@@ -412,19 +412,19 @@ ASTM Subcommittee E13.15 on Analytical Data. NIST is an agency of the U.S. Depar
 [bibliography]
 == References
 
-[[[mars-2010,1]]], Mars Climate Orbiter Failure Board Releases Report. http://mars.jpl.nasa.gov/msp98/news/mco990930.html (accessed January 2010).
+* [[[mars-2010,1]]], Mars Climate Orbiter Failure Board Releases Report. http://mars.jpl.nasa.gov/msp98/news/mco990930.html (accessed January 2010).
 
-[[[lloyd-2010,2]]], R. Lloyd, Metric mishap caused loss of NASA orbiter; CNN News: http://www.cnn.com/TECH/space/991110/mars.metric.02/ (accessed January 2010).
+* [[[lloyd-2010,2]]], R. Lloyd, Metric mishap caused loss of NASA orbiter; CNN News: http://www.cnn.com/TECH/space/991110/mars.metric.02/ (accessed January 2010).
 
-[[[monson-2005,3]]], R. Monson-Haefel, J2EE Web Services; Addison Wesley: Boston, MA, 2005, Vol. 4, pp 6-32.
+* [[[monson-2005,3]]], R. Monson-Haefel, J2EE Web Services; Addison Wesley: Boston, MA, 2005, Vol. 4, pp 6-32.
 
-[[[xml-2010,4]]], XML, from Wikipedia the free encyclopedia. http://en.wikipedia.org/wiki/Xml/ (accessed January 2010).
+* [[[xml-2010,4]]], XML, from Wikipedia the free encyclopedia. http://en.wikipedia.org/wiki/Xml/ (accessed January 2010).
 
-[[[harold-2005,5]]], E. R. Harold, Processing XML with Java; Addison Wesley: Vol. 3, pp 57-119, Boston, MA (2005).
+* [[[harold-2005,5]]], E. R. Harold, Processing XML with Java; Addison Wesley: Vol. 3, pp 57-119, Boston, MA (2005).
 
-[[[schaefer-2004,6]]], B. A. Schaefer, D. Poetz, G. W. Kramer, Documenting laboratory workflows using the Analytical Information Markup Language. JALA 2004, 9 (6), p 375.
+* [[[schaefer-2004,6]]], B. A. Schaefer, D. Poetz, G. W. Kramer, Documenting laboratory workflows using the Analytical Information Markup Language. JALA 2004, 9 (6), p 375.
 
-[[[thompson-2008,7]]], E. A. Thompson and B. N. Taylor, Guide for the Use of the International System of Units (SI); NIST Special Publication 811; National Institute of Standards and Technology, Gaithersburg, MD, 2008.
+* [[[thompson-2008,7]]], E. A. Thompson and B. N. Taylor, Guide for the Use of the International System of Units (SI); NIST Special Publication 811; National Institute of Standards and Technology, Gaithersburg, MD, 2008.
 
-[[[thompson-2010,8]]], H. S. Thompson, D. Beech, M. Maloney, and N. Mendelsohn, XML Schema Part 1—Structures Second Edition. http://www.w3.org/TR/xmlschema-1/ (accessed January 2010).
+* [[[thompson-2010,8]]], H. S. Thompson, D. Beech, M. Maloney, and N. Mendelsohn, XML Schema Part 1—Structures Second Edition. http://www.w3.org/TR/xmlschema-1/ (accessed January 2010).
 
