@@ -576,22 +576,22 @@ In alphabetical order:
 [bibliography]
 == References
 
-[[[nist_unitsml,1]]] NIST UnitsML working group +
+* [[[nist_unitsml,1]]] NIST UnitsML working group +
 http://unitsml.nist.gov
 
-[[[oasis,2]]] OASIS Universal Business Language (UBL) +
+* [[[oasis,2]]] OASIS Universal Business Language (UBL) +
 http://www.oasis-open.org/committees/tc_home.php?wg_abbrev=ubl
 
-[[[rfc2396,IETF RFC 2396]]] "`Uniform Resource Identifiers (URI): Generic Syntax`", RFC 2396, IETF +
+* [[[rfc2396,IETF RFC 2396]]] "`Uniform Resource Identifiers (URI): Generic Syntax`", RFC 2396, IETF +
 http://www.ietf.org/rfc/rfc2396.txt
 
-[[[rfc3121,IETF RFC 3121]]] "`A URN Namespace for OASIS`", RFC 3121, IETF +
+* [[[rfc3121,IETF RFC 3121]]] "`A URN Namespace for OASIS`", RFC 3121, IETF +
 http://www.ietf.org/rfc/rfc3121.txt
 
-[[[ndr_project,5]]] U.S. Department of the Navy NDR Project +
+* [[[ndr_project,5]]] U.S. Department of the Navy NDR Project +
 http://xml.coverpages.org/DON-XML-NDR20050127-33942.pdf
 
-[[[w3c_xml,6]]] W3C XML Schema Recommendations: XML Schema Part 1: Structures and XML Schema Part 2: Datatypes +
+* [[[w3c_xml,6]]] W3C XML Schema Recommendations: XML Schema Part 1: Structures and XML Schema Part 2: Datatypes +
 http://www.w3.org/XML/Schema +
 http://www.w3.org/TR/xmlschema-1/ +
 http://www.w3.org/TR/xmlschema-2/
