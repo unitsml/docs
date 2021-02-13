@@ -1,0 +1,1662 @@
+= UnitsML Guidelines Version 1.0
+:title-main: UnitsML Guidelines
+:edition: 1.0
+:doctype: guide
+:status: draft
+:date:
+:keywords:
+:fullname: Robert Dragoset
+:affiliation_abbrev: NIST
+:fullname_2: Martin S. Weber
+:affiliation_abbrev_2: NIST
+:fullname_3: Karen Olsen
+:affiliation_abbrev_3: NIST
+:fullname_4: Mark Carlisle
+:affiliation_abbrev_4: NIST
+:fullname_5: Peter Linstrom
+:affiliation_abbrev_5: NIST
+:fullname_6: Karen LeGrand
+:affiliation_abbrev_6: IEM
+:docfile: document.adoc
+:imagesdir: images
+:mn-document-class: nist
+:mn-output-extensions: xml,html,doc,pdf
+:local-cache-only:
+:data-uri-image:
+
+
+[.preface]
+== Abstract
+
+[Summary of the technical purpose of the document]
+
+[.preface]
+== Status
+
+This http://www.oasis-open.org/committees/process.php#dWorkingDraft[Working Draft] (WD) has been produced by one or more TC Members; it has not yet been voted on by the TC or http://www.oasis-open.org/committees/process.php#committeeDraft[approved] as a Committee Draft (Committee Specification Draft or a Committee Note Draft). The OASIS document http://www.oasis-open.org/committees/process.php#standApprovProcess[Approval Process] begins officially with a TC vote to approve a WD as a Committee Draft. A TC may approve a Working Draft, revise it, and re-approve it any number of times as a Committee Draft.
+
+== Introduction
+
+In our physical world, units are everywhere. We as humans compare distances, time, weight, value, and easily use a system of scales and references to do so. The grocery store is further away than the workplace. The road bike is lighter than the downhill mountain bike. The time it takes to read these guidelines is longer than the time it takes to not do so.
+
+We as humans are constantly aware of the value of something in reference to something else, and only seldom of its absolute, numerical value. Maybe it is because of this fact, that we do not forget the kind of value that we are talking about. To rehash the examples above, a human would not have the idea of claiming that the grocery store is 'bigger' (further away) than (the weight of) the road bike, or that not reading this document is 'shorter' than (the weight of) the mountain bike. Actually human language does not prevent us from stating something obviously that wrong, but a layer of inference kicks in to deliver missing or incomplete information.
+
+"The grocery store is further than the road bike [sic!]." Interpreting this sentence leads us to think, "The distance from here to the road bike, wherever it may be, is less than the distance from here to the grocery store. (Let's use the road bike to get to the store then)." This is an example of inference of missing facts from the surrounding haze, correcting wrong input so to speak and making something sensible out of it. In the end, this might not be what whoever said the first sentence wanted to say, and this is where serious misunderstandings can ensue; but then again, we as humans have experience in dealing with erroneous or incomplete information and are very likely to get it right with little effort.
+
+=== Units are not easy
+
+This small example should have shown though that units of measure and their related concepts (dimensions, quantities, prefixes, unit systems, conversions, derivations, etc.) can be quite confusing and ambiguous. In fact, trying to get 'marking up units' right is not an easy task. There are several pitfalls related to different approaches in dealing with units:
+
+* *Code lists* – can contain an arbitrary amount of units and information about them but will need a code after all to describe the units. Usually these code lists are compiled once and then used in scope. They are thus typically static; only a selection of units is represented; the format is fixed.
+* *Symbols* – are a light-weight way to 'mark up' numerical values with units. But once units from outside the SI come into play, the symbols no longer are unambiguous. Consider 'nm' for example: nanometers or nautical miles?
+* *Names* – are usually descriptive and well-known to the users. The only problem that remains is that not all names (especially outside the SI) are standardized. Consider the pound. Is it a US pound, and thus about 453.6 grams? Or is it maybe a metric pound, and thus exactly 500 grams? Maybe it's a troy pound, or even an avoirdupois pound. All of these are different, but in their domain usually just called "pound"
+
+So communicating units of measure is not as trivial as it might appear at first. There is a lot of information available about units of measure – and a lot of it is required while exchanging numerical data that is related to units of measure.
+
+=== Computers need help
+
+Given that deducing missing information is not generally a strength of computers nowadays, care has to be taken to add this extra information into the languages being used to have computers communicate amongst each other. For this purpose, there is a need for an unambiguous language to communicate units and all of their (necessary) related concepts. Such a language can be used to enrich the computer-to-computer communication so as to avoid confusion about the currently used units, unit systems, quantities etc.
+
+Another application of such a language has been suggested as early as 1986 by Dreiheller et al. (<<DREIHELLER>>) Input and output should be performed with proper unit and dimension checks. The authors offer an example of a fatal error caused by the lack of such unit checks on input and output: During the test of the Strategic Defense Initiative ('SDI', colloquially 'Star Wars') program in the United States in the mid-80s, the space shuttle Discovery flew over Maui facing in the wrong direction. The cause of the problem was that the computer system on board was not capable of determining input in unexpected units and not displaying the units of measure being used:
+
+[quote, '<<SIGSOFT>>, p. 12']
+____
+"Much to the surprise of Mission Control, the space shuttle Discovery flew upside-down over Maui on 19 June 1985 during an attempted test of a Star-Wars-type laser-beam missile defense experiment. (...) the experiment failed because the shuttle's reflecting mirror was oriented upward! A statement issued by NASA said that the shuttle was to be repositioned so that the mirror was pointing (downward) at a spot 10,023 feet above sea level on Mona Kea ; that number was supplied to the crew in units of feet, and was correctly fed into the on-board guidance system – which unfortunately was expecting units in nautical miles, not feet. Thus the mirror wound up being pointed (upward) to a spot 10,023 nautical miles above sea level."
+____
+
+=== Introduction to Physical Quantities and Scientific Units of Measure
+
+Before getting to discussion details about UnitsML, let's first make a brief detour introducing physical quantities and their relation to scientific units of measure.
+
+One definition of a physical quantity is the measurable property of a thing. Examples of physical quantities are length, mass, and velocity. The value of a quantity is its magnitude expressed as the product of a number and a scientific unit of measure, and the number multiplying the unit is the numerical value of the quantity expressed in that unit of measure.
+
+Any quantity can be expressed in terms of other quantities through a mathematical representation. It is convenient to define a set of base quantities through which all other quantities, called derived quantities, can be expressed. ISO 31 (<<ISO31>>) follows this convention and defines seven base quantities: length, mass, time, electric current, thermodynamic temperature, amount of substance and luminous intensity. In the SI, the seven base unit names and symbols used for expressing values of the seven base quantities are given in <<table1>> below.
+
+[[table1]]
+.Seven base quantities and their corresponding SI base unit names and symbols
+|===
+.2+h| Base Quantity 2+h| Base Unit
+h| Name h| Symbol
+
+| length | meter | m
+| mass | kilogram | kg
+| time | second | s
+| electric current | ampere | A
+| thermodynamic temperature | kelvin | K
+| amount of substance | mole | mol
+| luminous intensity | candela | cd
+|===
+
+There is one common usage of expressing the relationship between quantities and units that is technically incorrect and can lead to confusion. Frequently, an aspect of a physical quantity is treated as if it is a unit of measure. For example, the expression "stem:["emission rate" = 1.36" "rm(e//s)]", where 'stem:[rm(e)]' represents electron, treats 'electron' as a unit. The correct expression should be "stem:["electron emission rate" = 1.36" "rm(s)^(-1)]", or "stem:["electron emission rate" = 1.36 //rm(s)]". Please refer to the discussion in <<counted_items>> for more information about how UnitsML treats this issue.
+
+=== Purpose of UnitsML
+
+Units Markup Language (UnitsML, <<UNITSML>>) is a markup language for encoding scientific units of measure in XML. The language development was initially started as a project at the National Institute of Standards and Technology, where further accompanying components keep being developed until today (a database containing detailed information on SI (International System of Units (Système International d'Unités)) and
+
+non-SI scientific units of measure, and tools to facilitate the incorporation of UnitsML into other markup languages). The language development process has switched over to the Organization for the Advancement of Structured Information Standards (OASIS) in June 2006 – cf. <<dev_process>>.
+
+The availability of a markup language for units allows for the unambiguous storage, exchange, and processing of numerical data, thus facilitating the collaboration and sharing of information over the Internet. It is anticipated that UnitsML will be used by the developers of other markup languages to address the needs of specific communities (e.g. mathematics, chemistry, materials science, business/commerce, etc.). Use of UnitsML in other markup languages will reduce duplication of effort and improve compatibility among specifications that represent numerical data.
+
+The XML schema for UnitsML allows for the ability to represent scientific units of measure in XML and will be used for validating XML documents that use UnitsML. The UnitsML schema can be used as a building block for other markup languages by embedding a subset of the language into another markup language. It can as well be used to remain complete and intact and coexist with other markup languages in a single document. And finally it can be used to communicate facts about units of measure all on its own.
+
+SI units can be represented through the use of base units (e.g., meter, second), special derived units (e.g., joule, volt), and any combination of these units with appropriate prefixes and exponential powers (e.g., stem:[rm(mm)*rm(s)^(-2)]). Aside of creating units necessary for the user's domain of application, commonly used derived SI units (e.g., square meter, meter per second) and non-SI units (e.g., minute, ångström, and inch per second) will be explicitly supported for reference within XML documents.
+
+[[dev_process]]
+=== Development Process of UnitsML
+
+UnitsML has been developed within a technical committee (<<UNITSML>>) of the Organization for the Advancement of Structured Information Standards (OASIS) and will be released as a standard to the public after the due feedback rounds and running through the OASIS-internal processes. Due to the bylaws of the OASIS, there must not and cannot be patents pending or otherwise impeding the usage or further development of the standard itself.
+
+[bibliography]
+=== References
+
+* [[[DREIHELLER]]], A. Dreiheller and M. Moeschbacher and B. Mohr, Programming Pascal with Physical Units. _SIGPLAN Notices_, 21(12):114-123, 1986.
+
+* [[[ISO31]]], ISO Technical Committee ISO/TC12. _Quantities and units, ISO Standards handbook_, International Organization for Standardization, 1993.
+
+* [[[OASIS-NDR]]], Robin Cover, editor. _OASIS Naming Directives_. http://docs.oasis-open.org/specGuidelines/ndr/namingDirectives.html
+
+* [[[OASIS-UBL]]], Jon Bosak, editor. _OASIS UBL TC Homepage_. http://www.oasis-open.org/committees/tc_home.php?wg_abbrev=ubl
+
+* [[[SIGSOFT]]], Peter G. Neumann, Risks to the public in computer systems. _SIGSOFT Software Engineering Notes_, 10(3):, 1985.
+
+* [[[SP330]]], Barry N. Taylor and Ambler Thompson, editors. _The International System of Units (SI); NIST Special Publication 330_, National Institute Of Standards and Technology, 2008.
+
+* [[[SP811]]], Ambler Thompson and Barry N. Taylor. _Guide for the Use of the International System of Units (SI). NIST Special Publication 811_, National Institute Of Standards and Technology, 2008.
+
+* [[[UNITSML]]], Robert Dragoset. _OASIS UnitsML technical committee_. http://www.oasis-open.org/committees/tc_home.php?wg_abbrev=unitsml
+
+* [[[VIM]]], Working Group 2 of the Joint committee for Guides in Metrology. _International vocabulary of metrology -- Basic and general concepts and associated terms_, International Organization for Standardization, 2008.
+
+* [[[WSDL]]], Erik Christensen and Francisco Curbera and Greg Meredith and Sanjiva Weerawarana, editors. _Web Services Description Language (WSDL)_. http://www.w3.org/TR/wsdl
+
+* [[[XMLID]]], Jonathan Marsh and Daniel Veillard and Norman Walsh, editors. _xml:id Version 1.0 -- W3C Recommendation 9 September 2005_. http://www.w3.org/TR/xml-id/
+
+* [[[XMLNAMES11]]], Tim Bray and Dave Hollander and Andrew Layman and Richard Tobin, editors, _Namespaces in XML 1.1_. http://www.w3.org/TR/xml-names11/
+
+* [[[XSD1]]], Henry S. Thompson and David Beech and Murray Maloney and Noah Mendelsohn, editors, _XML Schema Part 1: Structures_. http://www.w3.org/TR/xmlschema-1/
+
+* [[[XSD2]]], Paul V. Biron and Ashok Malhotra, editors, _XML Schema Part 2: Datatypes_. http://www.w3.org/TR/xmlschema-2/
+
+== The UnitsML Language
+
+The UnitsML language was designed to be embeddable into other markup languages to describe the units of measure being used as well as to stand on its own. If it is embedded into another language, that language shall be referred to here as the "target language".
+
+UnitsML supports robust description of units, items, quantities, dimensions and prefixes. The following sections shall describe the UnitsML language in more detail, starting with a big picture of how UnitsML instance documents are structured, followed by details about each of the critical elements of the language.
+
+The normative reference to UnitsML though is solely the W3C XML Schema, which is published on the homepage of the OASIS technical committee (<<UNITSML>>).
+
+=== The Big Picture
+
+UnitsML consists of up to five different sets of elements describing various aspects of units of measure: `<UnitSet>`, `<CountedItemSet>`, `<QuantitySet>`, `<DimensionSet>` and `<PrefixSet>`. Not all of these have to be present, but typically at least one of the `<UnitSet>` or the `<CountedItemSet>` will be present, accompanied by additional information in a `<QuantitySet>`, `<DimensionSet>` and/or `<PrefixSet>`.
+
+[[fig1]]
+.UnitsML Overview
+image::img01.png[]
+
+Each of these ``<*Set>``s can contain potentially multiple `<Unit> (<CountedItem>,...)` elements which describe the units of measure used in the instance documents. Depending on the needs of the target language, including one or more of these sets may be enough to allow for marking up the used entities.
+
+The units of measure used (or counted items) typically refer to information about their quantity, dimensionality and so on – this information does not have to reside in the same element though. These references take the form of an URI, which can be resolvable to UnitsML content. The elements which can be referenced in this manner carry an `xml:id` attribute.
+
+=== Units
+
+[[what_are_units]]
+==== What are units?
+
+A measurement unit is a "real scalar quantity, defined and adopted by convention, with which any other quantity of the same kind can be compared to express the ratio of the two quantities as a number" (<<VIM>>, section 1.9, page 6).
+
+Or in other words, there exists a reference scale of the same kind of quantity as the quantity to be measured. This scale can then be used to express the magnitude of the phenomenon in question. This shows how tightly units of measure are integrated with the concept of the quantity (see also <<what_is_quantity>>). This tight coupling between units and quantities also shows in the definition of the quantity itself:
+
+[quote, '<<VIM>>, section 1.1, page 2']
+____
+a "property of a phenomenon, body, or substance, where the property has a magnitude that can be expressed as a number and a reference 
+
+[...]
+
+Note 2 : A reference can be a measurement unit, a measurement procedure, a reference material, or a combination of such."
+____
+
+[[rel_quantities_dimensions]]
+==== Relation to quantities and dimensions
+
+Units are samples from a specific quantity, chosen to measure phenomena of the same kind of quantity as the sample taken. Due to this definition (<<VIM>>, section 1.9, page 6), the quantity from which the unit was chosen and the quantity being measured must be of the same kind (in the sense of the International Vocabulary of Metrology (<<VIM>>)). Given the fact that a single unit can be related to multiple quantities (and those not necessarily having the same kind), it is necessary to retain the information of which exact quantity the reference sample (i.e., the unit in question) was taken. Thus, in UnitsML, a unit of measure should contain a reference to its encompassing quantity (via the `<QuantityReference>` element).
+
+Due to the relation of quantities and dimensions (see also <<what_is_dimension>>), a unit can be said to have a given dimension if that dimension matches the quantity dimension of the unit's related quantity. To model this in UnitsML, units of measure can also contain a pointer to a dimension footnote:[A unit of measure can be taken from a quantity whose quantity dimensions are similar to the quantity dimensions of quantities which are not of the same kind. In other words, the dimension that a unit is related to is not unique if its ratio of powers of quantity dimensions is not reduced.] via the `dimensionURL` attribute on the `<Unit>` element.
+
+==== Deriving units
+
+Given that units just represent a fitting sample of a specific quantity, deriving units essentially is the same as deriving quantities. So there is a need for a unit to measure, say, speed, and to create its unit the quotient of length per time is being formed. The SI units of choice for these two base quantities are the meter and the second, thus the unit to express speed is the meter per second, or stem:[rm(m)/rm(s)]. The quantity dimension of a given quantity, i.e., the seven-tuple of powers of the base quantities corresponds to the resulting (reduced) powers of the units of the involved base quantity. Thus the dimensioning of speed is Length per Time (due to the derivation of the quantity, length per time) which is mirrored in the unit of speed stem:[rm(m)^1*rm(s)^(-1)].
+
+==== Prefixing units
+
+When prefixing a unit, a multiplier is being applied on the number expressing the relation to the unit in question. This multiplier can also imply a certain method or range of measurement. Consider e.g. that the numbers are the same for a speed measured in kilometers per second and a speed measured in meters per millisecond.
+
+Prefixing units is similar to deriving a unit from itself (with regard to the chosen reference phenomenon of the chosen quantity) while changing the applied scale of the reference at the same time. Thus, in UnitsML to create a prefixed unit, it is advisable to derive and declare such units from their unprefixed version.
+
+==== The `<Unit>` element
+
+[[fig2]]
+.The UnitsML <Unit> element
+image::img02.png[]
+
+The `<Unit>` element is by far the most complex of the elements of UnitsML, mostly because of the information necessary to describe how the unit in question is derived from other units of measure (`<RootUnits>`), how the unit may be abbreviated due to given code lists (`<CodeListValue>`) and how numerical values related to these units can be converted to other units of measure (`<Conversions>`). Each of these elements will be described in more detail. Aside from this extra information, most elements of `<Unit>` allow marking up text with a specified meaning.
+
+Units need to be addressable, thus they carry an `xml:id` attribute. Their `dimensionURL` attribute allows addressing a given dimension directly instead of doing so via the related quantities. Finally the `timeStamp` attribute allows keeping track of different versions of the UnitsML data representing a given unit of measure.
+
+The most visible information about a unit of measure probably is its name and symbol. This information can be stored in the `<UnitName>` and `<UnitSymbol>` child elements, respectively. The `<UnitName>` element is an internationalized (carries an `xml:lang` attribute) text container for the unit name, whereas the `<UnitSymbol>` element can contain any valid XML-based structured markup (or just plain text) as well. Along with carrying an `xml:lang` attribute for the symbol, the required attribute `type` (such as HTML, LaTeX, MathML) must be supplied to describe which markup (which is not necessarily XML or SGML) is being used in the symbol.
+
+As detailed above (<<rel_quantities_dimensions>>) units of measure are related to quantities, potentially many. This information can be stored with the `<QuantityReference>` child element, whose `url` attribute is required (note that certain tools may expect the referenced content to resolve to valid UnitsML). For declarative purposes this reference can be named (`name` attribute) and internationalized (`xml:lang` attribute).
+
+[[unit_metadata]]
+==== Unit meta-data in UnitsML
+
+The following `<Unit>` child elements carry meta information about the unit in question:
+
+* `<UnitSystem>` describes the unit system (cf. [<<VIM>>, section 1.13, page 8]) in which the unit resides (which need not be unique, i.e., a unit may reside in multiple unit systems). The system can be described by its name and, optionally, type. It is internationalized (carries an `xml:lang` attribute).
+* `<UnitVersionHistory>` contains descriptive information for the historic development of the UnitsML representation of the unit. It is internationalized (carries an `xml:lang` attribute).
+* `<UnitDefinition>` details how the unit of measurement itself is being dened by the appropriate standards body. It can contain text as well as reference the appropriate source of the definition via name and URL (the `sourceName` and `sourceURL` attributes). It is internationalized (carries an `xml:lang` attribute).
+* `<UnitHistory>` contains descriptive information for the historic development of the unit itself. It enables addressing external sources for this (via the `sourceName` and `sourceURL` attributes) next to holding text content. It is internationalized (carries an `xml:lang` attribute).
+* `<UnitRemark>` serves as a placeholder for further additional information. Like `<UnitDefinition>` and `<UnitHistory>`, external publications can be referenced by the `sourceName` and `sourceURL` attributes. It is internationalized (carries an `xml:lang` attribute).
+
+==== Derived Units in UnitsML
+
+Derived units can be modeled in UnitsML with the use of the `<RootUnits>` element. Its possible children are the `<EnumeratedRootUnit>` and `<ExternalRootUnit>` elements. As the name implies, the `<EnumeratedRootUnit>` element gives access to an enumerated list of common root units, which can be used to create new derived units by using these 'popular' units. This fixed list of typical root units also improves interoperability by providing a fixed set of well understood units. The `<ExternalRootUnit>` can be used to create new derived units from UnitsML content.
+
+===== Enumerated root units
+
+`<EnumeratedRootUnit>` consists of a collection of attributes detailing the derivation. The enumerated list of units is available through the `unit` attribute, the only required attribute of the element. It contains obvious choices, such as 'second', 'kelvin' footnote:[Please note that these units are absolute, that is for the example of the unit kelvin the unit kelvin of the quantity absolute thermodynamic temperature is meant, not that of the quantity relative thermodynamic temperature. We advise modeling relative units, i.e., units belonging to a relative 'scale' kind of quantity, as seperate units from the absolute units.] or 'meter', as well as specialized units such as 'printers pica' or 'coulomb'. This unit can be combined with a `prefix` attribute, which contains an enumeration of the SI and IEC prefixes (i.e., the well-defined decimal and binary prefixes). To express cases where the unit is included in the expression with an exponent, the attributes `powerNumerator` and `powerDenominator` are offered to form a rational exponent. Finally for documentary purposes, the `sourceURL` attribute can be used to point to a relevant URL for information about the unit used. <<listing1>> shows a fragment for how to derive a unit for acceleration, miles per millisecond squared.
+
+[[listing1]]
+[source,xml]
+.Sample derived unit using `<EnumeratedRootUnit>`
+----
+<UnitsML>
+ <!-- ... -->
+ <Unit xml:id="u331">
+  <!-- ... -->
+  <RootUnits>
+   <EnumeratedRootUnit unit="mile" />
+   <EnumeratedRootUnit prefix="milli" powerNumerator="-2" unit="second" />
+  </RootUnits>
+ </Unit>
+ <!-- ... -->
+</UnitsML>
+----
+
+===== 'External' root units
+
+`<ExternalRootUnit>` gives you full control over the units from which you are deriving. In contrast to `<EnumeratedRootUnit>`, which gives a finite choice of units to derive from, `<ExternalRootUnit>` allows referring to root units via a URL (which is expected but not necessarily resolving to UnitsML content). Its unit attribute thus contains a URI. Next to the `prefix`, `powerNumerator`, `powerDenominator` and `sourceURL` attributes, which have the same purpose as in the `<EnumeratedRootUnit>`, it additionally offers the `annotation` attribute for optionally documenting the unit involved as well as an `xml:lang` attribute for internationalization purposes. <<listing2>> shows a fragment deriving from a counted item (pages) to form the derived unit 'pages per hour'.
+
+[[listing2]]
+[source,xml]
+.Sample derived unit using `<ExternalRootUnit>`
+----
+<UnitsML>
+ <!-- ... -->
+ <Unit xml:id="u337">
+  <!-- ... -->
+  <UnitName xml:lang="en-US">pages per hour</UnitName>
+  <!-- ... -->
+  <RootUnits>
+   <ExternalRootUnit unit="#i42" annotation="pages" xml:lang="en-US" />
+   <EnumeratedRootUnit powerNumerator="-1" unit="hour" />
+  </RootUnits>
+ </Unit>
+ <!-- ... -->
+ <CountedItem xml:id="i42">
+  <!-- ... -->
+  <ItemName xml:lang="en-US">page</ItemName>
+  <!-- ... -->
+ </CountedItem>
+ <!-- ... -->
+</UnitsML>
+----
+
+==== Referencing code lists in UnitsML
+
+Code list entries can be referenced (or assembled from) the `<CodeListValue>` child element(s). The sole required attribute for a `<CodeListValue>` is its `unitCodeValue` attribute. The code list can be named and referred to via the `codeListName` and `locationURL` attributes. Its version can be marked up with the `codeListVersion` attribute. The organization that publishes the given code list can be referred to via its URI (the `organizationURI` attribute) and its name (`organizationName`). Finally ``<CodeListValue>``s are also internationalized and thus carry an `xml:lang` attribute (see <<listing3>>).
+
+[[listing3]]
+[source,xml]
+.Sample `<CodeListValue>` fragment
+----
+<Unit>
+ <!-- ... -->
+ <UnitName xml:lang="en-US">nautical mile</UnitName>
+ <UnitName xml:lang="de-DE">Seemeile</UnitName>
+ <!-- ... -->
+ <CodeListValue unitCodeValue="NM" codeListVersion="2010-03-22" 
+  codeListName="Aquatic Companies Metric Entities (ACME)"
+  locationURL="http://www.acme.com/codes/acme/2010-03-22/"
+  organizationName="ACME" organizationURI="urn:megacorp:disney:acme"
+  xml:lang="en-US"/>
+ <!-- ... -->
+</Unit>
+----
+
+==== Unit conversions in UnitsML
+
+Conversions between different units are natively supported in UnitsML by the `<Conversions>` child element of the `<Unit>` element. The `<Conversions>` element is a container for all the possible conversions of a unit. There are three different mechanisms supported for conversions: linear conversions, 'special' conversions and conversions that are handled by a web-service.
+
+===== Linear conversions
+
+Linear conversions between two distinct units are covered by the `<Float64ConversionFrom>` element. Linear conversions are of the form stem:[y=((x+a)b)/c c+d] where stem:[y] is the value of the target (current) unit, stem:[x] the value of the source ('from') unit, and stem:[a], stem:[b], stem:[c], stem:[d] the parameters of the conversion, called `initialAddend` (stem:[a]), `multiplicand` (stem:[b]), `divisor` (stem:[c]) and `finalAddend` (stem:[d]) respectively.
+
+Additionally the `<Float64ConversionFrom>` element also supports documenting the decimal place to which the parameters are known to be signicant (e.g., whether a conversion factor is known to be 0.5 or 0.500). For this purpose the attributes `initialAddendDecimalPlace`, `multiplicandDigits`, `divisorDigits` and `finalAddendDecimalPlace` are present on the `<Float64ConversionFrom>` element. <<listing4>> demonstrates most of the parameters of the `<Float64ConversionFrom>` element with an absolute thermodynamic temperature conversion.
+
+If a conversion is known to be `exact` (e.g., does not involve stem:[pi]) it can be documented using the exact attribute of the conversion. This information does not refer to whether the actual machine implementation of floating point numbers used can produce an accurate result, but rather whether the conversion itself is known to be exact.
+
+Finally, a `<Float64ConversionFrom>` can also carry a `<ConversionNote>` element to document specific details about a given conversion. This `<ConversionNote>` element can contain plain text or any valid XML markup, and communicate its content's language via the `xml:lang` attribute.
+
+[[listing4]]
+[source,xml]
+.Sample linear conversion
+----
+<UnitsML>
+ <!-- ... -->
+ <Unit xml:id="u23">
+  <!-- ... -->
+  <UnitName xml:lang="en-us">degrees celsius</UnitName>
+  <!-- ... -->
+  <Conversions>
+   <Float64ConversionFrom xml:id="u23_from_u5" initialUnit="#u5"
+    finalAddend="-273.15" exact="true" />
+   <Float64ConversionFrom xml:id="u23_from_u314" initialUnit="#u314"
+    initialAddend="-32" multiplicand="9" divisor="5" exact="true" />
+   <!-- divisor="1.8" would have been as good -->
+   <!-- ... -->
+  </Conversions>
+  <!-- ... -->
+ </Unit>
+ <Unit xml:id="u314">
+  <!-- ... -->
+  <UnitName xml:lang="en-us">degrees fahrenheit</UnitName>
+  <!-- ... -->
+ </Unit>
+ <Unit xml:id="u5">
+  <!-- ... -->
+  <UnitName xml:lang="en-us">kelvin</UnitName>
+  <!-- ... -->
+ </Unit>
+ <!-- ... -->
+</UnitsML>
+----
+
+UnitsML stores information about conversions on the target unit, not on the source units (hence the name, `Float64ConversionFrom`). Whether conversion information is stored transitively is up to the author of the units markup. E.g., one could store conversions from inches to feet and from inches to meters as well as conversions from feet to meters and vice versa. On the other hand it is also possible to compute most of this information with just having the parameters for each single step. For this example this means that if there is conversion information stored for converting from inches to feet, and from feet to meters, then it is trivial to also compute how to convert from meters to feet, feet to inches, inches to meters or meters to inches. For the example in <<listing4>>, there is enough information to come up with the conversion parameters from kelvin to degrees Fahrenheit. The choice on the scope of documenting these parameters is up to the content author.
+
+===== Special conversions
+
+Special conversions are those that cannot be easily described as a linear conversion. Instead of containing parameters to a given function, a `<SpecialConversionFrom>` contains information about how to convert from a given unit either as textual documentation or in an alternative valid XML language (e.g., MathML). This can be used freely to model anything from non-linear equations to arbitrary equations in a domain language being used in the environment of the author up to simple textual descriptions of how to convert between given units.
+
+This information is presented in the `<SpecialConversionFrom>`'s `<ConversionDescription>` children, which can be marked with an `xml:lang` attribute to denote the used (natural) language in the conversion's description, and can contain either plain text or any valid(ating) XML markup. An example is given in <<listing5>>.
+
+[[listing5]]
+[source,xml]
+.Sample special conversion
+----
+<UnitsML>
+ <!-- ... -->
+ <Unit xml:id="u23">
+  <!-- ... -->
+  <UnitName xml:lang="en-us">degrees celsius</UnitName>
+  <!-- ... -->
+  <Conversions>
+   <!-- ... -->
+   <SpecialConversionFrom xml:id="u23_from_u314_special"
+    initialUnit="#u314">
+    <ConversionDescription xml:lang="de">
+     subtrahiere 32 vom nummerischen Wert der Grad Fahrenheit
+     und teile daraufhin durch 1.8
+    </ConversionDescription>
+    <ConversionDescription><![CDATA[
+    // scala code:
+    def fahrenheitToCelsius(f: Double): Double = (f-32)/1.8
+    ]]></ConversionDescription>
+   </SpecialConversionFrom>
+   <!-- ... -->
+  </Conversions>
+  <!-- ... -->
+ </Unit>
+ <Unit xml:id="u314">
+  <!-- ... -->
+  <UnitName xml:lang="en-us">degrees fahrenheit</UnitName>
+  <!-- ... -->
+ </Unit>
+ <!-- ... -->
+</UnitsML>
+----
+
+===== Conversions by a Web Service
+
+The final way to describe unit conversions within UnitsML is to refer to a web-service doing the actual conversion through the `<WSDLConversionFrom>` element. This element contains a `wsdlURL` attribute to refer to a Web Services Description Language (<<WSDL>>) instance document. Additionally a `<WSDLDescription>` child is supported to document further details or documentation about the function of the web service. This description is internationalized via the `xml:lang` attribute, and can contain either textual or valid XML markup content (see <<listing6>>).
+
+[[listing6]]
+[source,xml]
+.Sample WSDL conversion
+----
+<UnitsML>
+ <!-- ... -->
+ <Unit xml:id="u23">
+  <!-- ... -->
+  <UnitName xml:lang="en-us">degrees celsius</UnitName>
+  <!-- ... -->
+ </Unit>
+ <Unit xml:id="u314">
+  <!-- ... -->
+  <UnitName xml:lang="en-us">degrees fahrenheit</UnitName>
+  <!-- ... -->
+  <Conversions>
+   <!-- ... -->
+   <WSDLConversionFrom xml:id="u23_to_u314_wsdl"
+    initialUnit="#u23" 
+    wsdlURL="http://chalk.coas.unf.edu:8080/axis2/services/tempConvert?wsdl">
+    <WSDLDescription xml:lang="en-US">
+     Example of a WSDL temperature conversion, converting from kelvin
+     or degrees celsius to degrees fahrenheit. Parameters, as described
+     in the WSDL, too, are the numerical *value* and the source *unit*.
+     Example:
+     http://chalk.coas.unf.edu:8080/axis2/services/tempConvert/getKelvin?
+      value=25&unit=C
+    </WSDLDescription>
+   </WSDLConversionFrom>
+   <!-- ... -->
+  </Conversions>
+ </Unit>
+ <!-- ... -->
+</UnitsML>
+----
+
+[[counted_items]]
+=== Counted Items
+
+[[fig3]]
+.`<CountedItem>` element overview
+image::img03.png[]
+
+==== What are counted items?
+
+Counted items really are countable entities which are not units of measure. They are often combined with units of measure in the real world, e.g., if there is a count per time. It is often not obvious whether these counts should be on the unit side of the picture or on the quantity side. As an example consider the following, if we are talking about electron ow per second, would this be a quantity of 'electron flow' with a unit of stem:[rm(s)^(-1)] or a quantity 'flow' with a unit of electrons/s?
+
+The distinction between counted items and units gets even more blurred when consulting the VIM: "Numbers of entities are quantities of dimension one" (<<VIM>>, Note 4, section 1.8, page 6) and its definition of measurement unit : "real scalar quantity, defined and adopted by convention, with which any other quantity of the same kind can be compared to express the ratio of two quantities as a number" (<<VIM>>, section 1.9, page 6).
+
+In other words, if it is conventional to use a counted item as a reference for a given quantity of counted entities, then this qualifies it as a measurement unit. On the other hand, the (admittedly not universal) guide for the use of the International System of Units contrasts this with (<<SP811>>, section 7.5, page 17):
+
+____
+"When one gives the value of a quantity, any information concerning the quantity or its conditions of measurement must be presented in such a way as not to be associated with the unit. This means that quantities must be defined so that they can be expressed solely in acceptable units (including the unit one [...])"
+____
+
+One of the examples given is "the sensitivity for NO~3~ molecules is stem:[5 xx 10^(10) //rm(cm)^3] but not: the sensitivity is stem:[5 xx 10^(10)] NO~3~ stem:["molecules" // rm(cm)^3]" (ibid.). UnitsML does not dictate to take either way. For some applications it makes more sense to model a counted item as a measurement unit instead, using the `<Unit>` element, for others, the use of the `<CountedItem>` element may be more appropriate.
+
+==== The `<CountedItem>` element
+
+The `<CountedItem>` element can be used to mark up instances of counted entities to go along with a unit expression. This practice is strongly discouraged within the SI (cf. for example <<SP811>>, section 7.5, page 17) although often used in reality. One such example was given earlier already: instead of using an expression like electron stem:["flow" = n//rm(s)] often the discouraged version 'stem:["flow" = n" electrons/s"]' is being used. Furthermore, in contrast to the scientific community, these kinds of 'equations' are often used in commerce. In acknowledging this discouraged practice, the `<CountedItem>` element has been added to the UnitsML language.
+
+``<CountedItem>``s have to carry an `xml:id` attribute, so they can be referenced from elsewhere within a UnitsML or UnitsML-extended instance document. The child elements of the `<CountedItem>` carry mostly textual information referring to the item in question. The sole required child is the name of the item, `<ItemName>`, which can be localized with the `xml:lang` attribute. If the item in question is to appear in equations, a symbol should be added via the `<ItemSymbol>` element. Like the symbols in units and quantities, these can be localized via the `xml:lang` attribute but also have to carry a `type` attribute, determining the type of markup that is being used. The `<ItemSymbol>` element can have any simple (string) or complex (tree) content, as long as it is well-formed XML.
+
+The other child elements of `<CountedItem>` are for informational purposes only and not expected to be interpreted further by software supporting UnitsML. All of these child elements can be localized via the `xml:lang` attribute.
+
+`<ItemDefinition>`, `<ItemHistory>` and `<ItemRemark>` additionally can reference a source document and/or location containing further information about its definition, history and remarks about the item in question itself. These references are accomplished via the `sourceName` and `sourceURL` attributes.
+
+A complete example of the counted item element is provided in <<listing7>>.
+
+[[listing7]]
+[source,xml]
+.Sample `<CountedItem>` element
+----
+<CountedItem xml:id="i42">
+ <ItemName xml:lang="en-US">12 oz. bottle</ItemName>
+ <ItemVersionHistory xml:lang="en-US">added "12 oz. " to the item's
+name</ItemVersionHistory>
+ <!-- no symbol! -->
+ <ItemDefinition xml:lang="en" sourceName="Anheuser-Busch company
+definitions"
+  sourceURL="http://www.anheuser-busch.com/imaginary/definitions/12ozbottle.html">
+  The 12 fluid ounces bottle as being used by the Anheuser Busch companies
+ </ItemDefinition>
+ <ItemHistory xml:lang="en" sourceName="Anheuser-Busch chronicles"
+  sourceURL="http://www.anheuser-
+busch.com/imaginary/chronicles/12ozbottle.html" />
+ <ItemRemark xml:lang="en" sourceName="Anheuser-Busch feedback"
+  sourceURL="http://www.anheuser-
+busch.com/imaginary/feedback/12ozbottle.html">
+  Note that the european market prefers a different bottle size!
+ </ItemDefinition>
+</CountedItem>
+----
+
+=== Quantities
+
+[[what_is_quantity]]
+==== What is a quantity?
+
+The term _quantity sadly_ is a wildly overloaded one in the realm of metrology. While quantities are that specific thing you measure, quantities are also equivalence classes of specific quantities. A quantity can be a single measurement, a reference, a count, ... and at the same time an abstract concept, a base quantity, a derived quantity, etc.
+
+From the point of view of UnitsML, quantities shall be as defined in the VIM:
+
+[quote, '<<VIM>>, section 1.1, page 2']
+____
+"[A] quantity [is the] property of a phenomenon, body, or substance, where the property has a magnitude that can be expressed as a number and a reference.
+
+Note 1 The generic concept "quantity" can be divided into several levels of specific concepts"
+____
+
+An example of these different levels of abstraction is given by the quantity _length_, which can e.g. be a radius or a wavelength, or, more specific, a radius of a circle A, or a wavelength of the sodium D radiation.
+
+In other words, quantities can be seen as sets which contain various measured phenomena with a reference, and these references are units of measure. Not all of these references are sensible units of measure though – e.g., there could be a quantity 'width of a (specific) table' whose reference unit is its height, and another one whose reference unit is the meter. From the point of view of UnitsML, we consider these quantities, that have standardized units of measures as their reference.
+
+Quantities have been demonstrated above to carry different levels of abstraction. Orthogonally to that, quantities can also be split into base quantities and derived quantities. In fact the metric system is based on a unit system which is related to the International System of Quantities – that is consisting of the quantities length, mass, time and so on (<<VIM>>, section 1.6, note 2, page 4).
+
+==== Relation to dimensions and units
+
+Quantities are an intermediary concept between units of measure and their (quantity) dimensions. Relating to dimensions and units of measure, a quantity will have a single dimension associated with it (cf. <<what_is_dimension>>), which is dependent on the quantity's relation to its base quantities.
+
+Because of the possibility of dimensions containing quantities which are ratios of similar quantities (i.e., those whose dimensioning cancel out each other, for example a mass ratio per time), a single dimension can be base to multiple quantities, so there is a stem:[1:n] relation between quantities and dimensions.
+
+The relation between quantities and units of measure is more complicated. The same quantity can be measured with different references, i.e., units of measure. There can be a _length_ in meters, feet, inches, yards, fathoms et cetera. These could be considered different quantities, although they have a close relation, which is called '_kind of quantity_'. Quantities of the _same kind_ refer to the same sort of phenomenon being measured, but they do not have to have the same reference (i.e., unit of measure). Quantities which could be considered 'similar' or 'the same' thus could have multiple units of measure associated with it. Similarly units of measures can be the reference of multiple quantities, even of those which are not as closely related (are not considered to be of the same kind). There is thus a stem:[m:n] relation between quantities and units of measure.
+
+[[unitsml_and_koq]]
+==== UnitsML and '_kind of quantity_'
+
+'_Kind of quantity_' is an equivalence relation between quantities – only values within these quantities are actually comparable. Keep in mind that even if quantities have the same quantity dimensions, they need not be comparable, i.e., denoting the '_same_' quantity after all. Even though this is an important concept, it is simply defined as "[the] aspect common to mutually comparable quantities " (<<VIM>>, section 1.2, page 3).
+
+Noteworthy are also the following two notes from the VIM (<<VIM>>, section 1.2, page 3):
+
+____
+"Note 1 The division of the concept of "quantity" according to "_kind of quantity_" is to some extent arbitrary.
+
+Note 2 Quantities of the same kind within a given system of quantities have the same quantity dimension. However, quantities of the same dimension are not necessarily of the same kind."
+____
+
+UnitsML does not provide a way to denote the '_same-kindness_' of quantities. As this distinction (or equivalence) depends on the problem domain, this decision is left to the content authors instead.
+
+==== The `<Quantity>` element
+
+[[fig4]]
+.`<Quantity>` element overview
+image::img04.png[]
+
+Quantities in UnitsML are marked up with the `<Quantity>` element.
+
+The stem:[1:n] relation between quantities and dimensions is modeled in UnitsML by providing the `dimensionURL` attribute in the `<Quantity>` element. In this way, quantities in UnitsML can refer to a single dimension.
+
+Quantities can carry names via `<QuantityName>` elements, and symbols via the `<QuantitySymbol>` elements. Both are internationalized (i.e., carry an `xml:lang` attribute). `<QuantitySymbol>` additionally has a `type` attribute, which describes the kind of content as it allows any XML markup next to plain text.
+
+In UnitsML, quantities and units of measure can reference each other (multiple times) with the `<QuantityReference>` and `<UnitReference>` child elements of the `<Unit>` and `<Quantity>` elements, respectively. The `<QuantityReference>` element is used to refer to a quantity from a unit whereas the `<UnitReference>` element is used to refer to a unit from a quantity. The `<UnitReference>` element contains a required `url` attribute which ought to refer to the unit of measure, an optional `name` attribute containing the name of the referenced unit, as well as a `xml:lang` attribute for marking up the used language.
+
+The following child elements of `<Quantity>` all describe various meta-data aspects of quantities, similar to that of units of measure (cf. <<unit_metadata>>):
+
+* `<QuantityVersionHistory>` contains descriptive information for the historic development of the UnitsML representation of the quantity. It is internationalized (carries an `xml:lang` attribute).
+* `<QuantityDefinition>` details how the quantity itself is being defined by the appropriate standards body. It can contain text, as well as reference the appropriate source of the definition via name and url (the `sourceName` and `sourceURL` attributes). It is internationalized (carries an `xml:lang` attribute).
+* `<QuantityHistory>` contains descriptive information for the historic development of the quantity itself. It enables addressing external sources for this (via the `sourceName` and `sourceURL` attributes) as well as holding textual content. It is internationalized (carries an `xml:lang` attribute).
+* `<QuantityRemark>` serves as a placeholder for further additional information. Like `<QuantityDefinition>` and `<QuantityHistory>`, external publications can be referenced by the `sourceName` and `sourceURL` attributes. It is internationalized (carries an `xml:lang` attribute).
+
+An example of two sample `<Quantity>` elements can be seen in <<listing8>>.
+
+[[listing8]]
+[source,xml]
+.Sample `<Quantity>` element
+----
+<!-- ... -->
+<QuantitySet>
+ <Quantity xml:id="q42" dimensionURL="#d42" quantityType="base">
+  <QuantityName xml:lang="en-US">absolute thermodynamic
+temperature</QuantityName>
+  <QuantitySymbol type="ASCII">T</QuantitySymbol>
+  <QuantitySymbol type="LaTeX">{\ensuremath{T}}</QuantitySymbol>
+  <UnitReference url="#u5" name="kelvin" xml:lang="en" />
+  <UnitReference url="#u23" name="degrees_celsius" xml:lang="en" />
+  <!-- ... -->
+ </Quantity>
+ <Quantity xml:id="q43" dimensionURL="#d42" quantityType="base">
+  <QuantityName xml:lang="en-US">thermodynamic temperature
+difference</QuantityName>
+  <QuantitySymbol type="ASCII">T</QuantitySymbol>
+  <QuantitySymbol type="LaTeX">{\ensuremath{T}}</QuantitySymbol>
+  <UnitReference url="#u5" name="kelvin" xml:lang="en" />
+  <UnitReference url="#u23" name="degrees_celsius" xml:lang="en" />
+  <!-- ... -->
+ </Quantity>
+</QuantitySet>
+<!-- ... -->
+----
+
+=== Dimensions
+
+[[what_is_dimension]]
+==== What is a dimension?
+
+The term '_dimension_' is clearly defined within the world of the SI. To quote the International Vocabulary of Metrology, where it is more verbosely called "_quantity dimension_": "expression of the dependence of a quantity on the base quantities of a system of quantities as a product of powers of factors corresponding to the base quantities, omitting any numerical factor" (<<VIM>>, section 1.7, page 4), e.g., in the International System of Quantities (of which the SI consists) the quantity dimension of force is denoted by stem:[dim(ii(F))=ii(LMT)^2].
+
+As the definition of the VIM is somewhat abstract, here is the definition from NIST Special Publication 330 (<<SP330>>, excerpt of section 1.3, pp. 11-12):
+
+____
+"By convention physical quantities are organized in a system of dimensions. Each of the seven base quantities used in the SI is regarded as having its own dimension, which is symbolically represented by a single sans serif roman capital letter. The symbols used for the base quantities, and the symbols used to denote their dimension, are given as follows.
+
+All other quantities are derived quantities, which may be written in terms of the base quantities by the equations of physics. The dimensions of the derived quantities are written as products of powers of the dimensions of the base quantities using the equations that relate the derived quantities to the base quantities. In general the dimension of any quantity stem:[ii(Q)] is written in the form of a dimensional product,
+
+[stem]
+++++
+dim(ii(Q)) = ii(L)^alpha ii(M)^beta ii(T)^gamma ii(I)^delta Theta^epsilon ii(N)^zeta ii(J)^eta
+++++
+
+where the exponents stem:[alpha], stem:[beta], stem:[gamma], stem:[delta], stem:[epsilon], stem:[zeta], and stem:[eta], which are generally small integers which can be positive, negative or zero, are called the dimensional exponents. The dimension of a derived quantity provides the same information about the relation of that quantity to the base quantities as is provided by the SI unit of the derived quantity as a product of powers of the SI base units.
+
+There are some derived quantities stem:[ii(Q)] for which the defining equation is such that all of the dimensional exponents in the expression for the dimension of stem:[ii(Q)] are zero. [...] Such quantities are described as being _dimensionless_, or alternatively as being of _dimension one_ [...].
+
+There are also some quantities that cannot be described in terms of the seven base quantities of the SI at all, but have the nature of a count.footnote:[Note that these can be modeled as ``<CountedItem>``s in UnitsML] Examples are number of molecules [...]. Such counting quantities are usually regarded as dimensionless quantities, or quantities of dimension one, with the unit one, 1."
+____
+
+==== Relation to quantities and units
+
+From the point of view of the SI, dimensions are not related directly to units of measure. Instead the defining entity is the _quantity_, to which both one (or multiple) units of measure are related, as is its dimensionality. In practice though, as outlined by the quote of the NIST Special Publication 330, the dimensionality is being mirrored in the unit used for a derived quantity: the unit symbols carry the same dimension information as does the construction of the quantity via the base quantities, e.g., velocity consists of _length_ per _time_, stem:[ii(V)=l/t]. Its dimension thus is stem:[dim(ii(V))=ii(L)^1ii(T)^(-1)] (where dimensions with an exponent of zero have been omitted) which also can be seen from its units, e.g., meters per second: stem:[rm(m)/rm(s) = rm(m)^1rm(s)^(-1)]. So even if units of measure are not directly related to dimensions, the link is easy to construct.
+
+==== Dimensionality and '_kind of quantity_'
+
+A common approach is to decide on whether values of measured quantities are comparable based on their dimensionality. Remember that this is wrong. The VIM clearly defines when quantities are comparable. For more details, see <<unitsml_and_koq>>.
+
+==== The `<Dimension>` element
+
+Dimensions in UnitsML are geared towards the SI's system of quantities, i.e., it provides support for the seven base quantities as outlined in <<table1>>. Additionally two further factors for the dimensionality of a quantity are offered: _PlaneAngle_ and _Item_. The latter is being offered for marking up quantities involving counted quantities, e.g., electrons. Note that neither of these additions are supported by the SI.
+
+The `<PlaneAngle>` is supported in UnitsML for explicitly stating the involvement of an angle in a quantity instead of having to use the (canceling) expression stem:[ii(L)^n ii(L)^(-n)].
+
+[[listing9]]
+[source,xml]
+.Sample `<Dimension>` elements
+----
+<Dimension xml:id="dim42">
+ <Length powerNumerator="1" powerDenominator="1" />
+ <Mass powerNumerator="1" powerDenominator="1" />
+ <Time powerNumerator="-2" powerDenominator="1" />
+</Dimension>
+<!-- dimensionality of energy -->
+<Dimension xml:id="dim23a">
+ <Length powerNumerator="1" powerDenominator="1" />
+ <Mass powerNumerator="1" powerDenominator="1" />
+ <Time powerNumerator="-1" powerDenominator="1" />
+ <Length powerNumerator="1" powerDenominator="1" />
+ <Time powerNumerator="-1" powerDenominator="1" />
+</Dimension>
+<!-- Note: default of powerDenominator / powerNumerator is 1 -->
+<!-- following version thus is equal to the above for schema-aware
+     xml processors -->
+<Dimension xml:id="dim23b">
+ <Length />
+ <Mass />
+ <Time powerNumerator="-1" />
+ <Length />
+ <Time powerNumerator="-1" />
+</Dimension>
+----
+
+This example defines two quantity dimensions, that of force (`dim42`) and that of energy (`dim23a`, `dim23b`, `dim23c`). Note that the order of the `<Length>`, `<Mass>` etc. elements does not matter – each of the child elements of the `<Dimension>` element refers to a factor in the dimensional equation with the given rational exponent. Thus the third definition of energy is equivalent to the first: stem:[ii(LMT)^(-1) ii(LT)^(-1) = ii(L)^2 ii(MT)^(-2)].
+
+=== Prefixes
+
+==== What is a prefix?
+
+Prefixes are used in conjunction with units of measure to express multiples or submultiples of the unit in question. In other words they introduce a multiplier for associated numerical values and keep the range of the numerical value in bounds. The prefixes defined by the SI are decimal multipliers and cover the range from stem:[10^(24)] (yotta) to stem:[10^(-24)] (yocto) as can be seen in the <<table2>> below (<<SP330>>, section 3.1, page 29).
+
+[[table2]]
+.Decimal prefixes according to the SI
+|===
+h| Factor h| Name h| Symbol h| Factor h| Name h| Symbol
+| stem:[10^1] | deka | da | stem:[10^(-1)] | deci | d
+| stem:[10^2] | hecto | h | stem:[10^(-2)] | centi | c
+| stem:[10^3] | kilo | k | stem:[10^(-3)] | milli | m
+| stem:[10^6] | mega | M | stem:[10^(-6)] | micro | stem:[mu]
+| stem:[10^9] | giga | G | stem:[10^(-9)] | nano | n
+| stem:[10^(12)] | tera | T | stem:[10^(-12)] | pico | p
+| stem:[10^(15)] | peta | P | stem:[10^(-15)] | femto | f
+| stem:[10^(18)] | exa | E | stem:[10^(-18)] | atto | a
+| stem:[10^(21)] | zetta | Z | stem:[10^(-21)] | zepto | z
+| stem:[10^(24)] | yotta | Y | stem:[10^(-24)] | yocto | y
+|===
+
+Also in use are binary prefixes, especially in the electronics and computer industries. These prefixes do not contain submultiples (multipliers smaller than 1). Consult <<table3>> below for the prefixes as defined by ISO/IEC 80000-13 (taken from (<<VIM>>, section 1.17, page 11).
+
+[[table3]]
+.Binary prefixes according to the IEC
+|===
+h| Factor h| Prefix Name h| Prefix Symbol
+| stem:[(2^(10))^1] | kibi | Ki
+| stem:[(2^(10))^2] | mebi | Mi
+| stem:[(2^(10))^3] | gibi | Gi
+| stem:[(2^(10))^4] | tebi | Ti
+| stem:[(2^(10))^5] | pebi | Pi
+| stem:[(2^(10))^6] | exbi | Ei
+| stem:[(2^(10))^7] | zebi | Zi
+| stem:[(2^(10))^8] | yobi | Yi
+|===
+
+==== Combining prefixes
+
+"Compound prefix symbols, that is, prefix symbols formed by the juxtaposition of two or more prefix symbols, are not permitted. This rule also applies to compound prefix names" (<<SP330>>, section 3.1, page 30) - thus there is no microkilogram or µkg. Instead the related multipliers of the prefixes shall be combined to form a new prefix, 'milli' in this example. UnitsML does not allow you to define a prefix consisting of multiple base-exponent pairs, or refer to more than one prefix from ``<Unit>``s.
+
+==== The `<Prefix>` element
+
+The numerical multiplier is determined by the `prefixBase` and `prefixPower` attributes of the `<Prefix>` element. The name and symbol can be internationalized in the `<PrefixName>` and `<PrefixSymbol>` elements, which carry an `xml:lang` attribute for that purpose. Furthermore the `<PrefixSymbol>` element can contain either unstructured text content or any markup language, as determined by the (required) `type` attribute.
+
+Finally prefixes are addressable and thus carry an `xml:id` attribute.
+
+[[listing10]]
+[source,xml]
+.Sample `<Prefix>` element
+----
+<Prefix prefixBase="10" prefixPower="-6" xml:id="pref_42">
+	<PrefixName xml:lang="en">micro</PrefixName>
+	<PrefixName xml:lang="de">mikro</PrefixName>
+	<PrefixSymbol type="ASCII">u</PrefixSymbol>
+	<PrefixSymbol type="unicode">µ</PrefixSymbol>
+	<PrefixSymbol type="LaTeX">{\hbox{\textmu}}</PrefixSymbol>
+	<PrefixSymbol type="HTML">&mu;</PrefixSymbol>
+</Prefix>
+----
+
+The example provided in <<listing10>> above defines the 'micro' prefix, i.e., a divisor of a million (base 10, power -6). The example also demonstrates the use of the `xml:lang` attribute on the `<PrefixName>` element to distinguish between the spelling of the prefix in english and in german. Also note the different `<PrefixSymbol>` elements present: The user of this information can select the type of prefix symbol that best fits their environment.
+
+==== Other appearances of prefixes in UnitsML
+
+Prefixes appear in UnitsML also in the unit's `<RootUnits>` element. On its prefix attribute a predefined list of prefixes is being used to construct derived units, e.g., square millimeter per second. The values used in this attribute correspond to the unit symbols of both <<table2>> as well as <<table3>>, with the exception of stem:[mu]. Instead of stem:[mu], 'u' is being used to accommodate non-unicode environments.
+
+== Methods of using UnitsML with other schemata
+
+UnitsML on its own is useful, but its primary design goal was for it to be used in conjunction with other markup languages. This chapter thus discusses different ways of using UnitsML with other XML languages. The techniques shown encompass a simple reference to UnitsML content from within the target language as well as the different ways to compose W3C-XML Schema based languages as described in chapter four of "XML Schema Part 1: Structures Second Edition" (<<XSD1>>, 4 Schemas and Namespaces: Access and Composition).
+
+Each example is presented with an introduction on how the combination works, followed by the necessary modifications to the target language schema, and a sample instance document with the strategy under discussion. Finally, the benefits and drawbacks of each approach are discussed.
+
+As a vehicle for the discussion in this chapter, assume the target language is the following 'simple' language, as defined by the W3C XML Schema document in <<listing11>>.
+
+[[listing11]]
+[source,xml]
+.The 'simple' language
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  elementFormDefault="unqualified"
+  attributeFormDefault="unqualified">
+  <xsd:element name="SimpleSchemaRoot">
+    <xsd:annotation>
+      <xsd:documentation>Root element for simple test schema.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:choice maxOccurs="unbounded">
+        <xsd:element name="Text" type="xsd:string"/>
+        <xsd:element name="Measurement" minOccurs="0">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="NumericValue" type="xsd:double"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:choice>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
+----
+
+The 'simple' schema describes a language consisting of a blend of text elements (`<Text>`) and measurement results (`<Measurement>`). The measurement results consist of numeric values (`<NumericValue>`), which contains a double precision floating point number. A sample instance document is provided in <<listing12>>.
+
+[[listing12]]
+[source,xml]
+.A 'simple' instance document
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<SimpleSchemaRoot xsi:noNamespaceSchemaLocation="SimpleSchema0.xsd" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Text>The width of the room is: </Text>
+  <Measurement>
+    <NumericValue>3.14159</NumericValue>
+  </Measurement>
+  <Text>meters. The width has been obtained by ...</Text>
+</SimpleSchemaRoot>
+----
+
+The task at hand now shall be to use UnitsML to unambiguously markup the unit used for the measurement (meters in this case).
+
+=== Reference a unique unit ID
+
+One of the simplest methods of distinguishing a scientific unit of measure is to provide a unique identifier for the desired unit, usually based on the unit's symbol or name, e.g., 'm' or 'meter'. This reference can be either part of the textual content representing, for example, measurement results, or it could be maintained from an attribute of complex data containing said results. A simple method of using this approach has been shown above already (the usage of 'meters' in the text following the `<Measurement>` element.
+
+In contrast to mixing the information about the used units of measure into the text itself, it is preferable to put this information into either an attribute or an element, so it can be retrieved more easily from a well-defined position and in a single expected format.
+
+A first thought might be to use an attribute of type `xsd:token` or `xsd:string` to distinguish the different units of measures being used.
+
+Referencing by unit symbols or names has problems, though, especially with some symbols not being as unique as one would hope (consider nm - nanometers or nautical miles?). An alternative is to have the complex data containing the marked up value point to a portion of valid UnitsML, by using a data type of `xsd:anyURI`, which gives the possibility to either address a UnitsML element within the same document (via a fragment identifier) or even a UnitsML element from a central and/or authoritative source.
+
+==== XML Schema modifications
+
+To accomplish this, the 'simple' schema (and, in general, the target language) will have to be modified to accommodate for the attribute pointing to the unit being used.
+
+[[listing13]]
+[source,xml]
+.Relevant schema: referencing a unique ID
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  elementFormDefault="unqualified"
+  attributeFormDefault="unqualified">
+  <xsd:element name="SimpleSchemaRoot">
+    <xsd:annotation>
+      <xsd:documentation>Root element for simple test schema.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:choice maxOccurs="unbounded">
+        <xsd:element name="Text" type="xsd:string"/>
+        <xsd:element name="Measurement" minOccurs="0">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="NumericValue" type="xsd:double"/>
+            </xsd:sequence>
+            <xsd:attribute name="unit" type="xsd:anyURI"/>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:choice>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
+----
+
+==== Instance document
+
+By referencing a unique unit ID, it is possible to refer to UnitsML content from an authoritative source, e.g., an external document, the UnitsDB or output from a local database bearing UnitsML markup. The instance document below illustrates this method. Note that the fragment identifier at the unit URL reference most likely is not the symbol of the unit, as fragment identifiers need to be unique in the whole document (and unit in general symbols are not unique).
+
+[[listing14]]
+[source,xml]
+.Instance document: referencing a unique ID
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<SimpleSchemaRoot xsi:noNamespaceSchemaLocation="SimpleSchema1.xsd" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Text>The width of the room is: </Text>
+  <Measurement unit="http://authorative.source/Units#u1">
+    <NumericValue>3.14159</NumericValue>
+  </Measurement>
+  <Text>. The width has been obtained by ...</Text>
+</SimpleSchemaRoot>
+----
+
+Note that 'meters' has been removed from the `<Text>` following the `<Measurement>`. Instead this information (the name of the unit) can be retrieved from the UnitsML markup by following the provided reference, depending on the natural language being used (e.g., English).
+
+==== Discussion
+
+Adding a pointer to the unit has the least impact on your language and its schema. By adding a single attribute, the units of measure being used can be marked up. If the URI actually resolves to some UnitsML content, it can be fetched and inspected for required information, say, pulling the unit names out of a central database in a given language, or get information on how to convert between different units. 
+
+A bonus of this approach is that it encourages use of a dictionary of units. This keeps the information overhead slim at places which are expected to carry a lot of data. The dictionary may even reside in the same document (as realized by <<listing20>>).
+
+There are some practical issues with this approach though. The W3C XML Schema validation only can ensure that the type of the attribute matches a certain pattern. If a document is valid that does not mean that the URIs resolve at all, or to some meaningful content. If the URL referenced is on a foreign server, the data might not be accessible at all places that the document is being viewed. The data might not be under the control of the document author.
+
+Even if the references are only local URIs (e.g., using the `file://` 'protocol'), they have to be deployed into the expected location, the XML processor in use must implement the `xml:id` specification (<<XMLID>>) or implement support for the `xsd:ID` data type to be able to pull the information with a good performance.
+ 
+Lastly another complaint might be that the unit of measure being used isn't 'seen'. Instead of a comprehensible unit reference most likely an opaque identifier will be used. Depending on the scope of the target language this might be a drawback.
+
+In conclusion this is a low-impact way to reference units unambiguously. Its drawbacks have been sketched out above, but the ease with which it can be included speaks for itself. Also with some approaches (e.g., referencing a UnitsML instance document that makes up the 'local units database' containing only the (few) used units so that meaningful `xml:id` attributes can be used, with a well-defined system of distribution and/or deployment) most of these problems can be avoided.
+
+[[refer_to_schema]]
+=== Refer to the UnitsML schema
+
+One important reason for using XML schemata is being able to compose them in different ways (<<XSD1>>, 4 Schemas and Namespaces: Access and Composition). In this and the following sections the different mechanisms for composing schemata will be discussed in light of using UnitsML from the 'simple' schema. All four of these usage scenarios are tightly coupled with the use of namespaces in XML (<<XSD1>>, chapter 4; <<XMLNAMES11>>).
+
+By referring to the UnitsML schema the main work of pulling in the schema is not done from the target language schema, but instead in the instance documents of the target language. From the point of view of the target language schema, the foreign (in this case UnitsML) content just consists of a black box, which can be allowed at the fitting places.
+
+==== XML Schema modifications
+
+The target language schema only has to be modified in minor ways; the 'burden' of the integration lies mostly within the instance documents. UnitsML elements can be used within the target language by use of the `<xsd:any>` element, as shown in <<listing15>> or by explicitly pulling in (a subset of) UnitsML markup. The use of the XML namespaces here helps resolve the source schema for the used elements. In essence elements (just as the other declarations of the included schema) can be used within the target language schema while they are keeping the namespace as declared as `targetNamespace` in the included XML schema.
+
+[[listing15]]
+[source,xml]
+.Relevant schema: referring to UnitsML
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns="http://unitsml.nist.gov/simple"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  targetNamespace="http://unitsml.nist.gov/simple"
+  elementFormDefault="qualified"
+  attributeFormDefault="unqualified">
+  <xsd:element name="SimpleSchemaRoot">
+    <xsd:annotation>
+      <xsd:documentation>Root element for simple test schema modified by
+      referring to the schema within an XML instance document.
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:choice maxOccurs="unbounded">
+        <xsd:element name="Text" type="xsd:string"/>
+        <xsd:element name="Measurement" minOccurs="0">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="NumericValue" type="xsd:double"/>
+              <xsd:any processContents="strict" minOccurs="0"
+        namespace="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-1.0" />
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:choice>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
+----
+
+Note that in the example in listing 3.5, the allowable namespace for the `<xsd:any>` has been set to that of UnitsML. Additionally the `processContents` attribute has been set to "strict", meaning that at this place in instance documents only well-formed, valid UnitsML-XML is allowed. Furthermore the 'simple' language now exists in its own namespace.
+
+==== Instance document
+
+To assist resolving the different source schemata, the `xsi:schemaLocation` and `xsi:noNamespaceSchemaLocation` attributes will be used (cf. <<XSD1>>, section 2.6.3).
+
+The instance document shown in <<listing16>> utilizes two namespaces, "simple" and "unitsml", to distinguish the portions of the document corresponding to the appropriate schema, `SimpleSchema2.xsd` or `UnitsML-1.0.xsd`, respectively, as dictated by the `xsi:schemaLocation` attribute.
+
+UnitsML content marking up the units of measure being used can just be dropped into place, while remaining optional (in this example).
+
+[[listing16]]
+[source,xml]
+.Sample instance document: referring to UnitsML
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<simple:SimpleSchemaRoot 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:simple="http://unitsml.nist.gov/simple"
+    xmlns:unitsml="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-1.0"
+    xsi:schemaLocation="http://unitsml.nist.gov/simple
+      SimpleSchema2.xsd
+      urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-1.0
+     UnitsML-1.0.xsd">
+  <simple:Text>The width of the room is: </simple:Text>
+  <simple:Measurement>
+    <simple:NumericValue>3.14159</simple:NumericValue>
+    <unitsml:Unit xml:id="u42">
+      <unitsml:UnitName xml:lang="en-US">meter</unitsml:UnitName>
+      <unitsml:UnitSymbol type="ASCII">m</unitsml:UnitSymbol>
+    </unitsml:Unit>
+  </simple:Measurement>
+  <simple:Text>. The width has been obtained by ...</simple:Text>
+</simple:SimpleSchemaRoot>
+----
+
+In this case, the first referenced schema location is the host schema and the second the UnitsML schema. In the same way, we could reference additional schemata.
+
+==== Discussion
+
+Again this is a low impact way of allowing UnitsML content to be added to the target language. By designating places where UnitsML-namespaced content is allowed the units of measure being used can easily be marked up without really changing the target language. There is a strict separation of concern between the target language markup and the UnitsML markup, which, aside of being combined into a single document, do not interact with each other.
+
+The drawbacks from the previous approach are mostly removed with this solution: As there are no references to data outside of the instance document, the data is independent of server availability or resolving URLs. Deployment is easy – as the data to be deployed already is present in the instance document.
+
+The main drawback of this method is the potential duplication of information – multiple uses of the same unit have to carry the same element more than once – which can be considered bad practice. Additionally, this imposes a problem on the `xml:id` attribute of the `<Unit>` element, which has to be globally unique. Even though the same unit of measure might be used in different places in the instance document, the `xml:id` s must not be the same. Thus it is not possible to use the same `xml:id` in different places of the instance document.
+
+Finally the usage of the `<xsd:any>` element does not allow specifying expected or required information (for example the need to provide the names, symbols and definitions of used units, or the requirement to mark up the units' quantities and dimensions). Given that all the elements in the UnitsML schema are global, any element could be inserted in the marked place, e.g., `<Unit>` or `<UnitName>`.
+
+[[combination_of_reff]]
+=== Combination of referring to the UnitsML schema with referencing units by ID
+
+The previous two approaches can be combined into one which offers a low impact solution of including UnitsML into the target language. For that, elements that contain data that should be related to units of measure (or quantities etc.) need to be equipped with an `xsd:anyURI` attribute to point to the entity in question, and a section of the instance document needs to be devoted to describing units and its related concepts with UnitsML.
+
+==== XML Schema modifications
+
+As this approach is basically a combination of the previous two approaches, the modifications to the schema are similar: An attribute has been added to the `<Measurement>` element and a section in the instance document has been reserved to contain UnitsML markup. This is again accomplished by the use of the `<xsd:any>` element, restricting the namespace of the elements at this spot to that of UnitsML.
+
+[[listing17]]
+[source,xml]
+.Relevant schema: referencing a local units database
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+  elementFormDefault="qualified" 
+  attributeFormDefault="unqualified">
+  <xsd:element name="SimpleSchemaRoot">
+    <xsd:annotation>
+      <xsd:documentation>Root element for simple test schema.</xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="Text" type="xsd:string"/>
+          <xsd:element name="Measurement" minOccurs="0">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="NumericValue" type="xsd:double"/>
+              </xsd:sequence>
+              <xsd:attribute name="unit" type="xsd:anyURI"/>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+        <xsd:any minOccurs="0" maxOccurs="unbounded" 
+          namespace="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-1.0" 
+          processContents="strict"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
+----
+
+==== Instance document
+
+The instance document in <<listing18>> shows an instance of such an approach. Now there exists a single location in the instance document where the units of measure are being described, the elements which contain data measured in some unit merely point to the unit markup at this location.
+
+[[listing18]]
+[source,xml]
+.Sample instance document: referencing a local units database
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<SimpleSchemaRoot 
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:unitsml="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-1.0"
+    xsi:schemaLocation="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-1.0
+      unitsmlSchema-1.0.xsd"
+      xsi:noNamespaceSchemaLocation="SimpleSchema6.xsd">
+  <Text>The width of the room is: </Text>
+  <Measurement unit="#u42">
+    <NumericValue>3.14159</NumericValue>
+  </Measurement>
+  <Text>. The width has been obtained by ...</Text>
+  <unitsml:Unit xml:id="u42">
+    <unitsml:UnitName xml:lang="en-US">meter</unitsml:UnitName>
+    <unitsml:UnitSymbol type="ASCII">m</unitsml:UnitSymbol>
+  </unitsml:Unit>
+</SimpleSchemaRoot>
+----
+
+==== Discussion
+
+This approach combines the benefits of the previous two approaches, while eliminating most of the drawbacks: Adding the pointer to existing elements is a lean modification, and the single location of units markup encourages following the 'Don't Repeat Yourself' approach common in data modeling, resolving the drawback of the previous approach (as detailed in the Discussion section of Refer to the UnitsML schema).
+
+The drawbacks of the first approach (as outlined in the Discussion section of Reference a unique unit ID) are not reproduced: with the unit markup in the instance document there is no problem regarding deployment or availability of information. 
+
+The practical issue of having to use an XML processor which supports the `xml:id` specification (<<XMLID>>) remains though. Additionally, by needing to have a section on the units of measure being used in each instance document, there might be a considerable space overhead depending on the different operation scenarios of the target language.
+
+Finally this method does not allow restriction to a subset of UnitsML, or enforcing usage of a whole (sub)tree of UnitsML in the 'units database' section, as the `<xsd:any>` element will make any UnitsML element acceptable at this spot.
+
+=== `<import>` the UnitsML schema
+
+Another way of incorporating foreign schemata into the target language consists of using the `<import>` directive. It is described in detail in section 4.2.3 of the XML Schema Structures Part (<<XSD1>>, section 4.2.3 References to schema components across namespaces).
+
+Importing another schema is namespace aware and keeps the original namespace on the imported declarations and definitions. In contrast to merely referring to the UnitsML schema from within an instance document, now it is possible to refer to UnitsML content also from within the target language's schema – allowing greater control over which parts of the UnitsML schema are being used in the target language.
+
+==== XML Schema modifications
+
+The 'simple' schema in Listing 19: Relevant schema: importing UnitsML now was modified to pull in the UnitsML schema. This is accomplished with the use of the `<xsd:import>` element. In contrast to the previous example, here only the `<Unit>` element is being used in the target language, accomplished by referring to its definition within the UnitsML schema as follows: `<xsd:element ref="unitsml:Unit"/>`.
+
+The solution in Listing 19: Relevant schema: importing UnitsML brings UnitsML elements into the target language 'in-line'. Obviously another approach as described in <<combination_of_reff>> can be applied, too, which would look as outlined in <<listing20>>.
+
+[[listing20]]
+[source,xml]
+.Relevant schema: importing UnitsML (alternative)
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:simple="http://unitsml.nist.gov/simple" 
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+  xmlns:unitsml="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-1.0"
+targetNamespace="http://unitsml.nist.gov/simple" 
+  elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xsd:import namespace="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-
+1.0" 
+    schemaLocation="UnitsML-1.0.xsd"/>
+  <xsd:element name="SimpleSchemaRoot">
+    <xsd:annotation>
+      <xsd:documentation>Root element for simple test schema modified by
+importing 
+        the UnitsML schema into the Simple schema.
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="Text" type="xsd:string"/>
+          <xsd:element name="Measurement" minOccurs="0">
+            <xsd:complexType>
+              <xsd:sequence maxOccurs="unbounded">
+                <xsd:element name="NumericValue" type="xsd:double"/>
+              </xsd:sequence>
+              <xsd:attribute name="unit" type="xsd:anyURI" use="required"/>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+        <xsd:element ref="unitsml:UnitSet"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
+---- 
+
+This approach places the UnitsML element `<UnitSet>` as last in the language, allowing a 'local units database'.
+
+==== Instance document
+
+Using this option of composition, a 'simple' data file could look like the example shown in <<listing21>>. It shows that the 'simple' namespace (`xmlns:simple`) is different than the UnitsML namespace (`xmlns:unitsml`) and that the units part of the document is described completely in UnitsML. Note that the UnitsML namespace does not need to be resolved to its defining schema as the `<xsd:import>` already resolves the schema location.
+
+[[listing21]]
+[source,xml]
+.Sample instance document: importing UnitsML
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<simple:SimpleSchemaRoot
+  xsi:schemaLocation="http://unitsml.nist.gov/simple SimpleSchema4.xsd" 
+  xmlns:simple="http://unitsml.nist.gov/simple" 
+  xmlns:unitsml="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-1.0" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <simple:Text>The width of the room is: </simple:Text>
+  <simple:Measurement>
+    <simple:NumericValue>3.14159</simple:NumericValue>
+    <unitsml:Unit xml:id="u42">
+      <unitsml:UnitName xml:lang="en-US">meter</unitsml:UnitName>
+      <unitsml:UnitSymbol type="ASCII">m</unitsml:UnitSymbol>
+    </unitsml:Unit>
+  </simple:Measurement>
+  <simple:Text>. The width has been obtained by ...</simple:Text>
+</simple:SimpleSchemaRoot>
+----
+
+An alternative to using the explicit namespace prefix ("`simple:`") for the 'simple' language would be to globally declare the default namespace to be that of the target language, in this case by replacing the `xmlns:simple` attribute on the `<SimpleSchemaRoot>` by solely `xmlns` and dropping all the `simple:` prefixes within the instance document.
+
+[[listing22]]
+[source,xml]
+.Sample instance document: importing UnitsML (alternative)
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<simple:SimpleSchemaRoot
+  xsi:schemaLocation="http://unitsml.nist.gov/simple SimpleSchema7.xsd" 
+  xmlns:simple="http://unitsml.nist.gov/simple" 
+  xmlns:unitsml="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-1.0" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <simple:Text>The width of the room is: </simple:Text>
+  <simple:Measurement unit="#u42">
+    <simple:NumericValue>3.14159</simple:NumericValue>
+  </simple:Measurement>
+  <simple:Text>. The width has been obtained by ...</simple:Text>
+  <unitsml:UnitSet>
+    <unitsml:Unit xml:id="u42">
+      <unitsml:UnitName xml:lang="en-US">meter</unitsml:UnitName>
+      <unitsml:UnitSymbol type="ASCII">m</unitsml:UnitSymbol>
+    </unitsml:Unit>
+  </unitsml:UnitSet>
+</simple:SimpleSchemaRoot>
+----
+
+In contrast to the instance document in <<listing21>>, the UnitsML portion can be placed differently as outlined in <<listing20>>. A resulting instance document could look like the one in <<listing22>>.
+
+==== Discussion
+
+This approach results in benefits and drawbacks similar to the ones discussed in <<refer_to_schema>> with an added benefit: by bringing the UnitsML schema into the target language schema, all of the UnitsML declarations are ready to be deployed in the target language schema, giving fine-grained control over which elements are allowed at which places.
+
+Just as the discussed solution in <<combination_of_reff>> combines the benefits of pointing to unit definitions via an `xsd:anyURI` attribute with keeping the 'database' of units locally, the alternative approach outlined in <<listing20>> for the schema and in its instance document in <<listing22>> combines these for the case of importing the UnitsML schema into the target language. This should demonstrate that a wise choice of selection of elements from UnitsML together with a well-informed choice of placing the usage of these definitions can be decisive on the resulting set of positive and negative influences on the target language.
+
+=== `<include>` the UnitsML schema
+
+Another option of incorporating foreign schemata into the target language consists of using the `<include>` directive. It is described in detail in section 4.2.1 of the XML Schema Structures Part (<<XSD1>>, section 4.2.1 Assembling a schema for a single target namespace from multiple schema definition documents).
+
+In contrast to using the previous approaches, this approach needs modifications of the UnitsML schema, particularly as including another schema requires the included schema to either have no target namespace, or to have the same namespace as the including schema. To accomplish the equality of the namespaces for this (and the following) example, the stylesheet in <<listing23>> has been used to completely remove namespaces from the UnitsML schema.
+
+[[listing23]]
+[source,xml]
+.XSLT stylesheet to prepare the UnitsML schema for inclusion and redefinition
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+  stylesheet to strip namespaces from the OASIS UnitsML schema which
+  has a home under:
+   * OASIS: http://www.oasis-open.org/committees/tc_home.php?wg_abbrev=unitsml
+   * NIST: http://unitsml.nist.gov
+
+-->
+<xsl:stylesheet version="1.0" 
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+  xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
+  xmlns:unitsml="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-1.0"
+  xmlns:docco="http://www.ayaken.net/xsd2docco/2010/1" 
+  exclude-result-prefixes="xsl unitsml">
+  <xsl:output method="xml" encoding="UTF-8" cdata-section-elements="docco:example" />
+  
+  <xsl:template match="/xsd:schema">
+    <xsd:schema>
+      <!-- attributes must come first: copy everything except the
+targetNamespace attribute. -->
+      <!-- ..also overwrite element- and attributeFormDefault to make sure they
+are 'unqualified' -->
+      <xsl:for-each select="@*">
+        <xsl:choose>
+          <xsl:when test="local-name(.) = 'elementFormDefault'">
+            <xsl:attribute name="elementFormDefault">unqualified</xsl:attribute>
+          </xsl:when>
+          <xsl:when test="local-name(.) = 'attributeFormDefault'">
+            <xsl:attribute
+name="attributeFormDefault">unqualified</xsl:attribute>
+          </xsl:when>
+          <xsl:when test="local-name(.) = 'targetNamespace'">
+            <!-- do nothing -->
+          </xsl:when>
+          <xsl:otherwise>
+             <xsl:copy /> 
+          </xsl:otherwise>
+        </xsl:choose>
+      </xsl:for-each>
+      <!-- now for namespaces: copy all except the default namespace
+declaration. -->
+      <xsl:for-each select="namespace::*">
+        <xsl:if test="local-name(.) != ''">
+          <xsl:copy />
+        </xsl:if>
+      </xsl:for-each>
+      <!-- now copy all the rest -->
+      <xsl:apply-templates select="node()" />
+    </xsd:schema>
+  </xsl:template>
+  <xsl:template match="@*|node()">
+    <xsl:copy>
+      <xsl:apply-templates select="@*|node()" />
+    </xsl:copy>
+  </xsl:template>
+</xsl:stylesheet>
+----
+
+With this stylesheet, a new schema file `UnitsML-1.0-noNamespace.xsd` has been created which is identical to the original schema save for removing the target namespace declarations
+
+==== XML Schema modifications
+
+The 'simple' schema now pulls in the UnitsML schema via use of the `<xsd:include>` element as shown in <<listing24>>. This makes all of the definitions from the UnitsML schema available for use within the 'simple' schema. The `<Unit>` element is added to the measurement element. Note that it does not carry a namespace.
+
+[[listing24]]
+[source,xml]
+.Relevant schema: including UnitsML
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+  elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xsd:include schemaLocation="UnitsML-1.0-NoNamespace.xsd"/>
+  <xsd:element name="SimpleSchemaRoot">
+    <xsd:annotation>
+      <xsd:documentation>Root element for simple test schema modified by
+including
+        the UnitsML schema into the Simple schema.
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:choice maxOccurs="unbounded">
+        <xsd:element name="Text" type="xsd:string"/>
+        <xsd:element name="Measurement" minOccurs="0">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="NumericValue" type="xsd:double"/>
+              <xsd:element ref="Unit"/>
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:choice>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
+----
+
+==== Instance document
+
+[[listing25]]
+[source,xml]
+.Sample instance document: including UnitsML
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<SimpleSchemaRoot xsi:noNamespaceSchemaLocation="SimpleSchema3.xsd" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Text>The width of the room is: </Text>
+  <Measurement>
+    <NumericValue>3.14159</NumericValue>
+    <Unit xml:id="u42">
+      <UnitName xml:lang="en-US">meter</UnitName>
+      <UnitSymbol type="ASCII">m</UnitSymbol>
+    </Unit>
+  </Measurement>
+  <Text>. The width has been obtained by ...</Text>
+</SimpleSchemaRoot>
+----
+
+The XML document in <<listing25>> is an example of an instance document with this option. Notable in contrast to the previous two approaches is the lack of the use of namespaces (although, of course, namespaces can still be used when including other schemata).
+
+==== Discussion
+
+In addition to the benefits and drawbacks discussed in previous sections, including the UnitsML schema has the following two traits: First, it requires editing the UnitsML schema so that the `targetNamespace` attribute of the standard UnitsML does not stand in the way of the target language. This process can be automated through a stylesheet like that shown in <<listing23>>. The benefit that is achieved through accepting this drawback though is that the target language and UnitsML no longer exist in different namespaces, thus keeping up a uniform appearance to its users. On the other hand, by removing the UnitsML namespace or changing the UnitsML namespace to match the target language, the possibility for name clashes arises.
+
+=== `<redefine>` the elements of UnitsML
+
+The `redefine` method is related to the `include` method in that the parts of the redefined schema must be in the same namespace as the host schema, whether declared or not. Thus, the version of the UnitsML schema to be redefined must have no declared namespace. The `<redefine>` directive is describe in detail in section 4.2.2 of the XML Schema Structures Part (<<XSD1>>], section 4.2.2 Including modified component definitions).
+
+For this usage scenario the same result document `UnitsML-1.0-noNamespace.xsd` created by the XSLT stylesheet in <<listing23>> has been used.
+
+Whereas the `include` method does not allow changes to be made to the included schema, the `redefine` method allows simple and complex types, as well as element and attribute groups, to be modified by extension or restriction.
+
+==== XML Schema modifications
+
+The schema in <<listing26>> first redefines the `<Unit>` element from UnitsML to include a text element `<MyText>`. This modified `<Unit>` element then is used in the 'simple' schema itself.
+
+[[listing26]]
+[source,xml]
+.Relevant schema: redefining UnitsML
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  elementFormDefault="qualified" attributeFormDefault="unqualified">
+  <xsd:redefine schemaLocation="UnitsML-1.0-noNamespace.xsd">
+    <xsd:complexType name="UnitType">
+      <xsd:complexContent>
+        <xsd:extension base="UnitType">
+          <xsd:sequence>
+            <xsd:element name="MyText" minOccurs="0" type="xsd:string"/>
+          </xsd:sequence>
+        </xsd:extension>
+      </xsd:complexContent>
+    </xsd:complexType>
+  </xsd:redefine>
+  <xsd:element name="SimpleSchemaRoot">
+    <xsd:annotation>
+      <xsd:documentation>Root element for simple test schema modified by
+        including the UnitsML schema into the Simple schema redefining the Unit
+        element by extension.
+      </xsd:documentation>
+    </xsd:annotation>
+    <xsd:complexType>
+      <xsd:choice maxOccurs="unbounded">
+        <xsd:element name="Text" type="xsd:string" />
+        <xsd:element name="Measurement" minOccurs="0">
+          <xsd:complexType>
+            <xsd:sequence>
+              <xsd:element name="NumericValue" type="xsd:double" />
+              <xsd:element ref="Unit" />
+            </xsd:sequence>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:choice>
+    </xsd:complexType>
+  </xsd:element>
+</xsd:schema>
+----
+
+==== Instance document
+
+The instance document in <<listing27>> is identical to that for the `include` method, except for the additional element `MyText` being used.
+
+[[listing27]]
+[source,xml]
+.Sample instance document: redefining UnitsML
+----
+<?xml version="1.0" encoding="UTF-8"?>
+<SimpleSchemaRoot xsi:noNamespaceSchemaLocation="SimpleSchema5.xsd" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Text>The width of the room is: </Text>
+  <Measurement>
+    <NumericValue>3.14159</NumericValue>
+    <Unit xml:id="u42">
+      <UnitName xml:lang="en-US">meter</UnitName>
+      <UnitSymbol type="ASCII">m</UnitSymbol>
+      <MyText>This is sample text in an added element.</MyText>
+    </Unit>
+  </Measurement>
+  <Text>. The width has been obtained by ...</Text>
+</SimpleSchemaRoot>
+----
+
+==== Discussion
+
+The final improvement achieved by this solution consists of being able to extend the UnitsML schema. This cannot be achieved without dropping its namespace though.
+
+Now it is possible to create another shell around UnitsML which wraps vanilla UnitsML and extends it while keeping the original UnitsML namespace. This is strongly discouraged though, as the mechanisms for locating language schemata is closely coupled to the namespace of the language in question. In other words, when creating a different language, it should also exist in a different namespace.
+
+=== Summary
+
+In this chapter different approaches for incorporating UnitsML into the target language have been demonstrated, each with its own specific set of benefits and drawbacks. Please refer to the discussion section of each approach to evaluate in detail which solution best fits your use-case.
+
+Sparing the details, the different approaches' pros and cons and the impact on the target language (TL) schema can be summarized as in following table:
+
+[[table4]]
+.Summary of different UnitsML usage approaches
+|===
+h| Approach h| Benefits h| Drawbacks
+
+| Reference a unit a|
+* Few schema modifications for TL necessary
+* keeps units out of TL
+* lean & flexible approach
+* can reference global authoritative sources
+* 'Don't Repeat Yourself' fulfilled a|
+* No guarantee that the URIs resolve / deployment issues
+* cannot use UnitsML within TL schema
+
+| Refer to UnitsML a|
+* Few schema modifications for TL necessary
+* units, etc., clearly visible in instance documents
+* separation of concerns between TL and UnitsML
+* easily deployable a|
+* Multiple occurrences of some element result in problems with the `xml:id` attribute
+* 'Don't Repeat Yourself' violated
+* cannot use UnitsML within TL schema
+* no strict schema validation possible (use of `<xsd:any>`)
+* burden of weaving together namespaces on each instance document
+
+| Combination of above a|
+* Few schema modifications for TL necessary
+* easily deployable
+* units, etc., well visible in 'local units database'
+* flexible solution (refer to local and foreign content)
+* 'Don't Repeat Yourself' fulfilled a|
+* Cannot use UnitsML within TL schema
+* no strict schema validation possible (use of `<xsd:any>`)
+* burden of weaving together namespaces on each instance document
+
+| `<import>` UnitsML a|
+* Full access to UnitsML from the TL schema – fine grained validation possible
+* no instance document namespace / schema location synthesis necessary
+* depending on placement (cf. <<listing20>>), flexible solution
+* Extensive target language schema modifications necessary a|
+* requires well-planned integration
+
+| `<include>` UnitsML a|
+* Pull UnitsML into TL namespace
+* full access to UnitsML from the TL schema – fine grained validation possible
+* no instance document namespace / schema location synthesis necessary
+* depending on placement (cf. <<listing20>>), flexible solution a|
+* Requires modification of the UnitsML schema
+* extensive schema modifications necessary
+* requires well-planned integration
+
+| `<redefine>` UnitsML a|
+* Same as `<include>` above, plus
+* allowing to extend UnitsML a|
+* Same as `<include>` above, plus
+* redefinitions depart from OASIS UnitsML
+|===
+
+== Acknowledgements
+
+The following individuals have participated in the creation of this specification and are gratefully acknowledged:
+
+Participants:
+
+Robert Dragoset, NIST +
+Martin S. Weber, NIST +
+Karen Olsen, NIST +
+Mark Carlisle, NIST +
+Peter Linstrom, NIST +
+Karen LeGrand, IEM
+
+We also gratefully acknowledge the input of former members of the OASIS UnitsML technical committee in forming the UnitsML schema that is described herein.
+
+== Non-Normative Section
+
+=== W3C XML Schema for UnitsML
+
+=== Naming and Design Rules for UnitsML
+
+This chapter delineates the naming and design rules (NDRs) for the Units Markup Language (UnitsML) schema. These rules are applied on top of additional requirements by the OASIS (cf. <<OASIS-NDR>>).
+
+*[EX1]* Paragraphs marked like this one dene a Naming and Design Rule which is or was applied to the UnitsML schema. Names consisting of all upper case letters refer to the according entry from the OASIS
+
+Universal Business Language NDRs (cf.<<OASIS-UBL>>). Names having a suffix of \-UnitsML " have been altered from the original version to suit the needs of the UnitsML technical committee.
+
+==== Relations to Standards
+
+The W3C XML Schema Denition Language (XSD) has become the generally accepted and most widely adopted schema language. Accordingly, the NDR for UnitsML and the UnitsML schema must conform to the W3C XSD requirements.
+
+*[STA1]* The UnitsML schema design rules MUST be based on the W3C XML Schema Recommendations: XML Schema Part 1: Structures (<<XSD1>>) and XML Schema Part 2: Datatypes (<<XSD2>>).
+
+*[STA2]* The UnitsML schema MUST be based on the W3C suite of technical specifications holding recommendation status.
+
+==== Overall schema structure
+
+These schema structure issues must be addressed to provide a concise look and feel to the UnitsML schema that will facilitate the integration of UnitsML as a standard among the XML community and usage in other XSD-based markup languages.
+
+*[GXS1-UnitsML]* The UnitsML Schema MUST conform to the following physical layout as applicable:
+
+[[listing28]]
+[source,xml]
+.Global schema structure
+----
+<!-- ======= XML Declaration======== -->
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ===== Copyright Notice ===== -->
+Required OASIS full copyright notice.
+<!-- == xsd:schema Element With Namespaces Declarations == -->
+xsd:schema element to include version attribute and
+namespace declarations in the following order:
+xmlns:xsd
+Target namespace
+Default namespace
+Unqualified Datatypes
+Qualified Datatypes
+Identifier Schemes
+Code Lists
+Attribute Declarations - elementFormDefault="qualified"
+attributeFormDefault="unqualified"
+Version Attribute
+<!-- ===== Imports ===== -->
+all incorporated schemata
+<!-- ===== Root Element ===== -->
+Root Element Declaration
+Root Element Type Definition
+<!-- ===== Element Declarations ===== -->
+all element declarations
+<!-- ===== Element Type Definitions ===== -->
+all complex type definitions
+<!-- ===== Attribute Type Definitions ===== -->
+all global attribute (group) definitions
+<!-- ===== simpleType Type Definitions ===== -->
+all simple type definitions
+----
+
+Mixed content is intended for use in document-centric schemata. UnitsML is a data-centric format, and stored pieces of data must be clearly unambiguous. The use of white-space in mixed content makes processing unnecessarily difficult.
+
+*[MDC2]* Mixed content MUST NOT be used except where contained in an xsd:documentation element.
+
+==== Reusability
+
+To maximize reusability of elements declared within the UnitsML schemata, all element declarations must be global. This type of element declaration enables the re-use of elements both inside and outside of the UnitsML standard. Global declarations enable design flaws in schema implementations to be discovered more easily and avoided in future revisions.
+
+*[ELD2]* All element declarations MUST be global
+
+==== Namespaces
+
+XML namespaces provide a simple method for qualifying element, types and attribute names used in XML documents by associating them with namespaces identified by URI (uniform resource identifier) references ([7]). Namespaces are developed for modularity and to enable the re-use of well-understood markup vocabularies. Declared elements, attributes or types in one schema can be qualified by assigning a namespace prefix that binds a namespace to this prefix.
+
+*[NMS1]* The UnitsML schema MUST have a namespace declared using the xsd:targetNamespace attribute.
+
+Schema validation ensures that an instance conforms to its declared schema. There must never be two (different) schemata with the same namespace URI. In keeping with rule [NMS1], each UnitsML schema shall be part of its own versioned namespace.
+
+*[NMS2]* Every UnitsML schema version MUST have its own unique namespace.
+
+For interoperability and reusability of UnitsML in other schemata, and the use of external schemata within UnitsML, a consistent approach to namespace declarations is necessary.
+
+*[NMS3]* The UnitsML namespaces MUST only contain the UnitsML schema.
+
+To ensure conformance with the organizational structure of OASIS this structure must be mapped within the namespace name. The syntax for OASIS namespace names is described in IETF's RFC3121 ([7]). This implies the use of a persistent URN instead of a resolvable URL.
+
+*[NMS4]* The namespace names for UnitsML Schemas holding committee draft status MUST be of the form: `urn:oasis:names:tc:unitsml:schema:<subtype>:<document-id>`
+
+*[F]* The namespace names for UnitsML Schemas holding OASIS Standard status MUST be of the form: `urn:oasis:names:specification:unitsml:schema:<subtype>:<document-id>`
+
+Once a UnitsML namespace name is officially published, it must never be changed to maintain the persistence inherent with using URNs to define UnitsML namespace names.
+
+*[NMS6]* A published UnitsML namespace MUST never be changed.
+
+If two namespaces are mutually dependent then clearly, importing one will cause the other to be imported as well. For this reason, circular dependencies must not exist between external schemata imported into the UnitsML schema. By extension, circular dependencies must not exist between namespaces. A namespace \A" dependent upon type definitions or element declarations defined in another namespace \B" must import \B's" document schema.
+
+*[SSM2]* A schema in a UnitsML namespace that is dependent upon type definitions or element declarations defined in another namespace MUST only import the document schema from that namespace.
+
+==== Versioning
+
+Versioning enables tracking of changes in schema files. It provides for better maintainability as older revisions can be distinguished from the current version. The versioning is encoded in two different ways - firstly in the namespace name, secondly in an attribute version for the XSD root element xsd:schema. Each must represent the same version of a particular schema. To ensure compatibility and improve interoperability on the schema level, a versioning concept encoded in the namespace names is necessary.
+
+*[VER1]* Every UnitsML schema major version committee draft MUST have an RFC 3121 conform documentid of the form: `<name>-<major>.0[.<revision>]`
+
+*[VER2]* Every UnitsML schema major version OASIS Standard MUST have an RFC3121 conform documentid of the form: `<name>-<major>.0`
+
+*[VER3]* Every minor version release of a UnitsML schema draft MUST have an RFC3121 conform documentid of the form: `<name>-<major>.<non-zero>[.<revision>]`
+
+*[VER4]* Every minor version release of a UnitsML schema OASIS Standard MUST have an RFC 3121 document-id of the form `<name>-<major>.<non-zero>`
+
+Once a schema version is assigned a namespace, that schema version and that namespace will be associated in perpetuity. Any change to any schema module mandates association with a new namespace.
+
+*[VER5]* For UnitsML Minor version changes <name> MUST not change.
+
+To differentiate the logical progressing of the schema evolution the major and minor version numbers are positive integer incremented by one for major and minor changes.
+
+*[VER6]* Every UnitsML Schema major version number MUST be a sequentially assigned, incremental number greater than zero.
+
+*[VER7]* Every UnitsML Schema minor version number MUST be a sequentially assigned, incremental non-negative integer.
+
+==== General Naming Rules
+
+The official language for UnitsML is English. To avoid ambiguities, all official XML constructs in UnitsML must be in English using American spellings. The Oxford English Dictionary (OED) is the definitive dictionary of the English language. This multi-volume treatise is also available on CD ROM and on line (by subscription), as well as in simplified editions such as the Oxford English Dictionary for Writers and Editors.
+
+*[GNR1]* UnitsML element, attribute, and type names MUST consist of at least one word that MUST be in the English language, as found in the Oxford English Dictionary (OED) (Latest Ed.). Where both American and English spellings of the same word are provided, the American spelling MUST be used.
+
+Acronyms and abbreviations affect semantic interoperability and, as such, are to be avoided to the maximum extent practicable. Since some abbreviations will inevitably be necessary, UnitsML will maintain a normative list of authorized acronyms and abbreviations. Section B.11 provides the current list of permissible acronyms, abbreviations, and word truncations. The intent of this restriction is to facilitate the use of common semantics and to promote greater understanding.
+
+*[GNR4]* UnitsML XML element, attribute, and simple and complex type names MUST NOT use acronyms, abbreviations, or other word truncations, except those in the list of exceptions published in section B.11.
+
+The UnitsML standard does not desire a proliferation of acronyms and abbreviations. Section B.11 is an exception list and will be tightly controlled by the OASIS UnitsML technical committee. Additions will only occur after careful scrutiny to include assurance that such addition is critically necessary, that acronyms and abbreviations have not already been declared in another UnitsML document, and that such an addition will not create semantic ambiguity of any kind.
+
+*[GNR5]* Acronyms and abbreviations MUST only be added to the UnitsML approved acronym and abbreviation list after careful consideration for maximum understanding and reuse.
+
+Once an acronym or abbreviation has been approved, it is essential to ensure, for semantic clarity and interoperability, that only the acronym or abbreviation shall be used. The use or inclusion of the spelled-out name for the acronym or abbreviation shall not be allowed.
+
+*[GNR6]* The acronyms and abbreviations listed in Section B.11 MUST always be used.
+
+Generally speaking, the names for UnitsML XML constructs must be always singular. The only exceptions are words whose concept itself is plural.
+
+*[GNR7-UnitsML]* UnitsML XML element and type names MUST be in singular form unless the concept itself is plural. The sole exceptions to this rules is for the naming of the "Conversions " and "RootUnits " elements.
+
+*[GNR8-UnitsML]* The UpperCamelCase (UCC) convention MUST be used for naming elements and complex types.
+
+*[GNR9-UnitsML]* The lowerCamelCase (LCC) convention MUST be used for naming attributes and simple types.
+
+*[GNR10]* Acronyms and abbreviations at the beginning of an attribute declaration MUST appear in all lower case. All other acronym and abbreviation usage in an attribute declaration MUST appear in upper case.
+
+*[GNR11]* Acronyms MUST appear in all upper case for all element declarations and type definitions.
+
+==== Type Naming Rules
+
+Even though declaration of the name attribute for xsd:complexType and xsd:simpleType is not required by the W3C XML Schema standard, since elements and types are intended to be reusable, all types must be named. This permits other types to establish elements that reference such types. The attribute name is not allowed for xsd:localComplexType (local definition of types); therewith this rule implies global type definitions.
+
+*[GTD1]* All types MUST be named.
+
+The purpose of UnitsML is to develop a schema for creating standardized and consistent XML documents containing a precise and unambiguous description of units. Permitting the use of the data type xsd:anyType would allow schema constraints to be circumvented. Not assigning types to attributes is equivalent to using the "simple urtype", i.e., xsd:anySimpleType. Thus attributes must have types assigned.
+
+*[GTD2-UnitsML]* The xsd:anyType MUST NOT be used. Every attribute has an assigned type.
+
+==== Element Declarations
+
+*[ELD6]* The code list xsd:import element MUST contain the namespace and schema location attributes.
+
+*[ELD7]* Empty elements MUST not be declared.
+
+The use of the xsd:any element permits the use of elements unknown at the time of schema creation. The usage may circumvent the precise and standardized description of units with the UnitsML schema and software cannot handle these unforeseen elements. The sole exception is for the SymbolType complex type, whose purpose is to allow usage of an undetermined, foreign markup language.
+
+*[ELD9-UnitsML]* The xsd:any element MUST NOT be used. The single exception to this rule is within the SymbolType complex type which uses xsd:any on purpose.
+
+==== Attribute Declaration
+
+To provide XML-aware tools and XML validators with all referenced schemata, the xsd:schemaLocation attribute must contain a resolvable URL.
+
+*[ATD6]* Each xsd:schemaLocation attribute declaration MUST contain a resolvable URL.
+
+In general, the absence of an element in an XML schema does not have any particular meaning. It may indicate that the information is unknown or not applicable or that the element may be absent for some other reason. The XML schema specification does, however, provide a feature - the nillable attribute - whereby an element may be transferred with no content, but still use its attributes and thus carry semantic meaning. To retain semantic clarity, the nillability feature of XSD will not be used.
+
+*[ATD7]* The xsd built in nillable attribute MUST NOT be used for any UnitsML declared element.
+
+xsd:anyAttribute permits the use of attributes unknown at the time of schema creation. The usage may circumvent the precise and standardized description of units with the UnitsML schema and software cannot handle these unforeseen attributes.
+
+*[ATD8]* The xsd:anyAttribute MUST NOT be used.
+
+==== General Schema Rules
+
+This rule is useful to keep schemata as simple as possible. The unnecessary use of complex types results in overly complex schemata.
+
+*[GXS3]* Built-in XSD Simple Types SHOULD be used wherever possible.
+
+*[GXS4]* All W3C XML Schema constructs in the UnitsML schema MUST contain the following namespace declaration on the XSD schema element: `xmlns:xsd="http://www.w3.org/2001/XMLSchema"`
+
+Substitution groups allow a global element to replace another global element in an XML instance document without any further modifications to the schema. Substitution groups disrupt the harmonization of element names.
+
+*[GXS5]* The xsd:substitutionGroup feature MUST NOT be used.
+
+The xsd:notation attribute identifies a notation. Notation declarations affect all the `<notation>` element information items in the [children], if any, plus any included or imported declarations. Per XML Schema Definition Part 2, "It is an error for NOTATION to be used directly in a schema. Only datatypes that are derived from NOTATION by specifying a value for enumeration can be used in a schema" ([15]). The UnitsML schema model does not require or support the use of this feature.
+
+*[GXS7]* xsd:notation MUST NOT be used.
+
+The "all" compositor indicates that the elements declared within it can appear in any order. Because the UnitsML schema defines a special structure, it is important that element order be enforced in UnitsML instance documents or documents that incorporate UnitsML.
+
+*[GXS8]* The xsd:all element MUST NOT be used.
+
+The xsd:include feature provides a mechanism for bringing in schemata that reside in the same namespace. To avoid naming collisions with elements, types and attributes defined and declared in an incorporated schema, and avoid circular references this feature will not be used.
+
+*[GXS10]* The xsd:include feature MUST NOT be used.
+
+==== Allowed abbreviations for UnitsML
+
+ID:: Identifier
+lang:: Language
+ML:: Markup Language
+SI:: The International System of Units
+UnitsML:: Units Markup Language
+URI:: Uniform Resource Identifier
+URL:: Uniform Resource Locator
+WSDL:: Web Services Description Language
+
+== Revision History
+
+|===
+h| Revision h| Date h| Editor h| Changes Made
+| [Rev number] | [Rev Date] | [Modified By] | [Summary of Changes]
+|===
