@@ -16,7 +16,6 @@
 :affiliation_5: Biochemical Science Division, National Institute of Standards and Technology, Gaithersburg, MD, 20899
 :email_5: gary.kramer@nist.gov
 :keywords: analytical experiments; AnIML; data storage; device integration; interoperability; Markup Language; Scientific Units of Measure; UnitsML; Web services; XML.
-:docfile: document.adoc
 :imagesdir: images
 :mn-document-class: nist
 :mn-output-extensions: xml,html,doc,pdf

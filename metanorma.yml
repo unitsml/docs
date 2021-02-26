@@ -1,0 +1,11 @@
+---
+metanorma:
+  source:
+    files:
+      - sources/unitsml-guide/document.adoc
+      - sources/unitsml-incorporation/document.adoc
+      - sources/unitsml-ubl-ndr-subset/document.adoc
+
+  collection:
+    organization: "UnitsML"
+    name: "UnitsML documents"

@@ -17,7 +17,6 @@
 :affiliation_abbrev_5: NIST
 :fullname_6: Karen LeGrand
 :affiliation_abbrev_6: IEM
-:docfile: document.adoc
 :imagesdir: images
 :mn-document-class: nist
 :mn-output-extensions: xml,html,doc,pdf
@@ -109,33 +108,33 @@ UnitsML has been developed within a technical committee (<<UNITSML>>) of the Org
 [bibliography]
 === References
 
-* [[[DREIHELLER]]], A. Dreiheller and M. Moeschbacher and B. Mohr, Programming Pascal with Physical Units. _SIGPLAN Notices_, 21(12):114-123, 1986.
+* [[[DREIHELLER,DREIHELLER]]], A. Dreiheller and M. Moeschbacher and B. Mohr, Programming Pascal with Physical Units. _SIGPLAN Notices_, 21(12):114-123, 1986.
 
-* [[[ISO31]]], ISO Technical Committee ISO/TC12. _Quantities and units, ISO Standards handbook_, International Organization for Standardization, 1993.
+* [[[ISO31,ISO 31]]], ISO Technical Committee ISO/TC12. _Quantities and units, ISO Standards handbook_, International Organization for Standardization, 1993.
 
-* [[[OASIS-NDR]]], Robin Cover, editor. _OASIS Naming Directives_. http://docs.oasis-open.org/specGuidelines/ndr/namingDirectives.html
+* [[[OASIS-NDR,OASIS Naming Directives]]], Robin Cover, editor. _OASIS Naming Directives_. http://docs.oasis-open.org/specGuidelines/ndr/namingDirectives.html
 
-* [[[OASIS-UBL]]], Jon Bosak, editor. _OASIS UBL TC Homepage_. http://www.oasis-open.org/committees/tc_home.php?wg_abbrev=ubl
+* [[[OASIS-UBL,OASIS UBL TC]]], Jon Bosak, editor. _OASIS UBL TC Homepage_. http://www.oasis-open.org/committees/tc_home.php?wg_abbrev=ubl
 
-* [[[SIGSOFT]]], Peter G. Neumann, Risks to the public in computer systems. _SIGSOFT Software Engineering Notes_, 10(3):, 1985.
+* [[[SIGSOFT,SIGSOFT]]], Peter G. Neumann, Risks to the public in computer systems. _SIGSOFT Software Engineering Notes_, 10(3):, 1985.
 
-* [[[SP330]]], Barry N. Taylor and Ambler Thompson, editors. _The International System of Units (SI); NIST Special Publication 330_, National Institute Of Standards and Technology, 2008.
+* [[[SP330,NIST SP 330]]], Barry N. Taylor and Ambler Thompson, editors. _The International System of Units (SI); NIST Special Publication 330_, National Institute Of Standards and Technology, 2008.
 
-* [[[SP811]]], Ambler Thompson and Barry N. Taylor. _Guide for the Use of the International System of Units (SI). NIST Special Publication 811_, National Institute Of Standards and Technology, 2008.
+* [[[SP811,NIST SP 811]]], Ambler Thompson and Barry N. Taylor. _Guide for the Use of the International System of Units (SI). NIST Special Publication 811_, National Institute Of Standards and Technology, 2008.
 
-* [[[UNITSML]]], Robert Dragoset. _OASIS UnitsML technical committee_. http://www.oasis-open.org/committees/tc_home.php?wg_abbrev=unitsml
+* [[[UNITSML,OASIS UnitsML TC]]], Robert Dragoset. _OASIS UnitsML technical committee_. http://www.oasis-open.org/committees/tc_home.php?wg_abbrev=unitsml
 
-* [[[VIM]]], Working Group 2 of the Joint committee for Guides in Metrology. _International vocabulary of metrology -- Basic and general concepts and associated terms_, International Organization for Standardization, 2008.
+* [[[VIM,VIM]]], Working Group 2 of the Joint committee for Guides in Metrology. _International vocabulary of metrology -- Basic and general concepts and associated terms_, International Organization for Standardization, 2008.
 
-* [[[WSDL]]], Erik Christensen and Francisco Curbera and Greg Meredith and Sanjiva Weerawarana, editors. _Web Services Description Language (WSDL)_. http://www.w3.org/TR/wsdl
+* [[[WSDL,W3C TR wsdl]]], Erik Christensen and Francisco Curbera and Greg Meredith and Sanjiva Weerawarana, editors. _Web Services Description Language (WSDL)_. http://www.w3.org/TR/wsdl
 
-* [[[XMLID]]], Jonathan Marsh and Daniel Veillard and Norman Walsh, editors. _xml:id Version 1.0 -- W3C Recommendation 9 September 2005_. http://www.w3.org/TR/xml-id/
+* [[[XMLID,W3C TR xml-id]]], Jonathan Marsh and Daniel Veillard and Norman Walsh, editors. _xml:id Version 1.0 -- W3C Recommendation 9 September 2005_. http://www.w3.org/TR/xml-id/
 
-* [[[XMLNAMES11]]], Tim Bray and Dave Hollander and Andrew Layman and Richard Tobin, editors, _Namespaces in XML 1.1_. http://www.w3.org/TR/xml-names11/
+* [[[XMLNAMES11,W3C TR xml-names11]]], Tim Bray and Dave Hollander and Andrew Layman and Richard Tobin, editors, _Namespaces in XML 1.1_. http://www.w3.org/TR/xml-names11/
 
-* [[[XSD1]]], Henry S. Thompson and David Beech and Murray Maloney and Noah Mendelsohn, editors, _XML Schema Part 1: Structures_. http://www.w3.org/TR/xmlschema-1/
+* [[[XSD1,W3C TR xmlschema-1]]], Henry S. Thompson and David Beech and Murray Maloney and Noah Mendelsohn, editors, _XML Schema Part 1: Structures_. http://www.w3.org/TR/xmlschema-1/
 
-* [[[XSD2]]], Paul V. Biron and Ashok Malhotra, editors, _XML Schema Part 2: Datatypes_. http://www.w3.org/TR/xmlschema-2/
+* [[[XSD2,W3C TR xmlschema-2]]], Paul V. Biron and Ashok Malhotra, editors, _XML Schema Part 2: Datatypes_. http://www.w3.org/TR/xmlschema-2/
 
 == The UnitsML Language
 
@@ -168,7 +167,7 @@ Or in other words, there exists a reference scale of the same kind of quantity a
 
 [quote, '<<VIM>>, section 1.1, page 2']
 ____
-a "property of a phenomenon, body, or substance, where the property has a magnitude that can be expressed as a number and a reference 
+a "property of a phenomenon, body, or substance, where the property has a magnitude that can be expressed as a number and a reference
 
 [...]
 
@@ -284,7 +283,7 @@ Code list entries can be referenced (or assembled from) the `<CodeListValue>` ch
  <UnitName xml:lang="en-US">nautical mile</UnitName>
  <UnitName xml:lang="de-DE">Seemeile</UnitName>
  <!-- ... -->
- <CodeListValue unitCodeValue="NM" codeListVersion="2010-03-22" 
+ <CodeListValue unitCodeValue="NM" codeListVersion="2010-03-22"
   codeListName="Aquatic Companies Metric Entities (ACME)"
   locationURL="http://www.acme.com/codes/acme/2010-03-22/"
   organizationName="ACME" organizationURI="urn:megacorp:disney:acme"
@@ -407,7 +406,7 @@ The final way to describe unit conversions within UnitsML is to refer to a web-s
   <Conversions>
    <!-- ... -->
    <WSDLConversionFrom xml:id="u23_to_u314_wsdl"
-    initialUnit="#u23" 
+    initialUnit="#u23"
     wsdlURL="http://chalk.coas.unf.edu:8080/axis2/services/tempConvert?wsdl">
     <WSDLDescription xml:lang="en-US">
      Example of a WSDL temperature conversion, converting from kelvin
@@ -761,7 +760,7 @@ The 'simple' schema describes a language consisting of a blend of text elements 
 .A 'simple' instance document
 ----
 <?xml version="1.0" encoding="UTF-8"?>
-<SimpleSchemaRoot xsi:noNamespaceSchemaLocation="SimpleSchema0.xsd" 
+<SimpleSchemaRoot xsi:noNamespaceSchemaLocation="SimpleSchema0.xsd"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Text>The width of the room is: </Text>
   <Measurement>
@@ -825,7 +824,7 @@ By referencing a unique unit ID, it is possible to refer to UnitsML content from
 .Instance document: referencing a unique ID
 ----
 <?xml version="1.0" encoding="UTF-8"?>
-<SimpleSchemaRoot xsi:noNamespaceSchemaLocation="SimpleSchema1.xsd" 
+<SimpleSchemaRoot xsi:noNamespaceSchemaLocation="SimpleSchema1.xsd"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Text>The width of the room is: </Text>
   <Measurement unit="http://authorative.source/Units#u1">
@@ -839,14 +838,14 @@ Note that 'meters' has been removed from the `<Text>` following the `<Measuremen
 
 ==== Discussion
 
-Adding a pointer to the unit has the least impact on your language and its schema. By adding a single attribute, the units of measure being used can be marked up. If the URI actually resolves to some UnitsML content, it can be fetched and inspected for required information, say, pulling the unit names out of a central database in a given language, or get information on how to convert between different units. 
+Adding a pointer to the unit has the least impact on your language and its schema. By adding a single attribute, the units of measure being used can be marked up. If the URI actually resolves to some UnitsML content, it can be fetched and inspected for required information, say, pulling the unit names out of a central database in a given language, or get information on how to convert between different units.
 
 A bonus of this approach is that it encourages use of a dictionary of units. This keeps the information overhead slim at places which are expected to carry a lot of data. The dictionary may even reside in the same document (as realized by <<listing20>>).
 
 There are some practical issues with this approach though. The W3C XML Schema validation only can ensure that the type of the attribute matches a certain pattern. If a document is valid that does not mean that the URIs resolve at all, or to some meaningful content. If the URL referenced is on a foreign server, the data might not be accessible at all places that the document is being viewed. The data might not be under the control of the document author.
 
 Even if the references are only local URIs (e.g., using the `file://` 'protocol'), they have to be deployed into the expected location, the XML processor in use must implement the `xml:id` specification (<<XMLID>>) or implement support for the `xsd:ID` data type to be able to pull the information with a good performance.
- 
+
 Lastly another complaint might be that the unit of measure being used isn't 'seen'. Instead of a comprehensible unit reference most likely an opaque identifier will be used. Depending on the scope of the target language this might be a drawback.
 
 In conclusion this is a low-impact way to reference units unambiguously. Its drawbacks have been sketched out above, but the ease with which it can be included speaks for itself. Also with some approaches (e.g., referencing a UnitsML instance document that makes up the 'local units database' containing only the (few) used units so that meaningful `xml:id` attributes can be used, with a well-defined system of distribution and/or deployment) most of these problems can be avoided.
@@ -911,7 +910,7 @@ UnitsML content marking up the units of measure being used can just be dropped i
 .Sample instance document: referring to UnitsML
 ----
 <?xml version="1.0" encoding="UTF-8"?>
-<simple:SimpleSchemaRoot 
+<simple:SimpleSchemaRoot
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:simple="http://unitsml.nist.gov/simple"
     xmlns:unitsml="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-1.0"
@@ -957,8 +956,8 @@ As this approach is basically a combination of the previous two approaches, the 
 .Relevant schema: referencing a local units database
 ----
 <?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
-  elementFormDefault="qualified" 
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+  elementFormDefault="qualified"
   attributeFormDefault="unqualified">
   <xsd:element name="SimpleSchemaRoot">
     <xsd:annotation>
@@ -977,8 +976,8 @@ As this approach is basically a combination of the previous two approaches, the 
             </xsd:complexType>
           </xsd:element>
         </xsd:choice>
-        <xsd:any minOccurs="0" maxOccurs="unbounded" 
-          namespace="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-1.0" 
+        <xsd:any minOccurs="0" maxOccurs="unbounded"
+          namespace="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-1.0"
           processContents="strict"/>
       </xsd:sequence>
     </xsd:complexType>
@@ -995,7 +994,7 @@ The instance document in <<listing18>> shows an instance of such an approach. No
 .Sample instance document: referencing a local units database
 ----
 <?xml version="1.0" encoding="UTF-8"?>
-<SimpleSchemaRoot 
+<SimpleSchemaRoot
     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:unitsml="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-1.0"
     xsi:schemaLocation="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-1.0
@@ -1017,7 +1016,7 @@ The instance document in <<listing18>> shows an instance of such an approach. No
 
 This approach combines the benefits of the previous two approaches, while eliminating most of the drawbacks: Adding the pointer to existing elements is a lean modification, and the single location of units markup encourages following the 'Don't Repeat Yourself' approach common in data modeling, resolving the drawback of the previous approach (as detailed in the Discussion section of Refer to the UnitsML schema).
 
-The drawbacks of the first approach (as outlined in the Discussion section of Reference a unique unit ID) are not reproduced: with the unit markup in the instance document there is no problem regarding deployment or availability of information. 
+The drawbacks of the first approach (as outlined in the Discussion section of Reference a unique unit ID) are not reproduced: with the unit markup in the instance document there is no problem regarding deployment or availability of information.
 
 The practical issue of having to use an XML processor which supports the `xml:id` specification (<<XMLID>>) remains though. Additionally, by needing to have a section on the units of measure being used in each instance document, there might be a considerable space overhead depending on the different operation scenarios of the target language.
 
@@ -1040,18 +1039,18 @@ The solution in Listing 19: Relevant schema: importing UnitsML brings UnitsML el
 .Relevant schema: importing UnitsML (alternative)
 ----
 <?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema xmlns:simple="http://unitsml.nist.gov/simple" 
-  xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+<xsd:schema xmlns:simple="http://unitsml.nist.gov/simple"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
   xmlns:unitsml="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-1.0"
-targetNamespace="http://unitsml.nist.gov/simple" 
+targetNamespace="http://unitsml.nist.gov/simple"
   elementFormDefault="qualified" attributeFormDefault="unqualified">
   <xsd:import namespace="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-
-1.0" 
+1.0"
     schemaLocation="UnitsML-1.0.xsd"/>
   <xsd:element name="SimpleSchemaRoot">
     <xsd:annotation>
       <xsd:documentation>Root element for simple test schema modified by
-importing 
+importing
         the UnitsML schema into the Simple schema.
       </xsd:documentation>
     </xsd:annotation>
@@ -1073,7 +1072,7 @@ importing
     </xsd:complexType>
   </xsd:element>
 </xsd:schema>
----- 
+----
 
 This approach places the UnitsML element `<UnitSet>` as last in the language, allowing a 'local units database'.
 
@@ -1087,9 +1086,9 @@ Using this option of composition, a 'simple' data file could look like the examp
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 <simple:SimpleSchemaRoot
-  xsi:schemaLocation="http://unitsml.nist.gov/simple SimpleSchema4.xsd" 
-  xmlns:simple="http://unitsml.nist.gov/simple" 
-  xmlns:unitsml="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-1.0" 
+  xsi:schemaLocation="http://unitsml.nist.gov/simple SimpleSchema4.xsd"
+  xmlns:simple="http://unitsml.nist.gov/simple"
+  xmlns:unitsml="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-1.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <simple:Text>The width of the room is: </simple:Text>
   <simple:Measurement>
@@ -1111,9 +1110,9 @@ An alternative to using the explicit namespace prefix ("`simple:`") for the 'sim
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 <simple:SimpleSchemaRoot
-  xsi:schemaLocation="http://unitsml.nist.gov/simple SimpleSchema7.xsd" 
-  xmlns:simple="http://unitsml.nist.gov/simple" 
-  xmlns:unitsml="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-1.0" 
+  xsi:schemaLocation="http://unitsml.nist.gov/simple SimpleSchema7.xsd"
+  xmlns:simple="http://unitsml.nist.gov/simple"
+  xmlns:unitsml="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-1.0"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <simple:Text>The width of the room is: </simple:Text>
   <simple:Measurement unit="#u42">
@@ -1155,14 +1154,14 @@ In contrast to using the previous approaches, this approach needs modifications 
    * NIST: http://unitsml.nist.gov
 
 -->
-<xsl:stylesheet version="1.0" 
-  xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+<xsl:stylesheet version="1.0"
+  xmlns:xsd="http://www.w3.org/2001/XMLSchema"
   xmlns:xsl="http://www.w3.org/1999/XSL/Transform"
   xmlns:unitsml="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-1.0"
-  xmlns:docco="http://www.ayaken.net/xsd2docco/2010/1" 
+  xmlns:docco="http://www.ayaken.net/xsd2docco/2010/1"
   exclude-result-prefixes="xsl unitsml">
   <xsl:output method="xml" encoding="UTF-8" cdata-section-elements="docco:example" />
-  
+
   <xsl:template match="/xsd:schema">
     <xsd:schema>
       <!-- attributes must come first: copy everything except the
@@ -1182,7 +1181,7 @@ name="attributeFormDefault">unqualified</xsl:attribute>
             <!-- do nothing -->
           </xsl:when>
           <xsl:otherwise>
-             <xsl:copy /> 
+             <xsl:copy />
           </xsl:otherwise>
         </xsl:choose>
       </xsl:for-each>
@@ -1216,7 +1215,7 @@ The 'simple' schema now pulls in the UnitsML schema via use of the `<xsd:include
 .Relevant schema: including UnitsML
 ----
 <?xml version="1.0" encoding="UTF-8"?>
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" 
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema"
   elementFormDefault="qualified" attributeFormDefault="unqualified">
   <xsd:include schemaLocation="UnitsML-1.0-NoNamespace.xsd"/>
   <xsd:element name="SimpleSchemaRoot">
@@ -1250,7 +1249,7 @@ including
 .Sample instance document: including UnitsML
 ----
 <?xml version="1.0" encoding="UTF-8"?>
-<SimpleSchemaRoot xsi:noNamespaceSchemaLocation="SimpleSchema3.xsd" 
+<SimpleSchemaRoot xsi:noNamespaceSchemaLocation="SimpleSchema3.xsd"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Text>The width of the room is: </Text>
   <Measurement>
@@ -1333,7 +1332,7 @@ The instance document in <<listing27>> is identical to that for the `include` me
 .Sample instance document: redefining UnitsML
 ----
 <?xml version="1.0" encoding="UTF-8"?>
-<SimpleSchemaRoot xsi:noNamespaceSchemaLocation="SimpleSchema5.xsd" 
+<SimpleSchemaRoot xsi:noNamespaceSchemaLocation="SimpleSchema5.xsd"
   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
   <Text>The width of the room is: </Text>
   <Measurement>

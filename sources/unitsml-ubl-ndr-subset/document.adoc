@@ -4,12 +4,10 @@
 :affiliation: Biochemical Science Division, National Institute of Standards and Technology, Gaithersburg, MD, U.S.A. and Computer Science Department, University of Applied Sciences, Wiesbaden, Germany
 :fullname_2: Alexander Roth
 :affiliation_2: Biochemical Science Division, National Institute of Standards and Technology, Gaithersburg, MD, U.S.A. and Computer Science Department, University of Applied Sciences, Wiesbaden, Germany
-:docfile: NDRs_for_UnitsML.adoc
 :mn-document-class: nist
 :mn-output-extensions: xml,html,doc,pdf
 :local-cache-only:
 :data-uri-image:
-
 
 
 == Introduction
@@ -570,7 +568,7 @@ In alphabetical order:
 * Peter Linstrom (NIST, CSTL, Gaithersburg, MD, U.S.A.)
 * Karen Olsen (NIST, Physics, Gaithersburg, MD, U.S.A.)
 * Kent Reed (NIST, BFRL, Gaithersburg, MD, U.S.A.)
-* Martin Weber (NIST, P hysics, Gaithersburg, MD, U.S.A)
+* Martin Weber (NIST, Physics, Gaithersburg, MD, U.S.A)
 
 
 [bibliography]
@@ -591,7 +589,7 @@ http://www.ietf.org/rfc/rfc3121.txt
 * [[[ndr_project,5]]] U.S. Department of the Navy NDR Project +
 http://xml.coverpages.org/DON-XML-NDR20050127-33942.pdf
 
-* [[[w3c_xml,6]]] W3C XML Schema Recommendations: XML Schema Part 1: Structures and XML Schema Part 2: Datatypes +
+* [[[w3c_xml,W3C XML Schema Recommendations: XML Schema Part 1]]] W3C XML Schema Recommendations: XML Schema Part 1: Structures and XML Schema Part 2: Datatypes +
 http://www.w3.org/XML/Schema +
 http://www.w3.org/TR/xmlschema-1/ +
 http://www.w3.org/TR/xmlschema-2/
