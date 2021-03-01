@@ -18,7 +18,7 @@
 :keywords: analytical experiments; AnIML; data storage; device integration; interoperability; Markup Language; Scientific Units of Measure; UnitsML; Web services; XML.
 :imagesdir: images
 :mn-document-class: nist
-:mn-output-extensions: xml,html,doc,pdf
+:mn-output-extensions: xml,html,doc,rxl,pdf
 :local-cache-only:
 :data-uri-image:
 

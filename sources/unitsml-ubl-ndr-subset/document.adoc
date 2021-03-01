@@ -5,7 +5,7 @@
 :fullname_2: Alexander Roth
 :affiliation_2: Biochemical Science Division, National Institute of Standards and Technology, Gaithersburg, MD, U.S.A. and Computer Science Department, University of Applied Sciences, Wiesbaden, Germany
 :mn-document-class: nist
-:mn-output-extensions: xml,html,doc,pdf
+:mn-output-extensions: xml,html,doc,rxl,pdf
 :local-cache-only:
 :data-uri-image:
 

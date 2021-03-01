@@ -19,7 +19,7 @@
 :affiliation_abbrev_6: IEM
 :imagesdir: images
 :mn-document-class: nist
-:mn-output-extensions: xml,html,doc,pdf
+:mn-output-extensions: xml,html,doc,rxl,pdf
 :local-cache-only:
 :data-uri-image:
 
