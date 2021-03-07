@@ -1,20 +1,29 @@
 = Improving Interoperability by Incorporating UnitsML Into Markup Languages
 :title-main: Improving Interoperability by Incorporating UnitsML Into Markup Languages
+:series: nist-csts
+:series-title: UnitsML
+:series-abbrev: unitsml
+:series-mrprefix: UNITSML
+:nist-division: Systems Integration Division, Engineering Laboratory
+:nist-division-address: 100 Bureau Drive (Mail Stop 8260) Gaithersburg, MD 20899-8260
+:docnumber: 3000-003
+:issued-date: 2021-01-01
+:copyright-year: 2021
+:revision: 1
+:keywords: UnitsML, markup, units
+:doc-email: unitsml@list.nist.gov
 :fullname: Ismet Celebi
-:affiliation: Physics Laboratory, National Institute of Standards and Technology, Gaithersburg, MD, 20899 and Wiesbaden Computer Integrated Laboratory (WICIL), RheinMain University of Applied Sciences, Wiesbaden, Germany
-:email: ismet06@gmail.com
+:affiliation: Physics Laboratory
 :fullname_2: Robert A. Dragoset
-:affiliation_2: Physics Laboratory, National Institute of Standards and Technology, Gaithersburg, MD, 20899
-:email_2: dragoset@nist.gov
+:affiliation_2: Physics Laboratory
 :fullname_3: Karen J. Olsen
-:affiliation_3: Physics Laboratory, National Institute of Standards and Technology, Gaithersburg, MD, 20899
-:email_3: olsen@nist.gov
+:affiliation_3: Physics Laboratory
 :fullname_4: Reinhold Schaefer
-:affiliation_4: Wiesbaden Computer Integrated Laboratory (WICIL), RheinMain University of Applied Sciences, Wiesbaden, Germany
-:email_4: reinhold.schaefer@hs-rm.de
+:affiliation_4: RheinMain University of Applied Sciences
+:affiliation_subdiv_4: Wiesbaden Computer Integrated Laboratory (WICIL),
+:address_4: Wiesbaden, Germany
 :fullname_5: Gary W. Kramer
-:affiliation_5: Biochemical Science Division, National Institute of Standards and Technology, Gaithersburg, MD, 20899
-:email_5: gary.kramer@nist.gov
+:affiliation_5: Biochemical Science Division
 :keywords: analytical experiments; AnIML; data storage; device integration; interoperability; Markup Language; Scientific Units of Measure; UnitsML; Web services; XML.
 :imagesdir: images
 :mn-document-class: nist
@@ -22,6 +31,14 @@
 :local-cache-only:
 :data-uri-image:
 
+////
+:affiliation: Wiesbaden Computer Integrated Laboratory (WICIL), RheinMain University of Applied Sciences, Wiesbaden, Germany
+:email: ismet06@gmail.com
+:email_2: dragoset@nist.gov
+:email_3: olsen@nist.gov
+:email_4: reinhold.schaefer@hs-rm.de
+:email_5: gary.kramer@nist.gov
+////
 
 [.preface]
 == Abstract
@@ -41,7 +58,7 @@ store spectroscopy and chromatography data based on XML (Extensible Markup
 Language). XML is a language for describing what data are by enclosing
 them in computer-useable tags. Recording the units associated with the
 analytical data and metadata is an essential issue for any data representation scheme
-that must be addressed by all domainspecific markup languages. As scientific
+that must be addressed by all domain-specific markup languages. As scientific
 markup languages proliferate, it is very desirable to have a single scheme for
 handling units to facilitate moving information between different data domains.
 
@@ -184,7 +201,7 @@ that reference the AnIML core schema and UnitsML schema. An example is shown in 
 
 Features of UnitsML can be incorporated into XML instance documents by using the actual UnitsML
 schema within the host schema. The problem with this is the availability of the UnitsML schema. The following
-methods are dependent on having the UnitsML schema file (.xsd). The user could download the
+methods are dependent on having the UnitsML schema file (`.xsd`). The user could download the
 UnitsML schema to make it available offline. In this case, the user is responsible for updating the UnitsML
 schema, when schema updates are available on the UnitsML server. The UnitsML tool, which is described
 below in "`Tools under development,`" should be able to warn the user of this update and to update the offline
@@ -244,7 +261,7 @@ import example shown in <<listing_3>>, we see the difference in namespaces.
          </Unit>
      </UnitSet>
    </UnitsML>
-...
+   ...
 </AnIML>
 ----
 
@@ -263,7 +280,7 @@ schemaLocation="unitsml.xsd"/>
 ----
 
 Using the import option, an AnIML data file would look like the example shown in <<listing_3>>. It shows
-that the AnIML core namespace (xmlns:animlcore) is different than the UnitsML namespace (xmlns:unitsml)
+that the AnIML core namespace (`xmlns:animlcore`) is different than the UnitsML namespace (`xmlns:unitsml`)
 and that the units part of the document is described completely in UnitsML. The following element of the
 <UnitSet> element <Unit> is defined globally in the UnitsML schema. Therefore since this example doesn’t
 need information on prefixes, quantities, or dimensions, it is possible to use the <Unit> element directly
@@ -348,7 +365,7 @@ the service compatible with most operating systems and programming languages. To
 service, clients are required to support the XML-based Web Service Description Language (WDSL) and the
 XML-based exchange protocol SOAP (formerly Simple Object Access Protocol). Most recently developed web
 services packages support these standards. <<figure_3>> shows how the UnitsML web services will work. The
-service information could be published using the XMLbased UDDI (Universal Description, Discovery, and
+service information could be published using the XML-based UDDI (Universal Description, Discovery, and
 Integration) protocol. Applications can look up web services information to determine options to use. The
 public interface to the web service is described by the WSDL, an XML-based service description on how to
 communicate using the web service. After the client receives the information describing the services, the
@@ -395,11 +412,11 @@ standards-based approaches to manufacturing software integration problems.
 Ismet Celebi, a former NIST
 Associate for the Office of Electronic Commerce in Scientific and Engineering Data (ECSED) within the
 Physics Laboratory at the National Institute of Standards and Technology, was supported by the NIST
-Systems Integration for Manufactuing Applications Program and the Wiesbaden Computer Integrated
+Systems Integration for Manufacturing Applications Program and the Wiesbaden Computer Integrated
 Laboratory (WICIL), RheinMain University of Applied Sciences at the time the first draft of this paper was
 written. Reinhold Schaefer is a retired professor from Wiesbaden Computer Integrated Laboratory (WICIL),
 RheinMain University of Applied Sciences and a former President of the Association for Laboratory
-Automation. Robert Dragost is the chair of the OASIS Units Markup Language (UnitsML) Technical
+Automation. Robert Dragoset is the chair of the OASIS Units Markup Language (UnitsML) Technical
 Committee and is the manager of ECSED within the Physics Laboratory at NIST. Karen Olsen is a
 computer scientist of ECSED within the Physics Laboratory at NIST. Gary Kramer is a Research
 Chemist in the Bioassay Methods Group of the Biochemical Science Division at NIST and chairs

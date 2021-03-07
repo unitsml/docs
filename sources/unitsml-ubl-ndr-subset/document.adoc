@@ -1,9 +1,23 @@
 = Applying a subset of the UBL NDR to the UnitsML schema
 :title-main: Applying a subset of the UBL NDR to the UnitsML schema
+:series: nist-csts
+:series-title: UnitsML
+:series-abbrev: unitsml
+:series-mrprefix: UNITSML
+:nist-division: Systems Integration Division, Engineering Laboratory
+:nist-division-address: 100 Bureau Drive (Mail Stop 8260) Gaithersburg, MD 20899-8260
+:docnumber: 3000-002
+:issued-date: 2021-01-01
+:copyright-year: 2021
+:revision: 1
+:keywords: UnitsML, markup, units
+:doc-email: unitsml@list.nist.gov
 :fullname: Ronny Jopp
 :affiliation: Biochemical Science Division, National Institute of Standards and Technology, Gaithersburg, MD, U.S.A. and Computer Science Department, University of Applied Sciences, Wiesbaden, Germany
 :fullname_2: Alexander Roth
 :affiliation_2: Biochemical Science Division, National Institute of Standards and Technology, Gaithersburg, MD, U.S.A. and Computer Science Department, University of Applied Sciences, Wiesbaden, Germany
+:keywords: analytical experiments; AnIML; data storage; device integration; interoperability; Markup Language; Scientific Units of Measure; UnitsML; Web services; XML.
+:imagesdir: images
 :mn-document-class: nist
 :mn-output-extensions: xml,html,doc,rxl,pdf
 :local-cache-only:
@@ -239,7 +253,7 @@ assigned, incremental number greater than zero.
 +
 [example%unnumbered]
 Old: `urn:oasis:names:specification:unitsml:schema:xsd:UnitsMLSchema-1.0` +
-New: urn:oasis:names:specification:unitsml:schema:xsd:UnitsMLSchema-2.0
+New: `urn:oasis:names:specification:unitsml:schema:xsd:UnitsMLSchema-2.0`
 
 
 [VER7]:: Every UnitsML Schema minor version number MUST be a sequentially

@@ -1,28 +1,35 @@
 = UnitsML Guidelines Version 1.0
 :title-main: UnitsML Guidelines
-:edition: 1.0
-:doctype: guide
-:status: draft
-:date:
-:keywords:
+:series: nist-csts
+:series-title: UnitsML
+:series-abbrev: unitsml
+:series-mrprefix: UNITSML
+:nist-division: Systems Integration Division, Engineering Laboratory
+:nist-division-address: 100 Bureau Drive (Mail Stop 8260) Gaithersburg, MD 20899-8260
+:docnumber: 3000-001
+:issued-date: 2021-01-01
+:copyright-year: 2021
+:revision: 1
+:keywords: UnitsML, guide, units
+:doc-email: unitsml@list.nist.gov
+:mn-document-class: nist
 :fullname: Robert Dragoset
-:affiliation_abbrev: NIST
+:affiliation: Physics Laboratory
 :fullname_2: Martin S. Weber
-:affiliation_abbrev_2: NIST
+:affiliation_2: Physics Laboratory
 :fullname_3: Karen Olsen
-:affiliation_abbrev_3: NIST
+:affiliation_3: Physics Laboratory
 :fullname_4: Mark Carlisle
-:affiliation_abbrev_4: NIST
+:affiliation_4: Physics Laboratory
 :fullname_5: Peter Linstrom
-:affiliation_abbrev_5: NIST
+:affiliation_5: Physics Laboratory
 :fullname_6: Karen LeGrand
-:affiliation_abbrev_6: IEM
+:affiliation_6: International Engineering and Manufacturing
 :imagesdir: images
 :mn-document-class: nist
 :mn-output-extensions: xml,html,doc,rxl,pdf
 :local-cache-only:
 :data-uri-image:
-
 
 [.preface]
 == Abstract
@@ -229,15 +236,15 @@ Derived units can be modeled in UnitsML with the use of the `<RootUnits>` elemen
 .Sample derived unit using `<EnumeratedRootUnit>`
 ----
 <UnitsML>
- <!-- ... -->
- <Unit xml:id="u331">
   <!-- ... -->
-  <RootUnits>
-   <EnumeratedRootUnit unit="mile" />
-   <EnumeratedRootUnit prefix="milli" powerNumerator="-2" unit="second" />
-  </RootUnits>
- </Unit>
- <!-- ... -->
+  <Unit xml:id="u331">
+    <!-- ... -->
+    <RootUnits>
+      <EnumeratedRootUnit unit="mile" />
+      <EnumeratedRootUnit prefix="milli" powerNumerator="-2" unit="second" />
+    </RootUnits>
+  </Unit>
+  <!-- ... -->
 </UnitsML>
 ----
 
@@ -250,23 +257,23 @@ Derived units can be modeled in UnitsML with the use of the `<RootUnits>` elemen
 .Sample derived unit using `<ExternalRootUnit>`
 ----
 <UnitsML>
- <!-- ... -->
- <Unit xml:id="u337">
+  <!-- ... -->
+  <Unit xml:id="u337">
   <!-- ... -->
   <UnitName xml:lang="en-US">pages per hour</UnitName>
   <!-- ... -->
   <RootUnits>
-   <ExternalRootUnit unit="#i42" annotation="pages" xml:lang="en-US" />
-   <EnumeratedRootUnit powerNumerator="-1" unit="hour" />
+    <ExternalRootUnit unit="#i42" annotation="pages" xml:lang="en-US" />
+    <EnumeratedRootUnit powerNumerator="-1" unit="hour" />
   </RootUnits>
- </Unit>
- <!-- ... -->
- <CountedItem xml:id="i42">
+  </Unit>
+  <!-- ... -->
+  <CountedItem xml:id="i42">
   <!-- ... -->
   <ItemName xml:lang="en-US">page</ItemName>
   <!-- ... -->
- </CountedItem>
- <!-- ... -->
+  </CountedItem>
+  <!-- ... -->
 </UnitsML>
 ----
 
@@ -279,16 +286,16 @@ Code list entries can be referenced (or assembled from) the `<CodeListValue>` ch
 .Sample `<CodeListValue>` fragment
 ----
 <Unit>
- <!-- ... -->
- <UnitName xml:lang="en-US">nautical mile</UnitName>
- <UnitName xml:lang="de-DE">Seemeile</UnitName>
- <!-- ... -->
- <CodeListValue unitCodeValue="NM" codeListVersion="2010-03-22"
-  codeListName="Aquatic Companies Metric Entities (ACME)"
-  locationURL="http://www.acme.com/codes/acme/2010-03-22/"
-  organizationName="ACME" organizationURI="urn:megacorp:disney:acme"
-  xml:lang="en-US"/>
- <!-- ... -->
+  <!-- ... -->
+  <UnitName xml:lang="en-US">nautical mile</UnitName>
+  <UnitName xml:lang="de-DE">Seemeile</UnitName>
+  <!-- ... -->
+  <CodeListValue unitCodeValue="NM" codeListVersion="2010-03-22"
+    codeListName="Aquatic Companies Metric Entities (ACME)"
+    locationURL="http://www.acme.com/codes/acme/2010-03-22/"
+    organizationName="ACME" organizationURI="urn:megacorp:disney:acme"
+    xml:lang="en-US"/>
+  <!-- ... -->
 </Unit>
 ----
 
@@ -300,7 +307,7 @@ Conversions between different units are natively supported in UnitsML by the `<C
 
 Linear conversions between two distinct units are covered by the `<Float64ConversionFrom>` element. Linear conversions are of the form stem:[y=((x+a)b)/c c+d] where stem:[y] is the value of the target (current) unit, stem:[x] the value of the source ('from') unit, and stem:[a], stem:[b], stem:[c], stem:[d] the parameters of the conversion, called `initialAddend` (stem:[a]), `multiplicand` (stem:[b]), `divisor` (stem:[c]) and `finalAddend` (stem:[d]) respectively.
 
-Additionally the `<Float64ConversionFrom>` element also supports documenting the decimal place to which the parameters are known to be signicant (e.g., whether a conversion factor is known to be 0.5 or 0.500). For this purpose the attributes `initialAddendDecimalPlace`, `multiplicandDigits`, `divisorDigits` and `finalAddendDecimalPlace` are present on the `<Float64ConversionFrom>` element. <<listing4>> demonstrates most of the parameters of the `<Float64ConversionFrom>` element with an absolute thermodynamic temperature conversion.
+Additionally the `<Float64ConversionFrom>` element also supports documenting the decimal place to which the parameters are known to be significant (e.g., whether a conversion factor is known to be 0.5 or 0.500). For this purpose the attributes `initialAddendDecimalPlace`, `multiplicandDigits`, `divisorDigits` and `finalAddendDecimalPlace` are present on the `<Float64ConversionFrom>` element. <<listing4>> demonstrates most of the parameters of the `<Float64ConversionFrom>` element with an absolute thermodynamic temperature conversion.
 
 If a conversion is known to be `exact` (e.g., does not involve stem:[pi]) it can be documented using the exact attribute of the conversion. This information does not refer to whether the actual machine implementation of floating point numbers used can produce an accurate result, but rather whether the conversion itself is known to be exact.
 
@@ -311,32 +318,32 @@ Finally, a `<Float64ConversionFrom>` can also carry a `<ConversionNote>` element
 .Sample linear conversion
 ----
 <UnitsML>
- <!-- ... -->
- <Unit xml:id="u23">
+  <!-- ... -->
+  <Unit xml:id="u23">
   <!-- ... -->
   <UnitName xml:lang="en-us">degrees celsius</UnitName>
   <!-- ... -->
   <Conversions>
-   <Float64ConversionFrom xml:id="u23_from_u5" initialUnit="#u5"
-    finalAddend="-273.15" exact="true" />
-   <Float64ConversionFrom xml:id="u23_from_u314" initialUnit="#u314"
-    initialAddend="-32" multiplicand="9" divisor="5" exact="true" />
-   <!-- divisor="1.8" would have been as good -->
-   <!-- ... -->
+    <Float64ConversionFrom xml:id="u23_from_u5" initialUnit="#u5"
+      finalAddend="-273.15" exact="true" />
+    <Float64ConversionFrom xml:id="u23_from_u314" initialUnit="#u314"
+      initialAddend="-32" multiplicand="9" divisor="5" exact="true" />
+    <!-- divisor="1.8" would have been as good -->
+    <!-- ... -->
   </Conversions>
   <!-- ... -->
- </Unit>
- <Unit xml:id="u314">
+  </Unit>
+  <Unit xml:id="u314">
+    <!-- ... -->
+    <UnitName xml:lang="en-us">degrees fahrenheit</UnitName>
+    <!-- ... -->
+  </Unit>
+  <Unit xml:id="u5">
+    <!-- ... -->
+    <UnitName xml:lang="en-us">kelvin</UnitName>
+    <!-- ... -->
+  </Unit>
   <!-- ... -->
-  <UnitName xml:lang="en-us">degrees fahrenheit</UnitName>
-  <!-- ... -->
- </Unit>
- <Unit xml:id="u5">
-  <!-- ... -->
-  <UnitName xml:lang="en-us">kelvin</UnitName>
-  <!-- ... -->
- </Unit>
- <!-- ... -->
 </UnitsML>
 ----
 
@@ -353,34 +360,34 @@ This information is presented in the `<SpecialConversionFrom>`'s `<ConversionDes
 .Sample special conversion
 ----
 <UnitsML>
- <!-- ... -->
- <Unit xml:id="u23">
+  <!-- ... -->
+  <Unit xml:id="u23">
   <!-- ... -->
   <UnitName xml:lang="en-us">degrees celsius</UnitName>
   <!-- ... -->
   <Conversions>
-   <!-- ... -->
-   <SpecialConversionFrom xml:id="u23_from_u314_special"
-    initialUnit="#u314">
+    <!-- ... -->
+    <SpecialConversionFrom xml:id="u23_from_u314_special"
+      initialUnit="#u314">
     <ConversionDescription xml:lang="de">
-     subtrahiere 32 vom nummerischen Wert der Grad Fahrenheit
-     und teile daraufhin durch 1.8
+       subtrahiere 32 vom nummerischen Wert der Grad Fahrenheit
+       und teile daraufhin durch 1.8
     </ConversionDescription>
     <ConversionDescription><![CDATA[
-    // scala code:
-    def fahrenheitToCelsius(f: Double): Double = (f-32)/1.8
+      // scala code:
+      def fahrenheitToCelsius(f: Double): Double = (f-32)/1.8
     ]]></ConversionDescription>
-   </SpecialConversionFrom>
-   <!-- ... -->
+    </SpecialConversionFrom>
+    <!-- ... -->
   </Conversions>
   <!-- ... -->
- </Unit>
- <Unit xml:id="u314">
+  </Unit>
+  <Unit xml:id="u314">
+    <!-- ... -->
+    <UnitName xml:lang="en-us">degrees fahrenheit</UnitName>
+    <!-- ... -->
+  </Unit>
   <!-- ... -->
-  <UnitName xml:lang="en-us">degrees fahrenheit</UnitName>
-  <!-- ... -->
- </Unit>
- <!-- ... -->
 </UnitsML>
 ----
 
@@ -393,34 +400,34 @@ The final way to describe unit conversions within UnitsML is to refer to a web-s
 .Sample WSDL conversion
 ----
 <UnitsML>
- <!-- ... -->
- <Unit xml:id="u23">
   <!-- ... -->
-  <UnitName xml:lang="en-us">degrees celsius</UnitName>
-  <!-- ... -->
- </Unit>
- <Unit xml:id="u314">
-  <!-- ... -->
-  <UnitName xml:lang="en-us">degrees fahrenheit</UnitName>
-  <!-- ... -->
+  <Unit xml:id="u23">
+    <!-- ... -->
+    <UnitName xml:lang="en-us">degrees celsius</UnitName>
+    <!-- ... -->
+  </Unit>
+  <Unit xml:id="u314">
+    <!-- ... -->
+    <UnitName xml:lang="en-us">degrees fahrenheit</UnitName>
+    <!-- ... -->
   <Conversions>
-   <!-- ... -->
-   <WSDLConversionFrom xml:id="u23_to_u314_wsdl"
-    initialUnit="#u23"
-    wsdlURL="http://chalk.coas.unf.edu:8080/axis2/services/tempConvert?wsdl">
-    <WSDLDescription xml:lang="en-US">
-     Example of a WSDL temperature conversion, converting from kelvin
-     or degrees celsius to degrees fahrenheit. Parameters, as described
-     in the WSDL, too, are the numerical *value* and the source *unit*.
-     Example:
-     http://chalk.coas.unf.edu:8080/axis2/services/tempConvert/getKelvin?
-      value=25&unit=C
-    </WSDLDescription>
-   </WSDLConversionFrom>
-   <!-- ... -->
+    <!-- ... -->
+    <WSDLConversionFrom xml:id="u23_to_u314_wsdl"
+      initialUnit="#u23"
+      wsdlURL="http://chalk.coas.unf.edu:8080/axis2/services/tempConvert?wsdl">
+      <WSDLDescription xml:lang="en-US">
+        Example of a WSDL temperature conversion, converting from kelvin
+        or degrees celsius to degrees fahrenheit. Parameters, as described
+        in the WSDL, too, are the numerical *value* and the source *unit*.
+        Example:
+          http://chalk.coas.unf.edu:8080/axis2/services/tempConvert/getKelvin?
+          value=25&unit=C
+      </WSDLDescription>
+    </WSDLConversionFrom>
+    <!-- ... -->
   </Conversions>
- </Unit>
- <!-- ... -->
+  </Unit>
+  <!-- ... -->
 </UnitsML>
 ----
 
@@ -462,23 +469,21 @@ A complete example of the counted item element is provided in <<listing7>>.
 .Sample `<CountedItem>` element
 ----
 <CountedItem xml:id="i42">
- <ItemName xml:lang="en-US">12 oz. bottle</ItemName>
- <ItemVersionHistory xml:lang="en-US">added "12 oz. " to the item's
-name</ItemVersionHistory>
- <!-- no symbol! -->
- <ItemDefinition xml:lang="en" sourceName="Anheuser-Busch company
-definitions"
-  sourceURL="http://www.anheuser-busch.com/imaginary/definitions/12ozbottle.html">
-  The 12 fluid ounces bottle as being used by the Anheuser Busch companies
- </ItemDefinition>
- <ItemHistory xml:lang="en" sourceName="Anheuser-Busch chronicles"
-  sourceURL="http://www.anheuser-
-busch.com/imaginary/chronicles/12ozbottle.html" />
- <ItemRemark xml:lang="en" sourceName="Anheuser-Busch feedback"
-  sourceURL="http://www.anheuser-
-busch.com/imaginary/feedback/12ozbottle.html">
-  Note that the european market prefers a different bottle size!
- </ItemDefinition>
+  <ItemName xml:lang="en-US">12 oz. bottle</ItemName>
+  <ItemVersionHistory xml:lang="en-US">added "12 oz. " to the item's
+    name</ItemVersionHistory>
+  <!-- no symbol! -->
+  <ItemDefinition xml:lang="en" sourceName="Anheuser-Busch company
+    definitions"
+    sourceURL="http://www.anheuser-busch.com/imaginary/definitions/12ozbottle.html">
+    The 12 fluid ounces bottle as being used by the Anheuser Busch companies
+  </ItemDefinition>
+  <ItemHistory xml:lang="en" sourceName="Anheuser-Busch chronicles"
+  sourceURL="http://www.anheuser-busch.com/imaginary/chronicles/12ozbottle.html" />
+  <ItemRemark xml:lang="en" sourceName="Anheuser-Busch feedback"
+  sourceURL="http://www.anheuser-busch.com/imaginary/feedback/12ozbottle.html">
+    Note that the european market prefers a different bottle size!
+  </ItemRemark>
 </CountedItem>
 ----
 
@@ -556,24 +561,24 @@ An example of two sample `<Quantity>` elements can be seen in <<listing8>>.
 ----
 <!-- ... -->
 <QuantitySet>
- <Quantity xml:id="q42" dimensionURL="#d42" quantityType="base">
-  <QuantityName xml:lang="en-US">absolute thermodynamic
-temperature</QuantityName>
-  <QuantitySymbol type="ASCII">T</QuantitySymbol>
-  <QuantitySymbol type="LaTeX">{\ensuremath{T}}</QuantitySymbol>
-  <UnitReference url="#u5" name="kelvin" xml:lang="en" />
-  <UnitReference url="#u23" name="degrees_celsius" xml:lang="en" />
-  <!-- ... -->
- </Quantity>
- <Quantity xml:id="q43" dimensionURL="#d42" quantityType="base">
-  <QuantityName xml:lang="en-US">thermodynamic temperature
-difference</QuantityName>
-  <QuantitySymbol type="ASCII">T</QuantitySymbol>
-  <QuantitySymbol type="LaTeX">{\ensuremath{T}}</QuantitySymbol>
-  <UnitReference url="#u5" name="kelvin" xml:lang="en" />
-  <UnitReference url="#u23" name="degrees_celsius" xml:lang="en" />
-  <!-- ... -->
- </Quantity>
+  <Quantity xml:id="q42" dimensionURL="#d42" quantityType="base">
+    <QuantityName xml:lang="en-US">absolute thermodynamic
+      temperature</QuantityName>
+    <QuantitySymbol type="ASCII">T</QuantitySymbol>
+    <QuantitySymbol type="LaTeX">{\ensuremath{T}}</QuantitySymbol>
+    <UnitReference url="#u5" name="kelvin" xml:lang="en" />
+    <UnitReference url="#u23" name="degrees_celsius" xml:lang="en" />
+    <!-- ... -->
+  </Quantity>
+  <Quantity xml:id="q43" dimensionURL="#d42" quantityType="base">
+    <QuantityName xml:lang="en-US">thermodynamic temperature
+      difference</QuantityName>
+    <QuantitySymbol type="ASCII">T</QuantitySymbol>
+    <QuantitySymbol type="LaTeX">{\ensuremath{T}}</QuantitySymbol>
+    <UnitReference url="#u5" name="kelvin" xml:lang="en" />
+    <UnitReference url="#u23" name="degrees_celsius" xml:lang="en" />
+    <!-- ... -->
+  </Quantity>
 </QuantitySet>
 <!-- ... -->
 ----
@@ -623,27 +628,29 @@ The `<PlaneAngle>` is supported in UnitsML for explicitly stating the involvemen
 .Sample `<Dimension>` elements
 ----
 <Dimension xml:id="dim42">
- <Length powerNumerator="1" powerDenominator="1" />
- <Mass powerNumerator="1" powerDenominator="1" />
- <Time powerNumerator="-2" powerDenominator="1" />
+  <Length powerNumerator="1" powerDenominator="1" />
+  <Mass powerNumerator="1" powerDenominator="1" />
+  <Time powerNumerator="-2" powerDenominator="1" />
 </Dimension>
+
 <!-- dimensionality of energy -->
 <Dimension xml:id="dim23a">
- <Length powerNumerator="1" powerDenominator="1" />
- <Mass powerNumerator="1" powerDenominator="1" />
- <Time powerNumerator="-1" powerDenominator="1" />
- <Length powerNumerator="1" powerDenominator="1" />
- <Time powerNumerator="-1" powerDenominator="1" />
+  <Length powerNumerator="1" powerDenominator="1" />
+  <Mass powerNumerator="1" powerDenominator="1" />
+  <Time powerNumerator="-1" powerDenominator="1" />
+  <Length powerNumerator="1" powerDenominator="1" />
+  <Time powerNumerator="-1" powerDenominator="1" />
 </Dimension>
+
 <!-- Note: default of powerDenominator / powerNumerator is 1 -->
 <!-- following version thus is equal to the above for schema-aware
      xml processors -->
 <Dimension xml:id="dim23b">
- <Length />
- <Mass />
- <Time powerNumerator="-1" />
- <Length />
- <Time powerNumerator="-1" />
+  <Length />
+  <Mass />
+  <Time powerNumerator="-1" />
+  <Length />
+  <Time powerNumerator="-1" />
 </Dimension>
 ----
 
@@ -901,7 +908,7 @@ Note that in the example in listing 3.5, the allowable namespace for the `<xsd:a
 
 To assist resolving the different source schemata, the `xsi:schemaLocation` and `xsi:noNamespaceSchemaLocation` attributes will be used (cf. <<XSD1>>, section 2.6.3).
 
-The instance document shown in <<listing16>> utilizes two namespaces, "simple" and "unitsml", to distinguish the portions of the document corresponding to the appropriate schema, `SimpleSchema2.xsd` or `UnitsML-1.0.xsd`, respectively, as dictated by the `xsi:schemaLocation` attribute.
+The instance document shown in <<listing16>> utilizes two namespaces, ``simple` and `unitsml`, to distinguish the portions of the document corresponding to the appropriate schema, `SimpleSchema2.xsd` or `UnitsML-1.0.xsd`, respectively, as dictated by the `xsi:schemaLocation` attribute.
 
 UnitsML content marking up the units of measure being used can just be dropped into place, while remaining optional (in this example).
 
@@ -911,10 +918,10 @@ UnitsML content marking up the units of measure being used can just be dropped i
 ----
 <?xml version="1.0" encoding="UTF-8"?>
 <simple:SimpleSchemaRoot
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xmlns:simple="http://unitsml.nist.gov/simple"
-    xmlns:unitsml="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-1.0"
-    xsi:schemaLocation="http://unitsml.nist.gov/simple
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xmlns:simple="http://unitsml.nist.gov/simple"
+  xmlns:unitsml="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-1.0"
+  xsi:schemaLocation="http://unitsml.nist.gov/simple
       SimpleSchema2.xsd
       urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-1.0
      UnitsML-1.0.xsd">
@@ -1042,16 +1049,14 @@ The solution in Listing 19: Relevant schema: importing UnitsML brings UnitsML el
 <xsd:schema xmlns:simple="http://unitsml.nist.gov/simple"
   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
   xmlns:unitsml="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-1.0"
-targetNamespace="http://unitsml.nist.gov/simple"
+  targetNamespace="http://unitsml.nist.gov/simple"
   elementFormDefault="qualified" attributeFormDefault="unqualified">
-  <xsd:import namespace="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-
-1.0"
+  <xsd:import namespace="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-1.0"
     schemaLocation="UnitsML-1.0.xsd"/>
   <xsd:element name="SimpleSchemaRoot">
     <xsd:annotation>
       <xsd:documentation>Root element for simple test schema modified by
-importing
-        the UnitsML schema into the Simple schema.
+        importing the UnitsML schema into the Simple schema.
       </xsd:documentation>
     </xsd:annotation>
     <xsd:complexType>
@@ -1152,7 +1157,6 @@ In contrast to using the previous approaches, this approach needs modifications 
   has a home under:
    * OASIS: http://www.oasis-open.org/committees/tc_home.php?wg_abbrev=unitsml
    * NIST: http://unitsml.nist.gov
-
 -->
 <xsl:stylesheet version="1.0"
   xmlns:xsd="http://www.w3.org/2001/XMLSchema"
@@ -1165,17 +1169,16 @@ In contrast to using the previous approaches, this approach needs modifications 
   <xsl:template match="/xsd:schema">
     <xsd:schema>
       <!-- attributes must come first: copy everything except the
-targetNamespace attribute. -->
+        targetNamespace attribute. -->
       <!-- ..also overwrite element- and attributeFormDefault to make sure they
-are 'unqualified' -->
+        are 'unqualified' -->
       <xsl:for-each select="@*">
         <xsl:choose>
           <xsl:when test="local-name(.) = 'elementFormDefault'">
             <xsl:attribute name="elementFormDefault">unqualified</xsl:attribute>
           </xsl:when>
           <xsl:when test="local-name(.) = 'attributeFormDefault'">
-            <xsl:attribute
-name="attributeFormDefault">unqualified</xsl:attribute>
+            <xsl:attribute name="attributeFormDefault">unqualified</xsl:attribute>
           </xsl:when>
           <xsl:when test="local-name(.) = 'targetNamespace'">
             <!-- do nothing -->
@@ -1186,7 +1189,7 @@ name="attributeFormDefault">unqualified</xsl:attribute>
         </xsl:choose>
       </xsl:for-each>
       <!-- now for namespaces: copy all except the default namespace
-declaration. -->
+        declaration. -->
       <xsl:for-each select="namespace::*">
         <xsl:if test="local-name(.) != ''">
           <xsl:copy />
@@ -1221,8 +1224,7 @@ The 'simple' schema now pulls in the UnitsML schema via use of the `<xsd:include
   <xsd:element name="SimpleSchemaRoot">
     <xsd:annotation>
       <xsd:documentation>Root element for simple test schema modified by
-including
-        the UnitsML schema into the Simple schema.
+        including the UnitsML schema into the Simple schema.
       </xsd:documentation>
     </xsd:annotation>
     <xsd:complexType>
@@ -1364,55 +1366,67 @@ Sparing the details, the different approaches' pros and cons and the impact on t
 |===
 h| Approach h| Benefits h| Drawbacks
 
-| Reference a unit a|
+| Reference a unit
+a|
 * Few schema modifications for TL necessary
 * keeps units out of TL
 * lean & flexible approach
 * can reference global authoritative sources
-* 'Don't Repeat Yourself' fulfilled a|
+* 'Don't Repeat Yourself' fulfilled
+a|
 * No guarantee that the URIs resolve / deployment issues
 * cannot use UnitsML within TL schema
 
-| Refer to UnitsML a|
+| Refer to UnitsML
+a|
 * Few schema modifications for TL necessary
 * units, etc., clearly visible in instance documents
 * separation of concerns between TL and UnitsML
-* easily deployable a|
+* easily deployable
+a|
 * Multiple occurrences of some element result in problems with the `xml:id` attribute
 * 'Don't Repeat Yourself' violated
 * cannot use UnitsML within TL schema
 * no strict schema validation possible (use of `<xsd:any>`)
 * burden of weaving together namespaces on each instance document
 
-| Combination of above a|
+| Combination of above
+a|
 * Few schema modifications for TL necessary
 * easily deployable
 * units, etc., well visible in 'local units database'
 * flexible solution (refer to local and foreign content)
-* 'Don't Repeat Yourself' fulfilled a|
+* 'Don't Repeat Yourself' fulfilled
+a|
 * Cannot use UnitsML within TL schema
 * no strict schema validation possible (use of `<xsd:any>`)
 * burden of weaving together namespaces on each instance document
 
-| `<import>` UnitsML a|
+| `<import>` UnitsML
+a|
 * Full access to UnitsML from the TL schema – fine grained validation possible
 * no instance document namespace / schema location synthesis necessary
 * depending on placement (cf. <<listing20>>), flexible solution
-* Extensive target language schema modifications necessary a|
+* Extensive target language schema modifications necessary
+a|
 * requires well-planned integration
 
-| `<include>` UnitsML a|
+| `<include>` UnitsML
+a|
 * Pull UnitsML into TL namespace
 * full access to UnitsML from the TL schema – fine grained validation possible
 * no instance document namespace / schema location synthesis necessary
-* depending on placement (cf. <<listing20>>), flexible solution a|
+* depending on placement (cf. <<listing20>>), flexible solution
+a|
 * Requires modification of the UnitsML schema
 * extensive schema modifications necessary
 * requires well-planned integration
 
-| `<redefine>` UnitsML a|
+| `<redefine>` UnitsML
+a|
 * Same as `<include>` above, plus
-* allowing to extend UnitsML a|
+* allowing to extend UnitsML
+a|
 * Same as `<include>` above, plus
 * redefinitions depart from OASIS UnitsML
 |===
@@ -1446,7 +1460,7 @@ Universal Business Language NDRs (cf.<<OASIS-UBL>>). Names having a suffix of \-
 
 ==== Relations to Standards
 
-The W3C XML Schema Denition Language (XSD) has become the generally accepted and most widely adopted schema language. Accordingly, the NDR for UnitsML and the UnitsML schema must conform to the W3C XSD requirements.
+The W3C XML Schema Definition Language (XSD) has become the generally accepted and most widely adopted schema language. Accordingly, the NDR for UnitsML and the UnitsML schema must conform to the W3C XSD requirements.
 
 *[STA1]* The UnitsML schema design rules MUST be based on the W3C XML Schema Recommendations: XML Schema Part 1: Structures (<<XSD1>>) and XML Schema Part 2: Datatypes (<<XSD2>>).
 
@@ -1469,34 +1483,34 @@ Required OASIS full copyright notice.
 <!-- == xsd:schema Element With Namespaces Declarations == -->
 xsd:schema element to include version attribute and
 namespace declarations in the following order:
-xmlns:xsd
-Target namespace
-Default namespace
-Unqualified Datatypes
-Qualified Datatypes
-Identifier Schemes
-Code Lists
-Attribute Declarations - elementFormDefault="qualified"
-attributeFormDefault="unqualified"
-Version Attribute
+  xmlns:xsd
+  Target namespace
+  Default namespace
+  Unqualified Datatypes
+  Qualified Datatypes
+  Identifier Schemes
+  Code Lists
+  Attribute Declarations - elementFormDefault="qualified"
+  attributeFormDefault="unqualified"
+  Version Attribute
 <!-- ===== Imports ===== -->
-all incorporated schemata
+  all incorporated schemata
 <!-- ===== Root Element ===== -->
-Root Element Declaration
-Root Element Type Definition
+  Root Element Declaration
+  Root Element Type Definition
 <!-- ===== Element Declarations ===== -->
-all element declarations
+  all element declarations
 <!-- ===== Element Type Definitions ===== -->
-all complex type definitions
+  all complex type definitions
 <!-- ===== Attribute Type Definitions ===== -->
-all global attribute (group) definitions
+  all global attribute (group) definitions
 <!-- ===== simpleType Type Definitions ===== -->
-all simple type definitions
+  all simple type definitions
 ----
 
 Mixed content is intended for use in document-centric schemata. UnitsML is a data-centric format, and stored pieces of data must be clearly unambiguous. The use of white-space in mixed content makes processing unnecessarily difficult.
 
-*[MDC2]* Mixed content MUST NOT be used except where contained in an xsd:documentation element.
+*[MDC2]* Mixed content MUST NOT be used except where contained in an `xsd:documentation` element.
 
 ==== Reusability
 
@@ -1508,7 +1522,7 @@ To maximize reusability of elements declared within the UnitsML schemata, all el
 
 XML namespaces provide a simple method for qualifying element, types and attribute names used in XML documents by associating them with namespaces identified by URI (uniform resource identifier) references ([7]). Namespaces are developed for modularity and to enable the re-use of well-understood markup vocabularies. Declared elements, attributes or types in one schema can be qualified by assigning a namespace prefix that binds a namespace to this prefix.
 
-*[NMS1]* The UnitsML schema MUST have a namespace declared using the xsd:targetNamespace attribute.
+*[NMS1]* The UnitsML schema MUST have a namespace declared using the `xsd:targetNamespace` attribute.
 
 Schema validation ensures that an instance conforms to its declared schema. There must never be two (different) schemata with the same namespace URI. In keeping with rule [NMS1], each UnitsML schema shall be part of its own versioned namespace.
 
@@ -1534,7 +1548,7 @@ If two namespaces are mutually dependent then clearly, importing one will cause 
 
 ==== Versioning
 
-Versioning enables tracking of changes in schema files. It provides for better maintainability as older revisions can be distinguished from the current version. The versioning is encoded in two different ways - firstly in the namespace name, secondly in an attribute version for the XSD root element xsd:schema. Each must represent the same version of a particular schema. To ensure compatibility and improve interoperability on the schema level, a versioning concept encoded in the namespace names is necessary.
+Versioning enables tracking of changes in schema files. It provides for better maintainability as older revisions can be distinguished from the current version. The versioning is encoded in two different ways - firstly in the namespace name, secondly in an attribute version for the XSD root element `xsd:schema`. Each must represent the same version of a particular schema. To ensure compatibility and improve interoperability on the schema level, a versioning concept encoded in the namespace names is necessary.
 
 *[VER1]* Every UnitsML schema major version committee draft MUST have an RFC 3121 conform documentid of the form: `<name>-<major>.0[.<revision>]`
 
@@ -1586,29 +1600,29 @@ Generally speaking, the names for UnitsML XML constructs must be always singular
 
 ==== Type Naming Rules
 
-Even though declaration of the name attribute for xsd:complexType and xsd:simpleType is not required by the W3C XML Schema standard, since elements and types are intended to be reusable, all types must be named. This permits other types to establish elements that reference such types. The attribute name is not allowed for xsd:localComplexType (local definition of types); therewith this rule implies global type definitions.
+Even though declaration of the name attribute for `xsd:complexType` and `xsd:simpleType` is not required by the W3C XML Schema standard, since elements and types are intended to be reusable, all types must be named. This permits other types to establish elements that reference such types. The attribute name is not allowed for `xsd:localComplexType` (local definition of types); therewith this rule implies global type definitions.
 
 *[GTD1]* All types MUST be named.
 
-The purpose of UnitsML is to develop a schema for creating standardized and consistent XML documents containing a precise and unambiguous description of units. Permitting the use of the data type xsd:anyType would allow schema constraints to be circumvented. Not assigning types to attributes is equivalent to using the "simple urtype", i.e., xsd:anySimpleType. Thus attributes must have types assigned.
+The purpose of UnitsML is to develop a schema for creating standardized and consistent XML documents containing a precise and unambiguous description of units. Permitting the use of the data type `xsd:anyType` would allow schema constraints to be circumvented. Not assigning types to attributes is equivalent to using the "simple urtype", i.e., `xsd:anySimpleType`. Thus attributes must have types assigned.
 
-*[GTD2-UnitsML]* The xsd:anyType MUST NOT be used. Every attribute has an assigned type.
+*[GTD2-UnitsML]* The `xsd:anyType` MUST NOT be used. Every attribute has an assigned type.
 
 ==== Element Declarations
 
-*[ELD6]* The code list xsd:import element MUST contain the namespace and schema location attributes.
+*[ELD6]* The code list `xsd:import` element MUST contain the namespace and schema location attributes.
 
 *[ELD7]* Empty elements MUST not be declared.
 
-The use of the xsd:any element permits the use of elements unknown at the time of schema creation. The usage may circumvent the precise and standardized description of units with the UnitsML schema and software cannot handle these unforeseen elements. The sole exception is for the SymbolType complex type, whose purpose is to allow usage of an undetermined, foreign markup language.
+The use of the `xsd:any` element permits the use of elements unknown at the time of schema creation. The usage may circumvent the precise and standardized description of units with the UnitsML schema and software cannot handle these unforeseen elements. The sole exception is for the SymbolType complex type, whose purpose is to allow usage of an undetermined, foreign markup language.
 
-*[ELD9-UnitsML]* The xsd:any element MUST NOT be used. The single exception to this rule is within the SymbolType complex type which uses xsd:any on purpose.
+*[ELD9-UnitsML]* The `xsd:any` element MUST NOT be used. The single exception to this rule is within the SymbolType complex type which uses `xsd:any` on purpose.
 
 ==== Attribute Declaration
 
-To provide XML-aware tools and XML validators with all referenced schemata, the xsd:schemaLocation attribute must contain a resolvable URL.
+To provide XML-aware tools and XML validators with all referenced schemata, the `xsd:schemaLocation` attribute must contain a resolvable URL.
 
-*[ATD6]* Each xsd:schemaLocation attribute declaration MUST contain a resolvable URL.
+*[ATD6]* Each `xsd:schemaLocation` attribute declaration MUST contain a resolvable URL.
 
 In general, the absence of an element in an XML schema does not have any particular meaning. It may indicate that the information is unknown or not applicable or that the element may be absent for some other reason. The XML schema specification does, however, provide a feature - the nillable attribute - whereby an element may be transferred with no content, but still use its attributes and thus carry semantic meaning. To retain semantic clarity, the nillability feature of XSD will not be used.
 
@@ -1616,7 +1630,7 @@ In general, the absence of an element in an XML schema does not have any particu
 
 xsd:anyAttribute permits the use of attributes unknown at the time of schema creation. The usage may circumvent the precise and standardized description of units with the UnitsML schema and software cannot handle these unforeseen attributes.
 
-*[ATD8]* The xsd:anyAttribute MUST NOT be used.
+*[ATD8]* The `xsd:anyAttribute` MUST NOT be used.
 
 ==== General Schema Rules
 
@@ -1628,19 +1642,19 @@ This rule is useful to keep schemata as simple as possible. The unnecessary use 
 
 Substitution groups allow a global element to replace another global element in an XML instance document without any further modifications to the schema. Substitution groups disrupt the harmonization of element names.
 
-*[GXS5]* The xsd:substitutionGroup feature MUST NOT be used.
+*[GXS5]* The `xsd:substitutionGroup` feature MUST NOT be used.
 
-The xsd:notation attribute identifies a notation. Notation declarations affect all the `<notation>` element information items in the [children], if any, plus any included or imported declarations. Per XML Schema Definition Part 2, "It is an error for NOTATION to be used directly in a schema. Only datatypes that are derived from NOTATION by specifying a value for enumeration can be used in a schema" ([15]). The UnitsML schema model does not require or support the use of this feature.
+The `xsd:notation` attribute identifies a notation. Notation declarations affect all the `<notation>` element information items in the [children], if any, plus any included or imported declarations. Per XML Schema Definition Part 2, "It is an error for NOTATION to be used directly in a schema. Only datatypes that are derived from NOTATION by specifying a value for enumeration can be used in a schema" ([15]). The UnitsML schema model does not require or support the use of this feature.
 
-*[GXS7]* xsd:notation MUST NOT be used.
+*[GXS7]* `xsd:notation` MUST NOT be used.
 
 The "all" compositor indicates that the elements declared within it can appear in any order. Because the UnitsML schema defines a special structure, it is important that element order be enforced in UnitsML instance documents or documents that incorporate UnitsML.
 
-*[GXS8]* The xsd:all element MUST NOT be used.
+*[GXS8]* The `xsd:all` element MUST NOT be used.
 
-The xsd:include feature provides a mechanism for bringing in schemata that reside in the same namespace. To avoid naming collisions with elements, types and attributes defined and declared in an incorporated schema, and avoid circular references this feature will not be used.
+The `xsd:include` feature provides a mechanism for bringing in schemata that reside in the same namespace. To avoid naming collisions with elements, types and attributes defined and declared in an incorporated schema, and avoid circular references this feature will not be used.
 
-*[GXS10]* The xsd:include feature MUST NOT be used.
+*[GXS10]* The `xsd:include` feature MUST NOT be used.
 
 ==== Allowed abbreviations for UnitsML
 
