@@ -36,5 +36,5 @@ jobs:
         with:
           ruby-version: 2.6
 
-      - run: metanorma site generate sources -c sources/collection.yml
+      - run: metanorma site generate --agree-to-terms
         shell: cmd

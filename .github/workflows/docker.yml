@@ -30,7 +30,7 @@ jobs:
       - name: instal gems from local Gemfile
         run: curl -L --retry 3 https://raw.githubusercontent.com/metanorma/metanorma-build-scripts/master/gemfile-to-bundle-add.sh | bash
 
-      - run: metanorma site generate sources -o published -c sources/collection.yml
+      - run: metanorma site generate --agree-to-terms
         env:
           LC_ALL: C.UTF-8
           LANG: C.UTF-8

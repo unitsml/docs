@@ -25,7 +25,7 @@ jobs:
           LANG: C.UTF-8
           LANGUAGE: C.UTF-8
         run: |
-          metanorma site generate sources -o published -c sources/collection.yml
+          metanorma site generate --agree-to-terms
       - uses: actions/upload-artifact@master
         if: github.ref == 'refs/heads/master'
         with:

@@ -43,4 +43,4 @@ jobs:
         env:
           JAVA_OPTS: "java.awt.headless=true"
         run: |
-          metanorma site generate sources -c sources/collection.yml
+          metanorma site generate --agree-to-terms

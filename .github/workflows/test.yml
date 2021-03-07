@@ -70,4 +70,4 @@ jobs:
 
       - name: Metanorma compile
         run: |
-          metanorma site generate sources -c sources/collection.yml
+          metanorma site generate --agree-to-terms
