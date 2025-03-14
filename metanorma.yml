@@ -2,9 +2,10 @@
 metanorma:
   source:
     files:
-      - sources/unitsml-guide/document.adoc
-      - sources/unitsml-incorporation/document.adoc
-      - sources/unitsml-ubl-ndr-subset/document.adoc
+      - sources/asciiunits/document.adoc
+        # - sources/unitsml-guide/document.adoc
+        # - sources/unitsml-incorporation/document.adoc
+        # - sources/unitsml-ubl-ndr-subset/document.adoc
 
   collection:
     organization: "UnitsML"
