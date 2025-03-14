@@ -306,7 +306,7 @@ This may be added in a future version.
 AsciiUnits statements support the use of prefixes as standalone
 elements.
 
-Prefixes are naturally associated with
+Prefixes elements are indicated with a prefix of `-` after the prefix code.
 
 Syntax:
 
@@ -326,7 +326,7 @@ AsciiUnits statement (for deci):
 
 [source]
 ----
-d-      # deci prefix
+d-
 ----
 
 XML:
@@ -349,7 +349,7 @@ AsciiUnits statement (for deca):
 
 [source]
 ----
-da-      # deca prefix
+da-
 ----
 
 XML:
@@ -382,7 +382,7 @@ Syntax:
 
 [source]
 ----
-dim_{dimension-code}  # dimension code
+dim_{dimension-code}
 ----
 
 Where,
@@ -436,7 +436,7 @@ The supported operations are:
 ----
 dim_L^2         # squared length dimension
 dim_Theta^10    # temperature dimension to power 10
-sqrt(dim_Theta)
+sqrt(dim_Theta) # square root of temperature dimension
 ----
 ====
 
@@ -1006,7 +1006,7 @@ XML:
 ====
 
 
-=== Square Root
+=== Square root
 
 Using `sqrt()` function.
 
