@@ -1,0 +1,233 @@
+== Uncertainty representation
+
+=== General
+
+Measurement uncertainty is a critical aspect of scientific and engineering measurements.
+AsciiUnits provides a comprehensive system for representing uncertainty in measurements,
+enabling clear and unambiguous communication of measurement precision and reliability.
+
+AsciiUnits supports several types of uncertainty representation to accommodate different
+scientific and engineering needs.
+
+=== Absolute uncertainty
+
+Absolute uncertainty is expressed in the same units as the measurement.
+
+Syntax:
+
+[source]
+----
+{value} {unit-code}, uncertainty: {uncertainty_value} {uncertainty_unit}
+----
+
+Where,
+
+`{value}`:: is the numerical value
+`{unit-code}`:: is the unit code
+`{uncertainty_value}`:: is the absolute uncertainty value
+`{uncertainty_unit}`:: is the unit code for the uncertainty (typically the same as the main unit)
+
+.Examples of measurements with absolute uncertainty
+[example]
+====
+[source]
+----
+9.81 m/s^2, uncertainty: 0.02 m/s^2     # acceleration with absolute uncertainty
+1.602e-19 C, uncertainty: 9.8e-24 C     # elementary charge with absolute uncertainty
+----
+====
+
+.XML representation of a measurement with absolute uncertainty
+[example]
+====
+AsciiUnits statement:
+
+[source,ascii]
+----
+9.81 m/s^2, uncertainty: 0.02 m/s^2
+----
+
+XML:
+
+[source,xml]
+----
+<Measurement xmlns="https://schema.unitsml.org/unitsml/1.0">
+  <MeasurementValue>9.81</MeasurementValue>
+  <Uncertainty>
+    <Value>0.02</Value>
+    <Type>absolute</Type>
+  </Uncertainty>
+  <Unit xml:id="U_m.s-2" dimensionURL="#NISTd28">
+    <UnitSystem name="SI" type="SI_derived" xml:lang="en-US"/>
+    <UnitName xml:lang="en">meter per second squared</UnitName>
+    <UnitSymbol type="HTML">m&#x22c5;s<sup>&#x2212;2</sup></UnitSymbol>
+    <UnitSymbol type="MathMl">
+      <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+        <mi mathvariant="normal">m</mi>
+        <mo>&#x22c5;</mo>
+        <msup>
+          <mrow>
+            <mi mathvariant="normal">s</mi>
+          </mrow>
+          <mrow>
+            <mo>&#x2212;</mo>
+            <mn>2</mn>
+          </mrow>
+        </msup>
+      </math>
+    </UnitSymbol>
+    <RootUnits>
+      <EnumeratedRootUnit unit="meter"/>
+      <EnumeratedRootUnit unit="second" powerNumerator="-2"/>
+    </RootUnits>
+  </Unit>
+  <Quantity xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="NISTq12" quantityType="derived" dimensionURL="#NISTd28">
+    <QuantityName xml:lang="en-US">acceleration</QuantityName>
+  </Quantity>
+</Measurement>
+----
+====
+
+=== Relative uncertainty
+
+Relative uncertainty is expressed as a percentage or fraction of the measured value.
+
+Syntax:
+
+[source]
+----
+{value} {unit-code}, uncertainty: {uncertainty_percentage}%
+----
+
+or
+
+[source]
+----
+{value} {unit-code}, uncertainty: {uncertainty_fraction}
+----
+
+Where,
+
+`{value}`:: is the numerical value
+`{unit-code}`:: is the unit code
+`{uncertainty_percentage}`:: is the relative uncertainty as a percentage
+`{uncertainty_fraction}`:: is the relative uncertainty as a fraction
+
+.Examples of measurements with relative uncertainty
+[example]
+====
+[source]
+----
+5.67e-8 W/(m^2*K^4), uncertainty: 0.5%   # Stefan-Boltzmann constant with relative uncertainty
+299792458 m/s, uncertainty: 1e-9         # speed of light with fractional uncertainty
+----
+====
+
+=== Standard uncertainty
+
+Standard uncertainty represents the standard deviation of the measurement.
+
+Syntax:
+
+[source]
+----
+{value} {unit-code}, standard_uncertainty: {uncertainty_value} {uncertainty_unit}
+----
+
+Where,
+
+`{value}`:: is the numerical value
+`{unit-code}`:: is the unit code
+`{uncertainty_value}`:: is the standard uncertainty value
+`{uncertainty_unit}`:: is the unit code for the uncertainty
+
+.Examples of measurements with standard uncertainty
+[example]
+====
+[source]
+----
+6.67430e-11 m^3/(kg*s^2), standard_uncertainty: 1.5e-15 m^3/(kg*s^2)  # gravitational constant
+----
+====
+
+=== Expanded uncertainty
+
+Expanded uncertainty provides a higher confidence level by multiplying the standard uncertainty by a coverage factor.
+
+Syntax:
+
+[source]
+----
+{value} {unit-code}, expanded_uncertainty: {uncertainty_value} {uncertainty_unit}, coverage_factor: {k}
+----
+
+Where,
+
+`{value}`:: is the numerical value
+`{unit-code}`:: is the unit code
+`{uncertainty_value}`:: is the expanded uncertainty value
+`{uncertainty_unit}`:: is the unit code for the uncertainty
+`{k}`:: is the coverage factor
+
+.Examples of measurements with expanded uncertainty
+[example]
+====
+[source]
+----
+6.67430e-11 m^3/(kg*s^2), expanded_uncertainty: 3.1e-15 m^3/(kg*s^2), coverage_factor: 2  # gravitational constant with 95% confidence
+----
+====
+
+=== Interval notation
+
+For simple representation, uncertainty can be expressed using the interval notation with the ± symbol.
+
+Syntax:
+
+[source]
+----
+{value}±{uncertainty} {unit-code}
+----
+
+Where,
+
+`{value}`:: is the numerical value
+`{unit-code}`:: is the unit code
+`{uncertainty}`:: is the uncertainty value
+
+.Examples of measurements with interval notation
+[example]
+====
+[source]
+----
+5.0±0.1 kg             # mass with uncertainty
+(100±5)×(50±2) mm^2    # area with compound uncertainties
+----
+====
+
+=== Range notation
+
+For representing a range of values, AsciiUnits provides a range notation.
+
+Syntax:
+
+[source]
+----
+{min_value}..{max_value} {unit-code}
+----
+
+Where,
+
+`{min_value}`:: is the minimum value
+`{max_value}`:: is the maximum value
+`{unit-code}`:: is the unit code
+
+.Examples of measurements with range notation
+[example]
+====
+[source]
+----
+20..30 °C              # temperature range from 20 to 30 degrees Celsius
+----
+====
+
