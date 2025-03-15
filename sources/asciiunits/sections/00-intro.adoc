@@ -1,0 +1,8 @@
+== Introduction
+
+UnitsML is a suite of technologies that facilitate digital processing of units
+of measurement and measurement quantities.
+
+AsciiUnits is a text-based syntax for representing units of measurement in a
+compact and human-readable format, designed to be fully compatible with and
+interoperable with the UnitsML XML language.

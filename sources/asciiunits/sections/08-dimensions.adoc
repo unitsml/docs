@@ -1,0 +1,142 @@
+== AsciiUnits dimensions
+
+=== General
+
+AsciiUnits statements support the use of dimensions as standalone
+elements, that are not associated with any unit.
+
+=== Basic dimensions
+
+Dimensions elements are indicated with a prefix of `dim_`.
+
+Syntax:
+
+[source]
+----
+dim_{dimension-code}
+----
+
+Where,
+
+`{dimension-code}`:: is the dimension code
+
+[example]
+====
+[source]
+----
+dim_L       # length dimension
+dim_Theta   # temperature dimension
+dim_T       # time dimension
+----
+====
+
+[example]
+====
+AsciiUnits statement (for length):
+
+[source]
+----
+dim_L       # length dimension
+----
+
+XML:
+
+[source,xml]
+----
+<Dimension xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="D_L">
+  <Length symbol="L" powerNumerator="1"/>
+</Dimension>
+----
+====
+
+=== Dimensions with mathematical operations
+
+Dimension elements can be expressed with mathematic operation adjustments.
+
+The supported operations are:
+
+* `*` for addition
+* `/` for subtraction
+* `^` for power
+* `sqrt()` for square root
+
+[example]
+====
+[source]
+----
+dim_L^2         # squared length dimension
+dim_Theta^10    # temperature dimension to power 10
+sqrt(dim_Theta) # square root of temperature dimension
+----
+====
+
+[example]
+====
+AsciiUnits statement (for squared length):
+
+[source]
+----
+dim_L^2
+----
+
+XML:
+
+[source,xml]
+----
+<Dimension xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="D_L2">
+  <Length symbol="L" powerNumerator="2"/>
+</Dimension>
+----
+====
+
+[example]
+====
+AsciiUnits statement (for square root of temperature):
+
+[source]
+----
+sqrt(dim_Theta)
+----
+
+XML:
+
+[source,xml]
+----
+<Dimension xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="D_Theta0.5">
+  <ThermodynamicTemperature symbol="Theta" powerNumerator="0.5"/>
+</Dimension>
+----
+====
+
+=== Composed dimensions
+
+Composed dimensions are formed by combining more than one basic dimensions
+through mathematical operations.
+
+[example]
+====
+[source]
+----
+dim_Theta*dim_L^2
+----
+====
+
+[example]
+====
+AsciiUnits statement (for temperature times squared length):
+
+[source]
+----
+dim_Theta*dim_L^2
+----
+
+XML:
+
+[source,xml]
+----
+<Dimension xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="D_L2Theta">
+  <Length symbol="L" powerNumerator="2"/>
+  <ThermodynamicTemperature symbol="Theta" powerNumerator="1"/>
+</Dimension>
+----
+====

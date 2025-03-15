@@ -1,0 +1,54 @@
+== Architecture
+
+=== General
+
+AsciiUnits is a text-based syntax for representing units of measurement.
+
+There are two types of representable forms in AsciiUnits:
+
+* Units
+* Values of units
+
+=== Statement
+
+An AsciiUnits statement is a sequence of characters that represents a unit or
+a value of a unit.
+
+[example]
+====
+[source]
+----
+kg # kilogram
+um # micrometer (meter + prefix of micro)
+degK # degree kelvin
+----
+====
+
+=== Units
+
+A unit statement represented in the AsciiUnits language is composed of up to 3
+types of elements in the UnitsML model structure.
+
+* `Unit`, which represents the unit itself
+* `Dimension`, which represents the dimension of the unit
+* `Quantity`, which represents the quantity being described
+
+=== Values of units
+
+A value of a unit is a number that represents a measurement in that unit.
+
+A value consists of a numerical component and a unit. For example, in "2.3 kg,"
+"2.3" is the value representing the quantity and "kg" is the unit.
+
+[example]
+====
+[source]
+----
+1.5 m # 1.5 meters
+2.3 kg # 2.3 kilograms
+3.0 m/s # 3.0 meters per second
+----
+====
+
+AsciiUnits 1.0 does not support encoding of values of units.
+This may be added in a future version.
