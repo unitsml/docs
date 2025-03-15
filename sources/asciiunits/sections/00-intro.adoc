@@ -1,8 +1,151 @@
 == Introduction
 
+=== General
+
 UnitsML is a suite of technologies that facilitate digital processing of units
 of measurement and measurement quantities.
 
 AsciiUnits is a text-based syntax for representing units of measurement in a
 compact and human-readable format, designed to be fully compatible with and
 interoperable with the UnitsML XML language.
+
+=== Purpose
+
+Key features of AsciiUnits include:
+
+Automatic prefix parsing::
+Prefixes attached to unit codes are automatically recognized and processed.
+
+Automatic dimension calculation::
+Dimensions are automatically calculated based on the prefixes and units
+represented.
+
+Mathematical operations::
+Support for mathematical operations on units and dimensions such as addition,
+subtraction, division, exponentiation, square root, grouping and parentheses.
+
+Metadata support::
+Ability to add additional information such as quantity references, custom
+symbols, and names.
+
+UnitsML UnitsDB integration::
+The UnitsML UnitsDB database is the basis used by AsciiUnits to define the units
+and prefixes available for various applications.
+
+
+=== Differences with other technologies
+
+==== UCUM
+
+UCUM is a compact coding system for the representation of units of
+measurement, primarily designed for electronic data interchange in clinical and
+healthcare contexts. Originally developed by the Regenstrief Institute and adopted
+by HL7, UCUM is widely used in electronic health records and clinical
+information systems.
+
+While AsciiUnits and UCUM (Unified Code for Units of Measure) are both text-based
+systems for representing units of measurement, they differ in several key
+aspects.
+
+|===
+|Feature |AsciiUnits |UCUM
+
+|Syntax approach
+|Uses intuitive mathematical operators (`*`, `/`, `^`)
+|Uses special characters (`.` for multiplication, `/` for division)
+
+|Readability
+|Designed for human readability and ease of typing
+|Optimized for compactness and machine processing
+
+|XML integration
+|Direct mapping to UnitsML XML
+|No built-in XML representation
+
+|Metadata support
+|Supports additional metadata (quantity references, custom symbols)
+|No metadata support
+
+|Dimensional analysis
+|Automatic dimension calculation
+|No built-in dimensional analysis
+|===
+
+.Example comparison between AsciiUnits and UCUM
+[example]
+====
+[cols="1,1,1"]
+|===
+|Unit |AsciiUnits |UCUM
+
+|Meter
+|`m`
+|`m`
+
+|Square meter
+|`m^2`
+|`m2`
+
+|Meter per second
+|`m/s`
+|`m/s`
+
+|Kilogram meter per second squared
+|`kg*m/s^2`
+|`kg.m/s2`
+
+|Millimole per liter
+|`mmol/L`
+|`mmol/l`
+|===
+====
+
+==== QUDT
+
+QUDT (Quantities, Units, Dimensions and Types) is a semantic web framework for
+representing quantities, units, dimensions, and types in a consistent and
+interoperable manner based on RDF (Resource Description Framework) and OWL (Web
+Ontology Language).
+
+QUDT is designed to support the semantic web and linked data applications,
+enabling interoperability between different systems and applications.
+
+While AsciiUnits and QUDT share some similarities, they differ in their focus and
+implementation.
+
+QUDT relies on RDF and OWL for its representation and does not provide a
+text-based syntax for representing units of measurement. AsciiUnits allows for
+accessible encoding of units in documents and text files, making it possible for
+authors to represent measurement quantities in a clear and concise manner.
+
+AsciiUnits being a text-based syntax, is allows for conversion to and from
+UnitsML XML, which is a more structured and machine-readable format. This makes
+AsciiUnits suitable for applications where human readability and ease of typing
+are important, while QUDT is more focused on semantic web applications.
+
+==== Digital SI framework
+
+The Digital SI framework is an initiative to modernize the International System
+of Units (SI) by providing a digital representation of SI units and their
+relationships. It aims to enhance the accessibility and usability of SI units in
+digital applications, including scientific computing, data analysis, and
+machine learning.
+
+The Digital SI framework provides a comprehensive set of tools and resources for
+representing SI units, including a digital representation of SI base and derived
+units, as well as a set of guidelines for using SI units in digital applications.
+
+While AsciiUnits is designed to be a text-based syntax for representing units of
+measurement, the Digital SI framework focuses on providing a digital representation
+of SI units and their relationships. AsciiUnits can be used in conjunction with
+the Digital SI framework to provide a human-readable representation of SI units
+and their relationships, making it easier for users to work with SI units in
+digital applications.
+
+==== Other technologies
+
+AsciiUnits is designed to be compatible with and interoperable with other
+technologies for representing units of measurement, including UCUM, QUDT, and the
+Digital SI framework. It can be used in conjunction with these technologies to
+provide a comprehensive solution for representing units of measurement in
+scientific and engineering applications.

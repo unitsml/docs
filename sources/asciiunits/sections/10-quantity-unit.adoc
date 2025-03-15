@@ -1,0 +1,322 @@
+== Quantity unit
+
+=== General
+
+A unit of measurement is used to describe a quantity, and one unit can be used
+to measure different quantities.
+
+[example]
+The unit "meter" (m) can be used to measure length, wavelength, radius, height,
+displacement.
+
+For interoperability between systems and value conversions, it is important to
+specify the quantity being measured. This is important for ensuring that the
+unit is used correctly and consistently in scientific and engineering contexts.
+
+In AsciiUnits, a quantity unit is a unit of measurement that is associated with
+a specific quantity.
+
+
+=== Default quantity
+
+An AsciiUnit unit is associated with a default quantity.
+
+The default quantity is the first quantity entry as associated to the unit in
+the UnitsDB database.
+
+[example]
+====
+The unit `m` (meter) is associated with the quantities `length`, `diameter`,
+`length of path`, and so on in the UnitsDB database, with the `length` quantity
+being listed first. Therefore, the default quantity for `m` is "length".
+====
+
+The XML representation of an AsciiUnits unit always includes the default
+quantity association in the `<Quantity>` element unless a different quantity is
+specified.
+
+[example]
+====
+AsciiUnits statement:
+
+[source,ascii]
+----
+m # meter
+----
+
+XML:
+[source,xml]
+----
+<Unit xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="U_NISTu1" dimensionURL="#NISTd1">
+  <UnitSystem name="SI" type="SI_derived" xml:lang="en-US"/>
+  <UnitName xml:lang="en">meter</UnitName>
+  <UnitSymbol type="HTML">m</UnitSymbol>
+  <UnitSymbol type="MathMl">
+    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+      <mi mathvariant="normal">m</mi>
+    </math>
+  </UnitSymbol>
+</Unit>
+
+<Dimension xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="NISTd1">
+  <Length symbol="L" powerNumerator="1"/>
+</Dimension>
+
+<Quantity xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="NISTq1" quantityType="base" dimensionURL="#NISTd1">
+  <QuantityName xml:lang="en-US">length</QuantityName>
+</Quantity>
+----
+====
+
+=== Specific quantity
+
+AsciiUnits allows specifying the quantity a unit measures using the `quantity`
+metadata parameter. This parameter can reference a quantity defined in the
+UnitsDB database.
+
+Syntax:
+
+[source]
+----
+{unit-code} [{quantity-code}]
+----
+
+Where,
+
+`{unit-code}`:: is the unit code
+`{quantity-code}`:: is the reference to a quantity identifier or its shortname in the UnitsDB database
+
+.Examples of units with quantity references
+[example]
+====
+[source]
+----
+kg [NISTq2]                # kilogram with mass quantity reference
+kg [mass]                  # kilogram with mass quantity reference
+s [NISTq3]                 # second with time quantity reference
+s [duration]               # second with time quantity reference
+m [NISTq103]               # meter with length quantity reference
+m [position_vector]        # meter with length quantity reference
+l [NISTq105]               # liter with volume quantity reference
+l [volume]                 # liter with volume quantity reference
+----
+====
+
+The XML representation of an AsciiUnits unit with quantity reference includes
+the specific `<Quantity>` element that provides information about the quantity
+being measured.
+
+.AsciiUnits representation for kilogram with mass quantity reference
+[example]
+====
+AsciiUnits statement:
+
+[source,ascii]
+----
+kg [NISTq2]
+----
+
+XML:
+
+[source,xml]
+----
+<Unit xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="U_NISTu1" dimensionURL="#NISTd1">
+  <UnitSystem name="SI" type="SI_derived" xml:lang="en-US"/>
+  <UnitName xml:lang="en">meter</UnitName>
+  <UnitSymbol type="HTML">m</UnitSymbol>
+  <UnitSymbol type="MathMl">
+    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+      <mi mathvariant="normal">m</mi>
+    </math>
+  </UnitSymbol>
+</Unit>
+
+<Dimension xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="NISTd1">
+  <Length symbol="L" powerNumerator="1"/>
+</Dimension>
+
+<Quantity xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="NISTq2" quantityType="base" dimensionURL="#NISTd1">
+  <QuantityName xml:lang="en-US">mass</QuantityName>
+</Quantity>
+----
+====
+
+.AsciiUnits representation for meter with position vector quantity reference
+[example]
+====
+AsciiUnits statement:
+
+[source,ascii]
+----
+m [NISTq103]
+----
+
+XML:
+
+[source,xml]
+----
+<Unit xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="U_NISTu1" dimensionURL="#NISTd1">
+  <UnitSystem name="SI" type="SI_derived" xml:lang="en-US"/>
+  <UnitName xml:lang="en">meter</UnitName>
+  <UnitSymbol type="HTML">m</UnitSymbol>
+  <UnitSymbol type="MathMl">
+    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+      <mi mathvariant="normal">m</mi>
+    </math>
+  </UnitSymbol>
+</Unit>
+
+<Dimension xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="NISTd1">
+  <Length symbol="L" powerNumerator="1"/>
+</Dimension>
+
+<Quantity xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="NISTq103" quantityType="base" dimensionURL="#NISTd1">
+  <QuantityName xml:lang="en-US">position vector</QuantityName>
+</Quantity>
+----
+====
+
+
+=== Inferred quantity
+
+In composite units, when a quantity is not explicitly specified, AsciiUnits will
+attempt to infer the appropriate quantity based on the unit's dimension. This
+inference is based on the standard quantities defined in the UnitsDB database.
+
+[example]
+====
+A unit with dimension `L` (length) will be detected to be associated with the
+quantity "length".
+
+A unit with dimension `L*T^-1` will be detected to be associated with the
+quantity "velocity".
+====
+
+.Inferred quantity based on UnitsDB lookup
+[example]
+====
+AsciiUnits statement:
+
+[source,ascii]
+----
+m/s
+----
+
+Given that the unit `m/s` is a composite unit, AsciiUnits can detect the
+dimension `L*T^-1` (NISTd11), which allows an inference to the quantity
+"velocity" (NISTq12).
+
+XML (with inferred quantity):
+
+[source,xml]
+----
+<Unit xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="NISTu1.u3e-1/1" dimensionURL="#NISTd11">
+  <UnitSystem name="SI" type="SI_derived" xml:lang="en-US"/>
+  <UnitName xml:lang="en">meter per second</UnitName>
+  <UnitSymbol type="HTML">m&#x22c5;s<sup>&#x2212;1</sup></UnitSymbol>
+  <UnitSymbol type="MathMl">
+    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+      <mi mathvariant="normal">m</mi>
+      <mo>&#x22c5;</mo>
+      <msup>
+        <mrow>
+          <mi mathvariant="normal">s</mi>
+        </mrow>
+        <mrow>
+          <mo>&#x2212;</mo>
+          <mn>1</mn>
+        </mrow>
+      </msup>
+    </math>
+  </UnitSymbol>
+  <RootUnits>
+    <EnumeratedRootUnit unit="meter"/>
+    <EnumeratedRootUnit unit="second" powerNumerator="-1"/>
+  </RootUnits>
+</Unit>
+
+<Dimension xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="NISTd11">
+  <Length symbol="L" powerNumerator="1"/>
+  <Time symbol="T" powerNumerator="-1"/>
+</Dimension>
+
+<Quantity xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="NISTq12" quantityType="derived" dimensionURL="#NISTd11">
+  <QuantityName xml:lang="en-US">velocity</QuantityName>
+  <QuantityName xml:lang="en-US">speed</QuantityName>
+</Quantity>
+----
+====
+
+Composite units that lead to a detected of dimension associated with multiple
+quantities will always infer the first quantity in the UnitsDB database.
+
+NOTE: Composite units that lead to a dimension that is not associated with any
+quantity in the UnitsDB database will not be inferred.
+
+
+.Inferred quantity using composite units with detected dimension and quantity from UnitsDB
+[example]
+====
+AsciiUnits statement:
+
+[source,ascii]
+----
+cd*sr*m^(-2)
+----
+
+Given that the unit `cd*sr*m^(-2)` is a composite unit, AsciiUnits can detect
+the dimension `L^-2*J` (NISTd27), which allows an inference to the quantity
+"luminous flux" (NISTq47) or "luminance" (NISTq56), and the first detected
+quantity is always inferred since the exact quantity type is not specified.
+
+XML (with inferred quantity):
+
+[source,xml]
+----
+<Unit xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="U_cd.sr.m-2" dimensionURL="#NISTd27">
+  <UnitSystem name="SI" type="SI_derived" xml:lang="en-US"/>
+  <UnitName xml:lang="en">cd*sr*m^-2</UnitName>
+  <UnitSymbol type="HTML">cd&#x22c5;sr&#x22c5;m<sup>&#x2212;2</sup></UnitSymbol>
+  <UnitSymbol type="MathMl">
+    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+      <mi mathvariant="normal">cd</mi>
+      <mo>&#x22c5;</mo>
+      <mi mathvariant="normal">sr</mi>
+      <mo>&#x22c5;</mo>
+      <msup>
+        <mrow>
+          <mi mathvariant="normal">m</mi>
+        </mrow>
+        <mrow>
+          <mo>&#x2212;</mo>
+          <mn>2</mn>
+        </mrow>
+      </msup>
+    </math>
+  </UnitSymbol>
+  <RootUnits>
+    <EnumeratedRootUnit unit="candela"/>
+    <EnumeratedRootUnit unit="steradian"/>
+    <EnumeratedRootUnit unit="meter" powerNumerator="-2"/>
+  </RootUnits>
+</Unit>
+
+<!--
+  The dimension NISTd27 is detected given the length and luminous intensity
+  power numerators of L = -2 and J = 1.
+-->
+<Dimension xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="NISTd27">
+  <Length symbol="L" powerNumerator="-2"/>
+  <LuminousIntensity symbol="J" powerNumerator="1"/>
+</Dimension>
+
+<!--
+  The dimension NISTd27 is used in two UnitsDB quantities: NISTq47 (luminous
+  flux) and NISTq56 (luminance), detection always infers the first.
+-->
+<Quantity xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="NISTq47" quantityType="derived" dimensionURL="#NISTd27">
+  <QuantityName xml:lang="en-US">luminous flux</QuantityName>
+</Quantity>
+----
+====
+
