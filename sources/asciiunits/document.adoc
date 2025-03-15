@@ -42,9 +42,9 @@ include::sections/09-units.adoc[]
 
 include::sections/10-quantity-unit.adoc[]
 
-include::sections/11-formula-units.adoc[]
+// include::sections/11-formula-units.adoc[]
 
-include::sections/12-uncertainty.adoc[]
+// include::sections/12-uncertainty.adoc[]
 
 include::sections/13-ebnf.adoc[]
 
