@@ -1,0 +1,97 @@
+= UnitsML Documentation
+
+image:https://github.com/unitsml/docs/workflows/generate/badge.svg["Build Status", link="https://github.com/unitsml/docs/actions?query=workflow%3Agenerate"]
+
+This document is available in its rendered forms here:
+
+* https://unitsml.github.io/docs/[UnitsML Documentation]
+
+== Introduction
+
+This repository contains the official documentation for UnitsML (Units Markup
+Language), a comprehensive suite of technologies that facilitate digital
+processing of units of measurement and measurement quantities.
+
+UnitsML is a technology suite for working with units of measure. It provides a
+standardized way to represent units, quantities, dimensions, and prefixes,
+enabling unambiguous storage, exchange, and processing of numerical data across
+different systems and domains.
+
+The documentation includes:
+
+AsciiUnits syntax specification::
+A text-based syntax for representing units of measurement in a compact and human-readable format, fully compatible and interoperable with the UnitsML XML language
+
+UnitsML guide::
+Guidelines for using UnitsML in various applications
+
+UnitsML guide to incorporating UnitsML XML::
+Methods for incorporating UnitsML into other markup languages
+
+UnitsML subset specification for embedding into UBL NDR::
+Specification for UnitsML in the context of Universal Business Language Naming and Design Rules
+
+
+== Structure
+
+`sources/`::
+Source files for UnitsML specifications in Metanorma format.
+
+`sources/asciiunits/`:::
+AsciiUnits syntax specification
+
+`sources/unitsml-guide/`:::
+UnitsML guidelines
+
+`sources/unitsml-incorporation/`:::
+Documentation on incorporating UnitsML into other markup languages
+
+`sources/unitsml-ubl-ndr-subset/`:::
+UnitsML UBL NDR subset specification
+
+`_site/`:: Generated documentation in multiple formats (HTML, PDF, XML, etc.)
+
+== Building the documentation
+
+This repository uses Metanorma to build standardized documentation.
+
+=== Installing build tools
+
+See https://www.metanorma.org/install/ for detailed installation instructions.
+
+=== Building locally
+
+If you have Metanorma installed locally, run:
+
+[source,sh]
+----
+metanorma site generate
+----
+
+=== Building with Docker
+
+If you prefer using Docker, run:
+
+[source,sh]
+----
+docker run -v "$(pwd)":/metanorma -w /metanorma -it metanorma/mn metanorma site generate
+----
+
+== Generated formats
+
+The build process generates documentation in multiple formats:
+
+* HTML -- Web-friendly format with navigation
+* PDF -- Print-ready format
+* XML -- Machine-readable format
+* RXL -- Relaton XML bibliographic format
+
+== Related resources
+
+* https://www.bipm.org/en/publications/si-brochure/[BIPM SI Brochure]
+* https://www.nist.gov/pml/special-publication-811[NIST SP 811]
+* https://www.iso.org/standard/76921.html[ISO 80000-1:2022]
+
+== Copyright and license
+
+Copyright CalConnect.
