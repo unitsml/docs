@@ -1,0 +1,3 @@
+[submodule "unitsdb"]
+	path = unitsdb
+	url = https://github.com/unitsml/unitsdb
