@@ -1,0 +1,64 @@
+== AsciiUnits prefixes
+
+AsciiUnits statements support the use of prefixes as standalone
+elements.
+
+Prefixes elements are indicated with a prefix of `-` after the prefix code.
+
+Syntax:
+
+[source]
+----
+{prefix-code}-
+----
+
+Where,
+
+`{prefix-code}`:: is the prefix code
+`-`:: indicates that there is no unit associated with the prefix
+
+[example]
+====
+AsciiUnits statement (for deci):
+
+[source]
+----
+d-
+----
+
+XML:
+
+[source,xml]
+----
+<Prefix xmlns="https://schema.unitsml.org/unitsml/1.0" prefixBase="10" prefixPower="-1" xml:id="NISTp10_-1">
+  <PrefixName xml:lang="en">deci</PrefixName>
+  <PrefixSymbol type="ASCII">d</PrefixSymbol>
+  <PrefixSymbol type="unicode">d</PrefixSymbol>
+  <PrefixSymbol type="LaTeX">d</PrefixSymbol>
+  <PrefixSymbol type="HTML">d</PrefixSymbol>
+</Prefix>
+----
+====
+
+[example]
+====
+AsciiUnits statement (for deca):
+
+[source]
+----
+da-
+----
+
+XML:
+
+[source,xml]
+----
+<Prefix xmlns="https://schema.unitsml.org/unitsml/1.0" prefixBase="10" prefixPower="1" xml:id="NISTp10_1">
+  <PrefixName xml:lang="en">deka</PrefixName>
+  <PrefixSymbol type="ASCII">da</PrefixSymbol>
+  <PrefixSymbol type="unicode">da</PrefixSymbol>
+  <PrefixSymbol type="LaTeX">da</PrefixSymbol>
+  <PrefixSymbol type="HTML">da</PrefixSymbol>
+</Prefix>
+----
+====

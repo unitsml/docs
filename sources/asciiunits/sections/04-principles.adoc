@@ -1,0 +1,13 @@
+== Principles
+
+AsciiUnits follows the following key principles to ensure clarity and usability
+in representing units.
+
+Typability:: Symbols are meant to be easily typed on standard keyboards,
+avoiding complex characters or symbols.
+
+Non-ambiguous:: Unit representation and composure syntax should lead to exactly
+one interpretation, ensuring that each expression has an unambiguous meaning.
+
+Extensible:: New units and new prefixes can be added to the system without
+changing the syntax.

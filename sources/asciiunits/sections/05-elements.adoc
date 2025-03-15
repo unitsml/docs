@@ -1,0 +1,134 @@
+== Representable elements
+
+=== General
+
+AsciiUnits allows for the encoding of the following types of elements:
+
+* Unit systems
+* Units
+* Dimensions
+* Quantities
+* Prefixes in conjunction with units
+
+=== Unit systems
+
+A unit system is a collection of units of measure that forms a coherent
+framework for converting between different units of measurement.
+
+UnitsML defines the following unit systems.
+
+.UnitsML unit systems
+|===
+| ID | Name | Acceptable to be used in the SI system
+
+| `SI_base` | SI | true
+| `SI_derived_special` | SI-derived special | true
+| `SI_derived_non-special` | SI-derived non-special | true
+| `non-SI_acceptable` | non-SI but acceptable to be used together | true
+| `non-SI_not_acceptable` | non-SI and unacceptable to be used together | false
+
+|===
+
+Each unit in UnitsML belongs to exactly one unit system.
+
+=== Units
+
+The AsciiUnits syntax is designed to represent a wide range of units of
+measurement and their combinations.
+
+It includes:
+
+* Basic units: Simple units and prefixed units
+
+* Composite units: Units formed by combining basic units through mathematical
+  operations
+
+Basic units available to AsciiUnits are sourced from UnitsDB.
+
+UnitsDB is a comprehensive database of units of measurement and their relationships, which
+is used to define the units and prefixes available in AsciiUnits for various applications.
+
+NOTE: UnitsDB is a part of the UnitsML project and is maintained by CalConnect TC UNITS.
+
+[[si-prefixes]]
+=== Prefixes
+
+A prefix is a modifier to a unit that indicates a fixed factor by which the unit
+is multiplied.
+
+Prefixes can be used in conjunction with units to create prefixed units.
+
+The BIPM SI prefixes are used in AsciiUnits, which include the following:
+
+.SI prefixes in base 10
+|===
+.2+| Prefix .2+| Symbol .2+| Factor 4+| Representations
+| ASCII | HTML | LaTeX | Unicode
+
+| quetta | Q      | 10^30 | `Q` | `Q` | `Q` | `Q`
+| ronna  | R      | 10^27 | `R` | `R` | `R` | `R`
+| yotta  | Y      | 10^24 | `Y` | `Y` | `Y` | `Y`
+| zetta  | Z      | 10^21 | `Z` | `Z` | `Z` | `Z`
+| exa    | E      | 10^18 | `E` | `E` | `E` | `E`
+| peta   | P      | 10^15 | `P` | `P` | `P` | `P`
+| tera   | T      | 10^12 | `T` | `T` | `T` | `T`
+| giga   | G      | 10^9  | `G` | `G` | `G` | `G`
+| mega   | M      | 10^6  | `M` | `M` | `M` | `M`
+| kilo   | k      | 10^3  | `k` | `k` | `k` | `k`
+| hecto  | h      | 10^2  | `h` | `h` | `h` | `h`
+| deka   | da     | 10^1  | `da` | `da` | `da` | `da`
+| deci   | d      | 10^-1 | `d` | `d` | `d` | `d`
+| centi  | c      | 10^-2 | `c` | `c` | `c` | `c`
+| milli  | m      | 10^-3 | `m` | `m` | `m` | `m`
+| micro  | u      | 10^-6 | `u` | `&micro;` | `$mu$` | `μ`
+| nano   | n      | 10^-9 | `n` | `n` | `n` | `n`
+| pico   | p      | 10^-12 | `p` | `p` | `p` | `p`
+| femto  | f      | 10^-15 | `f` | `f` | `f` | `f`
+| atto   | a      | 10^-18 | `a` | `a` | `a` | `a`
+| zepto  | z      | 10^-21 | `z` | `z` | `z` | `z`
+| yocto  | y      | 10^-24 | `y` | `y` | `y` | `y`
+| ronto  | r      | 10^-27 | `r` | `r` | `r` | `r`
+| quecto | q      | 10^-30 | `q` | `q` | `q` | `q`
+|===
+
+.SI prefixes in binary
+|===
+.2+| Prefix .2+| Symbol .2+| Factor 4+| Representations
+| ASCII | HTML | LaTeX | Unicode
+
+| kibi  | Ki     | 2^10  | `Ki` | `Ki` | `Ki` | `Ki`
+| mebi  | Mi     | 2^20  | `Mi` | `Mi` | `Mi` | `Mi`
+| gibi  | Gi     | 2^30  | `Gi` | `Gi` | `Gi` | `Gi`
+| tebi  | Ti     | 2^40  | `Ti` | `Ti` | `Ti` | `Ti`
+| pebi  | Pi     | 2^50  | `Pi` | `Pi` | `Pi` | `Pi`
+| exbi  | Ei     | 2^60  | `Ei` | `Ei` | `Ei` | `Ei`
+| zebi  | Zi     | 2^70  | `Zi` | `Zi` | `Zi` | `Zi`
+| yobi  | Yi     | 2^80  | `Yi` | `Yi` | `Yi` | `Yi`
+
+|===
+
+=== Dimensions
+
+A dimension is a physical quantity that can be expressed in terms of
+fundamental quantities.
+
+Basic dimensions are described with only one quantity. More complex dimensions
+require multiple quantities to be expressed.
+
+Dimensions are represented in AsciiUnits using the `dim_` prefix followed by
+the dimension name.
+
+The collection of dimensions is defined in the UnitsDB database.
+Each dimension is represented by a unique identifier in the database,
+of the pattern `NISTd{n}`.
+
+=== Quantities
+
+A quantity is a type of measurement that is represented by a unit.
+
+Each quantity is associated with one or more quantity names, exactly one
+dimension, and one or more units of measurement.
+
+The collection of quantities is defined in the UnitsDB database.
+Each quantity is represented by a unique identifier in the database,
+of the pattern `NISTq{n}`.

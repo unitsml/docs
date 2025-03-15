@@ -1,0 +1,4 @@
+[bibliography]
+== Normative references
+
+* [[[unitsml-xml,UnitsML XML schema]]], https://www.unitsml.org
