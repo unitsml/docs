@@ -1,0 +1,157 @@
+== Unit system
+
+=== General
+
+A unit system is a defined set of units.
+
+UnitsDB differentiates unit systems in accordance to BIPM guidelines.
+
+SI units:: Units defined by the International System of Units (SI) as defined by
+the CGPM and described by the BIPM. SI units are the international standard for
+measurement. These are the 7 base units
+
+Units derived from SI units and special:: Units that are not part of the
+SI system but are directly derived from SI units and therefore acceptable for
+use. Examples include traditionally used units like newton, pascal, joule, watt.
+
+Units derived from SI units but not special:: Units that are not part of the SI
+system, directly derived from SI units but are usually dimensionless or compound
+units and not accepted for international use. Examples include ppm, ppb, square
+meters.
+
+Non-SI units, acceptable for use:: Units that are not part of the SI system but
+are generally accepted for technical use. These units include imperial units
+like hour, minute, angstrom, watt hour.
+
+Non-SI units, temporarily acceptable for use:: Units that are not part
+of the SI system but are temporarily accepted for use in specific contexts.
+These units only include "are" and "hectare" for area.
+
+Non-SI units, not acceptable for use:: Units that are not part of the SI system but
+are generally not accepted for technical use. These units include imperial units
+like foot, inch, mile, metric ton, and pound.
+
+NOTE: Prefixes are modifiers that act on units, they do not affect the units'
+categorization in unit systems.
+
+
+=== Unit system model
+
+==== Definition
+
+The UnitSystem model is defined in the LutaML data definition language.
+
+[source,lutaml]
+----
+class UnitSystem {
+  attribute id, String {
+    definition {
+      Unique identifier for the unit system.
+    }
+  }
+  attribute name, String {
+    definition {
+      Name of the unit system (e.g., SI, non-SI).
+    }
+  }
+  attribute acceptable, Boolean {
+    definition {
+      Whether the unit system is generally acceptable for use in scientific and
+      technical documentation.
+    }
+  }
+}
+----
+
+==== Attributes
+
+==== id
+
+The `id` field is a unique identifier for the unit system type. It indicates both the name of the system and the category of unit within that system. For example, `SI_base` refers to base units in the SI system.
+
+==== name
+
+The `name` field specifies the overarching unit system, either "SI" or "non-SI".
+
+==== acceptable
+
+The `acceptable` field is a boolean indicating whether units in this system are generally acceptable for use in scientific and technical documentation according to international standards.
+
+==== YAML structure
+
+The unit system data is stored in the `unit_systems.yaml` file with the following structure.
+
+[example]
+====
+[source,yaml]
+----
+- id: SI_base
+  name: SI
+  acceptable: true
+- id: SI_derived_special
+  name: SI
+  acceptable: true
+- id: SI_derived_non-special
+  name: SI
+  acceptable: true
+- id: non-SI_acceptable
+  name: non-SI
+  acceptable: true
+- id: non-SI_not_acceptable
+  name: non-SI
+  acceptable: false
+----
+====
+
+
+
+=== Unit system relationship model
+
+==== General
+
+Unit systems in UnitsDB maintain relationships with other entities in the database, primarily units.
+
+==== Definition
+
+[source,lutaml]
+----
+class UnitSystemRelationship {
+  attribute unit_id, String {
+    definition "Reference to the unit"
+  }
+  attribute unit_system_id, String {
+    definition "Reference to the unit system"
+  }
+}
+----
+
+In the UnitsDB structure, each unit is associated with a unit system through the `unit_system` field in the Unit model. This link establishes the context for the unit and provides guidance on its appropriate usage.
+
+For example, a unit like the meter would be associated with the `SI_base` unit system, indicating it is a base unit in the SI system and generally acceptable for use in scientific and technical documentation.
+
+==== Attributes
+
+===== unit_id
+
+The `unit_id` field is a reference to the unit that is associated with the unit system. This field links the unit to its corresponding unit system, allowing for easy identification and categorization.
+
+===== unit_system_id
+
+The `unit_system_id` field is a reference to the unit system that the unit belongs to. This field establishes the relationship between the unit and its unit system, providing context for its usage and interpretation.
+
+==== YAML structure
+
+The unit system relationship data is used in the `units.yaml` file with the following structure.
+
+[example]
+====
+[source,yaml]
+----
+- unit_id: NISTu1
+  unit_system_id: SI_base
+- unit_id: NISTu2
+  unit_system_id: SI_base
+- unit_id: NISTu3
+  unit_system_id: non-SI_acceptable
+----
+====
