@@ -32,20 +32,25 @@ class SymbolRepresentation {
   attribute id, String {
     definition "Unique identifier for the symbol representation"
   }
+
   attribute ascii, String {
     definition "ASCII text representation"
   }
+
   attribute html, String {
     definition "HTML representation (may include HTML entities)"
   }
+
   attribute mathml, String {
-    definition "MathML representation"
+    definition "MathML representation in XML format."
   }
+
   attribute latex, String {
-    definition "LaTeX representation"
+    definition "LaTeX representation in LaTeX typeset format."
   }
+
   attribute unicode, String {
-    definition "Unicode representation"
+    definition "Unicode representation in UTF-8 encoding."
   }
 }
 ----
@@ -81,11 +86,8 @@ entities across different files in UnitsDB.
 [source,lutaml]
 ----
 class CrossReference {
-  attribute url, String {
-    definition "URL reference to another entity."
-  }
-  attribute name, String[0..1] {
-    definition "Human-readable name of the referenced entity (optional)"
+  attribute identifier, String {
+    definition "Identifier of the referenced entity"
   }
 }
 ----

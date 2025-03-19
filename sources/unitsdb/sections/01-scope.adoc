@@ -4,6 +4,8 @@ This document specifies the data models, structures, and normalization rules for
 UnitsDB, the authoritative database of measurement units, quantities,
 dimensions, and prefixes for the UnitsML framework.
 
+NOTE: This document applies to UnitsDB version 1.0.0.
+
 The specification defines:
 
 * The overall architecture of UnitsDB
@@ -15,15 +17,16 @@ The specification defines:
 
 This document:
 
-* Does not specify the software implementation details for using UnitsDB in applications
+* Does not specify implementation details for using UnitsDB in applications
 * Does not define algorithms for unit conversions or dimensional analysis (though the data provided supports these operations)
 * Does not provide a comprehensive list of all units, quantities, dimensions, and prefixes (these are provided in the actual database)
 
 This specification is intended for:
 
 * Developers implementing UnitsML systems
-* Database administrators managing UnitsDB installations
+* Developers managing UnitsDB database instances
 * Contributors extending or modifying the UnitsDB database
 * Standards developers referencing UnitsDB
 
-The specification enables interoperable representation of measurement units and related concepts across different applications, domains, and systems.
+The specification enables interoperable representation of measurement units and
+related concepts across different applications, domains, and systems.
