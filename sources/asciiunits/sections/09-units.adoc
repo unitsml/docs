@@ -1,4 +1,10 @@
+[[asciiunits-units]]
 == AsciiUnits units
+
+=== General
+
+AsciiUnits supports a wide range of units, including basic units, prefixed
+units, and composite units.
 
 === Basic units
 
@@ -372,7 +378,7 @@ XML:
 ----
 ====
 
-=== Exponents
+==== Exponents
 
 Syntax:
 
@@ -472,7 +478,7 @@ XML:
 ----
 ====
 
-=== Square root
+==== Square root
 
 Using `sqrt()` function.
 
@@ -563,10 +569,12 @@ XML:
 ----
 ====
 
-=== Composed units
 
-Composed units are formed by combining more than one basic unit through
-mathematical operations.
+==== Realized units
+
+Realized composite units are formed by combining more than one basic unit through
+the above mentioned operations.
+
 
 [example]
 ====
@@ -640,66 +648,53 @@ XML:
 ----
 ====
 
-=== Metadata in units
 
-Metadata can be added after a comma after an AsciiUnits statement.
+[[symbol-ambiguity-resolution]]
+=== Symbol ambiguity resolution
 
-[example]
-====
-[source]
-----
-m, quantity: NISTq103               # meter with quantity reference
-cal_th/cm^2, name: langley          # calorie thermal per square centimeter with name
-cm*s^-2, symbol: cm cdot s^-2       # custom symbol representation
-cm*s^-2, multiplier: xx             # custom multiplier
-----
-====
+Multiple units can be represented by the same symbol. This is often differentiated according
+to historical or contextual usage, and in some cases they cannot be disambiguated
+by the context of the unit.
 
 [example]
 ====
-AsciiUnits statement (for candela steradian per square meter),
-with a custom symbol representation:
+* `m` can represent _meter_ or _mole_.
 
-[source]
-----
-cd*sr*m^(-2),symbol:cd cdot sr cdot m^(-2)
-----
-
-XML:
-
-[source,xml]
-----
-<Unit xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="U_cd.sr.m-2" dimensionURL="#D_L-2J">
-  <UnitSystem name="SI" type="SI_derived" xml:lang="en-US"/>
-  <UnitName xml:lang="en">cd*sr*m^-2</UnitName>
-  <UnitSymbol type="HTML">cd&#x22c5;sr&#x22c5;m<sup>&#x2212;2</sup></UnitSymbol>
-  <UnitSymbol type="MathMl">
-    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
-      <mi mathvariant="normal">cd</mi>
-      <mo>&#x22c5;</mo>
-      <mi mathvariant="normal">sr</mi>
-      <mo>&#x22c5;</mo>
-      <msup>
-        <mrow>
-          <mi mathvariant="normal">m</mi>
-        </mrow>
-        <mrow>
-          <mo>&#x2212;</mo>
-          <mn>2</mn>
-        </mrow>
-      </msup>
-    </math>
-  </UnitSymbol>
-  <RootUnits>
-    <EnumeratedRootUnit unit="candela"/>
-    <EnumeratedRootUnit unit="steradian"/>
-    <EnumeratedRootUnit unit="meter" powerNumerator="-2"/>
-  </RootUnits>
-</Unit>
-
-<Dimension xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="NISTd27">
-  <Length symbol="L" powerNumerator="-2"/>
-  <LuminousIntensity symbol="J" powerNumerator="1"/>
-</Dimension>
-----
+* `B` can represent both _bel_ (as in decibel) and _byte_.
 ====
+
+These units that are associated with multiple symbols are considered to have:
+
+* a primary unit symbol
+* one or more alternative unit symbols.
+
+To ensure unambiguous identification of units, AsciiUnits uses unique
+identifiers for these ambiguous symbols accross units.
+
+When using a potentially ambiguous symbol, AsciiUnits will attempt to resolve
+the ambiguity based on context where possible.
+
+A comprehensive table of ambiguous unit symbols and their disambiguated identifiers
+is provided in <<ambiguous-unit-symbols>>.
+
+In UnitsDB, there is a notion of a "prefixed unit", which is a unit that has
+a prefix attached to it (marked by `prefixed: true` in the UnitsDB entry).
+
+In case of ambiguity, the interpretation with no prefix is prioritised over the
+interpretation as a unit.
+
+Exceptionally, `kg` is decomposed into "kilo-gram" (a unit) rather than treated
+as a basic unit, for consistency with other prefixes of grams.
+
+[example]
+====
+`ct` is interpreted as _hundredweight_, rather than _centi-ton_.
+====
+
+Units with multiple symbols have those symbols encoded separately in the UnitsDB
+Units' database.
+
+NOTE: While different symbols can be used to reference the same Unit in UnitsML,
+the default unit symbol will still apply during presentation of the unit unless
+explicitly specified using <<unit-metadata>>.
+

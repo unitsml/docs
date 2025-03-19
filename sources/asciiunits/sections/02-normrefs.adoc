@@ -2,3 +2,4 @@
 == Normative references
 
 * [[[unitsml-xml,UnitsML XML schema]]], https://www.unitsml.org
+* [[[w3c-mathml-units,W3C TR mathml-units]]], https://www.w3.org/TR/mathml-units/

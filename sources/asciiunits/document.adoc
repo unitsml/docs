@@ -12,6 +12,10 @@
 :surname: Tse
 :givenname: Ronald
 :affiliation: Ribose Inc.
+:fullname_2: Nick Nicholas
+:surname_2: Nicholas
+:givenname_2: Nick
+:affiliation_2: Ribose Inc.
 :imagesdir: images
 :mn-document-class: cc
 :mn-output-extensions: xml,html,pdf,rxl
@@ -40,14 +44,20 @@ include::sections/08-dimensions.adoc[]
 
 include::sections/09-units.adoc[]
 
-include::sections/10-quantity-unit.adoc[]
+include::sections/10-metadata.adoc[]
 
-// include::sections/11-formula-units.adoc[]
+include::sections/11-ebnf.adoc[]
 
-// include::sections/12-uncertainty.adoc[]
+include::sections/12-with-asciimath.adoc[]
 
-include::sections/13-ebnf.adoc[]
+// include::sections/x1-formula-units.adoc[]
+
+// include::sections/x2-uncertainty.adoc[]
 
 include::sections/99-bibliography.adoc[]
 
-include::sections/a1-test-suite.adoc[]
+include::sections/a1-fixed-symbols.adoc[]
+
+include::sections/a2-ambiguous-symbols.adoc[]
+
+include::sections/a3-test-suite.adoc[]
