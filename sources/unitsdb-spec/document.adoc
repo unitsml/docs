@@ -1,0 +1,49 @@
+= CalConnect Standard: UnitsML -- UnitsDB specification
+:title: UnitsML -- UnitsDB specification
+:docnumber: 36811
+:copyright-year: 2025
+:doctype: standard
+:edition: 1
+:status: committee-draft
+:revdate: 2025-03-15
+:published-date: 2025-03-15
+:technical-committee: UnitsML
+:fullname: Ronald Tse
+:surname: Tse
+:givenname: Ronald
+:affiliation: Ribose Inc.
+:imagesdir: images
+:mn-document-class: cc
+:mn-output-extensions: xml,html,pdf,rxl
+:local-cache-only:
+:data-uri-image:
+
+include::sections/00-foreword.adoc[]
+
+include::sections/00-intro.adoc[]
+
+include::sections/01-scope.adoc[]
+
+include::sections/02-normrefs.adoc[]
+
+include::sections/03-terms.adoc[]
+
+include::sections/04-principles.adoc[]
+
+include::sections/05-architecture.adoc[]
+
+include::sections/06-unit-system.adoc[]
+
+include::sections/07-prefixes.adoc[]
+
+include::sections/08-quantities.adoc[]
+
+include::sections/09-dimensions.adoc[]
+
+include::sections/10-units.adoc[]
+
+include::sections/11-normalization.adoc[]
+
+include::sections/12-common-models.adoc[]
+
+include::sections/a1-test-suite.adoc[]

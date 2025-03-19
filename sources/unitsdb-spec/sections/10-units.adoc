@@ -1,0 +1,667 @@
+== Unit
+
+=== Unit model
+
+==== General
+
+A unit is a reference quantity adopted by convention with which other quantities
+of the same kind can be compared to express their value.
+
+In UnitsDB, units are organized according to their system (SI, non-SI),
+dimensionality, and relationships to other units.
+
+==== Definition
+
+The Unit model is defined as follows.
+
+[source,lutaml]
+----
+class Unit {
+  attribute id, String {
+    definition {
+      Unique identifier for the unit.
+
+      NOTE: Currently this is in the pattern `NISTuX` where X is a number.
+    }
+  }
+  attribute short_name, String {
+    definition {
+      Short name for the unit. This is a unique identifier for the unit.
+    }
+  }
+  attribute root, Boolean {
+    definition {
+      Whether the unit can be used as a root unit to create derived units.
+    }
+  }
+  attribute prefixed, Boolean {
+    definition {
+      Whether the unit is prefixed itself.
+    }
+  }
+  attribute unit_name, String {
+    collection true
+    definition {
+      One or more names of the unit.
+    }
+  }
+  attribute unit_symbol, UnitSymbol {
+    collection true
+    definition {
+      One or more symbol representations in different formats.
+    }
+  }
+  attribute unit_system, UnitSystemReference {
+    definition {
+      Reference to the unit system to which the unit belongs.
+    }
+  }
+  attribute dimension_ref, DimensionReference {
+    definition {
+      Reference to the dimension of the unit.
+    }
+  }
+  attribute quantity_ref, QuantityReference {
+    collection true
+    definition {
+      Reference to the quantity measured by the unit.
+    }
+  }
+  attribute root_units, RootUnitReference {
+    collection true
+    definition {
+      For derived units, the component root units with exponents.
+    }
+  }
+  attribute si_derived_bases, SiBaseUnitReference {
+    collection true
+    definition {
+      For SI-derived units, the SI base units with exponents.
+    }
+  }
+}
+----
+
+=== YAML structure
+
+The unit data is stored in the `units.yaml` file with the following structure.
+
+[example]
+.Example of an SI unit
+====
+[source,yaml]
+----
+NISTu1:
+  dimension_url: "#NISTd1"
+  short: meter
+  root: true
+  unit_system:
+    type: SI_base
+    name: SI
+  unit_name:
+  - meter
+  unit_symbols:
+  - id: m
+    ascii: m
+    html: m
+    mathml: "<mi mathvariant='normal'>m</mi>"
+    latex: "\\ensuremath{\\mathrm{m}}"
+    unicode: m
+  root_units:
+  - unit: meter
+    power_numerator: 1
+  quantity_reference:
+  - name: length
+    url: "#NISTq1"
+  - name: diameter
+    url: "#NISTq100"
+  - name: length of path
+    url: "#NISTq101"
+  - name: cartesian coordinates
+    url: "#NISTq102"
+  - name: position vector
+    url: "#NISTq103"
+  - name: displacement
+    url: "#NISTq104"
+  - name: radius of curvature
+    url: "#NISTq105"
+  - name: wavelength
+    url: "#NISTq114"
+  - name: distance
+    url: "#NISTq48"
+  - name: breadth
+    url: "#NISTq95"
+  - name: height
+    url: "#NISTq96"
+  - name: thickness
+    url: "#NISTq97"
+  - name: radius
+    url: "#NISTq98"
+  - name: radial distance
+    url: "#NISTq99"
+----
+====
+
+[example]
+.Example of a non-SI unit
+====
+[source,yaml]
+----
+NISTu8:
+  dimension_url: "#NISTd1"
+  short: inch
+  root: true
+  unit_system:
+    type: non-SI_not_acceptable
+    name: non-SI
+  unit_name:
+  - inch
+  unit_symbols:
+  - id: in
+    ascii: in
+    html: in
+    mathml: "<mi mathvariant='normal'>in</mi>"
+    latex: "\\ensuremath{\\mathrm{in}}"
+    unicode: in
+  - id: "\"_in"
+    ascii: "\""
+    html: "&#8243;"
+    mathml: "<mi mathvariant='normal'>&#8243;</mi>"
+    latex: "\\ensuremath{\\mathrm{''}}"
+    unicode: "″"
+  - id: dprime_in
+    ascii: "\""
+    html: "&#8243;"
+    mathml: "<mi mathvariant='normal'>&#8243;</mi>"
+    latex: "\\ensuremath{\\mathrm{''}}"
+    unicode: "″"
+  root_units:
+  - unit: inch
+    power_numerator: 1
+  quantity_reference:
+  - name: length
+    url: "#NISTq1"
+  - name: distance
+    url: "#NISTq48"
+----
+====
+
+[example]
+.Example of an SI-derived unit
+====
+[source,yaml]
+----
+NISTu18:
+  dimension_url: "#NISTd20"
+  short: ohm
+  root: true
+  unit_system:
+    type: SI_derived_special
+    name: SI
+  unit_name:
+  - ohm
+  unit_symbols:
+  - id: Ohm
+    ascii: Ohm
+    html: "&#8486;"
+    mathml: "<mi mathvariant='normal'>&#8486;</mi>"
+    latex: "\\ensuremath{\\mathrm{\\Omega}}"
+    unicode: Ω
+  root_units:
+  - unit: ohm
+    power_numerator: 1
+  quantity_reference:
+  - name: electric resistance
+    url: "#NISTq28"
+  si_derived_bases:
+  - id: NISTu1
+    prefix:
+    power: 2
+  - id: NISTu27
+    prefix: p10_3
+    power: 1
+  - id: NISTu3
+    prefix:
+    power: 4
+  - id: NISTu4
+    prefix:
+    power: 2
+----
+====
+
+==== Attributes
+
+=== Unit symbols model
+
+==== General
+
+The unit symbols model describes the various representations of a unit in
+different formats, such as ASCII, HTML, MathML, LaTeX, and Unicode. Each
+representation is associated with a unique identifier.
+
+==== Definition
+
+[source,lutaml]
+----
+class UnitSymbol {
+  attribute id, String {
+    definition "Unique identifier for the symbol representation"
+  }
+  attribute ascii, String {
+    definition "ASCII text representation"
+  }
+  attribute html, String {
+    definition "HTML representation (may include HTML entities)"
+  }
+  attribute mathml, String {
+    definition "MathML representation in XML format."
+  }
+  attribute latex, String {
+    definition "LaTeX representation in LaTeX typeset format."
+  }
+  attribute unicode, String {
+    definition "Unicode representation in UTF-8 encoding."
+  }
+}
+----
+
+==== Attributes
+
+===== id
+
+The `id` field is a unique identifier for the symbol representation. This
+field is used to reference the symbol in various contexts, such as documentation
+and software applications.
+
+===== ascii
+
+The `ascii` field contains the ASCII text representation of the symbol. This
+field is used in plain text environments where special characters may not be
+available.
+
+===== html
+
+The `html` field contains the HTML representation of the symbol. This may
+include HTML entities for special characters, allowing for proper rendering in
+web browsers and other HTML-compatible environments.
+
+===== mathml
+
+The `mathml` field contains the MathML representation of the symbol. This
+field is used in mathematical contexts where precise formatting is required.
+MathML is an XML-based markup language for describing mathematical notation.
+
+===== latex
+
+The `latex` field contains the LaTeX representation of the symbol. This
+field is used in typesetting environments where LaTeX is applied.
+
+===== unicode
+
+The `unicode` field contains the Unicode representation of the symbol. This
+field is used in environments that support Unicode encoding, such as within
+UnicodeMath.
+
+
+==== YAML structure
+
+[example]
+.Example unit symbols from `NISTu8`
+====
+[source,yaml]
+----
+unit_symbols:
+- id: in
+  ascii: in
+  html: in
+  mathml: "<mi mathvariant='normal'>in</mi>"
+  latex: "\\ensuremath{\\mathrm{in}}"
+  unicode: in
+- id: "\"_in"
+  ascii: "\""
+  html: "&#8243;"
+  mathml: "<mi mathvariant='normal'>&#8243;</mi>"
+  latex: "\\ensuremath{\\mathrm{''}}"
+  unicode: "″"
+- id: dprime_in
+  ascii: "\""
+  html: "&#8243;"
+  mathml: "<mi mathvariant='normal'>&#8243;</mi>"
+  latex: "\\ensuremath{\\mathrm{''}}"
+  unicode: "″"
+----
+====
+
+
+=== Dimension reference model
+
+==== General
+
+The dimension reference model describes the relationship between the unit and a
+dimension. Each unit is associated with a dimension, which defines the physical
+quantity that the unit measures.
+
+==== Definition
+
+[source,lutaml]
+----
+class DimensionReference {
+  attribute dimension_url, String {
+    definition "URL associated with the dimension"
+  }
+}
+----
+
+==== Attributes
+
+===== dimension_url
+
+The `dimension_url` field is a reference to the dimension that the unit is
+associated with. This field links the unit to its corresponding dimension,
+allowing for easy identification and categorization.
+
+==== YAML structure
+
+[example]
+====
+[source,yaml]
+----
+dimension_url: "#NISTd1"
+----
+====
+
+
+=== Unit system reference model
+
+==== General
+
+The unit system reference model describes the relationship between the unit and
+a unit system. Each unit is associated with a unit system, which defines the
+context in which the unit is used.
+
+==== Definition
+
+[source,lutaml]
+----
+class UnitSystemReference {
+  attribute type, String {
+    definition "Type of the unit system"
+  }
+  attribute name, String {
+    definition "Name of the unit system"
+  }
+}
+----
+
+==== Attributes
+
+===== type
+
+The `type` field is a string that represents the type of the unit system. This
+field indicates the classification of the unit system, such as SI base, SI
+derived, or non-SI.
+
+===== name
+
+The `name` field is a string that represents the name of the unit system. This
+field provides a human-readable label for the unit system, allowing for easy
+identification and categorization.
+
+==== YAML structure
+
+[example]
+====
+[source,yaml]
+----
+unit_system:
+  type: SI_base
+  name: SI
+----
+====
+
+[example]
+====
+[source,yaml]
+----
+unit_system:
+  type: non-SI_not_acceptable
+  name: non-SI
+----
+====
+
+
+=== SI root unit derivation reference model
+
+==== General
+
+The SI root unit derivation reference model describes the relationship between
+the unit and the SI root units. Each unit may be associated with one or more
+SI root units, which define the base units from which the unit is derived.
+
+This only applies for the units that are `SI_derived_special`.
+
+==== Definition
+
+[source,lutaml]
+----
+class SiBaseUnitReference {
+  attribute id, String {
+    definition {
+      Unique identifier for the SI base unit. e.g. `NISTu1`.
+    }
+  }
+  attribute prefix, String {
+    definition {
+      Prefix for the SI base unit, if applicable. Defaults to empty string.
+    }
+  }
+  attribute power, Integer {
+    definition {
+      Power of the SI base unit in the derived unit. Defaults to 1.
+    }
+  }
+}
+----
+
+==== Attributes
+
+===== id
+
+The `id` field is a string that represents a unique identifier for the SI base
+unit.
+
+===== prefix
+
+The `prefix` field is a string that represents the prefix for the SI base unit,
+if applicable.
+
+===== power
+
+The `power` field is an integer that indicates the power of the SI base unit in
+the derived unit. Defaults to 1.
+
+==== YAML structure
+
+[example]
+.Example SI root unit derivation reference from `NISTu14` "watt", which is an SI-derived unit
+====
+[source,yaml]
+----
+si_derived_bases:
+  - id: NISTu1
+    prefix:
+    power: 2
+  - id: NISTu27
+    prefix: p10_3
+    power: 1
+  - id: NISTu3
+    prefix:
+    power: -3
+----
+====
+
+[example]
+.Example SI root unit derivation reference from `NISTu18` "ohm", which is an SI-derived unit
+====
+[source,lutaml]
+----
+si_derived_bases:
+- id: NISTu1
+  prefix:
+  power: 2
+- id: NISTu27
+  prefix: p10_3
+  power: 1
+- id: NISTu3
+  prefix:
+  power: 4
+- id: NISTu4
+  prefix:
+  power: 2
+----
+====
+
+=== Root unit reference model
+
+==== General
+
+The root unit reference model describes the relationship between the unit and
+the root units. Each unit may be associated with one or more root units,
+which define the base units from which the unit is derived.
+
+If the unit is a root unit, where the `root` field is set to true, then the
+root unit reference model points to the unit itself.
+
+==== Definition
+
+[source,lutaml]
+----
+class RootUnitReference {
+  attribute unit, String {
+    definition "Unit `short` name of the root unit which is a Unit object."
+  }
+  attribute power_numerator, Integer {
+    definition "Power of the numerator."
+  }
+  attribute power_denominator, Integer {
+    definition "Power of the denominator."
+  }
+  attribute prefix, String {
+    definition "Prefix for the unit, if applicable."
+  }
+}
+----
+
+==== Attributes
+
+===== unit
+
+The `unit` field is a string that represents the short name of the root unit.
+
+===== power_numerator
+
+The `power_numerator` field is an integer that represents the power of the
+numerator. This field indicates the exponent of the root unit in the
+numerator of the derived unit.
+
+===== prefix
+
+The `prefix` field is a string that represents the prefix for the unit, if
+applicable. This field indicates any prefix that modifies the root unit, such
+as "k" for kilogram or "m" for milli.
+
+
+==== YAML structure
+
+[example]
+====
+.Example root unit reference from `NISTu36` "minute", which is a root unit
+[source,yaml]
+----
+root_units:
+  enumerated_root_units:
+  - unit: minute
+    power_numerator: 1
+----
+====
+
+[example]
+====
+.Example root unit reference from `NISTu122` "micron", which is not a root unit
+[source,yaml]
+----
+root_units:
+  enumerated_root_units:
+  - unit: meter
+    power_numerator: 1
+    prefix: u
+----
+
+This indicates that the micron is derived from the meter with a prefix of "u"
+(micro). Hence the micron, a unit of length, is represented as the unit "meter"
+with a prefix "u" (effectively, "micrometer") in the SI system.
+====
+
+[example]
+====
+.Example root unit reference from `NISTu125` "kilogram-force second squared per meter", which is not a root unit
+[source,yaml]
+----
+root_units:
+  enumerated_root_units:
+  - unit: gram_force
+    power_numerator: 1
+    prefix: k
+  - unit: second
+    power_numerator: 2
+  - unit: meter
+    power_numerator: -1
+----
+
+This indicates that the kilogram-force second squared per meter is derived from
+these root units:
+
+* kilogram-force (with a prefix of "k", effectively "gram_force" with a prefix "k")
+* second (with a power of 2)
+* meter (with a power of -1)
+
+The unicode representation would therefore be `kgf·s²m⁻¹`.
+====
+
+
+=== Quantity reference model
+
+==== General
+
+The quantity reference model describes the relationship between the unit and
+the quantity. Each unit may be associated with one or more quantities, which
+define the physical quantities that the unit measures.
+
+==== Definition
+
+[source,lutaml]
+----
+class QuantityReference {
+  attribute name, String {
+    definition "Name of the quantity"
+  }
+  attribute url, String {
+    definition "URL reference to the quantity"
+  }
+}
+----
+
+==== YAML structure
+
+[example]
+.Example quantity reference from `NISTu15` "coulomb", which is a root unit
+====
+[source,yaml]
+----
+quantity_reference:
+- name: electric charge
+  url: "#NISTq22"
+- name: amount of electricity
+  url: "#NISTq23"
+----
+====

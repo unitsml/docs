@@ -1,0 +1,308 @@
+== Data file normalization rules
+
+=== General
+
+Data file normalization in UnitsDB refers to the process of organizing and structuring the YAML files that make up the database to ensure consistency, non-redundancy, and integrity. These rules help maintain the quality and reliability of the data while facilitating its use in various applications.
+
+=== Normalization principles model
+
+==== General
+
+The normalization principles model defines the fundamental rules that govern how data is organized and referenced throughout the UnitsDB database.
+
+==== Key normalization principles
+
+[source,lutaml]
+----
+class NormalizationPrinciple {
+  attribute principle_type, String {
+    definition "Type of normalization principle"
+  }
+  attribute description, String {
+    definition "Description of the principle"
+  }
+  attribute examples, Array {
+    definition "Examples demonstrating the principle"
+  }
+}
+----
+
+===== Unique identifiers
+
+All model instances within UnitsDB (dimensions, quantities, units, prefixes, etc.) must have unique identifiers. These identifiers follow a consistent pattern:
+
+* Dimensions: `NISTdX` (e.g., `NISTd1`)
+* Quantities: `NISTqX` (e.g., `NISTq1`)
+* Units: `NISTuX` (e.g., `NISTu1`)
+* Prefixes: `NISTpX_Y` (e.g., `NISTp10_3`)
+
+Where `X` and `Y` are numeric values.
+
+===== References
+
+References between entities must use consistent paths:
+
+* References to dimensions use the format `#NISTdX`
+* References to quantities use the format `#NISTqX`
+* References to units use the format `#NISTuX`
+
+These references create a web of relationships that maintain the integrity of the database.
+
+===== Hierarchical organization
+
+The data is organized in a hierarchical manner that reflects the logical relationship between entities:
+
+* Dimensions provide the mathematical foundation for quantities
+* Quantities are physical properties that can be measured
+* Units are references for measuring quantities
+* Prefixes modify units to create new scales
+
+=== File normalization model
+
+==== General
+
+The file normalization model defines specific rules for each YAML file in the UnitsDB database to ensure internal consistency and proper structure.
+
+[source,lutaml]
+----
+class FileNormalization {
+  attribute file_name, String {
+    definition "Name of the YAML file"
+  }
+  attribute entity_type, String {
+    definition "Type of entity contained in the file"
+  }
+  attribute rules, Array {
+    definition "Normalization rules specific to this file"
+  }
+}
+----
+
+==== File-specific normalization rules
+
+===== dimensions.yaml
+
+* Each dimension entry must have a unique identifier.
+* Dimensionless entries must be explicitly marked with `dimensionless: true`.
+* Base quantity components must specify their `powerNumerator` and `symbol`.
+* When `dim_symbols` are provided, they must include representations in all standard formats (ascii, html, mathml, latex, unicode).
+
+===== quantities.yaml
+
+* Each quantity entry must have a unique identifier.
+* Each quantity must reference a valid dimension via `dimension_url`.
+* Quantity types must be either `base` or `derived`.
+* Quantity names must be provided as an array, with the primary name first.
+* Unit references must include both a name and a URL to the unit.
+
+===== units.yaml
+
+* Each unit entry must have a unique identifier.
+* Each unit must reference a valid dimension via `dimension_url`.
+* The `root` field must be explicitly set to either `true` or `false`.
+* If `prefixed` is true, there must be a prefix specified in the `root_units` section.
+* Unit names must be provided as an array, with the primary name first.
+* Unit symbols must include representations in all standard formats.
+* The `unit_system` field must specify both a valid `type` and `name`.
+* For derived units, the `root_units` section must properly enumerate all component units with their powers.
+* Quantity references must include both a name and a URL to the quantity.
+
+===== prefixes.yaml
+
+* Each prefix entry must have a unique identifier.
+* The `base` field must be either 10 (for SI prefixes) or 2 (for binary prefixes).
+* The `power` field must be an integer.
+* Prefix symbols must include representations in all standard formats.
+
+===== unit_systems.yaml
+
+* Each unit system entry must have a unique identifier.
+* The `name` field must be either "SI" or "non-SI".
+* The `acceptable` field must be explicitly set to either `true` or `false`.
+
+=== Cross-file normalization model
+
+==== General
+
+The cross-file normalization model defines rules that govern relationships between entities across different files in the UnitsDB database.
+
+[source,lutaml]
+----
+class CrossFileNormalization {
+  attribute relationship_type, String {
+    definition "Type of relationship between entities"
+  }
+  attribute source_entity, String {
+    definition "Source entity type"
+  }
+  attribute target_entity, String {
+    definition "Target entity type"
+  }
+  attribute rules, Array {
+    definition "Normalization rules for this relationship"
+  }
+}
+----
+
+==== Cross-file normalization rules
+
+===== Dimension-quantity relationships
+
+* Each quantity must reference a valid dimension.
+* Multiple quantities can reference the same dimension.
+
+===== Quantity-unit relationships
+
+* Each unit must be associated with at least one quantity.
+* Multiple units can measure the same quantity.
+* The dimension of a unit must match the dimension of the quantities it measures.
+
+===== Unit-prefix relationships
+
+* Prefixed units must reference valid prefixes.
+* The same prefix can be applied to multiple units.
+* For the base unit of mass (kilogram), prefixes are applied to "gram" rather than "kilogram".
+
+=== Data integrity model
+
+==== General
+
+The data integrity model defines checks and validations that should be performed to ensure the overall consistency and correctness of the UnitsDB database.
+
+[source,lutaml]
+----
+class DataIntegrityCheck {
+  attribute check_type, String {
+    definition "Type of integrity check"
+  }
+  attribute description, String {
+    definition "Description of the check"
+  }
+  attribute severity, String {
+    definition "Severity level if check fails (error, warning, info)"
+  }
+}
+----
+
+==== Data integrity checks
+
+To ensure the integrity of the UnitsDB data, the following checks should be performed:
+
+* All reference links must point to valid entities.
+* Circular references must be avoided.
+* No duplicate identifiers should exist within each entity type.
+* Derived dimensions must have consistent exponents in their base quantity components.
+* Units must have dimensions that match their referenced quantities.
+* All required fields must be present for each entity type.
+
+=== Change management model
+
+==== General
+
+The change management model defines rules and procedures for updating the UnitsDB data files while maintaining backward compatibility and data integrity.
+
+[source,lutaml]
+----
+class ChangeManagement {
+  attribute change_type, String {
+    definition "Type of change"
+  }
+  attribute rules, Array {
+    definition "Rules governing this type of change"
+  }
+  attribute impact, String {
+    definition "Potential impact of this type of change"
+  }
+}
+----
+
+==== Versioning and change management
+
+When updating the UnitsDB data files, the following rules should be applied:
+
+* Existing identifier values should not be changed to avoid breaking existing references.
+* New entities should be assigned new, unique identifiers.
+* When an entity needs to be deprecated, it should be marked as such rather than removed.
+* Major structural changes to the data format should be accompanied by a version increment and appropriate documentation.
+
+=== Normalized data examples
+
+==== General
+
+These examples demonstrate how properly normalized data should appear across the different UnitsDB files.
+
+==== Example of normalized data
+
+Here is an example of how normalized data should appear across the different files:
+
+.dimensions.yaml (excerpt)
+[source,yaml]
+----
+NISTd1:
+  length:
+    powerNumerator: 1
+    symbol: L
+    dim_symbols:
+    - id: dim_L
+      ascii: L
+      html: "&#x1D5AB;"
+      mathml: "<mi mathvariant='sans-serif'>L</mi>"
+      latex: "\\ensuremath{\\mathsf{L}}"
+      unicode: "\U0001D5AB"
+----
+
+.quantities.yaml (excerpt)
+[source,yaml]
+----
+NISTq1:
+  dimension_url: "#NISTd1"
+  quantity_type: base
+  quantity_name:
+  - length
+  unit_reference:
+  - name: meter
+    url: "#NISTu1"
+----
+
+.units.yaml (excerpt)
+[source,yaml]
+----
+NISTu1:
+  dimension_url: "#NISTd1"
+  short: meter
+  root: true
+  unit_system:
+    type: SI_base
+    name: SI
+  unit_name:
+  - meter
+  unit_symbols:
+  - id: m
+    ascii: m
+    html: m
+    mathml: "<mi mathvariant='normal'>m</mi>"
+    latex: "\\ensuremath{\\mathrm{m}}"
+    unicode: m
+  root_units:
+  - unit: meter
+    power_numerator: 1
+  quantity_reference:
+  - name: length
+    url: "#NISTq1"
+----
+
+.prefixes.yaml (excerpt)
+[source,yaml]
+----
+NISTp10_3:
+  name: kilo
+  symbol:
+    ascii: k
+    html: k
+    latex: k
+    unicode: k
+  base: 10
+  power: 3
+----
+
+This example demonstrates the proper normalization of data across the files, with consistent identifiers, references, and structured data.

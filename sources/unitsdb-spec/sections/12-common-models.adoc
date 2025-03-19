@@ -1,0 +1,111 @@
+== Common models
+
+=== General
+
+This section defines models that are shared across multiple components of the UnitsDB specification. These common models provide consistent structures and behaviors that are reused throughout the database.
+
+=== Symbol representation model
+
+==== General
+
+The Symbol representation model is used across various entities in UnitsDB to
+provide consistent representation of symbols in different formats.
+
+Symbol representations are used in:
+
+* Unit symbols
+* Dimension symbols
+* Prefix symbols
+
+Each representation includes multiple formats to support different output contexts:
+
+* Plain text (ASCII)
+* Web display (HTML)
+* Mathematical typesetting (MathML, LaTeX)
+* Unicode-enabled environments
+
+==== Definition
+
+[source,lutaml]
+----
+class SymbolRepresentation {
+  attribute id, String {
+    definition "Unique identifier for the symbol representation"
+  }
+  attribute ascii, String {
+    definition "ASCII text representation"
+  }
+  attribute html, String {
+    definition "HTML representation (may include HTML entities)"
+  }
+  attribute mathml, String {
+    definition "MathML representation"
+  }
+  attribute latex, String {
+    definition "LaTeX representation"
+  }
+  attribute unicode, String {
+    definition "Unicode representation"
+  }
+}
+----
+
+==== YAML structure
+
+[example]
+====
+Symbol representation for the meter unit:
+
+[source,yaml]
+----
+- id: m
+  ascii: m
+  html: m
+  mathml: "<mi mathvariant='normal'>m</mi>"
+  latex: "\\ensuremath{\\mathrm{m}}"
+  unicode: m
+----
+====
+
+
+=== Cross-reference model
+
+==== General
+
+The Cross-reference model establishes a consistent mechanism for linking
+entities across different files in UnitsDB.
+
+
+==== Definition
+
+[source,lutaml]
+----
+class CrossReference {
+  attribute url, String {
+    definition "URL reference to another entity."
+  }
+  attribute name, String[0..1] {
+    definition "Human-readable name of the referenced entity (optional)"
+  }
+}
+----
+
+==== YAML structure
+
+Cross-references follow a consistent pattern:
+
+* References to dimensions use the format `#NISTdX` (e.g., `#NISTd1` for length)
+* References to quantities use the format `#NISTqX` (e.g., `#NISTq1` for length)
+* References to units use the format `#NISTuX` (e.g., `#NISTu1` for meter)
+* References to prefixes use the format `#NISTpX_Y` (e.g., `#NISTp10_3` for kilo)
+
+[example]
+====
+Cross-reference to the length dimension from a quantity:
+
+[source,yaml]
+----
+dimension_url: "#NISTd1"
+----
+====
+

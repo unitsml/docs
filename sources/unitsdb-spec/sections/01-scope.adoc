@@ -1,0 +1,29 @@
+== Scope
+
+This document specifies the data models, structures, and normalization rules for
+UnitsDB, the authoritative database of measurement units, quantities,
+dimensions, and prefixes for the UnitsML framework.
+
+The specification defines:
+
+* The overall architecture of UnitsDB
+* The data models for unit systems, prefixes, quantities, dimensions, and units
+* The format and structure of YAML files that comprise the database
+* The normalization rules for data integrity and consistency
+* The relationships between different entities in the database
+* A test suite for validation of UnitsDB implementations
+
+This document:
+
+* Does not specify the software implementation details for using UnitsDB in applications
+* Does not define algorithms for unit conversions or dimensional analysis (though the data provided supports these operations)
+* Does not provide a comprehensive list of all units, quantities, dimensions, and prefixes (these are provided in the actual database)
+
+This specification is intended for:
+
+* Developers implementing UnitsML systems
+* Database administrators managing UnitsDB installations
+* Contributors extending or modifying the UnitsDB database
+* Standards developers referencing UnitsDB
+
+The specification enables interoperable representation of measurement units and related concepts across different applications, domains, and systems.

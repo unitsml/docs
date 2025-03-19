@@ -1,0 +1,4 @@
+[bibliography]
+== Normative references
+
+* SI Brochure: The International System of Units (SI), 9th edition, 2019, BIPM
