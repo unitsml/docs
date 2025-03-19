@@ -1,0 +1,211 @@
+[appendix,obligation=informative]
+[[ambiguous-unit-symbols]]
+== Ambiguous unit symbols
+
+The symbols used for units can be highly ambiguous. In order to guarantee accurate parsing,
+the symbols used to data enter units are unambiguous in UnitsDB's Units database.
+
+[example]
+====
+`B` is ambiguous between _bel_ (as in decibel) and _byte_.
+
+These units are kept unambiguous by using `bel_B` and `byte_B` to refer to them,
+although they will still both be rendered as `B`.
+====
+
+The following table lists ambiguous symbols and how they are disambiguated in the symbol IDs.
+
+.Ambiguous symbols supported in UnitsDB
+[cols="^1,5*<3", options="header"]
+|===
+| Symbol | Unit + ID | Unit + ID | Unit + ID | Unit + ID | Unit + ID
+
+| &#8242;
+| minute (minute of arc): `'`
+| foot: `'_ft`
+| minute: `'_min`
+| minute of arc: `prime`
+| foot: `prime_ft`
+
+| &#8243;
+| second (second of arc): `"`
+| second: `"_s`
+| inch: `"_in`
+| second of arc: `dprime`
+| second: `dprime_s`
+
+| &#8243;Hg
+| conventional inch of mercury: `"Hg`
+| conventional inch of mercury: `dprime_Hg`
+| inch of mercury (32 degF): `"Hg_32degF`
+| inch of mercury (60 degF): `"Hg_60degF`
+| inch of mercury (32 degF): `dprime_Hg_32degF`
+
+| hp
+| horsepower: `hp`
+| horsepower (UK): `hp_UK`
+| horsepower, water: `hp_water`
+| horsepower, metric: `hp_metric`
+| horsepower, boiler: `hp_boiler`
+
+| Btu
+| British thermal unit_IT: `Btu`
+| British thermal unit (mean): `Btu_mean`
+| British thermal unit (39 degF): `Btu_39degF`
+| British thermal unit (59 degF): `Btu_59degF`
+| British thermal unit (60 degF): `Btu_60degF`
+
+| a
+| are: `a`
+| year (365 days): `a_year`
+| year, tropical: `a_tropical_year`
+| year, sidereal: `a_sidereal_year`
+|
+
+| d
+| day: `d`
+| darcy: `darcy`
+| day, sidereal: `d_sidereal`
+|
+|
+
+| inHg
+| conventional inch of mercury: `inHg`
+| inch of mercury (32 degF): `inHg_32degF`
+| inch of mercury (60 degF): `inHg_60degF`
+|
+|
+
+| inH~2~O
+| conventional inch of water: `inH_2O`
+| inch of water (39.2 degF): `inH_2O_39degF`
+| inch of water (60 degF): `inH_2O_60degF`
+|
+|
+
+| min
+| minute: `min`
+| minim: `minim`
+| minute, sidereal: `min_sidereal`
+|
+|
+
+| pc
+| parsec: `pc`
+| pica (printer's): `pica_printer`
+| pica (computer): `pica_computer`
+|
+|
+
+| t
+| metric ton: `t`
+| long ton: `ton_long`
+| short ton: `ton_short`
+|
+|
+
+| B
+| bel: `bel_B`
+| byte: `byte_B`
+|
+|
+|
+
+| cmHg
+| conventional centimeter of mercury: `cmHg`
+| centimeter of mercury (0 degC): `cmHg_0degC`
+|
+|
+|
+
+| cmH~2~O
+| conventional centimeter of water: `cmH_2O`
+| centimeter of water (4 degC): `cmH_2O_4degC`
+|
+|
+|
+
+| cup
+| cup (US): `cup`
+| cup (FDA): `cup_label`
+|
+|
+|
+
+| D
+| debye: `D`
+| darcy: `Darcy`
+|
+|
+|
+
+| ft
+| foot: `ft`
+| foot (based on US survey foot): `ft_US_survey`
+|
+|
+|
+
+| ftH~2~O
+| conventional foot of water: `ftH_2O`
+| foot of water (39.2 degF): `ftH_2O_39degF`
+|
+|
+|
+
+| gi
+| gill (US): `gi`
+| gill [Canadian and UK (Imperial)]: `gi_imperial`
+|
+|
+|
+
+| h
+| hour: `h`
+| hour, sidereal: `h_sidereal`
+|
+|
+|
+
+| &#8242;Hg
+| conventional foot of mercury: `'Hg`
+| conventional foot of mercury: `prime_Hg`
+|
+|
+|
+
+| __ℏ__
+| natural unit of action: `h-bar`
+| atomic unit of action: `h-bar_atomic`
+|
+|
+|
+
+| __m__~e~
+| natural unit of mass: `m_e`
+| atomic unit of mass: `m_e_atomic`
+|
+|
+|
+
+| in
+| inch: `in`
+| inch (based on US survey foot): `in_US_survey`
+|
+|
+|
+
+| K
+| kelvin: `K`
+| kayser: `kayser`
+|
+|
+|
+
+| L
+| liter: `L`
+| lambert: `Lambert`
+|
+|
+|
+|===

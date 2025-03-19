@@ -1,0 +1,173 @@
+== Using AsciiUnits in AsciiMath
+
+=== General
+
+AsciiUnits can be embedded within AsciiMath using the `unitsml()` expression.
+This provides a way to incorporate UnitsML markup within mathematical content.
+
+The Plurimath library converts AsciiMath containing AsciiUnits into MathML that
+incorporates UnitsML expressions complying with
+https://www.w3.org/TR/mathml-units/[], with unique identifiers for each distinct
+unit, prefix, and dimension.
+
+Units expressions are identified in MathML as `<mtext>unitsml(...)</mtext>`,
+which in turn can be identified in AsciiMath as `"unitsml(...)"`.
+
+=== Notation
+
+The `unitsml(...)` expression consists of a unit string following the AsciiUnits
+syntax.
+
+Syntax:
+
+[source]
+----
+unitsml(unit-string{, unit-metadata})
+----
+
+Where,
+
+`unit-string`:: is the unit string, which can be a single unit or a combination
+of units, prefixes, and dimensions.
+
+`unit-metadata`:: is an optional comma-separated list of unit metadata
+parameters, described in <<unit-metadata>>.
+
+
+[example]
+====
+The AsciiMath with AsciiUnits expression for "millimeters per second squared"
+is represented as:
+
+[source]
+----
+"unitsml(mm*s^-2)"
+----
+====
+
+The `"..."` is an AsciiMath expression for string, which ensures backwards
+compatibility with AsciiMath parsers that are not UnitsML aware.
+
+The `unitsml()` expression can take additional parameters as defined in
+<<unit-metadata>>.
+
+
+=== Representation in UnitsML in MathML
+
+AsciiUnits in AsciiMath can be converted into a combination of UnitsML in MathML.
+
+MathML unit expressions are expressed as `<mi>` (in accordance with
+<<w3c-mathml-units>>) that cross-references to UnitsML definitions embedded in
+the XML that contains MathML.
+
+The following MathML Units convention are adopted:
+
+* inserting a spacing invisible times operator
+(`<mo rspace='thickmathspace'>&#x2062;</mo>`) between any numbers (`<mn>`) and unit expressions
+in MathML;
+
+* representing units in MathML as non-italic variables (`<mi mathvariant='normal'>`).
+
+No whitespace is inserted between a number and a unit expression, when that unit
+expression wholly consists of punctuation.
+
+[example]
+====
+`1 m` renders as _1 m_.
+
+`1 deg_C` renders as _1 °C_.
+
+However,
+
+`9 arc_degree 7 arc_minute 22 arc_second` renders as _9° 7′ 22″_.
+====
+
+
+[example]
+====
+The AsciiUnits in AsciiMath expression:
+
+[source]
+----
+9 "unitsml(C^3*A)"
+----
+
+is converted into:
+
+[source,xml]
+----
+<math xmlns='http://www.w3.org/1998/Math/MathML'>
+  <mrow>
+    <mn>9</mn>
+    <mo rspace='thickmathspace'>&#x2062;</mo>
+    <mrow xref='U_C3.A'>
+      <msup>
+        <mrow>
+          <mi mathvariant='normal'>C</mi>
+        </mrow>
+        <mrow>
+          <mn>3</mn>
+        </mrow>
+      </msup>
+      <mo>&#xB7;</mo>
+      <mi mathvariant='normal'>A</mi>
+    </mrow>
+
+    <Unit xmlns='http://unitsml.nist.gov/2005' xml:id='U_C3.A' dimensionURL='#D_T3I4'>
+      <UnitSystem name='SI' type='SI_derived' xml:lang='en-US'/>
+      <UnitName xml:lang='en'>C^3*A</UnitName>
+      <UnitSymbol type='HTML'>C<sup>3</sup> &#xB7; A</UnitSymbol>
+      <UnitSymbol type='MathML'>
+        <math xmlns='http://www.w3.org/1998/Math/MathML'>
+          <mrow>
+            <msup>
+              <mrow>
+                <mi mathvariant='normal'>C</mi>
+              </mrow>
+              <mrow>
+                <mn>3</mn>
+              </mrow>
+            </msup>
+            <mo>&#xB7;</mo>
+            <mi mathvariant='normal'>A</mi>
+          </mrow>
+        </math>
+      </UnitSymbol>
+      <RootUnits>
+        <EnumeratedRootUnit unit='coulomb' powerNumerator='3'/>
+        <EnumeratedRootUnit unit='ampere'/>
+      </RootUnits>
+    </Unit>
+    <Dimension xmlns='http://unitsml.nist.gov/2005' xml:id='D_T3I4'>
+      <Time symbol='T' powerNumerator='3'/>
+      <ElectricCurrent symbol='I' powerNumerator='4'/>
+    </Dimension>
+
+  </mrow>
+</math>
+----
+====
+
+
+=== Representing alternative unit symbols
+
+As described in <<symbol-ambiguity-resolution>>, a unit can be associated with
+alternative unit symbols, and can be referenced by any of those symbols.
+
+When using AsciiUnits in AsciiMath, the unit symbol referenced in the `unitsml(...)`
+expression supports the use of alternative unit symbols.
+
+It is crucial to note that if an alternative unit symbol used in the
+`unitsml(...)` expression, the unit symbol in the MathML representation will
+still be the canonical unit symbol unless explicitly specified otherwise using
+the syntax at <<metadata-symbol>>.
+
+[example]
+====
+An expression like `1 unitsml(mL)` will be recognised as referring to the
+"microlitre" unit.
+
+While the expression will be given under its canonical rendering of `ml` in
+UnitsML markup, the MathML rendering referencing that UnitsML expression will
+keep the notation `mL`.
+====
