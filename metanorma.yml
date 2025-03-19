@@ -3,9 +3,9 @@ metanorma:
   source:
     files:
       - sources/asciiunits/document.adoc
-      - sources/unitsml-guide/document.adoc
-      - sources/unitsml-incorporation/document.adoc
-      - sources/unitsml-ubl-ndr-subset/document.adoc
+      # - sources/unitsml-guide/document.adoc
+      # - sources/unitsml-incorporation/document.adoc
+      # - sources/unitsml-ubl-ndr-subset/document.adoc
 
   collection:
     organization: "CalConnect TC UNITS"
