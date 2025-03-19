@@ -1,5 +1,6 @@
 == Architecture
 
+
 === General
 
 The UnitsDB architecture follows a modular design that organizes
@@ -13,25 +14,26 @@ models.
 
 === File organization
 
-UnitsDB is organized into five primary YAML files, each responsible for a different component of the measurement system:
+UnitsDB is organized into five primary YAML files, each responsible for a
+different component of the measurement system.
 
-
-*`dimensions.yaml`::
+`dimensions.yaml`::
 Contains definitions of physical dimensions (length, mass, time, etc.)
 
-*`quantities.yaml`::
+`quantities.yaml`::
 Contains definitions of measurable quantities (length, velocity, force, etc.)
 
-*`units.yaml`::
+`units.yaml`::
 Contains definitions of measurement units (meter, second, newton, etc.)
 
-*`prefixes.yaml`::
+`prefixes.yaml`::
 Contains definitions of unit prefixes (kilo, milli, mega, etc.)
 
-*`unit_systems.yaml`::
+`unit_systems.yaml`::
 Contains definitions of unit systems (SI, non-SI) and their categories
 
 Each file contains entries that follow a consistent model structure as defined using the lutaml-model language.
+
 
 === Entity relationships
 
@@ -56,12 +58,16 @@ The UnitsDB architecture establishes explicit relationships between different en
   +----------------------------------------------------------------+
 ----
 
-The key relationships are:
+The key relationships are described below.
 
 * Dimension ↔ Quantity: Each quantity has exactly one dimension, but multiple quantities can share the same dimension
+
 * Quantity ↔ Unit: Each quantity can be measured by multiple units, and each unit can measure multiple quantities (many-to-many relationship)
+
 * Unit ↔ Dimension: Each unit has exactly one dimension, which must match the dimension of the quantities it measures
+
 * Prefix ↔ Unit: Prefixes can be applied to units to create new prefixed units
+
 * UnitSystem ↔ Unit: Each unit belongs to a specific unit system
 
 These relationships are implemented through cross-references between the different YAML files.
@@ -70,42 +76,40 @@ These relationships are implemented through cross-references between the differe
 
 UnitsDB uses a consistent cross-reference mechanism to link entities across different files:
 
-* References to dimensions use the format `#NISTdX` (e.g., `#NISTd1` for length)
-* References to quantities use the format `#NISTqX` (e.g., `#NISTq1` for length)
-* References to units use the format `#NISTuX` (e.g., `#NISTu1` for meter)
-* References to prefixes use the format `#NISTpX_Y` (e.g., `#NISTp10_3` for kilo)
+* References to dimensions use the format `#NISTdX` (e.g., `#NISTd1` for length).
+* References to quantities use the format `#NISTqX` (e.g., `#NISTq1` for length).
+* References to units use the format `#NISTuX` (e.g., `#NISTu1` for meter).
+* References to prefixes use the format `#NISTpX_Y` (e.g., `#NISTp10_3` for kilo).
 
-These cross-references create a web of relationships that maintain the integrity and coherence of the measurement system.
+These cross-references create a web of relationships that maintain the integrity
+and coherence of the measurement system.
 
-=== Lutaml-model language
+=== Information models
 
-UnitsDB uses the lutaml-model language to define the structure of each data model. The lutaml-model language provides a human-readable way to define class-like structures with attributes and relationships.
+UnitsDB defines five primary classes.
 
-The general pattern for a lutaml-model class definition is:
+`Dimension`::
+Represents the mathematical concept of a physical dimension
 
-[source,lutaml]
-----
-class ClassName {
-  attribute attributeName, AttributeType {
-    definition "Description of the attribute"
-  }
-  // Additional attributes...
-}
-----
+`Quantity`::
+Represents a measurable property with a specific dimension
 
-UnitsDB defines five primary classes using lutaml-model:
+`Unit`::
+Represents a reference for measuring quantities
 
-* `Dimension`: Represents the mathematical concept of a physical dimension
-* `Quantity`: Represents a measurable property with a specific dimension
-* `Unit`: Represents a reference for measuring quantities
-* `Prefix`: Represents a multiplier for units
-* `UnitSystem`: Represents a system of units (e.g., SI, non-SI)
+`Prefix`::
+Represents a multiplier for units
 
-Each class definition specifies the attributes that should be present in the corresponding YAML files.
+`UnitSystem`::
+Represents a system of units (e.g., SI, non-SI)
+
+Each class definition specifies the attributes that should be present in the
+corresponding YAML files.
 
 === Inheritance hierarchies
 
-UnitsDB does not use formal inheritance hierarchies, but it does establish conceptual hierarchies through relationships:
+UnitsDB does not use formal inheritance hierarchies, but it does establish
+conceptual hierarchies through relationships:
 
 * Base dimensions vs. derived dimensions: Derived dimensions are composed of combinations of base dimensions
 * Base quantities vs. derived quantities: Derived quantities reference dimensions that are combinations of base dimensions
@@ -127,7 +131,10 @@ These extension points allow UnitsDB to evolve while maintaining backward compat
 
 === Model mapping to YAML
 
-The lutaml-model class definitions are mapped to YAML structures in the database files. For example, the `Unit` class defined in lutaml-model:
+The lutaml-model class definitions are mapped to YAML structures in the database
+files.
+
+For example, the `Unit` class defined in lutaml-model:
 
 [source,lutaml]
 ----

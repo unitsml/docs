@@ -2,32 +2,14 @@
 
 === General
 
-Data file normalization in UnitsDB refers to the process of organizing and structuring the YAML files that make up the database to ensure consistency, non-redundancy, and integrity. These rules help maintain the quality and reliability of the data while facilitating its use in various applications.
+Data file normalization in UnitsDB refers to the process of organizing and
+structuring the YAML files that make up the database to ensure consistency,
+non-redundancy, and integrity. These rules help maintain the quality and
+reliability of the data while facilitating its use in various applications.
 
 === Normalization principles model
 
-==== General
-
-The normalization principles model defines the fundamental rules that govern how data is organized and referenced throughout the UnitsDB database.
-
-==== Key normalization principles
-
-[source,lutaml]
-----
-class NormalizationPrinciple {
-  attribute principle_type, String {
-    definition "Type of normalization principle"
-  }
-  attribute description, String {
-    definition "Description of the principle"
-  }
-  attribute examples, Array {
-    definition "Examples demonstrating the principle"
-  }
-}
-----
-
-===== Unique identifiers
+==== Unique identifiers
 
 All model instances within UnitsDB (dimensions, quantities, units, prefixes, etc.) must have unique identifiers. These identifiers follow a consistent pattern:
 
@@ -38,7 +20,7 @@ All model instances within UnitsDB (dimensions, quantities, units, prefixes, etc
 
 Where `X` and `Y` are numeric values.
 
-===== References
+==== References
 
 References between entities must use consistent paths:
 
@@ -48,7 +30,7 @@ References between entities must use consistent paths:
 
 These references create a web of relationships that maintain the integrity of the database.
 
-===== Hierarchical organization
+==== Hierarchical organization
 
 The data is organized in a hierarchical manner that reflects the logical relationship between entities:
 
@@ -58,27 +40,6 @@ The data is organized in a hierarchical manner that reflects the logical relatio
 * Prefixes modify units to create new scales
 
 === File normalization model
-
-==== General
-
-The file normalization model defines specific rules for each YAML file in the UnitsDB database to ensure internal consistency and proper structure.
-
-[source,lutaml]
-----
-class FileNormalization {
-  attribute file_name, String {
-    definition "Name of the YAML file"
-  }
-  attribute entity_type, String {
-    definition "Type of entity contained in the file"
-  }
-  attribute rules, Array {
-    definition "Normalization rules specific to this file"
-  }
-}
-----
-
-==== File-specific normalization rules
 
 ===== dimensions.yaml
 
@@ -121,30 +82,6 @@ class FileNormalization {
 * The `acceptable` field must be explicitly set to either `true` or `false`.
 
 === Cross-file normalization model
-
-==== General
-
-The cross-file normalization model defines rules that govern relationships between entities across different files in the UnitsDB database.
-
-[source,lutaml]
-----
-class CrossFileNormalization {
-  attribute relationship_type, String {
-    definition "Type of relationship between entities"
-  }
-  attribute source_entity, String {
-    definition "Source entity type"
-  }
-  attribute target_entity, String {
-    definition "Target entity type"
-  }
-  attribute rules, Array {
-    definition "Normalization rules for this relationship"
-  }
-}
-----
-
-==== Cross-file normalization rules
 
 ===== Dimension-quantity relationships
 
@@ -225,84 +162,3 @@ When updating the UnitsDB data files, the following rules should be applied:
 * When an entity needs to be deprecated, it should be marked as such rather than removed.
 * Major structural changes to the data format should be accompanied by a version increment and appropriate documentation.
 
-=== Normalized data examples
-
-==== General
-
-These examples demonstrate how properly normalized data should appear across the different UnitsDB files.
-
-==== Example of normalized data
-
-Here is an example of how normalized data should appear across the different files:
-
-.dimensions.yaml (excerpt)
-[source,yaml]
-----
-NISTd1:
-  length:
-    powerNumerator: 1
-    symbol: L
-    dim_symbols:
-    - id: dim_L
-      ascii: L
-      html: "&#x1D5AB;"
-      mathml: "<mi mathvariant='sans-serif'>L</mi>"
-      latex: "\\ensuremath{\\mathsf{L}}"
-      unicode: "\U0001D5AB"
-----
-
-.quantities.yaml (excerpt)
-[source,yaml]
-----
-NISTq1:
-  dimension_url: "#NISTd1"
-  quantity_type: base
-  quantity_name:
-  - length
-  unit_reference:
-  - name: meter
-    url: "#NISTu1"
-----
-
-.units.yaml (excerpt)
-[source,yaml]
-----
-NISTu1:
-  dimension_url: "#NISTd1"
-  short: meter
-  root: true
-  unit_system:
-    type: SI_base
-    name: SI
-  unit_name:
-  - meter
-  unit_symbols:
-  - id: m
-    ascii: m
-    html: m
-    mathml: "<mi mathvariant='normal'>m</mi>"
-    latex: "\\ensuremath{\\mathrm{m}}"
-    unicode: m
-  root_units:
-  - unit: meter
-    power_numerator: 1
-  quantity_reference:
-  - name: length
-    url: "#NISTq1"
-----
-
-.prefixes.yaml (excerpt)
-[source,yaml]
-----
-NISTp10_3:
-  name: kilo
-  symbol:
-    ascii: k
-    html: k
-    latex: k
-    unicode: k
-  base: 10
-  power: 3
-----
-
-This example demonstrates the proper normalization of data across the files, with consistent identifiers, references, and structured data.
