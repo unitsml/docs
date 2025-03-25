@@ -1,0 +1,52 @@
+
+== URN Specification for "unitsml" NID
+
+=== NID Definitions
+
+[source]
+----
+NID = "unitsml"
+----
+
+=== Syntax for the NSS (Namespace Specific String)
+
+The general syntax for the unitsml NSS follows this pattern:
+
+[source]
+----
+NSS = element-reference / composite-expression
+element-reference = element-type ":" element-id
+composite-expression = element-type "::" expression
+element-type = "u" / "d" / "p" / "q" / "s" / "k" / "i"
+element-id = number / name / hierarchical-id / prefix-with-power
+expression = term *( operator term )
+----
+
+==== Element type definitions
+
+[source]
+----
+number = 1*DIGIT
+name = 1*( ALPHA / DIGIT / "_" / "-" )
+hierarchical-id = name *( ":" name )
+prefix-with-power = base ":" power
+base = number
+power = ["-"] number
+----
+
+==== Expression syntax
+
+[source]
+----
+term = simple-term / grouped-term / function-term
+simple-term = name [exponent]
+grouped-term = "(" expression ")" [exponent]
+function-term = function-name "(" expression ")"
+function-name = "sqrt"
+exponent = "_e_" exponent-value
+exponent-value = number / fraction / grouped-exponent
+fraction = "(" number "/" number ")"
+grouped-exponent = "(" ["-"] number ["." number] ")"
+operator = "*" / "/"
+----
+

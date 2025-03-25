@@ -1,0 +1,37 @@
+== Namespace considerations
+
+=== Assignment
+
+The following provides background information on the process that led to the need for a UnitsML URN namespace and motivation for key aspects of the naming structure.
+
+The UnitsML Technical Committee has developed a comprehensive framework for representing units of measure in machine-readable formats. As this framework has evolved, the need for persistent, unique identifiers for UnitsML elements has become apparent.
+
+The UnitsML URN namespace was developed to address this need, providing a way to uniquely identify and reference UnitsML elements across different systems and implementations. The namespace is designed to be compatible with existing UnitsML identifiers while providing a standardized approach to identification.
+
+=== ID uniqueness
+
+The unitsml URN namespace ensures uniqueness of identifiers through several mechanisms:
+
+1. *Element type separation*: Each element type has its own namespace, allowing the same identifier to be used in different element types without conflict.
+2. *Dual identification system*: Elements can be identified by either numerical ID or short name, with a one-to-one mapping between these identifiers.
+3. *Hierarchical namespaces*: For elements such as unit systems, hierarchical identifiers are used to avoid conflicts.
+4. *Centralized registration*: The UnitsML Technical Committee maintains a central registry of identifiers to prevent duplicates.
+
+=== Identifier assignment
+
+Identifiers within the unitsml namespace are assigned according to the following principles:
+
+1. *Numerical IDs*: Numerical IDs are assigned sequentially as new elements are added to the UnitsML database.
+2. *Short names*: Short names are derived from the common name of the element, converted to lowercase, with spaces replaced by underscores.
+3. *Hierarchical IDs*: Hierarchical IDs follow a logical organization, with broader categories preceding more specific ones.
+4. *Prefix powers*: For prefixes, the base and power are included in the identifier to facilitate automated processing.
+
+=== URN resolution
+
+Resolution of unitsml URNs to resources is not part of this specification. However, implementations may provide resolution mechanisms to retrieve information about the identified element, such as:
+
+1. *Web services*: HTTP-based services that return information about the identified element.
+2. *Databases*: Local or remote databases that can be queried using the URN.
+3. *Registries*: Central registries maintained by standards bodies or organizations.
+
+The primary purpose of unitsml URNs is to provide stable, unique identifiers for reference, not necessarily to directly access resources.

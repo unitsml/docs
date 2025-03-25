@@ -1,0 +1,229 @@
+== Syntax
+
+=== Core
+
+The basic structure of a UnitsML URN follows the general URN syntax defined in
+<<RFC_8141>>.
+
+[source]
+----
+urn:unitsml:<element-type>:<element-identifier>
+----
+
+Where:
+
+`unitsml`:: the NID (Namespace Identifier)
+
+`<element-type>`:: identifies the type of UnitsML element
+
+`<element-identifier>`:: is a unique identifier within the element type
+namespace
+
+=== Entity types
+
+The UnitsML URN scheme defines the following entity types.
+
+[cols="1,4,1"]
+|===
+|Type code |Description |Example
+
+|`u` |Unit | `urn:unitsml:u:newton`
+|`d` |Dimension | `urn:unitsml:d:mass`
+|`p` |Prefix | `urn:unitsml:p:kilo`
+|`q` |Quantity | `urn:unitsml:q:luminous_intensity`
+|`s` |Unit system |urn: `unitsml:s:si:base`
+|`k` |Quantity kind | `urn:unitsml:k:length`
+|`i` |Type of interval/unit scale | `urn:unitsml:i:log`
+|===
+
+Each entity type has its own namespace for identifiers, meaning the same
+identifier can be used in different entity types without conflict.
+
+
+=== Identifiers
+
+In UnitsDB, each entity is assigned the following unique identifiers:
+
+* `(id:, type:)` an identifier that is a combination of the identifier type and
+the identifier itself, which is unique across the identifier type and unique
+across all UnitsDB entity types.
++
+[example]
+====
+The following is one of the identifiers for the unit "second" in UnitsDB.
+
+[source,yaml]
+----
+id: NISTu3
+type: nist
+----
+====
+
+* `short:` a short name for the entity, which is unique within its type.
++
+[example]
+====
+The following is one of the identifiers for the unit "second" in UnitsDB.
+
+[source,yaml]
+----
+short: second
+----
+====
+
+These are the two only types of identifiers that are supported in the URN scheme for all entity types.
+
+
+=== Units
+
+Units are fundamental entities in UnitsML, representing references for measurement. In the URN scheme, units are identified with the type code "u".
+
+[source]
+----
+urn:unitsml:u:<unit-identifier>
+----
+
+Where,
+
+`<unit-identifier>`:: is a unique identifier for the unit, which can be its UnitsDB ID conjoined using the `:` (colon) or the unique short name.
+
+[source]
+----
+// By short name
+urn:unitsml:u:newton
+urn:unitsml:u:meter
+urn:unitsml:u:kilogram
+
+// By identifier
+urn:unitsml:u:nist:NISTu3
+----
+
+For prefixed units, the prefix is considered part of the unit name:
+
+[source]
+----
+urn:unitsml:u:millimeter  // millimeter as a complete unit
+----
+
+
+=== Dimensions
+
+Dimensions represent the physical nature of quantities. In the URN scheme, dimensions are identified with the type code "d".
+
+[source]
+----
+urn:unitsml:d:<dimension-identifier>
+----
+
+Examples:
+
+[source]
+----
+urn:unitsml:d:length   // By short name
+urn:unitsml:d:mass     // mass dimension
+urn:unitsml:d:time     // time dimension
+
+// By identifier
+urn:unitsml:d:nist:NISTd5 // temperature dimension
+----
+
+=== Prefixes
+
+Prefixes are used to form decimal multiples or submultiples of units. In the URN scheme, prefixes are identified with the type code "p".
+
+[source]
+----
+urn:unitsml:p:<prefix-identifier>
+----
+
+or with explicit base and power values:
+
+[source]
+----
+urn:unitsml:p:<base>:<power>
+----
+
+Examples:
+
+[source]
+----
+urn:unitsml:p:kilo     // By short name (kilo)
+urn:unitsml:p:10:3     // Base 10, power 3 (kilo)
+urn:unitsml:p:mebi     // By short name (mebi)
+urn:unitsml:p:2:20     // Base 2, power 20 (mebi)
+
+urn:unitsml:p:nist:NISTp10_-1     // deci
+----
+
+
+=== Quantities
+
+Quantities represent properties that can be measured. In the URN scheme, quantities are identified with the type code "q".
+
+[source]
+----
+urn:unitsml:q:<quantity-identifier>
+----
+
+Examples:
+
+[source]
+----
+urn:unitsml:q:luminous_intensity // By short name
+urn:unitsml:q:length             // length quantity
+
+urn:unitsml:q:nist:NISTq12 // velocity quantity
+----
+
+=== Unit systems
+
+Unit systems represent coherent sets of units. In the URN scheme, unit systems are identified with the type code "s".
+
+[source]
+----
+urn:unitsml:s:<system-identifier>
+----
+
+Examples:
+
+[source]
+----
+urn:unitsml:s:si-base            // SI base unit system
+urn:unitsml:s:si-derived-nonspecial
+----
+
+
+=== Quantity kinds
+
+Quantity kinds represent aspects common to mutually comparable quantities. In the URN scheme, quantity kinds are identified with the type code "k".
+
+[source]
+----
+urn:unitsml:k:<kind-identifier>
+----
+
+Examples:
+
+[source]
+----
+urn:unitsml:k:length  // Length quantity kind
+urn:unitsml:k:energy  // Energy quantity kind
+----
+
+=== Type of interval/unit scale
+
+Types of interval represent how values in a scale are related. In the URN scheme, interval types are identified with the type code "i".
+
+[source]
+----
+urn:unitsml:i:<interval-identifier>
+----
+
+Examples:
+
+[source]
+----
+urn:unitsml:i:log      // Logarithmic interval
+urn:unitsml:i:discreet // Discrete interval
+----
+

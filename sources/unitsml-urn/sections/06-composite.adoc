@@ -1,0 +1,152 @@
+== Composite expressions
+
+=== General
+
+Composite expressions in UnitsML URNs allow for the representation of complex units, dimensions, and quantities. These expressions combine basic elements using mathematical operations to represent derived units or dimensions.
+
+=== Syntax for composite expressions
+
+A composite expression is indicated by a double colon after the element type:
+
+[source]
+----
+urn:unitsml:<element-type>::<composite-expression>
+----
+
+Within the composite expression, the following operators and symbols are used:
+
+[cols="1,2,2"]
+|===
+|Operator |Description |Example
+
+|* |Multiplication |meter*second
+|/ |Division |meter/second
+|_e_ |Exponentiation |meter_e_2
+|sqrt() |Square root |sqrt(meter)
+|() |Grouping |(newton*meter)/second
+|===
+
+=== Operations
+
+==== Multiplication
+
+Multiplication is represented by the asterisk (*) symbol. It combines two or more elements by multiplication.
+
+[example]
+====
+[source]
+----
+urn:unitsml:u::meter*second       // meter times second
+urn:unitsml:u::newton*meter       // newton meter
+urn:unitsml:d::length*time        // length times time
+----
+====
+
+==== Division
+
+Division is represented by the forward slash (/) symbol. It divides one element by another.
+
+[example]
+====
+[source]
+----
+urn:unitsml:u::meter/second       // meter per second
+urn:unitsml:d::length/time        // length per time
+urn:unitsml:u::(1/3)              // fractional number
+----
+====
+
+==== Exponentiation
+
+Exponentiation is represented by the `_e_` notation followed by the exponent value.
+
+[example]
+====
+[source]
+----
+urn:unitsml:u::meter_e_2         // square meter
+urn:unitsml:u::second_e_-1       // per second
+urn:unitsml:d::length_e_3        // volume dimension
+----
+====
+
+==== Square root
+
+Square root is represented either by the `sqrt()` function or by exponentiation with a fractional exponent.
+
+[example]
+====
+[source]
+----
+urn:unitsml:u::sqrt(meter)       // square root of meter
+urn:unitsml:u::meter_e_0.5       // alternative representation
+urn:unitsml:u::meter_e_(1/2)     // alternative with fraction
+----
+====
+
+==== Grouping
+
+Grouping is represented by parentheses and is used to control the order of operations.
+
+[example]
+====
+[source]
+----
+urn:unitsml:u::(newton*meter)/second   // newton meter per second
+urn:unitsml:u::newton*(meter/second)   // newton times meter per second
+----
+====
+
+=== Conversion from NIST Legacy IDs
+
+The new URN scheme provides a way to represent the same composite expressions that were previously represented using the NIST legacy ID notation.
+
+[example]
+====
+Legacy ID: `NISTu9.u3e-2/1`
+
+URN representation: `urn:unitsml:u::radian*second_e_-2` or `urn:unitsml:u::radian/second_e_2`
+
+This represents "radian per second squared".
+====
+
+[example]
+====
+Legacy ID: `NISTu11.u1e2/1.u27p10'3e-2/1`
+
+URN representation: `urn:unitsml:u::newton*meter_e_2*kilogram_e_-2` or `urn:unitsml:u::(newton*meter_e_2)/(kilogram_e_2)`
+
+This represents "newton meter squared per kilogram squared".
+====
+
+=== Complete examples
+
+Here are complete examples of composite expressions in URN form:
+
+[example]
+====
+[source]
+----
+// Basic units
+urn:unitsml:u:meter                # Base unit
+urn:unitsml:u:millimeter           # Prefixed unit
+
+// Composite units
+urn:unitsml:u::meter/second        # Meter per second
+urn:unitsml:u::meter*second_e_-1   # Alternative representation
+
+// Dimensions
+urn:unitsml:d:length               # Base dimension
+urn:unitsml:d::length/time         # Composite dimension
+
+// Quantities
+urn:unitsml:q:mass                 # Base quantity
+urn:unitsml:q::mass*acceleration   # Composite quantity
+
+// Complex expressions
+urn:unitsml:u::radian*second_e_-2  # Radian per second squared
+urn:unitsml:u::(newton*meter_e_2)/(kilogram_e_2)  # Newton meter squared per kilogram squared
+urn:unitsml:u::sqrt(meter)         # Square root of meter
+urn:unitsml:d::length*time_e_-2    # Acceleration dimension
+----
+====
