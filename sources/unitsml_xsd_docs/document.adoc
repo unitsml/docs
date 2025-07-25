@@ -1,0 +1,17 @@
+[#top]
+= XSD Templates
+
+[lutaml_xsd, ../../unitsdb/unitsml-v1.0-csd04.xsd, schema]
+----
+== Elements
+
+include::sources/_elements.adoc[]
+
+== Complex Types
+
+include::sources/_complex_type.adoc[]
+
+== Attribute Groups
+
+include::sources/_attribute_groups.adoc[]
+----

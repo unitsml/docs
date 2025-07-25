@@ -1,0 +1,40 @@
+{% for element in schema.element %}
+
+[#element_{{element.name}}]
+=== Element: *{{ element.name }}*
+
+==== Type <<complex_type_{{element.type}}, {{ element.type }}>>
+{% assign used_by_elements = schema | used_by: element %}
+{% if used_by_elements.size > 0 %}==== *Used By* {{ used_by_elements | join: ", " }}{% endif %}
+
+==== Description *pass:[{{ element.annotation.documentation.first.content }}]*
+{% assign element_attributes = schema | attributes: element %}
+{% assign element_children = schema | child_elements: element %}
+
+.XML Instance Representation 
+[source, xml]
+-----
+<{{element.name}}{{ element_attributes | xml_representations: schema }}
+{%- if element_children.size > 0 -%}>
+{%- for child in element_children -%}
+{% assign element_name = child.ref || child.name %}
+{%- if element_name %}
+  <{{element_name}}> ... </{{ element_name }}> {{ child | cardinality_representation: }}
+{%- else %}
+  {{ child }}
+{%- endif %}
+{%- endfor %}
+</{{element.name}}>
+{%- else -%}
+/>
+{% endif %}
+-----
+
+.Schema Component Representation
+[source, xml]
+-----
+<xsd:element name="{{element.name}}" type="{{element.type}}" />
+-----
+---
+
+{% endfor %}
