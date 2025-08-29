@@ -33,41 +33,7 @@ Description pass:[{{ complex_type.annotation.documentation.first.content }}]
 .Schema Component Representation 
 [source, xml]
 -----
-<xsd:complexType name="{{ complex_type.name }}">
-{%- for object in complex_type_element_order %}
-{%- assign sequence_drop = object | class_name_end_with: "::SequenceDrop" -%}
-{%- assign attribute_drop = object | class_name_end_with: "::AttributeDrop" -%}
-{%- assign simple_content_drop = object | class_name_end_with: "::SimpleContentDrop" -%}
-{%- assign attribute_group_drop = object | class_name_end_with: "::AttributeGroupDrop" -%}
-{%- if sequence_drop %}
-  <xsd:sequence{{ object | attributes_xml_representation_for: }}>
-  {%- for element in object.element %}
-    <xsd:element{{ element | attributes_xml_representation_for: }}/>
-  {%- endfor %}
-  {%- for any in object.any %}
-    <xsd:any{{ any | attributes_xml_representation_for: }}/>
-  {%- endfor %}
-  </xsd:sequence>
-{%- endif %}
-{%- if attribute_drop %}
-  <xsd:attribute{{ object | attributes_xml_representation_for: }}{% unless object.simple_type %}/{% endunless %}>
-  {%- if object.simple_type %}
-    {%- render "sources/simple_type", simple_type: object.simple_type, indent: "    " %}
-  </xsd:attribute>
-  {%- endif %}
-{%- endif %}
-{%- if attribute_group_drop %}
-  <xsd:attributeGroup{{ object | attributes_xml_representation_for: }}/>
-{%- endif %}
-{%- if simple_content_drop %}{% assign simple_content_children = object | simple_content_children: %}
-  <xsd:simpleContent>
-  {%- for child in simple_content_children %}
-    {{ child }}
-  {%- endfor %}
-  </xsd:simpleContent>
-{%- endif %}
-{%- endfor %}
-</xsd:complexType>
+{{ complex_type | to_xml_representation: skip_rendering_of }}
 -----
 
 ---
