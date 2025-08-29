@@ -19,24 +19,7 @@
 .Schema Component Representation
 [source, xml]
 -----
-<xsd:attributeGroup name="{{attribute_group.name}}">
-{%- assign element_order = attribute_group | resolved_element_order: %}
-{%- for element in element_order %}
-{%- assign attribute_drop = element | class_name_end_with: "::AttributeDrop" -%}
-{%- assign attribute_group_drop = element | class_name_end_with: "::AttributeGroupDrop" -%}
-{%- assign simple_type = element.simple_type %}
-{%- if attribute_drop %}
-  <xsd:attribute{{ element | attributes_xml_representation_for: }}{% unless simple_type %}/{% endunless %}>
-  {%- if simple_type %}
-    {%- render "sources/simple_type", simple_type: simple_type, element: element, indent: "    " %}
-  </xsd:attribute>
-  {%- endif %}
-{%- endif %}
-{%- if attribute_group_drop %}
-  <xsd:attributeGroup{{ attribute_group_drop | attributes_xml_representation_for: }}/>
-{%- endif %}
-{%- endfor %}
-</xsd:attributeGroup>
+{{ attribute_group | to_xml_representation: skip_rendering_of }}
 -----
 
 ---
