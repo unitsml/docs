@@ -1,7 +1,28 @@
-[#top]
-= XSD Templates
+= CalConnect Standard: UnitsML Schema specification
+:title: UnitsML Schema specification
+:docnumber: 36811
+:copyright-year: 2025
+:doctype: standard
+:edition: 1
+:status: committee-draft
+:revdate: 2025-08-22
+:published-date: 2025-08-22
+:technical-committee: UnitsML
+:fullname: Ronald Tse
+:surname: Tse
+:givenname: Ronald
+:affiliation: Ribose Inc.
+:fullname_2: Suleman Uzair
+:surname_2: Uzair
+:givenname_2: Suleman
+:affiliation_2: Ribose Inc.
+:imagesdir: images
+:mn-document-class: cc
+:mn-output-extensions: xml,html,pdf,rxl
+:local-cache-only:
+:data-uri-image:
 
-[lutaml_xsd, ../../unitsdb/unitsml-v1.0-csd04.xsd, schema]
+[lutaml_xsd, ../unitsml-schemas/unitsml-v1.0-csd04.xsd, schema, skip_rendering_of=annotation]
 ----
 == Elements
 
