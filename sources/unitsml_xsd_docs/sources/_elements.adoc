@@ -33,7 +33,7 @@
 .Schema Component Representation
 [source, xml]
 -----
-<xsd:element name="{{element.name}}" type="{{element.type}}" />
+{{ element | to_xml_representation: skip_rendering_of }}
 -----
 ---
 
