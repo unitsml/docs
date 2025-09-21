@@ -1,0 +1,477 @@
+== Composite expressions
+
+=== General
+
+Composite expressions in UnitsML URNs allow for the representation of complex units, dimensions, and quantities. These expressions combine basic elements using mathematical operations to represent derived units or dimensions.
+
+Composite expressions are only applicable to three element types:
+
+* Units (`u`): For derived units created through mathematical operations on other units
+* Dimensions (`d`): For combined dimensions that describe a physical property
+* Quantities (`q`): For physical quantities that combine multiple base quantities
+
+NOTE: Unit systems (`s`) and unit scales (`i`) are not used in composite expressions and can only be referenced as individual elements.
+
+=== Syntax for composite expressions
+
+A composite expression is indicated by a double colon after the element type:
+
+[source]
+----
+urn:unitsml:<element-type>::<composite-expression>
+----
+
+Within the composite expression, the following operators and symbols are used:
+
+[cols="1,2,2"]
+|===
+|Operator |Description |Example
+
+|`*` |Multiplication |`meter*second`
+|`/` |Division |`meter/second`
+|`_` |Exponentiation |`meter_2`
+|`sqrt(...)` |Square root |`sqrt(meter)`
+|`(...)` |Grouping |`(newton*meter)/second`
+
+|===
+
+=== Operations
+
+==== Multiplication
+
+Multiplication is represented by the asterisk (`*`) symbol. It combines two or more elements by multiplication.
+
+[example]
+====
+[source]
+----
+// Units
+urn:unitsml:u::meter*second       // meter times second
+urn:unitsml:u::newton*meter       // newton meter
+urn:unitsml:u::pascal*cubic_meter // pascal cubic meter (energy)
+
+// Dimensions
+urn:unitsml:d::length*time        // length times time
+urn:unitsml:d::length*mass        // length times mass
+urn:unitsml:d::mass*length*time_-2 // force dimension
+
+// Quantities
+urn:unitsml:q::mass*velocity      // momentum
+urn:unitsml:q::mass*velocity_2    // kinetic energy
+urn:unitsml:q::force*length       // work or energy
+----
+====
+
+==== Division
+
+Division is represented by the forward slash (`/`) symbol. It divides one element by another.
+
+[example]
+====
+[source]
+----
+// Units
+urn:unitsml:u::meter/second       // meter per second (velocity)
+urn:unitsml:u::kilogram/cubic_meter // kilogram per cubic meter (density)
+urn:unitsml:u::newton/square_meter // newton per square meter (pressure)
+urn:unitsml:u::(1/3)              // fractional number
+
+// Dimensions
+urn:unitsml:d::length/time        // length per time (velocity dimension)
+urn:unitsml:d::mass/length_3      // mass per volume (density dimension)
+urn:unitsml:d::mass/(length*time) // mass flux dimension
+
+// Quantities
+urn:unitsml:q::length/time        // velocity
+urn:unitsml:q::mass/volume        // density
+urn:unitsml:q::energy/time        // power
+----
+====
+
+==== Exponentiation
+
+Exponentiation is represented by the underscore (`_`) notation followed by the exponent value.
+
+[example]
+====
+[source]
+----
+// Units
+urn:unitsml:u::meter_2         // square meter (area)
+urn:unitsml:u::meter_3         // cubic meter (volume)
+urn:unitsml:u::second_-1       // per second (frequency)
+urn:unitsml:u::meter_-2        // per square meter
+
+// Dimensions
+urn:unitsml:d::length_2        // area dimension
+urn:unitsml:d::length_3        // volume dimension
+urn:unitsml:d::time_-1         // frequency dimension
+urn:unitsml:d::mass_-1         // specific property dimension
+
+// Quantities
+urn:unitsml:q::length_2        // area
+urn:unitsml:q::length_3        // volume
+urn:unitsml:q::time_-1         // frequency
+urn:unitsml:q::mass*length_-3  // density
+----
+====
+
+==== Square root
+
+Square root is represented either by the `sqrt(...)` function or by exponentiation with a fractional exponent.
+
+[example]
+====
+[source]
+----
+// Units
+urn:unitsml:u::sqrt(meter)       // square root of meter
+urn:unitsml:u::meter_0.5         // alternative representation
+urn:unitsml:u::meter_(1/2)       // alternative with fraction
+urn:unitsml:u::sqrt(pascal*second) // square root of pascal second
+
+// Dimensions
+urn:unitsml:d::sqrt(length)      // square root of length dimension
+urn:unitsml:d::length_0.5        // alternative representation
+urn:unitsml:d::sqrt(mass*length) // square root of mass times length
+
+// Quantities
+urn:unitsml:q::sqrt(energy)      // amplitude
+urn:unitsml:q::sqrt(power)       // root-mean-square value
+urn:unitsml:q::energy_0.5        // alternative representation
+----
+====
+
+==== Grouping
+
+Grouping is represented by parentheses and is used to control the order of operations.
+
+[example]
+====
+[source]
+----
+// Units
+urn:unitsml:u::(newton*meter)/second   // newton meter per second (power)
+urn:unitsml:u::newton*(meter/second)   // newton times meter per second
+urn:unitsml:u::(kilogram*meter_2)/second_2 // moment of inertia times angular acceleration
+
+// Dimensions
+urn:unitsml:d::(length*mass)/time     // momentum dimension
+urn:unitsml:d::(mass*length_2)/time_2 // energy dimension
+urn:unitsml:d::mass*(length/time_2)   // force dimension
+
+// Quantities
+urn:unitsml:q::(force*length)/time    // power
+urn:unitsml:q::(mass*velocity_2)/2    // kinetic energy
+urn:unitsml:q::mass*(length/time_2)   // force
+----
+====
+
+=== Complete examples
+
+Here are complete examples of composite expressions in URN form:
+
+[example]
+====
+[source]
+----
+// Basic units
+urn:unitsml:u:meter                # Base unit
+urn:unitsml:u:millimeter           # Prefixed unit
+
+// Composite units
+urn:unitsml:u::meter/second        # Meter per second (velocity)
+urn:unitsml:u::meter*second_-1     # Alternative representation
+urn:unitsml:u::newton*meter        # Newton meter (torque, energy)
+urn:unitsml:u::kilogram*meter_2    # Kilogram meter squared (moment of inertia)
+urn:unitsml:u::watt*hour           # Watt hour (energy)
+urn:unitsml:u::meter_2/second_2    # Meter squared per second squared (specific energy)
+
+// Basic dimensions
+urn:unitsml:d:length               # Base dimension (L)
+urn:unitsml:d:mass                 # Base dimension (M)
+urn:unitsml:d:time                 # Base dimension (T)
+
+// Composite dimensions
+urn:unitsml:d::length/time         # Velocity dimension (L/T)
+urn:unitsml:d::length*time_-2      # Acceleration dimension (L/T²)
+urn:unitsml:d::mass*length*time_-2 # Force dimension (M·L/T²)
+urn:unitsml:d::mass*length_-3      # Density dimension (M/L³)
+urn:unitsml:d::mass*length_2*time_-2 # Energy dimension (M·L²/T²)
+urn:unitsml:d::length_2*time_-3    # Power per area dimension (L²/T³)
+
+// Basic quantities
+urn:unitsml:q:mass                 # Base quantity
+urn:unitsml:q:length               # Base quantity
+urn:unitsml:q:time                 # Base quantity
+
+// Composite quantities
+urn:unitsml:q::mass*acceleration   # Force
+urn:unitsml:q::length/time         # Velocity
+urn:unitsml:q::length/time_2       # Acceleration
+urn:unitsml:q::force*length        # Energy, work
+urn:unitsml:q::mass*velocity_2     # Kinetic energy
+urn:unitsml:q::mass/volume         # Density
+urn:unitsml:q::energy/time         # Power
+urn:unitsml:q::mass*length_2       # Moment of inertia
+urn:unitsml:q::sqrt(energy/mass)   # Velocity from energy
+----
+====
+
+=== Conversion between AsciiUnits and UnitsML URN
+
+==== General
+
+AsciiUnits and UnitsML URN provide two different syntaxes for representing units, dimensions, and quantities. Converting between these two formats enables interoperability between systems that use either notation.
+
+==== Mapping of operators and syntax
+
+The following table maps the operators and syntax elements between AsciiUnits and UnitsML URN:
+
+[cols="2,2,3"]
+|===
+|Operation |AsciiUnits |UnitsML URN
+
+|Basic reference (unit) |`m` |`urn:unitsml:u:meter`
+|Basic reference (dimension) |`L` |`urn:unitsml:d:length`
+|Basic reference (quantity) |`l` |`urn:unitsml:q:length`
+|Multiplication |`m*s` |`urn:unitsml:u::meter*second`
+|Division |`m/s` or `m//s` |`urn:unitsml:u::meter/second`
+|Exponentiation |`m^2` |`urn:unitsml:u::meter_2`
+|Negative exponent |`s^-1` or `s^(-1)` |`urn:unitsml:u::second_-1`
+|Square root |`sqrt(m)` |`urn:unitsml:u::sqrt(meter)`
+|Grouping |`(m*s)/kg` |`urn:unitsml:u::(meter*second)/kilogram`
+|===
+
+==== AsciiUnits to UnitsML URN conversion
+
+To convert an AsciiUnits expression to a UnitsML URN:
+
+. Identify the element type (unit, dimension, prefix, quantity)
+** Units are represented with `u`
+** Dimensions are represented with `d`
+** Prefixes are represented with `p`
+** Quantities are represented with `q`
+
+. For simple elements, use the format: `urn:unitsml:<element-type>:<name>`
+** Example: `m` → `urn:unitsml:u:meter`
+** Example: `kg` → `urn:unitsml:u:kilogram`
+
+. For composite expressions, use the format: `urn:unitsml:<element-type>::<expression>`
+** Replace `^` with `_` for exponents
+** Use full names instead of symbols (e.g., `meter` instead of `m`)
+** Retain operators (`*`, `/`) and grouping (`()`)
+
+[example]
+====
+Converting from AsciiUnits to UnitsML URN:
+
+[cols="2,3"]
+|===
+|AsciiUnits |UnitsML URN
+
+|// Units
+|
+|`m^2` |`urn:unitsml:u::meter_2`
+|`kg*m/s^2` |`urn:unitsml:u::kilogram*meter*second_-2`
+|`J/(kg*K)` |`urn:unitsml:u::joule/(kilogram*kelvin)`
+|`sqrt(Hz)` |`urn:unitsml:u::sqrt(hertz)`
+|`(N*m)^2/kg` |`urn:unitsml:u::(newton*meter)_2/kilogram`
+|
+|// Dimensions
+|
+|`L^2` |`urn:unitsml:d::length_2`
+|`L*M/T^2` |`urn:unitsml:d::length*mass*time_-2`
+|`L^2*M/T^2` |`urn:unitsml:d::length_2*mass*time_-2`
+|
+|// Quantities
+|
+|`length^2` |`urn:unitsml:q::length_2`
+|`mass*acceleration` |`urn:unitsml:q::mass*acceleration`
+|`energy/time` |`urn:unitsml:q::energy/time`
+|===
+====
+
+==== UnitsML URN to AsciiUnits conversion
+
+To convert a UnitsML URN to AsciiUnits:
+
+. Remove the URN prefix (`urn:unitsml:<element-type>:` or `urn:unitsml:<element-type>::`)
+
+. Replace full names with symbols
+** Example: `meter` → `m`
+** Example: `second` → `s`
+** Example: `kilogram` → `kg`
+
+. Replace `_` with `^` for exponents
+
+. Retain operators (`*`, `/`) and grouping (`()`)
+
+[example]
+====
+Converting from UnitsML URN to AsciiUnits:
+
+[cols="3,2"]
+|===
+|UnitsML URN |AsciiUnits
+
+|// Units
+|
+|`urn:unitsml:u::meter_2` |`m^2`
+|`urn:unitsml:u::kilogram*meter*second_-2` |`kg*m*s^-2`
+|`urn:unitsml:u::joule/(kilogram*kelvin)` |`J/(kg*K)`
+|`urn:unitsml:u::sqrt(hertz)` |`sqrt(Hz)`
+|`urn:unitsml:u::(newton*meter)_2/kilogram` |`(N*m)^2/kg`
+|`urn:unitsml:u::(newton*meter)/second` |`(N*m)/s`
+|
+|// Dimensions
+|
+|`urn:unitsml:d::length_2` |`L^2`
+|`urn:unitsml:d::length*mass*time_-2` |`L*M*T^-2`
+|`urn:unitsml:d::length_2*time_-3` |`L^2*T^-3`
+|
+|// Quantities
+|
+|`urn:unitsml:q::length/time` |`velocity`
+|`urn:unitsml:q::mass*length_-3` |`density`
+|`urn:unitsml:q::force*distance` |`energy`
+|===
+====
+
+==== Conversion considerations
+
+The following considerations should be taken into account when converting
+between AsciiUnits and the UnitsML URN composite expression format:
+
+. Symbol name variants: AsciiUnits supports multiple identifiers per symbol. The
+primary name should be used in UnitsML URN.
+
+. Normalization: Normalize the composite expression after conversion to ensure
+consistent representation. See the
+<<_composite_expression_normalization,normalization>> section for more details.
+
+. Prefixes: Both AsciiUnits and the URN composite expression handle prefixes
+implicitly (e.g., `km` is parsed as kilometer, and `kilometer` in UnitsML URN is
+considered equivalent), therefore the parsing and conversion should be done in a
+way that the prefix is understood and retained.
+
+
+=== Conversion from NIST Legacy IDs
+
+The UnitsML URN scheme provides a way to represent the same composite expressions
+that were previously represented using the NIST legacy ID notation.
+
+To convert from NIST legacy IDs to the native UnitsML URN format, follow these steps:
+
+. *Parse the legacy ID*: NIST legacy IDs follow patterns like `NISTu1`, `NISTd1`, or composite forms like `NISTu9.u3e-2/1` for composite units.
+
+. *Identify the entity type*: The prefix indicates the entity type: `u` for units, `d` for dimensions, `p` for prefixes, `q` for quantities, etc.
+
+. *For simple entities*:
+  .. Obtain the entity's short name from the corresponding YAML file (e.g., "meter" for NISTu1, "length" for NISTd1)
+  .. Construct the URN as `urn:unitsml:<entity-type>:<short-name>`
+  .. Example: `NISTu1` → `urn:unitsml:u:meter`
+
+. *For composite expressions*:
+  .. Decompose the legacy ID into its components
+  .. For each component, identify:
+    * The base entity (e.g., `NISTu9` → `radian`)
+    * Any exponents (e.g., `e-2/1` → power of -2)
+    * Prefix information if present (e.g., `p10'3` → kilo)
+  .. Translate each component into the appropriate segment of the URN expression
+  .. Connect components using operators (`*`, `/`) based on the relationships in the legacy ID
+  .. Construct the URN as `urn:unitsml:<entity-type>::<expression>`
+
+. *Handle special cases*:
+  .. Some legacy composite IDs might reference a dimension directly (e.g., `NISTd11`)
+  .. For these, identify the corresponding dimension composition (e.g., `length*time_-2` for NISTd11)
+  .. Construct the URN accordingly
+
+==== Parsing the Legacy ID Syntax
+
+The legacy ID syntax for composite expressions follows a pattern:
+
+* `<base-id>.<component1>.<component2>...` where each component has the form:
+  ** `<entity-prefix><id>[p<prefix-base>'<prefix-power>]e<power-numerator>/<power-denominator>`
+  ** Example: `u3e-2/1` represents "second to power -2"
+  ** Example: `u27p10'3e-2/1` represents "kilogram to power -2"
+
+[example]
+====
+This composite unit represents "radian per second squared".
+
+Legacy ID: `NISTu9.u3e-2/1`
+
+Parsing steps:
+1. Base ID: NISTu9 → radian
+2. Component: u3e-2/1
+   * Entity: u3 → second
+   * Power: -2/1 → -2
+
+URN representation:
+* `urn:unitsml:u::radian*second_-2`
+* `urn:unitsml:u::radian/second_2`
+====
+
+[example]
+====
+This composite unit represents "newton meter squared per kilogram squared".
+
+Legacy ID: `NISTu11.u1e2/1.u27p10'3e-2/1`
+
+Parsing steps:
+1. Base ID: NISTu11 → newton
+2. First component: u1e2/1
+   * Entity: u1 → meter
+   * Power: 2/1 → 2
+3. Second component: u27p10'3e-2/1
+   * Entity: u27 → gram
+   * Prefix: p10'3 → kilo
+   * Power: -2/1 → -2
+   * Combined: kilogram^-2
+
+URN representation:
+* `urn:unitsml:u::newton*meter_2*kilogram_-2`
+* `urn:unitsml:u::(newton*meter_2)/(kilogram_2)`
+====
+
+[example]
+====
+This composite dimension represents "acceleration dimension".
+
+Legacy ID: `NISTd11`
+
+Parsing steps:
+1. Direct reference to NISTd11 which is "length/time²" dimension
+2. Consulting the dimensions.yaml file, we find NISTd11 corresponds to:
+   * length (power: 1)
+   * time (power: -2)
+
+URN representation:
+* `urn:unitsml:d::length*time_-2`
+====
+
+[example]
+====
+This composite unit represents "kilogram meter per second" (momentum unit).
+
+Legacy ID: `NISTu27p10'3.u1.u3e-1/1`
+
+Parsing steps:
+1. First component: NISTu27p10'3 → kilogram
+2. Second component: u1 → meter
+3. Third component: u3e-1/1 → second^-1
+
+URN representation:
+* `urn:unitsml:u::kilogram*meter*second_-1`
+* `urn:unitsml:u::kilogram*meter/second`
+====
+
+[example]
+====
+This composite quantity represents "force".
+
+URN representation:
+* `urn:unitsml:q::mass*acceleration`
+* `urn:unitsml:q::mass*length*time_-2`
+====

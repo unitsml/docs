@@ -1,0 +1,21 @@
+== principles
+
+The UnitsML URN scheme follows these design principles:
+
+Simplicity::
+URNs should be easy to construct, parse, and understand
+
+Readability::
+When possible, URNs should be human-readable
+
+Uniqueness::
+Each URN must uniquely identify a specific resource
+
+Persistence::
+The meaning of a URN should not change over time
+
+Compatibility::
+The scheme should be compatible with existing UnitsML identifiers
+
+Extensibility::
+The scheme should accommodate future additions to the UnitsML framework

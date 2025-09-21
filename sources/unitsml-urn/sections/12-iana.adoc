@@ -1,0 +1,66 @@
+
+== IANA considerations
+
+This section provides information required for the registration of the unitsml
+URN namespace with the Internet Assigned Numbers Authority (IANA), as required
+by <<RFC_8141>>.
+
+Namespace ID:: unitsml
+
+Registration information::
+Registration version number::: 1
+Registration date::: 2025-03-25
+
+Registrant information::
+Registrant::: UnitsML Technical Committee
+Contact information::: (Appropriate contact details to be added)
+
+Declared registrant of the namespace:: UnitsML Technical Committee
+
+Declaration of syntactic structure:: The syntax of `unitsml` URNs follows the pattern:
++
+[source]
+----
+urn:unitsml:<element-type>:<element-identifier>
+----
+or
+[source]
+----
+urn:unitsml:<element-type>::<composite-expression>
+----
++
+Where `<element-type>` is one of "u", "d", "p", "q", "s", "k", or "i", and
+`<element-identifier>` and `<composite-expression>` follow the rules specified
+in this document.
+
+Relevant ancillary documentation:: This document serves as the primary
+specification for the `unitsml` URN namespace. Additional documentation may be
+provided by the UnitsML Technical Committee.
+
+Identifier uniqueness considerations:: Uniqueness is ensured through the use of
+element type namespaces, central registration, and the processes described in
+this document.
+
+Identifier persistence considerations:: The UnitsML Technical Committee
+guarantees the persistence of `unitsml` URNs through active management of the
+namespace and adherence to the principles outlined in this document.
+
+Process of identifier assignment:: Identifiers are assigned by the UnitsML
+Technical Committee following the processes described in this document.
+
+Process for identifier resolution:: This namespace does not require resolution
+services.
+
+Rules for lexical equivalence:: Two `unitsml` URNs are considered lexically
+equivalent if they match exactly after normalization of composite expressions as
+described in this document.
+
+Conformance with URN syntax:: All `unitsml` URNs conform to the syntax
+requirements of RFC 8141.
+
+Validation mechanism:: Validation can be performed by checking against the
+formal grammar provided in this document and by verifying the existence of the
+referenced element in the UnitsML database.
+
+Scope:: The `unitsml` URN namespace is global in scope, intended for use in all
+contexts where UnitsML elements need to be identified.

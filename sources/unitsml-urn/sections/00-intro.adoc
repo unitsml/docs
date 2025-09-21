@@ -1,0 +1,44 @@
+== Introduction
+
+=== General
+
+UnitsML is a comprehensive framework for representing units of measurement in
+machine-readable format. A critical aspect of this framework is the ability to
+uniquely and persistently identify units, dimensions, prefixes, quantities, and
+other related concepts.
+
+This document describes a Uniform Resource Name (URN) namespace for identifying
+UnitsML resources. The URN scheme provides a way to reference UnitsML elements
+across different systems and over time, ensuring consistent identification
+regardless of location or implementation.
+
+=== Purpose
+
+The purpose of the UnitsML URN namespace is to provide persistent,
+location-independent identifiers for UnitsML resources.
+
+This enables:
+
+* Unique identification of basic UnitsML elements such as units, dimensions,
+prefixes, quantities, unit systems, quantity kinds, and unit scales
+
+* Representation of composite expressions combining multiple elements
+
+* References to specific versions of elements
+
+* Machine-readable identifiers that can be used in various contexts, including
+XML, JSON, and plain text
+
+=== Relationship to other identification systems
+
+The UnitsML URN namespace is designed to be compatible with existing identification systems while providing a standardized approach specific to UnitsML resources.
+
+It builds upon:
+
+* RFC 8141, which defines the URN scheme
+* UnitsML entity identifiers (e.g., `u:newton` for newton)
+* Legacy NIST UnitsML entity identifiers (e.g., `NISTu11` for newton)
+
+The UnitsML URN scheme provides a bridge between these systems, allowing for
+interoperability while maintaining the specific requirements of the UnitsML
+framework.

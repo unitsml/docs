@@ -1,0 +1,51 @@
+= CalConnect Standard: UnitsML URN namespace specification
+:title: UnitsML URN namespace specification
+:docnumber: 36811
+:copyright-year: 2025
+:doctype: standard
+:edition: 1
+:status: committee-draft
+:revdate: 2025-03-25
+:published-date: 2025-03-25
+:technical-committee: UnitsML
+:fullname: Ronald Tse
+:surname: Tse
+:givenname: Ronald
+:affiliation: Ribose Inc.
+:imagesdir: images
+:mn-document-class: cc
+:mn-output-extensions: xml,html,pdf,rxl
+:local-cache-only:
+:data-uri-image:
+
+include::sections/00-foreword.adoc[]
+
+include::sections/00-intro.adoc[]
+
+include::sections/01-scope.adoc[]
+
+include::sections/02-normrefs.adoc[]
+
+include::sections/03-terms.adoc[]
+
+include::sections/04-principles.adoc[]
+
+include::sections/05-elements.adoc[]
+
+include::sections/06-composite.adoc[]
+
+include::sections/07-composite-normalize.adoc[]
+
+include::sections/08-urn.adoc[]
+
+include::sections/09-namespace-considerations.adoc[]
+
+include::sections/10-community-considerations.adoc[]
+
+include::sections/11-security-considerations.adoc[]
+
+include::sections/12-iana.adoc[]
+
+include::sections/99-bibliography.adoc[]
+
+include::sections/a1-ebnf.adoc[]

@@ -1,0 +1,25 @@
+== Security considerations
+
+The `unitsml` URN namespace does not introduce any security issues beyond those
+associated with the use of URNs in general.
+
+Implementers should be aware of the following considerations:
+
+. Input validation: When processing `unitsml` URNs, implementations should
+validate the input to prevent injection attacks.
+
+. Reference integrity: Systems using `unitsml` URNs should verify the existence
+and validity of referenced elements before processing.
+
+. Authority: Implementers should verify that `unitsml` URNs come from
+authoritative sources, especially when using them for critical calculations.
+
+. Resource consumption: Processing complex composite expressions may consume
+significant resources and should be monitored for potential denial-of-service
+issues.
+
+These considerations are not unique to the `unitsml` namespace but are standard
+practice for systems dealing with external identifiers and references.
+
+There are no additional security concerns related to the `unitsml` namespace
+itself.
