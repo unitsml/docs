@@ -2,11 +2,13 @@
 
 === basic element
 
-fundamental component in the UnitsML framework, including unit, dimension, prefix, quantity, unit system, quantity kind, and type of interval/unit scale
+fundamental component in the UnitsML framework, including unit, dimension,
+prefix, quantity, unit system, quantity kind, and unit scale
 
 === composite expression
 
-combination of multiple basic elements using mathematical operations such as multiplication, division, and exponentiation
+combination of multiple basic elements using mathematical operations such as
+multiplication, division, and exponentiation
 
 === NID
 
@@ -14,23 +16,29 @@ namespace identifier, registered with IANA for use with URNs
 
 === NSS
 
-namespace specific string, the portion of a URN that follows the "urn:" <NID> ":" and conforms to the specification of the NID
+namespace specific string, the portion of a URN that follows the "urn:" <NID>
+":" and conforms to the specification of the NID
 
 === unit
 
-reference quantity with which other quantities of the same kind are compared to express their value
+reference quantity with which other quantities of the same kind are compared to
+express their value
 
 === dimension
 
-expression of the dependence of a physical quantity on the base quantities of a system of quantities, in the form of a product of powers of factors corresponding to the base quantities, omitting any numerical factors
+expression of the dependence of a physical quantity on the base quantities of a
+system of quantities, in the form of a product of powers of factors
+corresponding to the base quantities, omitting any numerical factors
 
 === prefix
 
-named multiple or submultiple of a unit, used to form decimal multiples or submultiples of units
+named multiple or submultiple of a unit, used to form decimal multiples or
+submultiples of units
 
 === quantity
 
-property of a phenomenon, body, or substance, where the property has a magnitude that can be expressed as a number and a reference
+property of a phenomenon, body, or substance, where the property has a magnitude
+that can be expressed as a number and a reference
 
 === unit system
 
@@ -40,6 +48,8 @@ set of units, together with a set of equations relating them
 
 aspect common to mutually comparable quantities
 
-=== type of interval
+=== unit scale
 
-specification of how values in a scale or interval are related to each other, such as logarithmic, linear, or discrete
+specification of how values in a measurement scale are related, characterized by
+properties such as whether they are continuous or discrete, ordered,
+logarithmic, and whether they support interval or ratio comparisons

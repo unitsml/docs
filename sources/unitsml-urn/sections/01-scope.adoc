@@ -1,6 +1,9 @@
 == Scope
 
-This document specifies the syntax, semantics, and usage guidelines for the UnitsML URN namespace. It covers:
+This document specifies the syntax, semantics, and usage guidelines for the
+UnitsML URN namespace.
+
+It covers:
 
 * The basic structure of UnitsML URNs
 * Identification of fundamental UnitsML elements (units, dimensions, prefixes, quantities, unit systems, quantity kinds, types of intervals)
@@ -9,4 +12,5 @@ This document specifies the syntax, semantics, and usage guidelines for the Unit
 * Normalization algorithms for comparing equivalent expressions
 * Namespace registration information as required by RFC 8141
 
-This specification is intended to be used by developers, standards bodies, and organizations implementing UnitsML in their systems.
+This specification is intended to be used by developers, standards bodies, and
+organizations implementing UnitsML in their systems.

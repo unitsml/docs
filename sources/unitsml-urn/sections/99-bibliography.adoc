@@ -1,2 +1,5 @@
 [bibliography]
 == Bibliography
+
+* [[[RFC_8141,IETF RFC 8141]]], _Uniform Resource Names (URNs)_
+* [[[RFC_5234,IETF RFC 5234]]], _Augmented BNF for Syntax Specifications: ABNF_

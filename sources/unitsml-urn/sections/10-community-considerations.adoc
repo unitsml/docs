@@ -4,44 +4,47 @@
 
 The UnitsML URN namespace serves the needs of several communities:
 
-1. *Scientific and engineering communities*: Researchers, engineers, and scientists who need to exchange measurement data.
-2. *Data management organizations*: Groups responsible for managing and exchanging scientific and technical data.
-3. *Standards bodies*: Organizations developing standards for measurement and data exchange.
-4. *Software developers*: Developers implementing systems that handle measurement data.
+. Scientific and engineering communities: Researchers, engineers, and scientists who need to exchange measurement data.
+. Data management organizations: Groups responsible for managing and exchanging scientific and technical data.
+. Standards bodies: Organizations developing standards for measurement and data exchange.
+. Software developers: Developers implementing systems that handle measurement data.
 
 === Benefits
 
-The benefits of the unitsml URN namespace for these communities include:
+The benefits of the `unitsml` URN namespace for these communities include:
 
-1. *Unambiguous identification*: Clear, unique identification of measurement units and related concepts.
-2. *Interoperability*: Common identification system that works across different platforms and implementations.
-3. *Persistence*: Stable references that remain valid over time, independent of physical location.
-4. *Machine processability*: Identifiers that can be parsed and processed by software.
+. Unambiguous identification: Clear, unique identification of measurement units and related concepts.
+. Interoperability: Common identification system that works across different platforms and implementations.
+. Persistence: Stable references that remain valid over time, independent of physical location.
+. Machine processability: Identifiers that can be parsed and processed by software.
 
 === Registration and authority
 
-The UnitsML Technical Committee serves as the authority for the unitsml URN namespace. The committee will:
+The CalConnect UnitsML Technical Committee serves as the authority for the
+`unitsml` URN namespace.
 
-1. *Maintain a registry*: Keep a central registry of all assigned identifiers.
-2. *Review new additions*: Review and approve new elements to be added to the namespace.
-3. *Ensure consistency*: Ensure that new identifiers follow the established patterns and conventions.
-4. *Provide documentation*: Maintain documentation on the namespace and its elements.
+The committee will:
+
+. Maintain a registry: Keep a central registry of all assigned identifiers.
+. Review new additions: Review and approve new elements to be added to the namespace.
+. Ensure consistency: Ensure that new identifiers follow the established patterns and conventions.
+. Provide documentation: Maintain documentation on the namespace and its elements.
 
 === Process for identifier updates
 
 The process for updating and adding identifiers to the unitsml namespace includes:
 
-1. *Proposal*: Submission of a proposal for a new element or identifier.
-2. *Review*: Review by the UnitsML Technical Committee for consistency and necessity.
-3. *Approval*: Formal approval and assignment of identifiers.
-4. *Publication*: Publication of the new identifier in the central registry.
-5. *Notification*: Notification to the community of the addition.
+. Proposal: Submission of a proposal for a new element or identifier.
+. Review: Review by the UnitsML Technical Committee for consistency and necessity.
+. Approval: Formal approval and assignment of identifiers.
+. Publication: Publication of the new identifier in the central registry.
+. Notification: Notification to the community of the addition.
 
 === Responsibility for the namespace
 
-The UnitsML Technical Committee takes responsibility for the unitsml namespace, including:
+The CalConnect UnitsML Technical Committee takes responsibility for the unitsml namespace, including:
 
-1. *Ensuring stability*: Maintaining the stability and persistence of identifiers.
-2. *Preventing conflicts*: Preventing naming conflicts and duplicate identifiers.
-3. *Documentation*: Providing clear documentation on the namespace and its usage.
-4. *Accessibility*: Ensuring that information about identifiers is accessible to the community.
+. Ensuring stability: Maintaining the stability and persistence of identifiers.
+. Preventing conflicts: Preventing naming conflicts and duplicate identifiers.
+. Documentation: Providing clear documentation on the namespace and its usage.
+. Accessibility: Ensuring that information about identifiers is accessible to the community.

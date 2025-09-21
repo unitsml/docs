@@ -2,7 +2,8 @@
 [appendix,obligation=informative]
 == ABNF Definition of Namespace ID = "unitsml"
 
-This appendix provides the formal ABNF (Augmented Backus-Naur Form) definition for the syntax of UnitsML URNs, according to RFC 5234.
+This appendix provides the formal ABNF (Augmented Backus-Naur Form) definition
+for the syntax of UnitsML URNs, according to <<RFC_5234>>.
 
 [source]
 ----
@@ -16,19 +17,27 @@ element-reference = simple-reference / composite-reference
 simple-reference = element-type ":" element-id
 
 ; Composite expression
-composite-reference = element-type "::" expression
+composite-reference = composite-element-type "::" expression
 
-; Element types
+; Element types (all types for simple references)
 element-type = "u" / "d" / "p" / "q" / "s" / "k" / "i"
 
-; Element identifiers can be numeric, named, hierarchical, or prefix specifications
-element-id = number / name / hierarchical-id / prefix-with-power
+; Element types that can be used in composite expressions
+composite-element-type = "u" / "d" / "q"
+
+; Element identifiers can be numeric, named, native, hierarchical, or prefix specifications
+element-id = number / name / native-id / hierarchical-id / prefix-with-power
 
 ; Numeric identifier
 number = 1*DIGIT
 
 ; Named identifier
 name = 1*( ALPHA / DIGIT / "_" / "-" )
+
+; Native identifier (UnitsML identifiers like u:meter, d:length, or NIST identifiers like NISTu1, NISTd2)
+native-id = ("u:" / "d:" / "p:" / "q:" / "us:") name / "NIST" element-type 1*DIGIT ["." *native-element-part]
+native-element-part = element-type [prefix-part] ["e" ["-"] number "/" number]
+prefix-part = "p" number "'" number
 
 ; Hierarchical identifier with colon separators
 hierarchical-id = name *( ":" name )
@@ -55,7 +64,7 @@ function-term = function-name "(" expression ")"
 function-name = "sqrt"
 
 ; Exponent notation
-exponent = "_e_" exponent-value
+exponent = "_" exponent-value
 exponent-value = number / fraction / grouped-exponent
 fraction = "(" number "/" number ")"
 grouped-exponent = "(" ["-"] number ["." number] ")"
@@ -64,4 +73,5 @@ grouped-exponent = "(" ["-"] number ["." number] ")"
 operator = "*" / "/"
 ----
 
-This ABNF grammar provides a formal definition of the syntax for UnitsML URNs, ensuring consistent parsing and interpretation across implementations.
+This ABNF grammar provides a formal definition of the syntax for UnitsML URNs,
+ensuring consistent parsing and interpretation across implementations.

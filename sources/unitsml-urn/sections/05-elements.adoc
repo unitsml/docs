@@ -50,7 +50,13 @@ across all UnitsDB entity types.
 +
 [example]
 ====
-The following is one of the identifiers for the unit "second" in UnitsDB.
+The following are identifiers for the unit "second" in UnitsDB.
+
+[source,yaml]
+----
+id: u:second
+type: unitsml
+----
 
 [source,yaml]
 ----
@@ -85,7 +91,7 @@ urn:unitsml:u:<unit-identifier>
 
 Where,
 
-`<unit-identifier>`:: is a unique identifier for the unit, which can be its UnitsDB ID conjoined using the `:` (colon) or the unique short name.
+`<unit-identifier>`:: is a unique identifier for the unit, which can be its UnitsDB ID directly, its UnitsDB ID conjoined using the `:` (colon), or the unique short name.
 
 [source]
 ----
@@ -94,8 +100,19 @@ urn:unitsml:u:newton
 urn:unitsml:u:meter
 urn:unitsml:u:kilogram
 
-// By identifier
-urn:unitsml:u:nist:NISTu3
+// By UnitsML identifier
+urn:unitsml:u:u:meter     // meter unit
+urn:unitsml:u:u:second    // second unit
+urn:unitsml:u:u:kilogram  // kilogram unit
+
+// By NIST identifier
+urn:unitsml:u:NISTu1      // meter unit
+urn:unitsml:u:NISTu3      // second unit
+urn:unitsml:u:NISTu2      // kilogram unit
+
+// By hierarchical identifier
+urn:unitsml:u:unitsml:u:second  // second unit
+urn:unitsml:u:nist:NISTu3       // second unit
 ----
 
 For prefixed units, the prefix is considered part of the unit name:
@@ -123,8 +140,19 @@ urn:unitsml:d:length   // By short name
 urn:unitsml:d:mass     // mass dimension
 urn:unitsml:d:time     // time dimension
 
-// By identifier
-urn:unitsml:d:nist:NISTd5 // temperature dimension
+// By UnitsML identifier
+urn:unitsml:d:d:length      // length dimension
+urn:unitsml:d:d:mass        // mass dimension
+urn:unitsml:d:d:temperature // temperature dimension
+
+// By NIST identifier
+urn:unitsml:d:NISTd1   // length dimension
+urn:unitsml:d:NISTd2   // mass dimension
+urn:unitsml:d:NISTd5   // temperature dimension
+
+// By hierarchical identifier
+urn:unitsml:d:unitsml:d:temperature // temperature dimension
+urn:unitsml:d:nist:NISTd5           // temperature dimension
 ----
 
 === Prefixes
@@ -152,7 +180,19 @@ urn:unitsml:p:10:3     // Base 10, power 3 (kilo)
 urn:unitsml:p:mebi     // By short name (mebi)
 urn:unitsml:p:2:20     // Base 2, power 20 (mebi)
 
-urn:unitsml:p:nist:NISTp10_-1     // deci
+// By UnitsML identifier
+urn:unitsml:p:p:kilo        // kilo
+urn:unitsml:p:p:deci        // deci
+urn:unitsml:p:p:mebi        // mebi
+
+// By NIST identifier
+urn:unitsml:p:NISTp10_3       // kilo
+urn:unitsml:p:NISTp10_-1      // deci
+urn:unitsml:p:NISTp2_20       // mebi
+
+// By hierarchical identifier
+urn:unitsml:p:unitsml:p:deci   // deci
+urn:unitsml:p:nist:NISTp10_-1  // deci
 ----
 
 
@@ -172,7 +212,19 @@ Examples:
 urn:unitsml:q:luminous_intensity // By short name
 urn:unitsml:q:length             // length quantity
 
-urn:unitsml:q:nist:NISTq12 // velocity quantity
+// By UnitsML identifier
+urn:unitsml:q:q:length             // length quantity
+urn:unitsml:q:q:velocity           // velocity quantity
+urn:unitsml:q:q:luminous_intensity // luminous intensity
+
+// By NIST identifier
+urn:unitsml:q:NISTq1       // length quantity
+urn:unitsml:q:NISTq12      // velocity quantity
+urn:unitsml:q:NISTq7       // luminous intensity
+
+// By hierarchical identifier
+urn:unitsml:q:unitsml:q:velocity  // velocity quantity
+urn:unitsml:q:nist:NISTq12        // velocity quantity
 ----
 
 === Unit systems
@@ -190,6 +242,14 @@ Examples:
 ----
 urn:unitsml:s:si-base            // SI base unit system
 urn:unitsml:s:si-derived-nonspecial
+
+// By UnitsML identifier
+urn:unitsml:s:us:si-base              // SI base unit system
+urn:unitsml:s:us:si-derived-nonspecial
+
+// By NIST identifier
+urn:unitsml:s:SI_base                // SI base unit system
+urn:unitsml:s:SI_derived_nonspecial  // SI derived nonspecial unit system
 ----
 
 
@@ -210,20 +270,26 @@ urn:unitsml:k:length  // Length quantity kind
 urn:unitsml:k:energy  // Energy quantity kind
 ----
 
-=== Type of interval/unit scale
+=== Unit scales
 
-Types of interval represent how values in a scale are related. In the URN scheme, interval types are identified with the type code "i".
+Unit scales represent how values in a measurement scale are related. In the URN scheme, unit scales are identified with the type code "i" (for interval).
 
 [source]
 ----
-urn:unitsml:i:<interval-identifier>
+urn:unitsml:i:<scale-identifier>
 ----
+
+Unit scales are characterized by properties like whether they are continuous or discrete, ordered, logarithmic, and whether they support interval or ratio comparisons.
 
 Examples:
 
 [source]
 ----
-urn:unitsml:i:log      // Logarithmic interval
-urn:unitsml:i:discreet // Discrete interval
+urn:unitsml:i:continuous_ratio    // Continuous ratio scale (e.g., length, mass)
+urn:unitsml:i:continuous_interval // Continuous interval scale (e.g., Celsius temperature)
+urn:unitsml:i:logarithmic_ratio   // Logarithmic ratio scale (e.g., decibels)
+urn:unitsml:i:logarithmic_field   // Logarithmic field scale (e.g., nepers)
+urn:unitsml:i:discrete            // Discrete scale (e.g., counts)
 ----
 
+NOTE: Unit scales are referenced as individual elements and cannot be used in composite expressions.

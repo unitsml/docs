@@ -2,18 +2,34 @@
 
 === General
 
-To ensure consistent interpretation and comparison of composite expressions, a normalization algorithm is defined. This algorithm converts any valid composite expression into a canonical form that can be used for equivalence checking and other operations.
+Composite expressions can be complex and may be represented in various ways.
+This can lead to ambiguity and inconsistency in interpretation.
+
+To address this, a normalization process is defined to convert composite
+expressions into a canonical form.
+
+NOTE: Normalization applies to composite expressions for units (`u`), dimensions (`d`),
+and quantities (`q`). Unit systems (`s`) and unit scales (`i`) cannot be used in
+composite expressions and therefore do not undergo normalization.
 
 === Normalization rules
 
 The normalization process applies the following rules:
 
-. *Ordering*: Elements should be ordered alphabetically within each term.
-. *Simplification*: Common terms in numerator and denominator should be canceled.
-. *Exponent consolidation*: Multiple occurrences of the same element should be consolidated with their exponents added.
-. *Grouping*: Parentheses should only be used when necessary for precedence.
-. *Names*: Short names should be used consistently within expressions.
+. *Ordering*: Elements are ordered within each term. Units are ordered by their
+dimension type (length, time, mass, etc.) and then alphabetically by their name.
+
+. *Simplification*: Common terms in numerator and denominator are canceled.
+
+. *Exponent consolidation*: Multiple occurrences of the same element are
+consolidated with their exponents added.
+
+. *Grouping*: Parentheses are only used when necessary for precedence.
+
+. *Names*: Short names are used consistently within expressions.
+
 . *Form*: Negative exponents are preferred over division for canonical representation.
+
 
 === Normalization algorithm
 
@@ -22,22 +38,26 @@ The normalization algorithm consists of the following steps:
 . *Parsing*: Parse the composite expression into a structured representation.
 
 . *Term extraction*: Identify all terms and their associated exponents.
-   a. For multiplication expressions, extract each term with its positive exponent.
-   b. For division expressions, extract the denominator terms with negative exponents.
-   c. For exponentiation, apply the exponent to the base term.
-   d. For square root, convert to exponentiation with exponent 0.5.
+
+.. For multiplication expressions, extract each term with its positive exponent.
+.. For division expressions, extract the denominator terms with negative exponents.
+.. For exponentiation, apply the exponent to the base term.
+.. For square root, convert to exponentiation with exponent 0.5.
 
 . *Term combination*: Combine like terms by adding their exponents.
-   a. Group terms with the same base element.
-   b. Add the exponents for each group.
-   c. Remove terms with zero exponent.
 
-. *Term sorting*: Sort the terms alphabetically by base element name.
+.. Group terms with the same base element.
+.. Add the exponents for each group.
+.. Remove terms with zero exponent.
+
+. *Term sorting*: Sort the terms alphabetically by their dimension type and then
+by base element name.
 
 . *Expression reconstruction*:
-   a. Use multiplication to combine terms with non-zero exponents.
-   b. Express terms with negative exponents using the `_e_` notation rather than division.
-   c. Only use parentheses when grouping affects the result.
+
+.. Use multiplication to combine terms with non-zero exponents.
+.. Express terms with negative exponents using the `_` notation rather than division.
+.. Only use parentheses when grouping affects the result.
 
 === Step-by-step examples
 
@@ -51,36 +71,38 @@ Here are step-by-step examples of the normalization process:
 Terms: `meter`, `second`, `meter`
 
 *Step 2*: Extract terms and exponents.
-Terms with exponents: `meter^1`, `second^1`, `meter^1`
+Terms with exponents: `meter_1`, `second_1`, `meter_1`
 
 *Step 3*: Combine like terms.
-Grouped terms: `meter^2`, `second^1`
+Grouped terms: `meter_2`, `second_1`
 
-*Step 4*: Sort terms alphabetically.
-Sorted terms: `meter^2`, `second^1`
+*Step 4*: Sort terms alphabetically by their dimension type and then by base element name.
+Sorted terms: `meter_2`, `second_1`
 
 *Step 5*: Reconstruct the expression.
-Normalized expression: `meter_e_2*second`
+
+Normalized expression: `meter_2*second`
 ====
 
 [example]
 ====
-*Original expression*: `(newton*meter_e_2)/(kilogram_e_2)`
+*Original expression*: `(newton*meter_2)/(kilogram_2)`
 
 *Step 1*: Parse the expression.
-Terms: `newton`, `meter_e_2` in numerator, `kilogram_e_2` in denominator
+Terms: `newton`, `meter_2` in numerator, `kilogram_2` in denominator
 
 *Step 2*: Extract terms and exponents.
-Terms with exponents: `newton^1`, `meter^2`, `kilogram^-2`
+Terms with exponents: `newton_1`, `meter_2`, `kilogram_-2`
 
 *Step 3*: Combine like terms.
-Grouped terms: `newton^1`, `meter^2`, `kilogram^-2`
+Grouped terms: `newton_1`, `meter_2`, `kilogram_-2`
 
-*Step 4*: Sort terms alphabetically.
-Sorted terms: `kilogram^-2`, `meter^2`, `newton^1`
+*Step 4*: Sort terms alphabetically by their dimension type and then by base element name.
+Sorted terms: `kilogram_-2`, `meter_2`, `newton_1`
 
 *Step 5*: Reconstruct the expression.
-Normalized expression: `kilogram_e_-2*meter_e_2*newton`
+
+Normalized expression: `kilogram_-2*meter_2*newton`
 ====
 
 [example]
@@ -91,29 +113,36 @@ Normalized expression: `kilogram_e_-2*meter_e_2*newton`
 Terms: `meter` in numerator, `second`, `second` in denominators
 
 *Step 2*: Extract terms and exponents.
-Terms with exponents: `meter^1`, `second^-1`, `second^-1`
+Terms with exponents: `meter_1`, `second_-1`, `second_-1`
 
 *Step 3*: Combine like terms.
-Grouped terms: `meter^1`, `second^-2`
+Grouped terms: `meter_1`, `second_-2`
 
-*Step 4*: Sort terms alphabetically.
-Sorted terms: `meter^1`, `second^-2`
+*Step 4*: Sort terms alphabetically by their dimension type and then by base element name.
+Sorted terms: `meter_1`, `second_-2`
 
 *Step 5*: Reconstruct the expression.
-Normalized expression: `meter*second_e_-2`
+
+Normalized expression: `meter*second_-2`
 ====
 
 === Comparison of expressions
 
-Two composite expressions are considered equivalent if they normalize to the same canonical form. This allows for comparison of expressions that may be written differently but represent the same underlying quantity.
+Two composite expressions are considered equivalent if they normalize to the
+same canonical form.
+
+This allows for comparison of expressions that may be written differently but
+represent the same underlying quantity.
 
 [example]
 ====
 Expression 1: `meter/second`
-Normalized: `meter*second_e_-1`
 
-Expression 2: `meter*second_e_-1`
-Normalized: `meter*second_e_-1`
+Normalized: `meter*second_-1`
+
+Expression 2: `meter*second_-1`
+
+Normalized: `meter*second_-1`
 
 Result: These expressions are equivalent.
 ====
@@ -121,9 +150,11 @@ Result: These expressions are equivalent.
 [example]
 ====
 Expression 1: `newton*meter`
+
 Normalized: `meter*newton`
 
 Expression 2: `meter*newton`
+
 Normalized: `meter*newton`
 
 Result: These expressions are equivalent.

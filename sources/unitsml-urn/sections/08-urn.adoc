@@ -1,7 +1,13 @@
 
 == URN Specification for "unitsml" NID
 
+=== General
+
+This clause specifies the syntax for the UnitsML URN namespace.
+
 === NID Definitions
+
+The NID for the UnitsML URN namespace is defined as follows:
 
 [source]
 ----
@@ -10,31 +16,57 @@ NID = "unitsml"
 
 === Syntax for the NSS (Namespace Specific String)
 
-The general syntax for the unitsml NSS follows this pattern:
+The general syntax for the `unitsml` NSS follows this pattern:
 
 [source]
 ----
 NSS = element-reference / composite-expression
 element-reference = element-type ":" element-id
-composite-expression = element-type "::" expression
+composite-expression = composite-element-type "::" expression
 element-type = "u" / "d" / "p" / "q" / "s" / "k" / "i"
-element-id = number / name / hierarchical-id / prefix-with-power
+composite-element-type = "u" / "d" / "q"
+element-id = number / name / native-id / hierarchical-id / prefix-with-power
 expression = term *( operator term )
 ----
 
-==== Element type definitions
+The element reference syntax is used to identify a specific element in the
+UnitsML namespace.
+
+==== Element Reference Types
+
+Different forms of element references are supported:
+
+* *Simple name reference*: References an element by its unique short name
+  ** Example: `urn:unitsml:u:meter` for the meter unit
+  ** Example: `urn:unitsml:d:length` for the length dimension
+
+* *Native ID reference*: References an element by its native ID from the UnitsDB database
+  ** Example: `urn:unitsml:u:u:meter` for the meter unit
+  ** Example: `urn:unitsml:d:d:length` for the length dimension
+  ** Example: `urn:unitsml:u:NISTu1` for the meter unit (NIST identifier)
+  ** Example: `urn:unitsml:d:NISTd1` for the length dimension (NIST identifier)
+
+* *Hierarchical ID reference*: References an element by a system-specific identifier
+  ** Example: `urn:unitsml:u:unitsml:u:meter` for the meter unit
+  ** Example: `urn:unitsml:d:unitsml:d:length` for the length dimension
+  ** Example: `urn:unitsml:u:nist:NISTu1` for the meter unit (NIST identifier)
+  ** Example: `urn:unitsml:d:nist:NISTd1` for the length dimension (NIST identifier)
 
 [source]
 ----
 number = 1*DIGIT
 name = 1*( ALPHA / DIGIT / "_" / "-" )
+native-id = ("u:" / "d:" / "p:" / "q:" / "us:") name / "NIST" element-type 1*DIGIT ["." *native-element-part]
+native-element-part = element-type [prefix-part] ["e" ["-"] number "/" number]
+prefix-part = "p" number "'" number
 hierarchical-id = name *( ":" name )
 prefix-with-power = base ":" power
 base = number
 power = ["-"] number
 ----
 
-==== Expression syntax
+The composite expression syntax is used to represent complex units, dimensions,
+and quantities.
 
 [source]
 ----
@@ -43,10 +75,9 @@ simple-term = name [exponent]
 grouped-term = "(" expression ")" [exponent]
 function-term = function-name "(" expression ")"
 function-name = "sqrt"
-exponent = "_e_" exponent-value
+exponent = "_" exponent-value
 exponent-value = number / fraction / grouped-exponent
 fraction = "(" number "/" number ")"
 grouped-exponent = "(" ["-"] number ["." number] ")"
 operator = "*" / "/"
 ----
-
