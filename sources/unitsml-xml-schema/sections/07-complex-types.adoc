@@ -1,0 +1,9 @@
+== Complex types
+
+[lutaml_xsd,schemas/unitsml-v1.0-csd04.xsd,schema,skip_rendering_of=annotation]
+----
+{% for item in schema.complex_type %}
+include::../templates/_complex_type.adoc.liquid[]
+
+{% endfor %}
+----
