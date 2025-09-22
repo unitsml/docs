@@ -1,0 +1,45 @@
+= CalConnect Standard: UnitsML XML schema specification
+:title: UnitsML XML schema specification
+:docnumber: 36811
+:copyright-year: 2025
+:doctype: standard
+:edition: 1
+:status: committee-draft
+:revdate: 2025-08-22
+:published-date: 2025-08-22
+:technical-committee: TC UNITS
+:fullname: Ronald Tse
+:surname: Tse
+:givenname: Ronald
+:affiliation: Ribose Inc.
+:fullname_2: Suleman Uzair
+:surname_2: Uzair
+:givenname_2: Suleman
+:affiliation_2: Ribose Inc.
+:imagesdir: images
+:mn-document-class: cc
+:mn-output-extensions: xml,html,pdf,rxl
+:local-cache-only:
+:data-uri-image:
+
+include::sections/00-foreword.adoc[]
+
+include::sections/00-intro.adoc[]
+
+include::sections/01-scope.adoc[]
+
+include::sections/02-normrefs.adoc[]
+
+include::sections/03-terms.adoc[]
+
+include::sections/04-conventions.adoc[]
+
+include::sections/05-schema.adoc[]
+
+include::sections/06-elements.adoc[]
+
+include::sections/07-complex-types.adoc[]
+
+include::sections/08-attribute-groups.adoc[]
+
+include::sections/99-bibliography.adoc[]

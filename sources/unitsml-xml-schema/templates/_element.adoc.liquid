@@ -1,0 +1,136 @@
+{%# Documentation #%}
+{%liquid
+  assign item_attributes = schema | attributes: item
+  assign item_children = schema | child_elements: item
+  assign used_by_items = schema | used_by: item
+%}
+{% capture docs %}
+{% for paragraph in item.annotation.documentation %}
+{{ paragraph.content }}
+
+{% endfor %}
+{% endcapture %}
+
+[[xsd_{{item.name}}]]
+=== `<{{ item.name }}>`
+
+==== General
+
+{{ docs }}
+
+{% if used_by_items.size > 0 %}
+{% comment %}
+  TODO: used_by_elements should return the element, not an anchor.
+  There should be 0 Metanorma things in Lutaml liquid drops.
+  TODO: Make the following work
+  {% for used_by in used_by_elements %}
+  * {{ used_by.name }} (<<xsd_{{used_by.name}}>>)
+
+  {% endfor %}
+{% endcomment %}
+This element is used by:
+
+{% for used_by in used_by_items %}
+* {{ used_by }}
+
+{% endfor %}
+{% endif %}
+
+==== Attributes
+
+{% if item_attributes.size > 0 %}
+{% for attribute in item_attributes %}
+{% capture attribute_docs %}
+{% for paragraph in attribute.annotation.documentation %}
+{{ paragraph.content }}
+
+{% endfor %}
+{% endcapture %}
+`@{{ attribute.name }}`:: `{{ attribute.type }}` `[{{ attribute | min_max_arg: }}]`
+{% if attribute_docs %}
++
+--
+{{ attribute_docs }}
+--
+{% endif %}
+
+{% endfor %}
+{% else %}
+No attributes defined.
+{% endif %}
+
+==== Content model
+
+{% comment %}
+TODO: Not all elements have type?
+{% endcomment %}
+
+This element is specified the type {{ item.type }} (<<xsd_{{item.type}}>>).
+
+{% comment %}
+TODO: The "content model" section needs to describe sequence, anyOf, allOf,
+choice, etc, in proper hierarchy.
+{% endcomment %}
+
+{% if item_children.size > 0 %}
+
+{% for child in item_children %}
+{% assign item_name = child.ref || child.name %}
+{% if item_name %}
+{% capture child_docs %}
+{% for paragraph in child.annotation.documentation %}
+{{ paragraph.content }}
+
+{% endfor %}
+{% endcapture %}
+
+{% comment %}
+  {# TODO: cardinality_representation is very weird. We don't want a filter like this. We want direct access to the model instead. #}
+  {{ child.name }}:: `{{ child.type }}` ({{ child.minOccurs }}..{{ child.maxOccurs }})
+{% endcomment %}
+{{ item_name }}:: `{{ child.type }}` {{ child | cardinality_representation: }}
+{% if child_docs %}
++
+--
+{{ child_docs }}
+--
+{% endif %}
+
+{% else %}
+{{ child }}
+
+{% endif %}
+{% endfor %}
+
+{% else %}
+No child elements defined.
+{% endif %}
+
+
+[example]
+.Illustrative usage of `<{{ item.name }}>`
+====
+[source,xml]
+-----
+<{{item.name}}{{ item_attributes | xml_representations: schema }}
+{%- if item_children.size > 0 -%}>
+{%- for child in item_children -%}
+{% assign item_name = child.ref || child.name %}
+{%- if item_name %}
+  <{{item_name}}> ... </{{ item_name }}> {{ child | cardinality_representation: }}
+{%- else %}
+  {{ child }}
+{%- endif %}
+{%- endfor %}
+</{{item.name}}>
+{%- else -%}
+/>
+{% endif %}
+-----
+====
+
+.XSD source of `<{{ item.name }}>`
+[source,xml]
+-----
+{{ item | to_xml_representation: skip_rendering_of }}
+-----

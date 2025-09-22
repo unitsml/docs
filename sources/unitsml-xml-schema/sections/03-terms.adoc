@@ -1,0 +1,48 @@
+== Terms and definitions
+
+=== unit
+
+standard quantity used to express a physical quantity
+
+=== basic unit
+
+unit not derived from other units
+
+=== composite unit
+
+unit derived from two or more basic units conjoined by multiplication or division
+
+=== prefix
+
+modifier to a unit with a fixed factor
+
+=== quantity
+
+type of measurement that is represented by a unit
+
+[example]
+distance, moment of force, temperature, energy.
+
+=== dimension
+
+basic physical quantity that can be expressed in terms of fundamental
+quantities
+
+[example]
+length, mass, time, plane angle.
+
+=== unit name
+
+name of a unit
+
+=== unit symbol
+
+abbreviated representation of a unit
+
+=== unit reference
+
+reference identifier to a unit in a database
+
+=== unit dimensions
+
+fundamental quantities to which the unit applies

@@ -1,8 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
    Units Markup language (UnitsML) Schema
-    Website: http://unitsml.nist.gov
+    Website: https://www.unitsml.org
     Version History: http://unitsml.nist.gov/Schema/schema_changes.txt
+
+Copyright (C) CalConnect 2024 - 2025. All Rights Reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+1. Redistributions of source code must retain the above copyright notice,
+	this list of conditions and the following disclaimer.
+
+2. Redistributions in binary form must reproduce the above copyright notice,
+	this list of conditions and the following disclaimer in the documentation
+	and/or other materials provided with the distribution.
+
+3. Neither the name of the copyright holder nor the names of its contributors
+	may be used to endorse or promote products derived from this software
+	without specific prior written permission.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE
+ARE DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE
+LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR
+CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF
+SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
+INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
+CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE)
+ARISING IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF
+THE POSSIBILITY OF SUCH DAMAGE.
 
 Copyright (C) OASIS Open 2006 - 2011. All Rights Reserved.
 
@@ -36,7 +64,13 @@ ANY IMPLIED WARRANTIES OF MERCHANTABILITY OR FITNESS FOR A PARTICULAR
 PURPOSE.
 
 -->
-<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-1.0" targetNamespace="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-1.0" elementFormDefault="qualified" attributeFormDefault="unqualified" version="1.0-CSD-04">
+<xsd:schema
+	xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+	xmlns="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-1.0"
+	targetNamespace="urn:oasis:names:tc:unitsml:schema:xsd:UnitsMLSchema-1.0"
+	elementFormDefault="qualified"
+	attributeFormDefault="unqualified"
+	version="1.0-CSD-04">
 	<xsd:import namespace="http://www.w3.org/XML/1998/namespace" schemaLocation="http://www.w3.org/2009/01/xml.xsd"/>
 	<!--=== Root-Node of an UnitsML document ===-->
 	<xsd:element name="UnitsML" type="UnitsMLType">
@@ -115,7 +149,7 @@ PURPOSE.
 	</xsd:element>
 	<xsd:element name="Float64ConversionFrom" type="Float64ConversionFromType">
 		<xsd:annotation>
-			<xsd:documentation>Element for providing factors for a conversion equation from another unit; y = d + ((b / c) (x + a))</xsd:documentation>
+			<xsd:documentation>Element for providing factors for a conversion equation from another unit; stem:[y = d + ((b / c) (x + a))]</xsd:documentation>
 		</xsd:annotation>
 	</xsd:element>
 	<xsd:element name="ConversionNote" type="NoteType">
@@ -837,7 +871,7 @@ PURPOSE.
 		<xsd:sequence>
 			<xsd:element ref="Float64ConversionFrom" minOccurs="0" maxOccurs="unbounded">
 				<xsd:annotation>
-					<xsd:documentation>Element for providing factors for a conversion equation from another unit; y = d + ((b / c) (x + a)). Note: The related "conversion to" equation is a simple inversion of the above equation; i.e., x = ((c / b) (y - d)) - a.</xsd:documentation>
+					<xsd:documentation>Element for providing factors for a conversion equation from another unit; stem:[y = d + ((b / c) (x + a))]. Note: The related "conversion to" equation is a simple inversion of the above equation; i.e., stem:[x = ((c / b) (y - d)) - a].</xsd:documentation>
 				</xsd:annotation>
 			</xsd:element>
 			<xsd:element ref="SpecialConversionFrom" minOccurs="0" maxOccurs="unbounded">
@@ -854,7 +888,7 @@ PURPOSE.
 	</xsd:complexType>
 	<xsd:complexType name="Float64ConversionFromType">
 		<xsd:annotation>
-			<xsd:documentation>Type for the element for providing factors for a conversion equation from another unit; y = d + ((b / c) (x + a))</xsd:documentation>
+			<xsd:documentation>Type for the element for providing factors for a conversion equation from another unit; stem:[y = d + ((b / c) (x + a))]</xsd:documentation>
 		</xsd:annotation>
 		<xsd:sequence>
 			<xsd:element ref="ConversionNote" minOccurs="0" maxOccurs="unbounded"/>
