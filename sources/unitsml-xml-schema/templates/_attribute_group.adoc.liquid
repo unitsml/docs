@@ -1,0 +1,66 @@
+{%# Documentation #%}
+{%liquid
+  assign item_attributes = schema | attributes: item
+  assign used_by_items = schema | used_by: item
+%}
+{% capture docs %}
+{% for paragraph in item.annotation.documentation %}
+{{ paragraph.content }}
+
+{% endfor %}
+{% endcapture %}
+
+[[xsd_{{item.name}}]]
+=== `{{ item.name }}`
+
+==== Group
+
+{{ docs }}
+
+{% if used_by_items.size > 0 %}
+{% comment %}
+  TODO: used_by_* should return the element, not an anchor.
+  There should be 0 Metanorma things in Lutaml liquid drops.
+  TODO: Make the following work
+
+  {% for used_by in used_by_items %}
+    * {{ used_by.name }} (<<xsd_{{used_by.name}}>>)
+
+  {% endfor %}
+{% endcomment %}
+This attribute group is used by:
+
+{% for used_by in used_by_items %}
+* {{ used_by }}
+
+{% endfor %}
+{% endif %}
+
+==== Attributes
+
+{% if item_attributes.size > 0 %}
+{% for attribute in item_attributes %}
+{% capture attribute_docs %}
+{% for paragraph in attribute.annotation.documentation %}
+{{ paragraph.content }}
+
+{% endfor %}
+{% endcapture %}
+`@{{ attribute.name }}`:: `{{ attribute.type }}` `[{{ attribute | min_max_arg: }}]`
+{% if attribute_docs %}
++
+--
+{{ attribute_docs }}
+--
+{% endif %}
+
+{% endfor %}
+{% else %}
+No attributes defined.
+{% endif %}
+
+.XSD source of `<{{ item.name }}>`
+[source,xml]
+-----
+{{ item | to_xml_representation: skip_rendering_of }}
+-----

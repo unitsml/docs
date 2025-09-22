@@ -1,0 +1,9 @@
+== Introduction
+
+The UnitsML XML Schema defines the structure and content of the
+representation of UnitsML objects in XML.
+
+It is defined as an XML Schema definition (XSD) for use in XML
+applications. The schema is intended to be used in conjunction with the
+UnitsML specification, which defines the semantics of the UnitsML
+vocabulary.
