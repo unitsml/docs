@@ -1,10 +1,10 @@
 {%# Documentation #%}
 {%liquid
-  assign item_attributes = schema | attributes: item
-  assign item_children = schema | child_elements: item
-  assign used_by_items = schema | used_by: item
-  assign item_element_order = item | resolved_element_order:
-  assign elements = schema | child_elements: item
+  assign item_attributes = item.attribute_elements
+  assign item_children = item.child_elements
+  assign used_by_items = item.used_by
+  assign item_element_order = item.resolved_element_order
+  assign elements = item_children
 %}
 {% capture docs %}
 {% for paragraph in item.annotation.documentation %}
@@ -33,7 +33,7 @@
 This complex type is used by:
 
 {% for used_by in used_by_items %}
-* {{ used_by }}
+* {{ used_by.name }} (<<xsd_{{ used_by.name }}, {{ used_by.name }}>>)
 
 {% endfor %}
 {% endif %}
@@ -48,7 +48,16 @@ This complex type is used by:
 
 {% endfor %}
 {% endcapture %}
-`@{{ attribute.name }}`:: `{{ attribute.type }}` `[{{ attribute | min_max_arg: }}]`
+
+{% capture attr_name %}
+{%- if attribute.ref -%}
+{{- attribute.ref -}}
+{%- else -%}
+{{- attribute.name -}}
+{%- endif -%}
+{% endcapture %}
+
+`@{{ attr_name }}`:: {% if attribute.type %}`{{ attribute.type }}`{% endif %} `[{{ attribute.cardinality }}]`
 {% if attribute_docs %}
 +
 --
@@ -84,7 +93,7 @@ choice, etc, in proper hierarchy.
   {# TODO: cardinality_representation is very weird. We don't want a filter like this. We want direct access to the model instead. #}
   {{ child.name }}:: `{{ child.type }}` ({{ child.minOccurs }}..{{ child.maxOccurs }})
 {% endcomment %}
-{{ item_name }}:: `{{ child.type }}` {{ child | cardinality_representation: }}
+{{ item_name }}:: {% if child.type %}`{{ child.type }}`{% endif %} [{{ child.min_occurrences }}..{{ child.max_occurrences }}]
 {% if child_docs %}
 +
 --
@@ -129,5 +138,5 @@ No child elements defined.
 .XSD source of `<{{ item.name }}>`
 [source,xml]
 -----
-{{ item | to_xml_representation: skip_rendering_of }}
+{{ item.to_formatted_xml }}
 -----
