@@ -1,7 +1,8 @@
 {%# Documentation #%}
+
 {%liquid
-  assign item_attributes = schema | attributes: item
-  assign used_by_items = schema | used_by: item
+  assign item_attributes = item.attribute_elements
+  assign used_by_items = item.used_by
 %}
 {% capture docs %}
 {% for paragraph in item.annotation.documentation %}
@@ -31,7 +32,19 @@
 This attribute group is used by:
 
 {% for used_by in used_by_items %}
-* {{ used_by }}
+{% capture description %}
+{% for paragraph in used_by.annotation.documentation %}
+{{ paragraph.content }}
+
+{% endfor %}
+{% endcapture %}
+@{{ used_by.name }}::
+{% if description %}
++
+--
+{{ description }}
+--
+{% endif %}
 
 {% endfor %}
 {% endif %}
@@ -46,7 +59,7 @@ This attribute group is used by:
 
 {% endfor %}
 {% endcapture %}
-`@{{ attribute.name }}`:: `{{ attribute.type }}` `[{{ attribute | min_max_arg: }}]`
+`@{{ attribute.name }}`:: `{{ attribute.type }}` `[{{ attribute.cardinality }}]`
 {% if attribute_docs %}
 +
 --
@@ -60,7 +73,13 @@ No attributes defined.
 {% endif %}
 
 .XSD source of `<{{ item.name }}>`
+
+{%liquid
+  assign xml_representation = item.to_formatted_xml
+  assign item_xml_representation = item | to_xml_representation:
+%}
+
 [source,xml]
 -----
-{{ item | to_xml_representation: skip_rendering_of }}
+{{ xml_representation }}
 -----
