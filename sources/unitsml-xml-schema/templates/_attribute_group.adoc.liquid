@@ -19,16 +19,6 @@
 {{ docs }}
 
 {% if used_by_items.size > 0 %}
-{% comment %}
-  TODO: used_by_* should return the element, not an anchor.
-  There should be 0 Metanorma things in Lutaml liquid drops.
-  TODO: Make the following work
-
-  {% for used_by in used_by_items %}
-    * {{ used_by.name }} (<<xsd_{{used_by.name}}>>)
-
-  {% endfor %}
-{% endcomment %}
 This attribute group is used by:
 
 {% for used_by in used_by_items %}

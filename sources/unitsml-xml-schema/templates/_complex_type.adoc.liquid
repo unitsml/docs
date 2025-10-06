@@ -21,15 +21,6 @@
 {{ docs }}
 
 {% if used_by_items.size > 0 %}
-{% comment %}
-  TODO: used_by_items should return the element, not an anchor.
-  There should be 0 Metanorma things in Lutaml liquid drops.
-  TODO: Make the following work
-  {% for used_by in used_by_items %}
-  * {{ used_by.name }} (<<xsd_{{used_by.name}}>>)
-
-  {% endfor %}
-{% endcomment %}
 This complex type is used by:
 
 {% for used_by in used_by_items %}
@@ -89,10 +80,6 @@ choice, etc, in proper hierarchy.
 {% endfor %}
 {% endcapture %}
 
-{% comment %}
-  {# TODO: cardinality_representation is very weird. We don't want a filter like this. We want direct access to the model instead. #}
-  {{ child.name }}:: `{{ child.type }}` ({{ child.minOccurs }}..{{ child.maxOccurs }})
-{% endcomment %}
 {{ item_name }}:: {% if child.type %}`{{ child.type }}`{% endif %} [{{ child.min_occurrences }}..{{ child.max_occurrences }}]
 {% if child_docs %}
 +
@@ -118,12 +105,25 @@ No child elements defined.
 ====
 [source,xml]
 -----
-<...{{ item_attributes | xml_representations: schema }}
+<...{% for attr in item_attributes %}
+{%- capture type %}
+{%- if attr.referenced_type %}
+{{-  attr.referenced_type }}
+{%- elsif attr.simple_type.restriction %}
+{{- attr.simple_type.restriction.base }} (value comes from list: '{{ attr.simple_type.restriction.enumeration | map: "value" | join: "'|'" }}')
+{%- elsif attr.simple_type.union %}
+{%- assign union = attr.simple_type.union %}
+{%- assign restriction = union.simple_type.restriction %}
+{{ union.member_types }} (value comes from list: {{ restriction.enumeration | map: "value" | join: "'|'" }})
+{%- endif %}
+{%- endcapture %}
+  {{ attr.referenced_name }}="{{ type }}" [{{ attr.cardinality }}]
+{%- endfor %}
 {%- if elements.size > 0 -%}>
 {%- for child in elements -%}
 {% assign element_name = child.ref || child.name %}
 {%- if element_name %}
-  <{{ element_name }}> ... </{{ element_name }}> {{ child | cardinality_representation: }}
+  <{{ element_name }}> ... </{{ element_name }}> [{{ child.min_occurrences }}..{{ child.max_occurrences }}]
 {%- else %}
   {{ child }}
 {%- endif %}
@@ -138,5 +138,5 @@ No child elements defined.
 .XSD source of `<{{ item.name }}>`
 [source,xml]
 -----
-{{ item.to_formatted_xml }}
+{{ item | to_xml_representation: skip_rendering_of }}
 -----
