@@ -1,8 +1,8 @@
 {%# Documentation #%}
 {%liquid
-  assign item_attributes = schema | attributes: item
-  assign item_children = schema | child_elements: item
-  assign used_by_items = schema | used_by: item
+  assign item_attributes = item.attributes
+  assign item_children = item.child_elements
+  assign used_by_items = item.used_by
 %}
 {% capture docs %}
 {% for paragraph in item.annotation.documentation %}
@@ -19,19 +19,11 @@
 {{ docs }}
 
 {% if used_by_items.size > 0 %}
-{% comment %}
-  TODO: used_by_elements should return the element, not an anchor.
-  There should be 0 Metanorma things in Lutaml liquid drops.
-  TODO: Make the following work
-  {% for used_by in used_by_elements %}
-  * {{ used_by.name }} (<<xsd_{{used_by.name}}>>)
-
-  {% endfor %}
-{% endcomment %}
 This element is used by:
 
 {% for used_by in used_by_items %}
-* {{ used_by }}
+{%- assign used_by_name = used_by.ref | default: used_by.name -%}
+* {{ used_by.name }} (<<xsd_{{used_by.name}}>>)
 
 {% endfor %}
 {% endif %}
@@ -46,7 +38,7 @@ This element is used by:
 
 {% endfor %}
 {% endcapture %}
-`@{{ attribute.name }}`:: `{{ attribute.type }}` `[{{ attribute | min_max_arg: }}]`
+`@{{ attribute.name | default: attribute.ref }}`:: {% if attribute.referenced_type %}`{{ attribute.referenced_type }}`::{% endif %} `[{{ attribute.cardinality }}]`
 {% if attribute_docs %}
 +
 --
@@ -75,7 +67,7 @@ choice, etc, in proper hierarchy.
 {% if item_children.size > 0 %}
 
 {% for child in item_children %}
-{% assign item_name = child.ref || child.name %}
+{% assign item_name = child.ref | default: child.name %}
 {% if item_name %}
 {% capture child_docs %}
 {% for paragraph in child.annotation.documentation %}
@@ -84,11 +76,7 @@ choice, etc, in proper hierarchy.
 {% endfor %}
 {% endcapture %}
 
-{% comment %}
-  {# TODO: cardinality_representation is very weird. We don't want a filter like this. We want direct access to the model instead. #}
-  {{ child.name }}:: `{{ child.type }}` ({{ child.minOccurs }}..{{ child.maxOccurs }})
-{% endcomment %}
-{{ item_name }}:: `{{ child.type }}` {{ child | cardinality_representation: }}
+{{ item_name }}:: `{{ child.type }}` [{{ child.min_occurrences }}..{{ child.max_occurrences }}]
 {% if child_docs %}
 +
 --
@@ -112,12 +100,25 @@ No child elements defined.
 ====
 [source,xml]
 -----
-<{{item.name}}{{ item_attributes | xml_representations: schema }}
+<{{item.name}}{% for attr in item_attributes %}
+{%- capture type %}
+{%- if attr.referenced_type %}
+{{-  attr.referenced_type }}
+{%- elsif attr.simple_type.restriction -%}
+{{- attr.simple_type.restriction.base -}} (value comes from list: '{{ attr.simple_type.restriction.enumeration | map: "value" | join: "'|'" }}')
+{%- elsif attr.simple_type.union -%}
+{%- assign union = attr.simple_type.union -%}
+{%- assign restriction = union.simple_type.restriction -%}
+{{- union.member_types }} (value comes from list: {{ restriction.enumeration | map: "value" | join: "'|'" }})
+{%- endif %}
+{%- endcapture %}
+  {{- attr.referenced_name }}="{{ type }}" [{{ attr.cardinality }}]
+{% endfor %}
 {%- if item_children.size > 0 -%}>
 {%- for child in item_children -%}
-{% assign item_name = child.ref || child.name %}
+{% assign item_name = child.ref | default: child.name %}
 {%- if item_name %}
-  <{{item_name}}> ... </{{ item_name }}> {{ child | cardinality_representation: }}
+  <{{item_name}}> ... </{{ item_name }}> [{{ child.min_occurrences }}..{{ child.max_occurrences }}]
 {%- else %}
   {{ child }}
 {%- endif %}
