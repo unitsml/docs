@@ -80,7 +80,7 @@ choice, etc, in proper hierarchy.
 {% endfor %}
 {% endcapture %}
 
-{{ item_name }}:: {% if child.type %}`{{ child.type }}`{% endif %} [{{ child.min_occurrences }}..{{ child.max_occurrences }}]
+{{ item_name }}:: {% if child.referenced_type %}`{{ child.referenced_type }}`{% endif %} [{{ child.min_occurrences }}..{{ child.max_occurrences }}]
 {% if child_docs %}
 +
 --
@@ -118,8 +118,11 @@ No child elements defined.
 {%- endif %}
 {%- endcapture %}
   {{ attr.referenced_name }}="{{ type }}" [{{ attr.cardinality }}]
-{%- endfor %}
-{%- if elements.size > 0 -%}>
+{%- endfor -%}
+{%- if elements.size > 0 -%}
+{% if item_attributes.size > 0 %}
+>
+{%- else -%}>{% endif %}
 {%- for child in elements -%}
 {% assign element_name = child.ref || child.name %}
 {%- if element_name %}

@@ -38,7 +38,7 @@ This element is used by:
 
 {% endfor %}
 {% endcapture %}
-`@{{ attribute.name | default: attribute.ref }}`:: {% if attribute.referenced_type %}`{{ attribute.referenced_type }}`::{% endif %} `[{{ attribute.cardinality }}]`
+`@{{ attribute.name | default: attribute.ref }}`:: {% if attribute.referenced_type %}`{{ attribute.referenced_type }}`{% endif %} `[{{ attribute.cardinality }}]`
 {% if attribute_docs %}
 +
 --
@@ -53,16 +53,7 @@ No attributes defined.
 
 ==== Content model
 
-{% comment %}
-TODO: Not all elements have type?
-{% endcomment %}
-
 This element is specified the type {{ item.type }} (<<xsd_{{item.type}}>>).
-
-{% comment %}
-TODO: The "content model" section needs to describe sequence, anyOf, allOf,
-choice, etc, in proper hierarchy.
-{% endcomment %}
 
 {% if item_children.size > 0 %}
 
@@ -76,7 +67,7 @@ choice, etc, in proper hierarchy.
 {% endfor %}
 {% endcapture %}
 
-{{ item_name }}:: `{{ child.type }}` [{{ child.min_occurrences }}..{{ child.max_occurrences }}]
+{{ item_name }}:: {% if child.referenced_type %}`{{ child.referenced_type }}`{% endif %} [{{ child.min_occurrences }}..{{ child.max_occurrences }}]
 {% if child_docs %}
 +
 --
@@ -112,9 +103,12 @@ No child elements defined.
 {{- union.member_types }} (value comes from list: {{ restriction.enumeration | map: "value" | join: "'|'" }})
 {%- endif %}
 {%- endcapture %}
-  {{- attr.referenced_name }}="{{ type }}" [{{ attr.cardinality }}]
-{% endfor %}
-{%- if item_children.size > 0 -%}>
+  {{ attr.referenced_name }}="{{ type }}" [{{ attr.cardinality }}]
+{%- endfor -%}
+{%- if item_children.size > 0 -%}
+{% if item_attributes.size > 1 %}
+>
+{%- else -%}>{% endif %}
 {%- for child in item_children -%}
 {% assign item_name = child.ref | default: child.name %}
 {%- if item_name %}
@@ -124,7 +118,7 @@ No child elements defined.
 {%- endif %}
 {%- endfor %}
 </{{item.name}}>
-{%- else -%}
+{%- else %}
 />
 {% endif %}
 -----
