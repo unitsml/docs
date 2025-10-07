@@ -112,9 +112,14 @@ No child elements defined.
 {%- elsif attr.simple_type.restriction %}
 {{- attr.simple_type.restriction.base }} (value comes from list: '{{ attr.simple_type.restriction.enumeration | map: "value" | join: "'|'" }}')
 {%- elsif attr.simple_type.union %}
-{%- assign union = attr.simple_type.union %}
-{%- assign restriction = union.simple_type.restriction %}
-{{ union.member_types }} (value comes from list: {{ restriction.enumeration | map: "value" | join: "'|'" }})
+{%- assign union = attr.simple_type.union -%}
+{% capture enums %}
+{%- for u_s_type in union.simple_type -%}
+{% assign something = u_s_type.restriction %}
+{{- u_s_type.restriction.enumeration | map: "value" | join: "'|'" -}}
+{%- endfor -%}
+{% endcapture %}
+{{- union.member_types }} (value comes from list: {{ enums }})
 {%- endif %}
 {%- endcapture %}
   {{ attr.referenced_name }}="{{ type }}" [{{ attr.cardinality }}]
@@ -132,7 +137,7 @@ No child elements defined.
 {%- endif %}
 {%- endfor %}
 </...>
-{%- else -%}
+{%- else %}
 />
 {% endif %}
 -----
