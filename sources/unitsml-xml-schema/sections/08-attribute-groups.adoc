@@ -3,7 +3,7 @@
 [lutaml_xsd,schemas/unitsml-v1.0-csd04.xsd,schema,skip_rendering_of=annotation]
 ----
 {% for item in schema.attribute_group %}
-include::../templates/_attribute_group.adoc.liquid[]
+include::../templates/_attribute_group.adoc[]
 
 {% endfor %}
 ----
