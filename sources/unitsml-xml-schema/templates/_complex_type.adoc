@@ -40,15 +40,7 @@ This complex type is used by:
 {% endfor %}
 {% endcapture %}
 
-{% capture attr_name %}
-{%- if attribute.ref -%}
-{{- attribute.ref -}}
-{%- else -%}
-{{- attribute.name -}}
-{%- endif -%}
-{% endcapture %}
-
-`@{{ attr_name }}`:: {% if attribute.type %}`{{ attribute.type }}`{% endif %} `[{{ attribute.cardinality }}]`
+`@{{ attribute.ref | default: attribute.name }}`:: {% if attribute.referenced_type %}`{{ attribute.referenced_type }}`{% endif %} `[{{ attribute.cardinality }}]`
 {% if attribute_docs %}
 +
 --

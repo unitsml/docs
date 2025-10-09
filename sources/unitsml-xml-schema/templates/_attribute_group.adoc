@@ -49,7 +49,7 @@ This attribute group is used by:
 
 {% endfor %}
 {% endcapture %}
-`@{{ attribute.name }}`:: `{{ attribute.type }}` `[{{ attribute.cardinality }}]`
+`@{{ attribute.name | default: attribute.ref }}`:: {% if attribute.referenced_type %}`{{ attribute.referenced_type }}`{% endif %} `[{{ attribute.cardinality }}]`
 {% if attribute_docs %}
 +
 --
@@ -64,12 +64,7 @@ No attributes defined.
 
 .XSD source of `<{{ item.name }}>`
 
-{%liquid
-  assign xml_representation = item.to_formatted_xml
-  assign item_xml_representation = item | to_xml_representation:
-%}
-
 [source,xml]
 -----
-{{ xml_representation }}
+{{ item | to_xml_representation: skip_rendering_of }}
 -----
