@@ -22,7 +22,6 @@
 This element is used by:
 
 {% for used_by in used_by_items %}
-{%- assign used_by_name = used_by.ref | default: used_by.name -%}
 * {{ used_by.name }} (<<xsd_{{used_by.name}}>>)
 
 {% endfor %}

@@ -1,6 +1,6 @@
 == Attribute groups
 
-[lutaml_xsd,schemas/unitsml-v1.0-csd04.xsd,schema,skip_rendering_of=annotation]
+[lutaml_xsd,schemas/unitsml-v1.0-csd04.xsd,schema,skip_rendering_of=annotation,include_path=templates]
 ----
 {% for item in schema.attribute_group %}
 include::../templates/_attribute_group.adoc[]

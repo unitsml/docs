@@ -1,0 +1,20 @@
+{%- assign element_name = child.ref || child.name -%}
+{%- assign mixed = child.mixed | default: false -%}
+{%- if mixed -%}
+  <!-- Mixed Content -->
+{%- for element in child.resolved_element_order %}{% render "child_elements", child: element %}{% endfor -%}
+{%- elsif child.is_sequence? %}
+  Start Sequence {% if child.cardinality %}[{{ child.min_occurrences }}..{{ child.max_occurrences }}]{% endif %}
+{%- for element in child.resolved_element_order -%}{% if element.is_annotation? %}{% continue %}{% endif %}
+{%- render "child_elements", child: element %}
+{%- endfor %}
+  End Sequence
+{%- elsif child.is_any? -%}
+  Allow any elements from any namespace (skip validation). [{{ child.min_occurrences }}..{{ child.max_occurrences }}]
+{%- elsif child.is_all? -%}
+  Allow all elements from any namespace (skip validation). [{{ child.min_occurrences }}..{{ child.max_occurrences }}]
+{%- elsif child.is_choice? -%}
+  One of the elements [{{ child.min_occurrences }}..{{ child.max_occurrences }}] times.
+{%- elsif element_name -%}
+  <{{ element_name }}> ... </{{ element_name }}> [{{ child.min_occurrences }}..{{ child.max_occurrences }}]
+{%- endif %}

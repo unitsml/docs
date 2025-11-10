@@ -85,7 +85,6 @@ choice, etc, in proper hierarchy.
 
 {% endif %}
 {% endfor %}
-
 {% else %}
 No child elements defined.
 {% endif %}
@@ -120,13 +119,8 @@ No child elements defined.
 {% if item_attributes.size > 0 %}
 >
 {%- else -%}>{% endif %}
-{%- for child in elements -%}
-{% assign element_name = child.ref || child.name %}
-{%- if element_name %}
-  <{{ element_name }}> ... </{{ element_name }}> [{{ child.min_occurrences }}..{{ child.max_occurrences }}]
-{%- else %}
-  {{ child }}
-{%- endif %}
+{%- for child in item_element_order -%}{% if child.is_annotation? %}{% continue %}{% endif %}
+{%- render "child_elements", child: child -%}
 {%- endfor %}
 </...>
 {%- else %}
