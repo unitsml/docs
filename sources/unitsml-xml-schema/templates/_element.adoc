@@ -1,8 +1,10 @@
 {%# Documentation #%}
 {%liquid
+  assign item_complex_type = item.referenced_complex_type
   assign item_attributes = item.attributes
   assign item_children = item.child_elements
   assign used_by_items = item.used_by
+  assign elements = item_complex_type.direct_child_elements
 %}
 {% capture docs %}
 {% for paragraph in item.annotation.documentation %}
@@ -109,17 +111,17 @@ No child elements defined.
 {%- endcapture %}
   {{ attr.referenced_name }}="{{ type }}" [{{ attr.cardinality }}]
 {%- endfor -%}
-{%- if item_children.size > 0 -%}
+{%- if elements.size > 0 -%}
 {% if item_attributes.size > 1 %}
 >
 {%- else -%}>{% endif %}
-{%- for child in item_children -%}
-{% assign item_name = child.ref | default: child.name %}
-{%- if item_name %}
-  <{{item_name}}> ... </{{ item_name }}> [{{ child.min_occurrences }}..{{ child.max_occurrences }}]
-{%- else %}
-  {{ child }}
-{%- endif %}
+  {% if item_complex_type.mixed %}<!-- Mixed content -->{%- endif %}
+{%- for child in elements -%}
+  {%- if child.is_annotation? or child.is_attribute? or child.is_attribute_group? -%}
+  {%- continue -%}
+  {%- else %}
+  {% render "child_elements", child: child -%}
+  {% endif -%}
 {%- endfor %}
 </{{item.name}}>
 {%- else %}
