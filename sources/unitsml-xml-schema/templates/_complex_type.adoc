@@ -4,7 +4,7 @@
   assign item_children = item.child_elements
   assign used_by_items = item.used_by
   assign item_element_order = item.resolved_element_order
-  assign elements = item_children
+  assign elements = item.direct_child_elements
 %}
 {% capture docs %}
 {% for paragraph in item.annotation.documentation %}
@@ -119,8 +119,13 @@ No child elements defined.
 {% if item_attributes.size > 0 %}
 >
 {%- else -%}>{% endif %}
-{%- for child in item_element_order -%}{% if child.is_annotation? %}{% continue %}{% endif %}
-{%- render "child_elements", child: child -%}
+  {% if item.mixed %}<!-- Mixed content -->{% endif %}
+{%- for child in elements -%}
+  {%- if child.is_annotation? or child.is_attribute? or child.is_attribute_group? -%}
+  {%- continue -%}
+  {%- else %}
+  {% render "child_elements", child: child -%}
+  {% endif -%}
 {%- endfor %}
 </...>
 {%- else %}
