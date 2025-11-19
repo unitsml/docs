@@ -1,18 +1,18 @@
 {%- capture cardinality -%}{{ child.min_occurrences }}..{{ child.max_occurrences }}{%- endcapture -%}
-{%- if child.is_sequence? -%}
+{%- if child.sequence? -%}
 {%- assign min_or_max_ocurrs = child.min_occurs | default: child.max_occurs -%}
 {%- if min_or_max_ocurrs -%}{%- assign indent = "  " %}
   Start Sequence [{{ cardinality }}]
-{%- endif -%}{%- for element in child.resolved_element_order %}{%- if element.is_annotation? or element.is_attribute? or element.is_attribute_group? -%}{%- continue -%}{%- else %}
+{%- endif -%}{%- for element in child.resolved_element_order %}{%- if element.annotation? or element.attribute? or element.attribute_group? -%}{%- continue -%}{%- else %}
   {{ indent }}{% render "child_elements", child: element -%}
 {%- endif -%}
 {%- endfor %}
 {%- if min_or_max_ocurrs %}
   End Sequence
 {%- endif -%}
-{%- elsif child.is_any? -%}
+{%- elsif child.any? -%}
   Allow any elements from any namespace ({{ child.process_contents }} validation). [{{ cardinality }}]
-{%- elsif child.is_simple_content? %}
+{%- elsif child.simple_content? %}
   {{ child.base_type }}
 {%- else -%}
 {%- assign element_name = child.ref | default: child.name -%}
