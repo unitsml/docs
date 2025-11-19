@@ -121,7 +121,7 @@ No child elements defined.
 {%- else -%}>{% endif %}
 {%- if item.mixed %}
   <!-- Mixed content -->
-{%- endif -%}{%- for child in elements -%}{%- if child.is_annotation? or child.is_attribute? or child.is_attribute_group? -%}{%- continue -%}{%- else -%}
+{%- endif -%}{%- for child in elements -%}{%- if child.annotation? or child.attribute? or child.attribute_group? -%}{%- continue -%}{%- else -%}
 {% render "child_elements", child: child -%}
 {% endif -%}
 {% endfor %}
