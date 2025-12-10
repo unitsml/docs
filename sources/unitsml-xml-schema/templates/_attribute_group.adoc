@@ -62,9 +62,11 @@ This attribute group is used by:
 No attributes defined.
 {% endif %}
 
+{%- capture xmlns -%}xmlns="http://www.w3.org/2001/XMLSchema" {% endcapture %}
+
 .XSD source of `<{{ item.name }}>`
 
 [source,xml]
 -----
-{{ item | to_xml_representation: skip_rendering_of }}
+{{ item | to_xml_representation: skip_rendering_of | remove: xmlns }}
 -----
