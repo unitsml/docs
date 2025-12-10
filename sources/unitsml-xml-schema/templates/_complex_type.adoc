@@ -106,14 +106,13 @@ No child elements defined.
 {%- assign union = attr.simple_type.union -%}
 {% capture enums %}
 {%- for u_s_type in union.simple_type -%}
-{% assign something = u_s_type.restriction %}
-{{- u_s_type.restriction.enumeration | map: "value" | join: "'|'" -}}
+[ {{ u_s_type.restriction.base }} (value comes from list: {{- u_s_type.restriction.enumeration | map: "value" | join: "'|'" -}}) ]
 {%- endfor -%}
-{% endcapture %}
-{{- union.member_types }} (value comes from list: {{ enums }})
+{% endcapture -%}
+union of: [ {{ union.member_types }}, {{ enums }} ]
 {%- endif %}
 {%- endcapture %}
-  {{ attr.referenced_name }}="{{ type }}" [{{ attr.cardinality }}]
+  {{ attr.referenced_name }}="{{ attr.fixed | default: type }}" [{{ attr.cardinality }}]
 {%- endfor -%}
 {%- if elements.size > 0 -%}
 {% if item_attributes.size > 0 %}
@@ -131,9 +130,10 @@ No child elements defined.
 {% endif %}
 -----
 ====
+{%- capture xmlns -%}xmlns="http://www.w3.org/2001/XMLSchema" {% endcapture %}
 
 .XSD source of `<{{ item.name }}>`
 [source,xml]
 -----
-{{ item | to_xml_representation: skip_rendering_of }}
+{{ item | to_xml_representation: skip_rendering_of | remove: xmlns }}
 -----

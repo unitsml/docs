@@ -5,7 +5,10 @@ gem "lutaml",
     branch: "update/xsd_support_metanorma_plugin"
 gem "lutaml-model",
     github: "lutaml/lutaml-model",
-    branch: "update/liquid_element_order"
+    branch: "main"
+gem "lutaml-xsd",
+    github: "lutaml/lutaml-xsd",
+    branch: "update/liquid_drop_methods"
 gem "metanorma"
 gem "metanorma-cli"
 gem "metanorma-plugin-lutaml",
@@ -14,3 +17,6 @@ gem "metanorma-plugin-lutaml",
 gem "metanorma-standoc",
     github: "metanorma/metanorma-standoc",
     branch: "update/lutaml_xsd_preprocessor_support"
+gem "metanorma-utils",
+    github: "metanorma/metanorma-utils",
+    branch: "main"
