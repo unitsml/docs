@@ -1,72 +1,53 @@
-{%# Documentation #%}
-
-{%liquid
-  assign item_attributes = item.attribute_elements
-  assign used_by_items = item.used_by
-%}
-{% capture docs %}
-{% for paragraph in item.annotation.documentation %}
+{%- assign item_attributes = item.attribute_elements -%}
+{%- assign used_by_items = item.used_by -%}
+{%- capture docs -%}
+{% for paragraph in item.annotation.documentation -%}
 {{ paragraph.content }}
 
-{% endfor %}
-{% endcapture %}
+{% endfor -%}
+{%- endcapture -%}
+{%- assign docs = docs | strip -%}
+{%- capture used_by_list -%}
+{% for used_by in used_by_items -%}
+* {{ used_by.name }} (<<xsd_{{ used_by.name }}>>)
+{% endfor -%}
+{%- endcapture -%}
+{%- assign used_by_list = used_by_list | strip -%}
+{%- capture attribute_list -%}
+{% for attribute in item_attributes -%}
+{% render "attribute", attribute: attribute %}
 
-[[xsd_{{item.name}}]]
+{% endfor -%}
+{%- endcapture -%}
+{%- assign attribute_list = attribute_list | strip -%}
+
+[[xsd_{{ item.name }}]]
 === `{{ item.name }}`
 
 ==== Group
 
+{% if docs != "" %}
 {{ docs }}
+{% else %}
+No documentation supplied.
+{% endif %}
 
 {% if used_by_items.size > 0 %}
 This attribute group is used by:
 
-{% for used_by in used_by_items %}
-{% capture description %}
-{% for paragraph in used_by.annotation.documentation %}
-{{ paragraph.content }}
-
-{% endfor %}
-{% endcapture %}
-@{{ used_by.name }}::
-{% if description %}
-+
---
-{{ description }}
---
-{% endif %}
-
-{% endfor %}
+{{ used_by_list }}
 {% endif %}
 
 ==== Attributes
 
 {% if item_attributes.size > 0 %}
-{% for attribute in item_attributes %}
-{% capture attribute_docs %}
-{% for paragraph in attribute.annotation.documentation %}
-{{ paragraph.content }}
-
-{% endfor %}
-{% endcapture %}
-`@{{ attribute.name | default: attribute.ref }}`:: {% if attribute.referenced_type %}`{{ attribute.referenced_type }}`{% endif %} `[{{ attribute.cardinality }}]`
-{% if attribute_docs %}
-+
---
-{{ attribute_docs }}
---
-{% endif %}
-
-{% endfor %}
+{{ attribute_list }}
 {% else %}
 No attributes defined.
 {% endif %}
 
-{%- capture xmlns -%}xmlns="http://www.w3.org/2001/XMLSchema" {% endcapture %}
-
-.XSD source of `<{{ item.name }}>`
-
+.XSD source of `{{ item.name }}`
 [source,xml]
 -----
-{{ item | to_xml_representation: skip_rendering_of | remove: xmlns }}
+{{ item.to_formatted_xml }}
 -----

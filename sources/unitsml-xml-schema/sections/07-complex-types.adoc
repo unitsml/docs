@@ -1,9 +1,9 @@
 == Complex types
 
-[lutaml_xsd,schemas/unitsml-v1.0-csd04.xsd,schema,skip_rendering_of=annotation,include_path=templates]
+[lutaml_xsd,schemas/unitsml-v1.0-csd04.xsd,schema,include_path=templates]
 ----
 {% for item in schema.complex_types_sorted_by_name %}
-include::../templates/_complex_type.adoc[]
+{% render "complex_type", item: item %}
 
 {% endfor %}
 ----

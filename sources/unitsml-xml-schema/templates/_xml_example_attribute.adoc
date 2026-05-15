@@ -1,0 +1,2 @@
+{%- assign attribute_name = attr.referenced_name | default: attr.name | default: attr.ref -%}
+{%- assign attribute_value = attr.fixed | default: attr.default | default: attr.referenced_type | default: attr.type | default: "..." %} {{ attribute_name }}="{{ attribute_value }}"{%- comment -%}{%- endcomment -%}

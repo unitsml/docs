@@ -1,0 +1,24 @@
+{%- assign attribute_name = attribute.referenced_name | default: attribute.name | default: attribute.ref -%}
+{%- assign attribute_type = attribute.referenced_type | default: attribute.type -%}
+{%- capture attribute_docs -%}
+{% for paragraph in attribute.annotation.documentation -%}
+{{ paragraph.content }}
+
+{% endfor -%}
+{%- endcapture -%}
+{%- assign attribute_docs = attribute_docs | strip -%}
+{%- capture constraints -%}
+{% render "attribute_value_constraints", attribute: attribute %}
+{%- endcapture -%}
+{%- assign constraints = constraints | strip -%}
+
+`@{{ attribute_name }}`:: {% if attribute_type %}`{{ attribute_type }}` {% endif %}`[{{ attribute.cardinality | default: "0..1" }}]`
+{% if attribute_docs != "" %}
++
+--
+{{ attribute_docs }}
+--
+{% endif %}
+{% if constraints != "" %}
+{{ constraints }}
+{% endif %}
