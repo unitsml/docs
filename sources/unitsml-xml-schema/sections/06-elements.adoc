@@ -1,9 +1,9 @@
 == Elements
 
-[lutaml_xsd,schemas/unitsml-v1.0-csd04.xsd,schema,skip_rendering_of=annotation,include_path=templates]
+[lutaml_xsd,schemas/unitsml-v1.0-csd04.xsd,schema,include_path=templates]
 ----
 {% for item in schema.elements_sorted_by_name %}
-include::../templates/_element.adoc[]
+{% render "element", item: item %}
 
 {% endfor %}
 ----
