@@ -1,0 +1,53 @@
+{%- assign item_attributes = item.attribute_elements -%}
+{%- assign used_by_items = item.used_by -%}
+{%- capture docs -%}
+{% for paragraph in item.annotation.documentation -%}
+{{ paragraph.content }}
+
+{% endfor -%}
+{%- endcapture -%}
+{%- assign docs = docs | strip -%}
+{%- capture used_by_list -%}
+{% for used_by in used_by_items -%}
+* {{ used_by.name }} (<<xsd_{{ used_by.name }}>>)
+{% endfor -%}
+{%- endcapture -%}
+{%- assign used_by_list = used_by_list | strip -%}
+{%- capture attribute_list -%}
+{% for attribute in item_attributes -%}
+{% render "attribute", attribute: attribute %}
+
+{% endfor -%}
+{%- endcapture -%}
+{%- assign attribute_list = attribute_list | strip -%}
+
+[[xsd_{{ item.name }}]]
+=== `{{ item.name }}`
+
+==== Group
+
+{% if docs != "" %}
+{{ docs }}
+{% else %}
+No documentation supplied.
+{% endif %}
+
+{% if used_by_items.size > 0 %}
+This attribute group is used by:
+
+{{ used_by_list }}
+{% endif %}
+
+==== Attributes
+
+{% if item_attributes.size > 0 %}
+{{ attribute_list }}
+{% else %}
+No attributes defined.
+{% endif %}
+
+.XSD source of `{{ item.name }}`
+[source,xml]
+-----
+{{ item.to_formatted_xml }}
+-----

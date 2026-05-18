@@ -1,0 +1,26 @@
+{%- assign indent = indent | default: "  " -%}
+{%- assign child_indent = indent | append: "  " -%}
+{%- if child.annotation? or child.attribute? or child.attribute_group? -%}
+{%- elsif child.sequence? -%}
+{% for element in child.resolved_element_order -%}
+{% render "xml_example_child", child: element, indent: indent %}
+{% endfor -%}
+{%- elsif child.choice? %}
+{{ indent }}<!-- One of: -->
+{% for element in child.resolved_element_order -%}
+{% render "xml_example_child", child: element, indent: child_indent %}
+{% endfor -%}
+{%- elsif child.all? -%}
+{% for element in child.resolved_element_order -%}
+{% render "xml_example_child", child: element, indent: indent %}
+{% endfor -%}
+{%- elsif child.any? %}
+{{ indent }}<!-- Any element from any namespace -->
+{%- elsif child.element? -%}
+{%- assign element_name = child.referenced_name | default: child.name | default: child.ref -%}
+{{ indent }}<{{ element_name }}>...</{{ element_name }}>
+{%- elsif child.child_elements.size > 0 -%}
+{% for element in child.child_elements -%}
+{% render "xml_example_child", child: element, indent: indent %}
+{% endfor -%}
+{%- endif -%}

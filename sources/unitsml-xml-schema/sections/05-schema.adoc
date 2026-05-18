@@ -1,0 +1,26 @@
+== Schema
+
+The UnitsML XML schema is defined in the file `unitsml.xsd`, which is
+included in the UnitsML distribution.
+
+The root element of the schema is `<UnitsML>`, which contains all other
+elements.
+
+The schema is defined using the W3C XML Schema Definition Language
+(<<w3c_xmlschema>>), and conforms to <<w3c_xmlschema-1>> and
+<<w3c_xmlschema-2>>.
+
+The UnitsML XML schema may be used in the following ways:
+
+* To validate UnitsML XML documents, ensuring that they conform to the
+  structure and content rules defined in the schema.
+
+* To incorportate UnitsML XML into XML application schemas, allowing for the
+  integration of UnitsML data with other XML-based data formats.
+
+* To generate code or data structures in programming languages that
+  support XML schema, facilitating the processing of UnitsML XML
+  documents.
+
+The UnitsML XML schema is maintained by the CalConnect TC UNITS Technical
+Committee, and is available from https://www.unitsml.org.

@@ -37,11 +37,15 @@ jobs:
       #     github-packages-token: ${{ secrets.METANORMA_CI_PAT_TOKEN }}
       #     use-bundler: true
 
+      - name: Install bundled dependencies
+        run: bundle check || bundle install
+
       - name: Metanorma generate site
         uses: actions-mn/build-and-publish@v2
         with:
           agree-to-terms: true
           destination: gh-pages
+          use-bundler: true
 
   deploy:
     if: ${{ github.ref == 'refs/heads/main' }}

@@ -1,0 +1,9 @@
+== Complex types
+
+[lutaml_xsd,schemas/unitsml-v1.0-csd04.xsd,schema,include_path=templates]
+----
+{% for item in schema.complex_types_sorted_by_name %}
+{% render "complex_type", item: item %}
+
+{% endfor %}
+----
