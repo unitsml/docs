@@ -5,7 +5,7 @@
 :doctype: standard
 :edition: 1
 :status: committee-draft
-:revdate: 2025-08-22
+:updated-date: 2025-08-22
 :published-date: 2025-08-22
 :technical-committee: TC UNITS
 :fullname: Ronald Tse
