@@ -40,12 +40,25 @@ jobs:
       - name: Install bundled dependencies
         run: bundle check || bundle install
 
+      - name: Record documentation runtime
+        run: |
+          bundle exec ruby -rjson -e '
+            names = %w[lutaml-model metanorma-standoc metanorma-plugin-lutaml metanorma-utils metanorma-cli]
+            dependencies = Gem.loaded_specs.select { |name, _| names.include?(name) }
+            puts JSON.generate(runtime: RUBY_DESCRIPTION, dependencies: dependencies.transform_values { |spec| spec.version.to_s })
+          '
+
       - name: Metanorma generate site
         uses: actions-mn/build-and-publish@v2
         with:
           agree-to-terms: true
           destination: gh-pages
           use-bundler: true
+
+      - name: Verify generated XML Schema documentation
+        run: >-
+          bundle exec ruby script/verify_xsd_documentation.rb
+          sources/unitsml-xml-schema/schemas/unitsml-v1.0-csd04.xsd _site
 
   deploy:
     if: ${{ github.ref == 'refs/heads/main' }}
