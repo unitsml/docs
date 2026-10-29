@@ -19,18 +19,25 @@ concurrency:
 jobs:
   build:
     runs-on: ubuntu-latest
-    container:
-      image: metanorma/metanorma:latest
     env:
-      # The image otherwise selects /setup/Gemfile and ignores this repository.
       BUNDLE_GEMFILE: Gemfile
-      # Let Bundler install the repo bundle before Ruby auto-activates it.
-      RUBYOPT: ""
     steps:
       - name: Checkout
         uses: actions/checkout@v4
         with:
           submodules: true
+
+      - name: Setup Ruby
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.3'
+          bundler-cache: true
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: '21'
 
       - name: Cache Metanorma assets
         uses: actions-mn/cache@v1
