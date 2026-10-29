@@ -1,0 +1,34 @@
+{%- assign marker = marker | default: "*" -%}
+{%- assign child_marker = marker | append: "*" -%}
+{%- capture cardinality -%}[{{ child.min_occurrences | default: "1" }}..{{ child.max_occurrences | default: "1" }}]{%- endcapture -%}
+{%- if child.annotation? or child.attribute? or child.attribute_group? -%}
+{%- elsif child.sequence? %}
+{{ marker }} Sequence {{ cardinality }}
+{% for element in child.resolved_element_order -%}
+{% render "child_elements", child: element, marker: child_marker %}
+{% endfor -%}
+{%- elsif child.choice? %}
+{{ marker }} Choice {{ cardinality }}
+{% for element in child.resolved_element_order -%}
+{% render "child_elements", child: element, marker: child_marker %}
+{% endfor -%}
+{%- elsif child.all? %}
+{{ marker }} All {{ cardinality }}
+{% for element in child.resolved_element_order -%}
+{% render "child_elements", child: element, marker: child_marker %}
+{% endfor -%}
+{%- elsif child.any? %}
+{{ marker }} Any element from any namespace ({{ child.process_contents | default: "strict" }} processing) {{ cardinality }}
+{%- elsif child.simple_content? %}
+{{ marker }} Simple content based on `{{ child.base_type | default: child.base }}` {{ cardinality }}
+{%- elsif child.element? -%}
+{%- assign element_name = child.referenced_name | default: child.name | default: child.ref -%}
+{%- assign element_type = child.referenced_type | default: child.type -%}
+{{ marker }} `<{{ element_name }}>`{% if element_type %} of type `{{ element_type }}`{% endif %} {{ cardinality }}
+{%- elsif child.child_elements.size > 0 -%}
+{%- assign group_name = child.name | default: child.ref | default: "anonymous" -%}
+{{ marker }} Group `{{ group_name }}` {{ cardinality }}
+{% for element in child.child_elements -%}
+{% render "child_elements", child: element, marker: child_marker %}
+{% endfor -%}
+{%- endif -%}

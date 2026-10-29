@@ -1,0 +1,65 @@
+{%- assign simple_type = attribute.simple_type -%}
+{%- if simple_type == nil and attribute.referenced_object -%}
+{%- assign simple_type = attribute.referenced_object.simple_type -%}
+{%- endif -%}
+{%- if simple_type -%}
+{%- assign restriction = simple_type.restriction -%}
+{%- assign union = simple_type.union -%}
+{%- if restriction -%}
+{%- assign enum_values = restriction.enumeration | map: "value" -%}
+{%- assign pattern_values = restriction.pattern | map: "value" -%}
+{%- capture constraint_body -%}
+{% if restriction.base -%}
+Base type: `{{ restriction.base }}`
+{% endif -%}
+{% if enum_values.size > 0 %}
+
+Allowed values:
+
+{% for enum_value in enum_values %}
+* `{{ enum_value }}`
+{% endfor %}
+{% endif -%}
+{% if pattern_values.size > 0 %}
+
+Patterns:
+
+{% for pattern_value in pattern_values %}
+* `{{ pattern_value }}`
+{% endfor %}
+{% endif -%}
+{%- endcapture -%}
+{%- assign constraint_body = constraint_body | strip -%}
+{%- if constraint_body != "" %}
++
+--
+{{ constraint_body }}
+--
+{% endif -%}
+{%- elsif union -%}
+{%- capture union_body -%}
+{% if union.member_types -%}
+Member types: `{{ union.member_types }}`
+{% endif -%}
+{% for union_simple_type in union.simple_type -%}
+{% assign union_restriction = union_simple_type.restriction -%}
+{% assign union_enum_values = union_restriction.enumeration | map: "value" -%}
+{% if union_enum_values.size > 0 %}
+
+Allowed `{{ union_restriction.base }}` values:
+
+{% for union_enum_value in union_enum_values %}
+* `{{ union_enum_value }}`
+{% endfor %}
+{% endif -%}
+{% endfor -%}
+{%- endcapture -%}
+{%- assign union_body = union_body | strip -%}
+{%- if union_body != "" %}
++
+--
+{{ union_body }}
+--
+{% endif -%}
+{%- endif -%}
+{%- endif -%}

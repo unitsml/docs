@@ -1,0 +1,4 @@
+== Scope
+
+This document describes the UnitsML XML Schema (UnitsML XSD), which is an
+XML Schema definition for the representation of UnitsML objects in XML.

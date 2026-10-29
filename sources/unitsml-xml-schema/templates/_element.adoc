@@ -1,0 +1,103 @@
+{%- assign item_complex_type = item.referenced_complex_type -%}
+{%- assign item_attributes = item.attributes -%}
+{%- assign used_by_items = item.used_by -%}
+{%- assign content_model_items = item_complex_type.resolved_element_order -%}
+{%- capture docs -%}
+{% for paragraph in item.annotation.documentation -%}
+{{ paragraph.content }}
+
+{% endfor -%}
+{%- endcapture -%}
+{%- assign docs = docs | strip -%}
+{%- capture used_by_list -%}
+{% for used_by in used_by_items -%}
+* {{ used_by.name }} (<<xsd_{{ used_by.name }}>>)
+{% endfor -%}
+{%- endcapture -%}
+{%- assign used_by_list = used_by_list | strip -%}
+{%- capture attribute_list -%}
+{% for attribute in item_attributes -%}
+{% render "attribute", attribute: attribute %}
+
+{% endfor -%}
+{%- endcapture -%}
+{%- assign attribute_list = attribute_list | strip -%}
+{%- capture content_model_list -%}
+{% for child in content_model_items -%}
+{% render "child_elements", child: child %}
+{% endfor -%}
+{%- endcapture -%}
+{%- assign content_model_list = content_model_list | strip -%}
+{%- capture example_attributes -%}
+{% for attr in item_attributes -%}
+{% render "xml_example_attribute", attr: attr -%}
+{% endfor -%}
+{%- endcapture -%}
+{%- capture example_children -%}
+{% if item_complex_type.mixed -%}
+  <!-- mixed content -->
+{% endif -%}
+{% for child in content_model_items -%}
+{% render "xml_example_child", child: child, indent: "  " -%}
+{% endfor -%}
+{%- endcapture -%}
+
+[[xsd_{{ item.name }}]]
+=== `<{{ item.name }}>`
+
+==== General
+
+{% if docs != "" %}
+{{ docs }}
+{% else %}
+No documentation supplied.
+{% endif %}
+
+{% if used_by_items.size > 0 %}
+This element is used by:
+
+{{ used_by_list }}
+{% endif %}
+
+==== Attributes
+
+{% if item_attributes.size > 0 %}
+{{ attribute_list }}
+{% else %}
+No attributes defined.
+{% endif %}
+
+==== Content model
+
+{% if item.type %}
+This element uses the `{{ item.type }}` type (<<xsd_{{ item.type }}>>).
+
+{% endif %}
+{% if item_complex_type.mixed %}
+This element allows mixed content.
+
+{% endif %}
+{% if content_model_list != "" %}
+{{ content_model_list }}
+{% else %}
+No child elements defined.
+{% endif %}
+
+[example]
+.Illustrative usage of `<{{ item.name }}>`
+====
+[source,xml]
+-----
+<{{ item.name }}{{ example_attributes }}{% if example_children != "" %}>
+{% if example_children != "" %}{{ example_children }}{% endif %}
+</{{ item.name }}>
+{% else %}/>
+{% endif %}
+-----
+====
+
+.XSD source of `<{{ item.name }}>`
+[source,xml]
+-----
+{{ item.to_formatted_xml }}
+-----

@@ -1,0 +1,6 @@
+[bibliography]
+== Normative references
+
+* [[[w3c_xmlschema,W3C xmlschema-1]]]
+* [[[w3c_xmlschema-1,W3C xmlschema11-1]]]
+* [[[w3c_xmlschema-2,W3C xmlschema11-2]]]
