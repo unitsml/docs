@@ -1,0 +1,33 @@
+= UnitsML — Part 4: The units model — quantities, scales and the difference law
+:docnumber: 4
+:edition: 1
+:revdate: 2026-10-30
+:copyright-year: 2026
+:language: en
+:title-intro-en: UnitsML
+:title-main-en: Part 4: The units model — quantities, scales and the difference law
+:doctype: standard
+:docstage: 20
+:mn-document-class: iso
+:mn-output-extensions: xml,html,doc,pdf
+:imagesdir: images
+
+== Status of this draft
+
+Structure and normative content are settled in the program design (unitsml/unitsml-ruby#95, 2026-10-28 GUM report §3); this document formalizes them. Drafting order position: after Parts 2 and 3.
+
+== Abstract
+
+Semantics over the register (UnitsML 3): dimension vectors are the L0 arithmetic-gating level (derived, never stored); L1 quantities are named concepts whose membership (`quantity_references`), primary designation (UnitsML 3 content rule), and assertion resolution (short → unitsml id → NIST id) gate meaning; declared equivalence classes widen addition/subtraction. Scale classes carry machine-checkable operation legality from `scales.yaml` (e.g. `continuous_interval` forbids ×, ÷, scaling). The difference law with invariants I1–I4: differences are closed under addition, subtraction and factor-only conversion; `Abs − Abs` on a non-ratio scale yields a difference; absolute-vs-difference typing follows provenance, not unit; uncertainties are always differences. Strict gating rejects dimension-compatible but kind-incompatible conversions (Bq↔Hz, Sv↔Gy) unless stated kinds are compatible.
+
+== Clause plan
+
+- 5 Dimension and quantity levels (Pendrill L0/L1 frame)
+- 6 Resolution and gating (membership, primary reference, assertions, equivalence classes)
+- 7 Scales and operation legality
+- 8 The difference law (invariants I1–I4)
+- Annex A (normative) red/green vector table: J→energy; Bq↔Hz refusal; `(20 °C − 15 °C) → 5 K`; `10 °C × 2` scale error naming `continuous_interval`
+
+== Conformance
+
+U8 Annex B vectors; consumed identically by the reference implementation and all parity runtimes.

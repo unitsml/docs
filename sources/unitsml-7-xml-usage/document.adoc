@@ -1,0 +1,36 @@
+= UnitsML — Part 7: UnitsML XML — the usage contract
+:docnumber: 7
+:edition: 1
+:revdate: 2026-10-30
+:copyright-year: 2026
+:language: en
+:title-intro-en: UnitsML
+:title-main-en: Part 7: UnitsML XML — the usage contract
+:doctype: standard
+:docstage: 20
+:mn-document-class: iso
+:mn-output-extensions: xml,html,doc,pdf
+:imagesdir: images
+
+== Status of this draft
+
+Base document landed: "UnitsML XML Schema specification" (unitsml/docs PR #9) — the lutaml_xsd-generated specification of unitsml-v1.0.xsd covering all 96 schema components, enumerations and examples. That document specifies SYNTAX; this part specifies USAGE semantics. Drafting order position: after Parts 4, 5 and the Plurimath 2 model.
+
+== Abstract
+
+How conforming producers emit and consumers interpret UnitsML 1.0 documents: the emitted element set (`Unit`, `Prefix`, `Quantity`, `Dimension`, `QuantityReference`, `Conversions`) with `xml:id` allocation; `QuantityReference` selection per the UnitsML 3 primary-reference rule (never positional `.first`); `Conversions` emission with the full affine attribute set of UnitsML 5 (never synthetic `SpecialConversionFrom`/`WSDLConversionFrom`); `xref` linking from MathML into the document (consumed by the Plurimath embedding clauses); schema-version declaration; deterministic reading of foreign payloads (the openCDD corpus's duplicate lowercase attributes are tolerated on read, never reproduced on write); and the recorded gap — UnitsML 1.0 has no first-class uncertainty element — with Annex B (informative) proposing a `MeasurementResult` sibling of `QuantityReference` (category, exact decimal text, k, p, interval kind/endpoints, JCGM 101 distribution parameters) as a WG-path proposal.
+
+== Clause plan
+
+- 5 Emission contract (elements, ids, ordering)
+- 6 QuantityReference selection
+- 7 Conversions emission
+- 8 Cross-references from MathML
+- 9 Reading rules and determinism
+- 10 The uncertainty gap
+- Annex A (informative) validation profile
+- Annex B (informative) the measurement-result element proposal
+
+== Conformance
+
+Round-trip vectors in U8: emitted XML validates; anchors resolve; conversion elements round-trip per UnitsML 5.
