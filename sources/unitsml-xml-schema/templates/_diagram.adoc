@@ -1,0 +1,24 @@
+{%- assign root_id = "schema_" | append: item.name -%}
+The diagram shows attributes and the content model in schema order.
+Element edges show occurrence ranges; see the declarations below for all constraints.
+
+.Structure of `{{ item.name }}`
+[plantuml,format=svg]
+....
+@startuml xsd-{{ item.name }}
+!pragma layout smetana
+left to right direction
+hide empty members
+hide circle
+skinparam classAttributeIconSize 0
+skinparam shadowing false
+class "{{ item.name }}{% if item.element? and item.type %} : {{ item.type }}{% endif %}" as {{ root_id }} [[#xsd_{{ item.name }}]] {
+{% for attribute in attributes %}
+{%- assign attribute_name = attribute.referenced_name | default: attribute.name | default: attribute.ref -%}
+{%- assign attribute_type = attribute.referenced_type | default: attribute.type -%}
+  @{{ attribute_name }}{% if attribute_type %} : {{ attribute_type }}{% endif %} [{{ attribute.cardinality | default: "0..1" }}]
+{% endfor %}
+}
+{% render "diagram_children", children: children, parent_id: root_id, schema: schema %}
+@enduml
+....
