@@ -1,0 +1,30 @@
+{%- assign position = 0 -%}
+{% for child in children %}
+{%- assign node_id = parent_id | append: "_" | append: forloop.index0 -%}
+{%- assign minimum = child.min_occurs | default: child.min_occurrences | default: "1" -%}
+{%- assign maximum = child.max_occurs | default: child.max_occurrences | default: "1" | replace: "unbounded", "*" -%}
+{%- if child.annotation? or child.attribute? or child.attribute_group? -%}
+{%- elsif child.element? -%}
+{%- assign position = position | plus: 1 -%}
+{%- assign element_name = child.referenced_name | default: child.name | default: child.ref -%}
+{%- assign element_type = child.referenced_type | default: child.type -%}
+{%- assign global_element = schema.elements_sorted_by_name | where: "name", element_name | first -%}
+{%- assign global_type = schema.complex_types_sorted_by_name | where: "name", element_type | first -%}
+class "{{ element_name }}{% if element_type %} : {{ element_type }}{% endif %}" as {{ node_id }}{% if global_element %} [[#xsd_{{ global_element.name }}]]{% elsif global_type %} [[#xsd_{{ global_type.name }}]]{% endif %}
+{{ parent_id }} --> {{ node_id }} : {{ position }}. [{{ minimum }}..{{ maximum }}]
+{%- elsif child.any? %}
+{%- assign position = position | plus: 1 -%}
+class "Any element\n{{ child.process_contents | default: "strict" }} processing" as {{ node_id }}
+{{ parent_id }} --> {{ node_id }} : {{ position }}. [{{ minimum }}..{{ maximum }}]
+{%- elsif child.simple_content? %}
+{%- assign position = position | plus: 1 -%}
+class "Simple content\n{{ child.base_type | default: child.base }}" as {{ node_id }}
+{{ parent_id }} --> {{ node_id }}
+{%- elsif child.resolved_element_order.size > 0 %}
+{%- assign position = position | plus: 1 -%}
+{%- capture label -%}{% if child.sequence? %}Sequence{% elsif child.choice? %}Choice{% elsif child.all? %}All{% elsif child.complex_content? %}Complex content{% else %}Group{% endif %}{%- endcapture %}
+class "{{ label }}" as {{ node_id }}
+{{ parent_id }} --> {{ node_id }} : {{ position }}.
+{% render "diagram_children", children: child.resolved_element_order, parent_id: node_id, schema: schema %}
+{% endif %}
+{% endfor %}
