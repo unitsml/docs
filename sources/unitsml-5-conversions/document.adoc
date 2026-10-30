@@ -1,0 +1,34 @@
+= UnitsML — Part 5: Conversions — definitions and application
+:docnumber: 5
+:edition: 1
+:revdate: 2026-10-30
+:copyright-year: 2026
+:language: en
+:title-intro-en: UnitsML
+:title-main-en: Part 5: Conversions — definitions and application
+:doctype: standard
+:docstage: 20
+:mn-document-class: iso
+:mn-output-extensions: xml,html,doc,pdf
+:imagesdir: images
+
+== Status of this draft
+
+Implementation reference: unitsml-ruby#92 (spec Tasks 1–8 written into the issue); data: UnitsML 3. Known engine defect recorded for this part's test suite: the composition's double base-power application (unitsml-ruby#92 comment 6518226290).
+
+== Abstract
+
+The UnitsML conversion law `y = d + (b/c)(x + a)` and its inverse `x = (c/b)(y − d) − a`: attribute semantics (`initialUnit`, `initialAddend` a, `multiplicand` b, `divisor` c, `finalAddend` d, `exact`, digit metadata); exactness discipline (rationals for `exact="true"`, lexical decimal preservation, no float drift, no silent precision loss for `exact="false"`); the difference application law (offsets cancel on differences — factor-only; affine legal only at power 1 and only for absolute values); application precedence (caller-supplied definition → document `<Conversions>` → register canonical path, with the agreement diagnostic and no double application); `initialUnit` resolution (document fragment, SI Digital Framework URI, IEC IRDI; unresolvable is a typed error); refusal semantics for `SpecialConversionFrom`/`WSDLConversionFrom`.
+
+== Clause plan
+
+- 5 The equation and attributes
+- 6 Exactness and digit metadata
+- 7 Difference application and affine legality
+- 8 Resolution and precedence
+- 9 Refusals
+- Annex A (normative) vector table: degC/degF exact round-trips, percent→one, non-exact percent-per-degree, difference-skip-addends, affine-in-composite and power≠1 errors, refusals, ft² red/green (the double-power defect)
+
+== Conformance
+
+U8 Annex B vectors; Plurimath evaluation and both runtimes replay them byte-identically.

@@ -1,0 +1,37 @@
+= UnitsML — Part 8: Conformance — corpora, vector sets and runtime classes
+:docnumber: 8
+:edition: 1
+:revdate: 2026-10-30
+:copyright-year: 2026
+:language: en
+:title-intro-en: UnitsML
+:title-main-en: Part 8: Conformance — corpora, vector sets and runtime classes
+:doctype: standard
+:docstage: 20
+:mn-document-class: iso
+:mn-output-extensions: xml,html,doc,pdf
+:imagesdir: images
+
+== Status of this draft
+
+Home: unitsml/unitsml-testsuite (today only `corpora/renders` exists; unitsml/unitsml-testsuite#1 specifies the expansion). Drafting order position: last; this part gates every release in the series.
+
+== Abstract
+
+The conformance contract for all implementations: the corpora layout (`corpora/renders`, `corpora/uncertainty`, `corpora/conversion`, `corpora/conformance`) with a versioned index; the vector file format — inputs, expected results as exact decimal strings (UnitsML 2), per-vector metadata (source clause, engine/grammar/vector-set versions, declared tolerance `|computed − expected| ≤ 10^−d·|expected|` where non-exact); replay-harness requirements per language (Ruby, TypeScript, Rust lanes; byte-identical output; releases blocked on drift); the runtime conformance classes (parse/render; quantity and conversion; evaluation; full-series) and the claims each licenses; and the Monte Carlo reproducibility classes (byte-exact under pinned Wichmann–Hill vs distributional with stated tests; MCMC-draw examples excluded from byte vectors).
+
+== Clause plan
+
+- 5 Corpora layout and versioned index
+- 6 Vector file format and metadata
+- 7 Replay harness requirements and CI gates
+- 8 Runtime conformance classes
+- 9 Monte Carlo reproducibility classes
+- Annex A (normative) uncertainty vectors
+- Annex B (normative) conversion, scale and quantity-gating vectors
+- Annex C (normative) GUM/JCGM vectors: H.1–H.6 with the H.1 versioned triple (2008 first-order / amended GUF₂ per Plurimath 4 Annex A / MCM); JCGM 101 §9.2–9.5; the LPU-failure set (GUM-6 §13.1.4 Br₂; GUM-5 Ex 6, 7, 13, 14, 16); JCGM 106 decision vectors
+- Annex D (informative) corpus provenance
+
+== Conformance
+
+This part is the gate of the series.

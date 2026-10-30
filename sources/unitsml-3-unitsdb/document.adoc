@@ -1,0 +1,79 @@
+= UnitsML — Part 3: UnitsDB — the register: data model and content rules
+:docnumber: 3
+:edition: 1
+:revdate: 2026-10-30
+:copyright-year: 2026
+:language: en
+:title-intro-en: UnitsML
+:title-main-en: Part 3: UnitsDB — the register: data model and content rules
+:doctype: standard
+:docstage: 20
+:mn-document-class: iso
+:mn-output-extensions: xml,html,doc,pdf
+:imagesdir: images
+
+== Foreword
+
+UnitsDB is the single source of truth of the series: every unit identity, prefix, dimension, quantity kind, scale class, conversion factor and currency in the ecosystem resolves from this register, and no implementation hardcodes any of it. This part specifies the register's collections, its schema versioning policy, and the content rules introduced with schema 2.2.0.
+
+== Scope
+
+This document specifies the collections of the register and their interreferences; the schema versioning policy; the content rules for canonical conversions, scale operation legality, primary quantity references, and L1 equivalence classes; the currency-as-denomination rule; and provenance and licensing requirements for imported corpora.
+
+The *semantics* of consuming this data — resolution, gating, conversion application — are specified in UnitsML 4 and UnitsML 5.
+
+== Normative references
+
+* UnitsML 1, UnitsML 2
+* ISO 4217 (currency codes)
+* IEC 62720 (units dictionary; source corpus only — no IEC backing of this register is implied)
+
+== Terms and definitions
+
+*register*:: the UnitsDB dataset: the seven collections of Clause 5 at one uniform `schema_version`.
+*denomination*:: a currency code: a unit of account that is its own base and admits no conversion factor.
+
+== Collections and identifiers
+
+The register comprises: `units.yaml`, `prefixes.yaml`, `dimensions.yaml`, `quantities.yaml`, `scales.yaml`, `unit_systems.yaml`, `currencies.yaml`. All collections in one release carry the SAME `schema_version`, quoted. Loaders treat units, prefixes, dimensions, quantities and unit systems as REQUIRED and currencies as OPTIONAL-IF-ABSENT; any collection that is present MUST match the uniform version.
+
+Identifiers are typed pairs (`type`, `id`); NIST identifiers are primary for cross-collection references; `unitsml:` identifiers (`u:`, `q:`, `cur:`, `d:`, `us:`) are the series' own namespace.
+
+== Schema versioning policy
+
+The schema version moves only by maintainer decision. Additive optional fields move the minor component; removals or semantic changes move the major component. A schema version MUST be supported by the register loader before a data release can adopt it (unitsdb-ruby ≥ 2.2.12 supports 2.2.0).
+
+== Content rules
+
+=== Canonical conversions
+
+A unit whose derivation is mechanical MUST carry `canonical_conversion`: an exact rational `factor` (decimal or `p/q` string), an `offset` where the unit is affine, and the `root_units` decomposition the factor was computed over (REQUIRED). Units at powers other than 1, affine units inside composites, logarithmic units, and prefix-level units do not carry canonical data; the register's coverage report itemizes every unit as generated, derived-by-design, or source-needed with a reason (reports/iec-62720 and the #130 report).
+
+=== Scale operation legality
+
+`scales.yaml` classifies scales and lists the operations each permits; consumers MUST take operation legality from this data (UnitsML 4, Clause 7).
+
+=== Primary quantity reference
+
+A unit with more than one `quantity_reference` MUST designate exactly one entry `primary: true`. Selection rule: the quantity in the SI Brochure definition where the unit has an SI special name (joule → energy, weber → magnetic flux, …); the explicitly curated first entry otherwise. The current register flags 96 units.
+
+=== L1 equivalence classes
+
+A quantity MAY declare `equivalence_class`: quantities in the same class are interchangeable for addition and subtraction. The energy class is landed (energy, work, kinetic energy, mechanical energy, amount of heat, potential energy); all other quantities gate identity-only. Classes are curated from ISO 80000 usage; never inferred in code.
+
+=== Currencies
+
+Each ISO 4217 code is its own base: no root units, no cross-currency factors, ever — floating exchange rates would make any stored factor silently wrong. The register carries the 178 active List One codes with ISO numeric identifiers. Minor units: ISO's "N.A." is recorded as ABSENT, never 0 (KMF and XDR carry the real value 0).
+
+== Provenance and licensing
+
+Imported data records its source corpus, snapshot identity and license. The IEC 62720 import carries an informative reference per unit and implies no IEC endorsement. Source defects in imported corpora are counted and reported, never silently corrected.
+
+== Conformance
+
+Enforced by the register's own validation suite (schema validation, identifier uniqueness, reference integrity, SI-reference integrity) and by the conversion and scale vectors of UnitsML 8, Annex B.
+
+== Bibliography
+
+* NIST SP 811:2008, _Guide for the Use of the International System of Units (SI)_
+* unitsml/unitsdb#130, #134, #135, #136 (content-rule provenance)

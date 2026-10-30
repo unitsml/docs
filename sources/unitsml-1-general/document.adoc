@@ -1,0 +1,177 @@
+= UnitsML — Part 1: General — procedures, terms and conformance language
+:docnumber: 1
+:edition: 1
+:revdate: 2026-10-30
+:copyright-year: 2026
+:language: en
+:title-intro-en: UnitsML
+:title-main-en: Part 1: General — procedures, terms and conformance language
+:doctype: standard
+:docstage: 20
+:mn-document-class: iso
+:mn-output-extensions: xml,html,doc,pdf
+:imagesdir: images
+
+== Foreword
+
+This part of the UnitsML specification series establishes the register procedures, the normative vocabulary, the artifact discipline and the release procedures that every other part of the series assumes. It is the root document of the series: every other part cites it for requirement language and procedures and carries no duplicate of that content.
+
+This series is developed within the UnitsML program (https://github.com/unitsml). The program dependency graph and stage gates are tracked in unitsml/unitsml-ruby#95.
+
+== Introduction
+
+The UnitsML stack expresses measurement — values, units, quantity kinds, uncertainty — across a data register (UnitsDB), expression languages and multiple output formats, with implementations in Ruby, TypeScript and Rust. The architecture principle of the series is that *artifacts are the product and engines are interchangeable*: everything shareable is compiled to a checksummed artifact, every runtime replays the same conformance corpora, and byte-identity across languages is enforced by contract testing rather than by shared binaries.
+
+Implementations follow a *reference-first rule*: the Ruby implementation lands every semantic layer first and its outputs are frozen as the oracle corpora; implementations in other languages are generated from schema declarations or verified against those corpora, never re-derived independently.
+
+== Scope
+
+This document specifies:
+
+- the procedures of the UnitsML specification register: document numbering, types, lifecycle, and amendment rules;
+- the normative vocabulary of the series and the requirement language (MUST/SHOULD/MAY);
+- the artifact discipline: checksums, editions, and the binding between normative parts and their conformance corpora;
+- the release and distribution procedures for the data register and its downstream packages.
+
+This document does not specify any behavior of units, quantities, conversions, expressions or evaluation; those are specified in Parts 2 to 8.
+
+== Normative references
+
+* RFC 2119, _Key words for use in RFCs to Indicate Requirement Levels_
+* RFC 8174, _Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words_
+* JCGM 200:2012, _International vocabulary of metrology — Basic and general concepts and associated terms (VIM)_
+* JCGM 100:2008 + Amd.1:2026, _Evaluation of measurement data — Guide to the expression of uncertainty in measurement (GUM)_
+
+== Terms, definitions and abbreviated terms
+
+=== Terms and definitions
+
+*artifact*::
+versioned, checksummed, language-independent file produced from a normative source (grammar, register, schema, corpus) and consumed by implementations without modification. Artifact bytes are authoritative; consumers verify checksums before use.
+
+*corpus*::
+a versioned collection of test vectors owned by UnitsML 8. A corpus entry names its normative source clause and the tolerance convention that applies.
+
+*oracle*::
+an implementation whose output is frozen into a corpus. The reference implementation of the series is the Ruby one; corpora are frozen from it.
+
+*dialect L*::
+the legacy AsciiMath compatibility dialect specified in UnitsML companion specifications (Plurimath series); not extended by this series.
+
+*dialect P (pma)*::
+the featureful strict input language specified in the Plurimath series.
+
+*edition*::
+a recorded revision of an artifact or register, identified by checksum and version string.
+
+=== Abbreviated terms
+
+MSPEC:: (historic) working name of the specification family, superseded by the per-series branding "UnitsML" and "Plurimath".
+SP 811:: NIST Special Publication 811, _Guide for the Use of the International System of Units (SI)_.
+
+== Register procedures
+
+=== Document types
+
+[cols="1,3"]
+|===
+|Type |Meaning
+
+|Standards Track
+|normative specifications of behavior, data or syntax; enforced by corpora
+
+|Informational
+|orientation, glossaries, research notes; never cited as a requirement source
+
+|Process
+|this document and its amendments
+|===
+
+=== Lifecycle
+
+Idea → Draft (docstage 20) → Committee Draft (30) → Final Draft (50) → Published (60). A Published document changes only by a numbered Amendment; corrections that would alter normative content require an Amendment entry, never silent edits.
+
+=== Numbering
+
+Part numbers are permanent and never reused. Informational documents may share the numbering space but carry an explicit type marker.
+
+=== Single-source normativity
+
+A normative rule is stated in exactly one part. Other parts cite it. Restating a rule from another part is an editorial defect and is corrected on sight.
+
+== Conformance language
+
+The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RECOMMENDED, NOT RECOMMENDED, MAY, and OPTIONAL are to be interpreted as described in RFC 2119 and RFC 8174. A requirement binds an implementation only within the conformance class it claims (UnitsML 8, runtime classes).
+
+== Artifact discipline
+
+- Every artifact carries a checksum; consumers MUST verify it before use.
+- Every artifact records its edition (source revision and generation date).
+- Grammars, the register dataset, model schemas and corpora are artifacts; per-language engines are not.
+- A change to artifact content regenerates the artifact and its conformance corpus in the same change.
+
+== Distribution and release procedures
+
+The release chain is strict and ordered:
+
+[verse]
+--
+unitsdb data (tag v*) → unitsdb-ruby (submodule pin, VERSION, UNITS_DATA_VERSION)
+  → unitsml-ruby (payload regeneration, dependency bump)
+  → unitsdb-ts / unitsml-ts (dataset rebuild) → npm (bare, unprefixed names)
+--
+
+Rules:
+
+- Data schema versions and gem/npm package versions are independent; the data pin travels via `UNITS_DATA_VERSION`.
+- Releases are PATCH bumps unless the maintainer states otherwise.
+- npm package names are bare and unprefixed (`unitsml`, `unitsdb`, `asciiunits`).
+- Release workflows run Node 24: trusted publishing requires npm ≥ 11.5.
+- Every release is gated by conformance-corpus replay (UnitsML 8).
+
+== Conformance
+
+This part is enforced by the register procedures themselves; it introduces no vectors. Annex A is informative.
+
+[appendix]
+== Annex A (informative): series map
+
+[cols="1,2,1"]
+|===
+|Part |Title |Consumes
+
+|2
+|Numeric and serialization contract
+|1
+
+|3
+|UnitsDB: the register
+|1, 2
+
+|4
+|The units model
+|3, 2
+
+|5
+|Conversions
+|3, 4, 2
+
+|6
+|asciiunits content language
+|3, 1
+
+|7
+|UnitsML XML usage
+|3, 4, 5
+
+|8
+|Conformance
+|1, 2 and all tested parts
+|===
+
+The companion series Plurimath (math model, format interfaces, uncertainty representation, evaluation) references this series at exactly three seams: the unit-expression content language (Part 6), the units semantics (Parts 4 and 5), and the conformance corpora (Part 8).
+
+== Bibliography
+
+* UnitsML program master graph: https://github.com/unitsml/unitsml-ruby/issues/95
+* Pendrill, L. R. (2024), _Quantities and units: order amongst complexity_, De Gruyter

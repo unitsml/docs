@@ -4,6 +4,14 @@ metanorma:
     files:
       - sources/asciiunits/document.adoc
       - sources/unitsdb/document.adoc
+      - sources/unitsml-1-general/document.adoc
+      - sources/unitsml-2-numeric/document.adoc
+      - sources/unitsml-3-unitsdb/document.adoc
+      - sources/unitsml-4-units-model/document.adoc
+      - sources/unitsml-5-conversions/document.adoc
+      - sources/unitsml-6-asciiunits/document.adoc
+      - sources/unitsml-7-xml-usage/document.adoc
+      - sources/unitsml-8-conformance/document.adoc
       # - sources/unitsml-guide/document.adoc
       # - sources/unitsml-incorporation/document.adoc
       # - sources/unitsml-ubl-ndr-subset/document.adoc
