@@ -12,23 +12,101 @@
 :mn-output-extensions: xml,html,doc,pdf
 :imagesdir: images
 
-== Status of this draft
+== Foreword
 
-Implementation reference: unitsml-ruby#92 (spec Tasks 1–8 written into the issue); data: UnitsML 3. Known engine defect recorded for this part's test suite: the composition's double base-power application (unitsml-ruby#92 comment 6518226290).
+This part defines what a conversion IS in this stack — the UnitsML 1.0 linear equation with its exactness and digit metadata — and the law of its application: exact rational arithmetic, offset cancellation on differences, precedence of definitions, and refusal of non-linear forms. The register carries the data (UnitsML 3); this part carries the semantics.
 
-== Abstract
+== Scope
 
-The UnitsML conversion law `y = d + (b/c)(x + a)` and its inverse `x = (c/b)(y − d) − a`: attribute semantics (`initialUnit`, `initialAddend` a, `multiplicand` b, `divisor` c, `finalAddend` d, `exact`, digit metadata); exactness discipline (rationals for `exact="true"`, lexical decimal preservation, no float drift, no silent precision loss for `exact="false"`); the difference application law (offsets cancel on differences — factor-only; affine legal only at power 1 and only for absolute values); application precedence (caller-supplied definition → document `<Conversions>` → register canonical path, with the agreement diagnostic and no double application); `initialUnit` resolution (document fragment, SI Digital Framework URI, IEC IRDI; unresolvable is a typed error); refusal semantics for `SpecialConversionFrom`/`WSDLConversionFrom`.
+This document specifies: the conversion equation and its attributes; exactness discipline; the difference application law and affine legality; definition resolution and application precedence; and refusal semantics for non-linear conversions.
 
-== Clause plan
+== Normative references
 
-- 5 The equation and attributes
-- 6 Exactness and digit metadata
-- 7 Difference application and affine legality
-- 8 Resolution and precedence
-- 9 Refusals
-- Annex A (normative) vector table: degC/degF exact round-trips, percent→one, non-exact percent-per-degree, difference-skip-addends, affine-in-composite and power≠1 errors, refusals, ft² red/green (the double-power defect)
+* UnitsML 1, UnitsML 2, UnitsML 3, UnitsML 4
+* UnitsML 1.0 XSD `Float64ConversionFromType` (the data syntax)
+* JCGM 100:2008 Clause 3.3.5–3.3.7 (exactness discipline analogy)
+
+== The conversion equation
+
+A linear conversion from unit *x* to unit *y* is
+
+[y = d + (b/c)(x + a)]
+
+where a = `initialAddend`, b = `multiplicand`, c = `divisor`, d = `finalAddend`; defaults 0, 1, 1, 0. The inverse is x = (c/b)(y − d) − a. The equation is legal at power 1 of a single absolute unit only.
+
+== Exactness and digit metadata
+
+`exact="true"` conversions MUST be computed in exact rational arithmetic (UnitsML 2), with their lexical decimal attributes parsed exactly; an implementation MUST NOT route them through binary floating point. `exact="false"` or absent: the declared precision travels; implementations MUST NOT present the result as exact. Digit metadata — `multiplicandDigits`, `divisorDigits`, `initialAddendDecimalPlace`, `finalAddendDecimalPlace` — MUST be carried by data layers and MUST NOT be discarded on import; it feeds significant-figure handling in reporting.
+
+== Difference application and affine legality
+
+The difference law of UnitsML 4 Clause 8 governs application: absolutes convert affinely; differences (including uncertainty magnitudes and interval-endpoint distances) convert by the factor b/c alone. Affine units MUST NOT appear inside composite expressions nor at powers ≠ 1; each is a specified error. The canonical register entries express the same law structurally: `factor` and `offset` with the `root_units` decomposition the factor was computed over.
+
+== Definition resolution and precedence
+
+When more than one definition exists, application order is:
+
+. caller-supplied conversion definition;
+. document-local `<Conversions>` resolved against the enclosing document;
+. the register canonical path (UnitsML 3).
+
+`initialUnit` and target references resolve by document fragment (`#xml:id`), SI Digital Framework URI, or IEC IRDI (via the register's reference URIs and alias seeds); an unresolvable reference is a typed error naming it — no silent fallback. When a local definition and the register disagree, the disagreement is reported as a diagnostic; the two paths are never applied in sequence (no double conversion), and the register is never silently overridden.
+
+== Refusal semantics
+
+`SpecialConversionFrom` and `WSDLConversionFrom` MUST be refused with typed errors naming the conversion and its kind. Approximating a non-linear conversion by a linear factor is non-conforming. Logarithmic units without canonical data are "no derivation path" and refuse conversion the same way (register-side counterparts: dB, Np, B).
+
+== Known engine defect (normative test target)
+
+The composition rule in reference implementations applies the base power twice: a sub-factor already raised to the base power is exponentiated again at the composition site. The red vector is ft² (0.3048 m)² = 0.09290304 m²; an implementation returning 0.3048⁴ violates this part. UnitsML 8 Annex B carries the vector; the fix rides unitsml-ruby#92.
 
 == Conformance
 
-U8 Annex B vectors; Plurimath evaluation and both runtimes replay them byte-identically.
+Annex A defines the vector table; UnitsML 8 Annex B freezes and replays it byte-identically across the reference implementation and parity runtimes.
+
+[appendix]
+== Annex A (normative): conversion vectors
+
+|===
+|Vector |Expected
+
+|0 °C → K · 100 °C → K
+|273.15 · 373.15 (exact rationals)
+
+|32 °F → K → °F round-trip
+|273.15 · exact identity
+
+|1 mi → m · 1 kWh → J (source-needed class)
+|1609.344 (exact) · TBD by sourced curation
+
+|1 bar → Pa · 2 bar → Pa
+|100 000 · 200 000 (register canonical)
+
+|percent → one (IEC 62720 import path)
+|0.01 exact
+
+|percent per degree (non-exact)
+|declared-precision decimal `0.5729577951308232087679815481`, never marked exact
+
+|(20 °C − 15 °C) → K
+|5 K (offset cancels — UnitsML 4 I1)
+
+|u = 0.2 °C → K
+|0.2 K (factor-only — I4)
+
+|degC² · (degC)·(s) composites
+|specified errors (affine at power ≠ 1 / in composite)
+
+|ft²
+|0.09290304 m² (double-power defect red/green)
+
+|SpecialConversionFrom · WSDLConversionFrom
+|typed refusal naming the conversion
+
+|unresolvable initialUnit
+|typed error naming the reference
+|===
+
+== Bibliography
+
+* UnitsML 1.0 XSD; unitsml/unitsdb#130 (data), #134 (corpus import); unitsml/unitsml-ruby#92 (application)

@@ -12,26 +12,84 @@
 :mn-output-extensions: xml,html,doc,pdf
 :imagesdir: images
 
-== Status of this draft
+== Foreword
 
-Home: unitsml/unitsml-testsuite (today only `corpora/renders` exists; unitsml/unitsml-testsuite#1 specifies the expansion). Drafting order position: last; this part gates every release in the series.
+This part is the gate of the series: it defines the corpora that freeze normative behavior into replayable vectors, the format those vectors take, the harness every implementation must satisfy, and the conformance classes an implementation may claim. Byte-identity across implementations is enforced HERE, by replay — never by shared code.
 
-== Abstract
+== Scope
 
-The conformance contract for all implementations: the corpora layout (`corpora/renders`, `corpora/uncertainty`, `corpora/conversion`, `corpora/conformance`) with a versioned index; the vector file format — inputs, expected results as exact decimal strings (UnitsML 2), per-vector metadata (source clause, engine/grammar/vector-set versions, declared tolerance `|computed − expected| ≤ 10^−d·|expected|` where non-exact); replay-harness requirements per language (Ruby, TypeScript, Rust lanes; byte-identical output; releases blocked on drift); the runtime conformance classes (parse/render; quantity and conversion; evaluation; full-series) and the claims each licenses; and the Monte Carlo reproducibility classes (byte-exact under pinned Wichmann–Hill vs distributional with stated tests; MCMC-draw examples excluded from byte vectors).
+This document specifies: the corpora layout and versioned index; the vector file format and metadata; the replay-harness requirements; the runtime conformance classes and the claims each licenses; and the reproducibility classes for Monte Carlo vectors.
 
-== Clause plan
+== Normative references
 
-- 5 Corpora layout and versioned index
-- 6 Vector file format and metadata
-- 7 Replay harness requirements and CI gates
-- 8 Runtime conformance classes
-- 9 Monte Carlo reproducibility classes
-- Annex A (normative) uncertainty vectors
-- Annex B (normative) conversion, scale and quantity-gating vectors
-- Annex C (normative) GUM/JCGM vectors: H.1–H.6 with the H.1 versioned triple (2008 first-order / amended GUF₂ per Plurimath 4 Annex A / MCM); JCGM 101 §9.2–9.5; the LPU-failure set (GUM-6 §13.1.4 Br₂; GUM-5 Ex 6, 7, 13, 14, 16); JCGM 106 decision vectors
-- Annex D (informative) corpus provenance
+* UnitsML 1, UnitsML 2; the tested parts (3–7 and the Plurimath series parts under test)
+* JCGM 101:2008 Clause 7.9 (adaptive procedure); JCGM 106:2012 (decision vectors)
 
-== Conformance
+== Corpora layout and versioned index
 
-This part is the gate of the series.
+[listing]
+corpora/
+  renders/        expected-renders.json, inputs.txt   (parse → format columns)
+  uncertainty/    parse, render and round-trip vectors (Plurimath 2)
+  conversion/     conversion, scale and gating vectors (UnitsML 4, 5)
+  conformance/    evaluator vectors (Plurimath 4)
+  index.json      versioned: names each vector set, its source part,
+                  its vector_set_version and its provenance
+
+The index is an artifact (UnitsML 1, Clause artifact discipline): checksummed, editioned, consumed by both reference and parity runtimes.
+
+== Vector file format and metadata
+
+A vector carries: `input`; `expected` as exact decimal strings (UnitsML 2) for every compared field; `metadata`: the normative source (document + clause), `engine_version`, `grammar_version`, `vector_set_version`, `numeric_algorithm`, and — only where a vector is non-exact — `tolerance_d` such that |computed − expected| ≤ 10^−d^·|expected|. A vector without `tolerance_d` is byte-exact. Monte Carlo vectors carry the PRNG identity, seed and trial count.
+
+== Replay harness requirements and CI gates
+
+A conforming harness MUST: load and checksum-verify the corpora; replay every vector of every claimed class; compare bytes; and report drift per vector. Release CI MUST block on any drift. The reference harness lives in unitsml/unitsml-testsuite; parity runtimes (TypeScript, Rust) run the same corpora through their own lanes.
+
+== Runtime conformance classes
+
+[cols="1,3"]
+|===
+|Class |Licenses the implementation to claim
+
+|parse/render
+|correct parse of an input language into the model and correct emission per format column of the render corpus
+
+|quantity-conversion
+|UnitsML 4/5 semantics: resolution, gating, scales, conversion application (Annex B)
+
+|evaluation
+|Plurimath 4: propagation, adequacy verdict, second-order, MCM, conformity (Annex C)
+
+|full-series
+|all of the above plus round-trip guarantees (Plurimath 2, Annex A)
+|===
+
+Claims MUST name the class and the corpus version replayed. An implementation MUST NOT claim a class whose vectors it does not replay byte-identically (or within declared non-exact tolerances).
+
+== Monte Carlo reproducibility classes
+
+Byte-exact: vectors produced by the pinned Wichmann–Hill generator with recorded seed and trial count; the adaptive stopping δ = ½·10^ℓ is part of the vector. Distributional: for methods without deterministic draws (e.g. MCMC sampling, GUM-5 Ex 12), vectors carry statistical-equivalence assertions (stated test and threshold) instead of byte expectations. Implementations MUST state which class each claimed vector satisfies.
+
+[appendix]
+== Annex A (normative): uncertainty vector set
+
+Parse/render/round-trip vectors for every mechanism of Plurimath 2: the three categories; k, p pairings; interval kinds; concise (output-only) and absolute notations; the ASCII channels (quoted channel for dialect L; native literals for pma); lossiness assertions per the Plurimath 2 matrix. Invariant replayed: every model field survives every lossless channel byte-identically.
+
+[appendix]
+== Annex B (normative): conversion, scale and quantity-gating vectors
+
+The vector tables of UnitsML 4 Annex A and UnitsML 5 Annex A, frozen: degC/degF/round-trips, percent, non-exact percent-per-degree, difference-skip-addends, affine-in-composite and power ≠ 1 errors, ft² double-power red/green, refusals, resolution red/greens (J → energy; Bq↔Hz; equivalence-class addition), scale errors naming the class.
+
+[appendix]
+== Annex C (normative): GUM/JCGM evaluator vectors
+
+- GUM H.1–H.6, with H.1 as the **versioned triple**: 2008 first-order (u_c = 32 nm) / amended second-order per Amd.1:2026 H.1.7 (u_c ≈ 34.2 nm, derivation in Plurimath 4 Annex A) / MCM per JCGM 101 §9.5 (u(δL) = 36 nm; shortest 99 % interval [745, 932] nm).
+- JCGM 101 §9.2 (masses), §9.3 (microresistance), §9.4 (comparison loss with r = 0.9), §9.5 (gauge block) MCM vectors; pinned Wichmann–Hill seeds.
+- LPU-failure set: GUM-6 §13.1.4 bromine (LPU u = 0 vs true 0.00007); GUM-5 Ex 6 (dominant uniform), Ex 7 (GUF₁/GUF₂/MCM), Ex 13, Ex 14 (linearity adequacy), Ex 16 (comparison loss at x₁ = 0).
+- JCGM 106 decisions: one-sided p_c at Table 1 z-values; guarded accept/reject with r = 0.65 → R_C = 0.1 %; C_m = 1 boundary; ISO 14253-1 w = U ceiling.
+
+[appendix]
+== Annex D (informative): corpus provenance
+
+Every vector names its normative source. The H.1 triple's second-order member carries the derivation reference (Plurimath 4 Annex A); the JCGM vectors cite clause and table. The excluded-as-byte-vectors set (MCMC draws) is listed with its distributional-class alternative.
