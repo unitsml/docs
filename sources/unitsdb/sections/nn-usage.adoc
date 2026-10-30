@@ -1,0 +1,47 @@
+== Usage
+
+
+=== Quantity usage models
+
+==== General
+
+The quantity usage models describe how quantities are used in practical applications.
+
+==== Finding units for a quantity
+
+To find all units that can measure a specific quantity, you can look up the quantity's `unit_reference` field. For example, to find units for measuring velocity (NISTq12):
+
+[source,yaml]
+----
+NISTq12:
+  unit_reference:
+  - name: meter per second
+    url: "#NISTu1.u3e-1/1"
+  - name: kilometer per hour
+    url: "#NISTu160"
+  - name: mile per hour
+    url: "#NISTu110"
+  # ...and more
+----
+
+==== Finding quantities with the same dimension
+
+To find all quantities that share the same dimension, you can search for quantities with matching `dimension_url` values. For example, quantities with dimension "L" (NISTd1) include:
+
+* length (NISTq1)
+* distance (NISTq48)
+* radius (NISTq98)
+* height (NISTq96)
+* thickness (NISTq97)
+
+==== Unit conversion for a quantity
+
+Once you identify that two units can measure the same quantity (they appear in the same quantity's `unit_reference` list), you can use conversion factors to convert measurements between them.
+
+[example]
+====
+For the quantity "length" (NISTq1), to convert between meter (NISTu1) and foot (NISTu78):
+1 meter = 3.28084 feet
+====
+
+This dimensional analysis approach ensures that conversions are physically meaningful and that the resulting measurements represent the same physical quantity.

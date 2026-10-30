@@ -1,0 +1,375 @@
+== Dimension
+
+=== General
+
+A dimension is a physical quantity that can be measured.
+
+According to the SI Brochure, a dimension is defined as "a physical quantity
+that can be expressed in terms of base quantities." Dimensions are fundamental
+to the system of units and provide a framework for understanding and comparing
+different physical properties.
+
+The SI standard defines the following dimensions and corresponding dimension symbols:
+
+* time (T)
+* length (L)
+* mass (M)
+* electric current (I)
+* absolute temperature (Θ)
+* amount of substance (N)
+* luminous intensity (J).
+
+In UnitsDB, dimensions are represented as mathematical combinations of base
+dimensions, using the same approach as dimensional analysis in physics.
+
+
+=== Dimension model
+
+==== Definition
+
+The Dimension model is defined as follows.
+
+[source,lutaml]
+----
+class Dimension {
+  attribute id, String {
+    definition {
+      Unique identifier for the dimension
+    }
+  }
+
+  attribute dimensionless, Boolean {
+    definition {
+      Whether the dimension is dimensionless. A dimensionless dimension
+      does not have any associated dimension components in `components`.
+    }
+  }
+
+  attribute components, DimensionComponent {
+    collection true
+    definition {
+      Components of the dimension, including base quantities and their powers.
+      Not applicable for dimensionless quantities.
+    }
+  }
+}
+----
+
+==== YAML structure
+
+The dimension data is stored in the `dimensions.yaml` file with the following structure:
+
+[source,yaml]
+----
+NISTd1:
+  length:
+    powerNumerator: 1
+    symbol: L
+    dim_symbols:
+    - id: dim_L
+      ascii: L
+      html: "&#x1D5AB;"
+      mathml: "<mi mathvariant='sans-serif'>L</mi>"
+      latex: "\\ensuremath{\\mathsf{L}}"
+      unicode: "\U0001D5AB"
+NISTd12:
+  length:
+    powerNumerator: 1
+    symbol: L
+  mass:
+    powerNumerator: 1
+    symbol: M
+  time:
+    powerNumerator: -2
+    symbol: T
+NISTd67:
+  dimensionless: true
+----
+
+==== Attributes
+
+===== id
+
+The `id` field is a unique identifier for the dimension, typically in the format
+`NISTdX` where X is a number. Each dimension has a unique ID that is used for
+cross-referencing throughout the UnitsDB system.
+
+===== dimensionless
+
+The `dimensionless` field is a boolean that indicates whether the dimension is
+dimensionless (true) or has a physical dimension (false or not present).
+Dimensionless quantities are pure numbers without units, such as ratios, angles,
+and counts.
+
+===== dimension components
+
+Each dimension is composed of one or more base dimension components represented as a DimensionComponent object.
+
+Each dimension can only have a maximum of one base dimension component of each
+type of the 7 base dimensions.
+
+
+=== Dimension component model
+
+==== General
+
+A dimension component represents a base quantity and its exponent (power) in the dimension.
+
+The seven base quantities in SI are:
+
+* (NISTq1) length
+* (NISTq2) mass
+* (NISTq3) time
+* (NISTq4) electric current
+* (NISTq5) thermodynamic temperature
+* (NISTq6) amount of substance
+* (NISTq7) luminous intensity
+
+==== Definition
+
+[source,lutaml]
+----
+class DimensionComponent {
+  attribute base_dimension, BaseDimensionEnum {
+    definition {
+      The base dimension represented by this component.
+    }
+  }
+
+  attribute power_numerator, Integer {
+    definition "The exponent (power) of the base quantity in the dimension"
+  }
+
+  attribute symbol, String {
+    definition "The symbol used to represent the base quantity in dimensional formulas"
+  }
+
+  attribute dim_symbols, DimensionSymbol {
+    collection true
+    definition "Symbol representations in different formats"
+  }
+}
+
+----
+
+==== Attributes
+
+===== base_dimension
+
+The `base_dimension` field is an enumeration that specifies the base dimension
+represented by this component, with possible values listed in the
+`BaseDimensionEnum` model.
+
+===== power_numerator
+
+The `power_numerator` field is an integer that represents the exponent (power)
+of the base quantity in the dimension. This indicates how many times the base
+dimension is multiplied in the dimension formula.
+
+[example]
+A power of 2 indicates that the base dimension is squared.
+
+[example]
+For a dimension with a power of -1, it indicates the reciprocal of the base dimension.
+
+===== symbol
+
+The `symbol` field represents a general notation used for the dimension in various contexts.
+
+[example]
+For a dimension expressed with a power of 0, it indicates that the dimension is dimensionless.
+
+===== dim_symbols
+
+The `dim_symbols` field is a collection of `DimensionSymbol` objects that
+represent the symbol representations of the dimension in different formats, in
+the `DimensionSymbol` model.
+
+
+=== Base dimension enumeration
+
+==== General
+
+The `BaseDimensionEnum` model defines the enumeration of base dimensions
+according to the SI system. Each base dimension is represented by a unique
+identifier and has a corresponding definition.
+
+
+==== Definition
+
+[source,lutaml]
+----
+class BaseDimensionEnum {
+  definition {
+    Enumeration of base dimensions.
+  }
+
+  value length {
+    definition {
+      The base dimension of length
+    }
+  }
+  value mass {
+    definition {
+      The base dimension of mass
+    }
+  }
+  value time {
+    definition {
+      The base dimension of time
+    }
+  }
+  value electric_current {
+    definition {
+      The base dimension of electric current
+    }
+  }
+  value thermodynamic_temperature {
+    definition {
+      The base dimension of thermodynamic temperature
+    }
+  }
+  value amount_of_substance {
+    definition {
+      The base dimension of amount of substance
+    }
+  }
+  value luminous_intensity {
+    definition {
+      The base dimension of luminous intensity
+    }
+  }
+
+  value plane_angle {
+    definition {
+      The base dimension of the dimensionless plane angle. This is a special
+      case that is not a base dimension in the SI system but is often treated as
+      such in dimensional analysis.
+    }
+  }
+}
+----
+
+==== Enumerated values
+
+===== length
+
+The `length` base dimension represents the physical quantity of length.
+
+===== mass
+
+The `mass` base dimension represents the physical quantity of mass.
+
+===== time
+
+The `time` base dimension represents the physical quantity of time.
+
+===== electric_current
+
+The `electric_current` base dimension represents the physical quantity of electric current.
+
+===== thermodynamic_temperature
+
+The `thermodynamic_temperature` base dimension represents the physical quantity of thermodynamic temperature.
+
+===== amount_of_substance
+
+The `amount_of_substance` base dimension represents the physical quantity of the amount of substance.
+
+===== luminous_intensity
+
+The `luminous_intensity` base dimension represents the physical quantity of luminous intensity.
+
+===== plane_angle
+
+The `plane_angle` base dimension represents the physical quantity of a plane
+angle. This is a special case that is not a base dimension in the SI system but
+is often treated as such in dimensional analysis.
+
+
+=== Dimension representation symbol model
+
+==== General
+
+The dimension representation symbols model defines the various symbol
+representations for a dimension. These symbols are used in different contexts,
+such as mathematical expressions, HTML rendering, and LaTeX typesetting.
+
+This model is only used for base dimensions defined in the `BaseDimensionEnum` model.
+
+NOTE: Only base dimensions have officially assigned dimension symbols by the SI System.
+
+==== Definition
+
+[source,lutaml]
+----
+class DimensionSymbol {
+  attribute id, String {
+    definition "Unique identifier for the symbol representation"
+  }
+
+  attribute ascii, String {
+    definition "ASCII text representation"
+  }
+
+  attribute html, String {
+    definition "HTML representation (may include HTML entities)"
+  }
+
+  attribute mathml, String {
+    definition "MathML representation in XML format."
+  }
+
+  attribute latex, String {
+    definition "LaTeX representation in LaTeX typeset format."
+  }
+
+  attribute unicode, String {
+    definition "Unicode representation in UTF-8 encoding."
+  }
+}
+----
+
+==== Attributes
+
+===== id
+
+The `id` field is a unique identifier for the symbol representation.
+
+===== ascii
+
+The `ascii` field contains the ASCII text representation of the symbol. This is the most basic representation and is suitable for plain text environments.
+
+===== html
+
+The `html` field contains the HTML representation of the symbol. This may include HTML entities for special characters.
+
+===== mathml
+
+The `mathml` field contains the MathML representation of the symbol. This is an XML-based markup language for representing mathematical notations.
+
+===== latex
+
+The `latex` field contains the LaTeX representation of the symbol.
+
+===== unicode
+
+The `unicode` field contains the Unicode representation of the symbol.
+
+==== YAML structure
+
+The dimension representation symbols data is stored in the `dimensions.yaml` file with the following structure:
+
+[example]
+====
+[source,yaml]
+----
+id: dim_L
+ascii: L
+html: "&#x1D5AB;"
+mathml: "<mi mathvariant='sans-serif'>L</mi>"
+latex: "\\ensuremath{\\mathsf{L}}"
+unicode: "\U0001D5AB"
+----
+====
+

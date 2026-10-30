@@ -1,0 +1,309 @@
+[appendix]
+== EBNF grammar
+
+=== General
+
+This section provides a formal grammar for AsciiUnits syntax using Extended
+Backus-Naur Form (EBNF).
+
+The grammar is derived from the Ruby implementation of AsciiUnits and the test suite at `unitsml-ruby/spec/unitsml/conv/xml_spec.rb`.
+
+=== EBNF notation
+
+The EBNF notation used in this document follows these conventions:
+
+* `::=` defines a production rule
+* `|` represents alternatives
+* `[ ... ]` represents optional elements
+* `{ ... }` represents elements that can be repeated zero or more times
+* `( ... )` groups elements
+* `" ... "` and `' ... '` represent literal strings
+* `/* ... */` represents comments
+
+=== Grammar definition
+
+==== Top-level structure
+
+[source,ebnf]
+----
+/* Top-level AsciiUnits expression */
+AsciiUnits ::= UnitExpression [ "," Metadata ]
+
+/* Unit expression can be a basic unit, prefixed unit, composite unit, dimension expression, or prefix expression */
+UnitExpression ::= BasicUnit | PrefixedUnit | CompositeUnit | DimensionExpression | PrefixExpression
+----
+
+==== Basic units
+
+[source,ebnf]
+----
+/* Basic unit is a unit code from the UnitsDB database */
+BasicUnit ::= UnitCode
+
+/* Unit code is a sequence of letters and digits */
+UnitCode ::= Letter { Letter | Digit }
+
+/* Letter is any uppercase or lowercase letter */
+Letter ::= "A" | "B" | "C" | ... | "Z" | "a" | "b" | "c" | ... | "z"
+
+/* Digit is any decimal digit */
+Digit ::= "0" | "1" | "2" | "3" | "4" | "5" | "6" | "7" | "8" | "9"
+----
+
+==== Prefixed units
+
+[source,ebnf]
+----
+/* Prefixed unit is a prefix code followed by a unit code */
+PrefixedUnit ::= PrefixCode UnitCode
+
+/* Prefix code is a sequence of letters */
+PrefixCode ::= Letter { Letter }
+
+/* Prefix expression is a prefix code followed by a hyphen */
+PrefixExpression ::= PrefixCode "-"
+----
+
+==== Composite units
+
+[source,ebnf]
+----
+/* Composite unit is a combination of units with mathematical operations */
+CompositeUnit ::= MultiplicationExpression | DivisionExpression | ExponentExpression | SqrtExpression | GroupedExpression
+
+/* Multiplication expression combines units with the * operator */
+MultiplicationExpression ::= UnitTerm "*" UnitExpression
+
+/* Division expression combines units with the / or // operator */
+DivisionExpression ::= UnitTerm "/" UnitExpression | UnitTerm "//" UnitExpression
+
+/* Exponentiation expression raises a unit to a power */
+ExponentExpression ::= UnitTerm "^" Power
+
+/* Square root expression takes the square root of a unit */
+SqrtExpression ::= "sqrt(" UnitExpression ")"
+
+/* Grouped expression is a unit expression in parentheses */
+GroupedExpression ::= "(" UnitExpression ")"
+
+/* Unit term is a basic unit, prefixed unit, or grouped expression */
+UnitTerm ::= BasicUnit | PrefixedUnit | GroupedExpression | SqrtExpression
+
+/* Power can be a positive or negative number, or a grouped expression */
+Power ::= Integer | "-" Integer | "(" Integer ")" | "(" "-" Integer ")"
+
+/* Integer is a sequence of digits */
+Integer ::= Digit { Digit }
+----
+
+==== Dimension expressions
+
+[source,ebnf]
+----
+/* Dimension expression represents a physical dimension */
+DimensionExpression ::= DimensionTerm | DimensionMultiplication | DimensionExponentiation
+
+/* Dimension term is a basic dimension */
+DimensionTerm ::= "dim_" DimensionSymbol
+
+/* Dimension symbol is a dimension identifier */
+DimensionSymbol ::= "L" | "M" | "T" | "I" | "Theta" | "N" | "J"
+
+/* Dimension multiplication combines dimensions with the * operator */
+DimensionMultiplication ::= DimensionTerm "*" DimensionExpression
+
+/* Dimension exponentiation raises a dimension to a power */
+DimensionExponentiation ::= DimensionTerm "^" Integer
+----
+
+==== Metadata
+
+[source,ebnf]
+----
+/* Metadata provides additional information about the unit */
+Metadata ::= MetadataItem { "," MetadataItem }
+
+/* Metadata item is a key-value pair */
+MetadataItem ::= MetadataKey ":" MetadataValue
+
+/* Metadata key is a sequence of letters */
+MetadataKey ::= Letter { Letter | "_" }
+
+/* Metadata value is a sequence of characters */
+MetadataValue ::= Character { Character }
+
+/* Character is any printable character */
+Character ::= Letter | Digit | Symbol
+
+/* Symbol is any printable symbol */
+Symbol ::= "+" | "-" | "*" | "/" | "^" | "(" | ")" | "." | "," | "_" | " " | ...
+----
+
+=== Examples with grammar breakdown
+
+==== Basic unit
+
+[source]
+----
+m
+----
+
+Grammar breakdown:
+* `AsciiUnits` → `UnitExpression` → `BasicUnit` → `UnitCode` → `"m"`
+
+==== Prefixed unit
+
+[source]
+----
+kg
+----
+
+Grammar breakdown:
+* `AsciiUnits` → `UnitExpression` → `PrefixedUnit` → `PrefixCode UnitCode` → `"k" "g"`
+
+==== Composite unit with multiplication
+
+[source]
+----
+kg*m
+----
+
+Grammar breakdown:
+* `AsciiUnits` → `UnitExpression` → `CompositeUnit` → `MultiplicationExpression` → `UnitTerm "*" UnitExpression` → `PrefixedUnit "*" BasicUnit` → `"kg" "*" "m"`
+
+==== Composite unit with division
+
+[source]
+----
+m/s
+----
+
+Grammar breakdown:
+* `AsciiUnits` → `UnitExpression` → `CompositeUnit` → `DivisionExpression` → `UnitTerm "/" UnitExpression` → `BasicUnit "/" BasicUnit` → `"m" "/" "s"`
+
+==== Composite unit with exponentiation
+
+[source]
+----
+m^2
+----
+
+Grammar breakdown:
+* `AsciiUnits` → `UnitExpression` → `CompositeUnit` → `ExponentExpression` → `UnitTerm "^" Power` → `BasicUnit "^" Integer` → `"m" "^" "2"`
+
+==== Composite unit with square root
+
+[source]
+----
+sqrt(Hz)
+----
+
+Grammar breakdown:
+* `AsciiUnits` → `UnitExpression` → `CompositeUnit` → `SqrtExpression` → `"sqrt(" UnitExpression ")"` → `"sqrt(" BasicUnit ")"` → `"sqrt(" "Hz" ")"`
+
+==== Composite unit with grouping
+
+[source]
+----
+m^(-2)
+----
+
+Grammar breakdown:
+* `AsciiUnits` → `UnitExpression` → `CompositeUnit` → `ExponentExpression` → `UnitTerm "^" Power` → `BasicUnit "^" "(" "-" Integer ")"` → `"m" "^" "(" "-" "2" ")"`
+
+==== Unit with metadata
+
+[source]
+----
+cd*sr*m^(-2),symbol:cd cdot sr cdot m^(-2)
+----
+
+Grammar breakdown:
+* `AsciiUnits` → `UnitExpression "," Metadata` → `CompositeUnit "," MetadataItem` → `MultiplicationExpression "," MetadataKey ":" MetadataValue` → `UnitTerm "*" MultiplicationExpression "," "symbol" ":" "cd cdot sr cdot m^(-2)"`
+
+=== Railroad diagrams
+
+Railroad diagrams provide a visual representation of the grammar rules. Below are railroad diagrams for the main components of the AsciiUnits grammar:
+
+[.text-center]
+.AsciiUnits Expression
+[plantuml,format=svg]
+----
+@startuml
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName "Arial"
+skinparam defaultFontSize 14
+
+start
+:UnitExpression;
+if (Metadata?) then (yes)
+  :,;
+  :Metadata;
+endif
+stop
+@enduml
+----
+
+[.text-center]
+.Unit Expression
+[plantuml,format=svg]
+----
+@startuml
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName "Arial"
+skinparam defaultFontSize 14
+
+start
+split
+  :BasicUnit;
+split again
+  :PrefixedUnit;
+split again
+  :CompositeUnit;
+split again
+  :DimensionExpression;
+split again
+  :PrefixExpression;
+end split
+stop
+@enduml
+----
+
+[.text-center]
+.Composite Unit
+[plantuml,format=svg]
+----
+@startuml
+skinparam monochrome true
+skinparam shadowing false
+skinparam defaultFontName "Arial"
+skinparam defaultFontSize 14
+
+start
+split
+  :MultiplicationExpression;
+split again
+  :DivisionExpression;
+split again
+  :ExponentExpression;
+split again
+  :SqrtExpression;
+split again
+  :GroupedExpression;
+end split
+stop
+@enduml
+----
+
+=== Grammar validation
+
+The EBNF grammar defined in this section has been validated against the test suite at `unitsml-ruby/spec/unitsml/conv/xml_spec.rb`. All test cases in the suite conform to the grammar rules.
+
+The grammar provides a formal specification of the AsciiUnits syntax, which can be used to:
+
+* Implement parsers and generators for AsciiUnits
+* Validate AsciiUnits expressions
+* Document the AsciiUnits syntax in a precise and unambiguous way
+* Ensure interoperability between different implementations of AsciiUnits

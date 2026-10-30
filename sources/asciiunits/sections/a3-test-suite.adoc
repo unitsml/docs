@@ -1,0 +1,586 @@
+[appendix]
+== Test suite
+
+=== General
+
+This test suite is used for:
+
+* Validating implementations of AsciiUnits parsers and generators
+* Ensuring compatibility between different implementations
+* Providing examples for users of AsciiUnits
+* Serving as a reference for the expected behavior of AsciiUnits
+
+Implementers of AsciiUnits parsers and generators should ensure that their
+implementations can correctly process all the examples in this test suite.
+
+This comprehensive test suite for AsciiUnits is based on the Ruby
+implementation's test suite at `unitsml-ruby/spec/unitsml/conv/xml_spec.rb`.
+
+The test suite includes a variety of AsciiUnits statements and their
+corresponding XML representations, serving as a reference for implementers and
+users of AsciiUnits.
+
+
+=== Basic units
+
+==== Meter (m)
+
+AsciiUnits statement:
+[source,ascii]
+----
+m
+----
+
+XML representation:
+[source,xml]
+----
+<Unit xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="U_NISTu1" dimensionURL="#NISTd1">
+  <UnitSystem name="SI" type="SI_derived" xml:lang="en-US"/>
+  <UnitName xml:lang="en">meter</UnitName>
+  <UnitSymbol type="HTML">m</UnitSymbol>
+  <UnitSymbol type="MathMl">
+    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+      <mi mathvariant="normal">m</mi>
+    </math>
+  </UnitSymbol>
+</Unit>
+
+<Dimension xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="NISTd1">
+  <Length symbol="L" powerNumerator="1"/>
+</Dimension>
+----
+
+==== Hertz (hz)
+
+AsciiUnits statement:
+[source,ascii]
+----
+Hz
+----
+
+XML representation:
+[source,xml]
+----
+<Unit xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="U_NISTu31" dimensionURL="#NISTd24">
+  <UnitSystem name="SI" type="SI_derived" xml:lang="en-US"/>
+  <UnitName xml:lang="en">hertz</UnitName>
+  <UnitSymbol type="HTML">Hz</UnitSymbol>
+  <UnitSymbol type="MathMl">
+    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+      <mi mathvariant="normal">Hz</mi>
+    </math>
+  </UnitSymbol>
+</Unit>
+
+<Dimension xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="NISTd24">
+  <Time symbol="T" powerNumerator="-1"/>
+</Dimension>
+
+<Quantity xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="NISTq45" quantityType="base" dimensionURL="#NISTd24">
+  <QuantityName xml:lang="en-US">frequency</QuantityName>
+</Quantity>
+----
+
+==== Radian (rad)
+
+AsciiUnits statement:
+[source,ascii]
+----
+rad
+----
+
+XML representation:
+[source,xml]
+----
+<Unit xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="U_NISTu9" dimensionURL="#D_L0">
+  <UnitSystem name="SI" type="SI_derived" xml:lang="en-US"/>
+  <UnitName xml:lang="en">radian</UnitName>
+  <UnitSymbol type="HTML">rad</UnitSymbol>
+  <UnitSymbol type="MathMl">
+    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+      <mi mathvariant="normal">rad</mi>
+    </math>
+  </UnitSymbol>
+</Unit>
+
+<Dimension xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="NISTd9">
+  <PlaneAngle symbol="phi" powerNumerator="1"/>
+</Dimension>
+
+<Dimension xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="D_L0">
+  <Length symbol="L" powerNumerator="0"/>
+</Dimension>
+
+<Quantity xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="NISTq9" dimensionURL="#NISTd9" quantityType="base">
+  <QuantityName xml:lang="en-US">plane angle</QuantityName>
+  <QuantityName xml:lang="en-US">angle</QuantityName>
+</Quantity>
+----
+
+=== Prefixed units
+
+==== Kilogram (kg)
+
+AsciiUnits statement:
+[source,ascii]
+----
+kg
+----
+
+XML representation:
+[source,xml]
+----
+<Unit xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="U_NISTu2" dimensionURL="#NISTd2">
+  <UnitSystem name="SI" type="SI_base" xml:lang="en-US"/>
+  <UnitName xml:lang="en">kilogram</UnitName>
+  <UnitSymbol type="HTML">kg</UnitSymbol>
+  <UnitSymbol type="MathMl">
+    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+      <mi mathvariant="normal">kg</mi>
+    </math>
+  </UnitSymbol>
+  <RootUnits>
+    <EnumeratedRootUnit unit="gram" prefix="k"/>
+  </RootUnits>
+</Unit>
+
+<Prefix xmlns="https://schema.unitsml.org/unitsml/1.0" prefixBase="10" prefixPower="3" xml:id="NISTp10_3">
+  <PrefixName xml:lang="en">kilo</PrefixName>
+  <PrefixSymbol type="ASCII">k</PrefixSymbol>
+  <PrefixSymbol type="unicode">k</PrefixSymbol>
+  <PrefixSymbol type="LaTeX">k</PrefixSymbol>
+  <PrefixSymbol type="HTML">k</PrefixSymbol>
+</Prefix>
+
+<Dimension xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="NISTd2">
+  <Mass symbol="M" powerNumerator="1"/>
+</Dimension>
+
+<Quantity xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="NISTq2" quantityType="base" dimensionURL="#NISTd2">
+  <QuantityName xml:lang="en-US">mass</QuantityName>
+</Quantity>
+----
+
+==== Micrometer (um)
+
+AsciiUnits statement:
+[source,ascii]
+----
+um
+----
+
+XML representation:
+[source,xml]
+----
+<Unit xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="U_um" dimensionURL="#NISTd1">
+  <UnitSystem name="SI" type="SI_derived" xml:lang="en-US"/>
+  <UnitName xml:lang="en">um</UnitName>
+  <UnitSymbol type="HTML">&micro;m</UnitSymbol>
+  <UnitSymbol type="MathMl">
+    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+      <mi mathvariant='normal'>µm</mi>
+    </math>
+  </UnitSymbol>
+  <RootUnits>
+    <EnumeratedRootUnit unit="meter" prefix="u"/>
+  </RootUnits>
+</Unit>
+
+<Prefix xmlns="https://schema.unitsml.org/unitsml/1.0" prefixBase="10" prefixPower="-6" xml:id="NISTp10_-6">
+  <PrefixName xml:lang="en">micro</PrefixName>
+  <PrefixSymbol type="ASCII">u</PrefixSymbol>
+  <PrefixSymbol type="unicode">μ</PrefixSymbol>
+  <PrefixSymbol type="LaTeX">$mu$</PrefixSymbol>
+  <PrefixSymbol type="HTML">&micro;</PrefixSymbol>
+</Prefix>
+
+<Dimension xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="NISTd1">
+  <Length symbol="L" powerNumerator="1"/>
+</Dimension>
+----
+
+==== Millibar (mbar)
+
+AsciiUnits statement:
+[source,ascii]
+----
+mbar
+----
+
+XML representation:
+[source,xml]
+----
+<Unit xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="U_NISTu362">
+  <UnitSystem name="not_SI" type="not_SI" xml:lang="en-US"/>
+  <UnitName xml:lang="en">millibar</UnitName>
+  <UnitSymbol type="HTML">mbar</UnitSymbol>
+  <UnitSymbol type="MathMl">
+    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+      <mi mathvariant="normal">mbar</mi>
+    </math>
+  </UnitSymbol>
+  <RootUnits>
+    <EnumeratedRootUnit unit="bar" prefix="m"/>
+  </RootUnits>
+</Unit>
+
+<Prefix xmlns="https://schema.unitsml.org/unitsml/1.0" prefixBase="10" prefixPower="-3" xml:id="NISTp10_-3">
+  <PrefixName xml:lang="en">milli</PrefixName>
+  <PrefixSymbol type="ASCII">m</PrefixSymbol>
+  <PrefixSymbol type="unicode">m</PrefixSymbol>
+  <PrefixSymbol type="LaTeX">m</PrefixSymbol>
+  <PrefixSymbol type="HTML">m</PrefixSymbol>
+</Prefix>
+
+<Dimension xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="NISTd14">
+  <Length symbol="L" powerNumerator="-1"/>
+  <Mass symbol="M" powerNumerator="1"/>
+  <Time symbol="T" powerNumerator="-2"/>
+</Dimension>
+----
+
+=== Composite units
+
+==== Multiplication (kg*m)
+
+AsciiUnits statement:
+[source,ascii]
+----
+kg*m
+----
+
+XML representation:
+[source,xml]
+----
+<Unit xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="U_kg.m" dimensionURL="#D_LM">
+  <UnitSystem name="SI" type="SI_derived" xml:lang="en-US"/>
+  <UnitName xml:lang="en">kg*m</UnitName>
+  <UnitSymbol type="HTML">kg&#x22c5;m</UnitSymbol>
+  <UnitSymbol type="MathMl">
+    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+      <mi mathvariant="normal">kg</mi>
+      <mo>&#x22c5;</mo>
+      <mi mathvariant="normal">m</mi>
+    </math>
+  </UnitSymbol>
+  <RootUnits>
+    <EnumeratedRootUnit unit="gram" prefix="k"/>
+    <EnumeratedRootUnit unit="meter"/>
+  </RootUnits>
+</Unit>
+
+<Prefix xmlns="https://schema.unitsml.org/unitsml/1.0" prefixBase="10" prefixPower="3" xml:id="NISTp10_3">
+  <PrefixName xml:lang="en">kilo</PrefixName>
+  <PrefixSymbol type="ASCII">k</PrefixSymbol>
+  <PrefixSymbol type="unicode">k</PrefixSymbol>
+  <PrefixSymbol type="LaTeX">k</PrefixSymbol>
+  <PrefixSymbol type="HTML">k</PrefixSymbol>
+</Prefix>
+
+<Dimension xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="D_LM">
+  <Length symbol="L" powerNumerator="1"/>
+  <Mass symbol="M" powerNumerator="1"/>
+</Dimension>
+----
+
+==== Division (m/s)
+
+AsciiUnits statement:
+[source,ascii]
+----
+m/s
+----
+
+XML representation:
+[source,xml]
+----
+<Unit xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="U_m.s-1" dimensionURL="#NISTd11">
+  <UnitSystem name="SI" type="SI_derived" xml:lang="en-US"/>
+  <UnitName xml:lang="en">meter per second</UnitName>
+  <UnitSymbol type="HTML">m&#x22c5;s<sup>&#x2212;1</sup></UnitSymbol>
+  <UnitSymbol type="MathMl">
+    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+      <mi mathvariant="normal">m</mi>
+      <mo>&#x22c5;</mo>
+      <msup>
+        <mrow>
+          <mi mathvariant="normal">s</mi>
+        </mrow>
+        <mrow>
+          <mo>&#x2212;</mo>
+          <mn>1</mn>
+        </mrow>
+      </msup>
+    </math>
+  </UnitSymbol>
+  <RootUnits>
+    <EnumeratedRootUnit unit="meter"/>
+    <EnumeratedRootUnit unit="second" powerNumerator="-1"/>
+  </RootUnits>
+</Unit>
+
+<Dimension xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="NISTd11">
+  <Length symbol="L" powerNumerator="1"/>
+  <Time symbol="T" powerNumerator="-1"/>
+</Dimension>
+----
+
+==== Exponentiation (m^2)
+
+AsciiUnits statement:
+[source,ascii]
+----
+m^2
+----
+
+XML representation:
+[source,xml]
+----
+<Unit xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="U_m2" dimensionURL="#D_L2">
+  <UnitSystem name="SI" type="SI_derived" xml:lang="en-US"/>
+  <UnitName xml:lang="en">m^2</UnitName>
+  <UnitSymbol type="HTML">m<sup>2</sup></UnitSymbol>
+  <UnitSymbol type="MathMl">
+    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+      <msup>
+        <mrow>
+          <mi mathvariant="normal">m</mi>
+        </mrow>
+        <mrow>
+          <mn>2</mn>
+        </mrow>
+      </msup>
+    </math>
+  </UnitSymbol>
+</Unit>
+
+<Dimension xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="D_L2">
+  <Length symbol="L" powerNumerator="2"/>
+</Dimension>
+----
+
+==== Negative exponentiation (kg^-2)
+
+AsciiUnits statement:
+[source,ascii]
+----
+kg^-2
+----
+
+XML representation:
+[source,xml]
+----
+<Unit xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="U_kg-2" dimensionURL="#D_M-2">
+  <UnitSystem name="SI" type="SI_base" xml:lang="en-US"/>
+  <UnitName xml:lang="en">kg^-2</UnitName>
+  <UnitSymbol type="HTML">kg<sup>&#x2212;2</sup></UnitSymbol>
+  <UnitSymbol type="MathMl">
+    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+      <msup>
+        <mrow>
+          <mi mathvariant="normal">kg</mi>
+        </mrow>
+        <mrow>
+          <mo>&#x2212;</mo>
+          <mn>2</mn>
+        </mrow>
+      </msup>
+    </math>
+  </UnitSymbol>
+  <RootUnits>
+    <EnumeratedRootUnit unit="gram" prefix="k" powerNumerator="-2"/>
+  </RootUnits>
+</Unit>
+
+<Prefix xmlns="https://schema.unitsml.org/unitsml/1.0" prefixBase="10" prefixPower="3" xml:id="NISTp10_3">
+  <PrefixName xml:lang="en">kilo</PrefixName>
+  <PrefixSymbol type="ASCII">k</PrefixSymbol>
+  <PrefixSymbol type="unicode">k</PrefixSymbol>
+  <PrefixSymbol type="LaTeX">k</PrefixSymbol>
+  <PrefixSymbol type="HTML">k</PrefixSymbol>
+</Prefix>
+
+<Dimension xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="D_M-2">
+  <Mass symbol="M" powerNumerator="-2"/>
+</Dimension>
+----
+
+==== Square root (sqrt(hz))
+
+AsciiUnits statement:
+[source,ascii]
+----
+sqrt(Hz)
+----
+
+XML representation:
+[source,xml]
+----
+<Unit xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="U_Hz0.5" dimensionURL="#D_T-0.5">
+  <UnitSystem name="SI" type="SI_derived" xml:lang="en-US"/>
+  <UnitName xml:lang="en">Hz^0.5</UnitName>
+  <UnitSymbol type="HTML">Hz<sup>0.5</sup></UnitSymbol>
+  <UnitSymbol type="MathMl">
+    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+      <msup>
+        <mrow>
+          <mi mathvariant="normal">Hz</mi>
+        </mrow>
+        <mrow>
+          <mn>0.5</mn>
+        </mrow>
+      </msup>
+    </math>
+  </UnitSymbol>
+</Unit>
+
+<Dimension xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="D_T-0.5">
+  <Time symbol="T" powerNumerator="-0.5"/>
+</Dimension>
+----
+
+==== Complex composite (j/kg*k)
+
+AsciiUnits statement:
+[source,ascii]
+----
+J/kg*K
+----
+
+XML representation:
+[source,xml]
+----
+<Unit xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="U_NISTu13.u27p10_3e-1/1.u5e-1/1" dimensionURL="#D_L2M0T-2Theta-1">
+  <UnitSystem name="SI" type="SI_derived" xml:lang="en-US"/>
+  <UnitName xml:lang="en">joule per kilogram kelvin</UnitName>
+  <UnitSymbol type="HTML">J&#x22c5;kg<sup>&#x2212;1</sup>&#x22c5;K<sup>&#x2212;1</sup></UnitSymbol>
+  <UnitSymbol type="MathMl">
+    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+      <mi mathvariant="normal">J</mi>
+      <mo>&#x22c5;</mo>
+      <msup>
+        <mrow>
+          <mi mathvariant="normal">kg</mi>
+        </mrow>
+        <mrow>
+          <mo>&#x2212;</mo>
+          <mn>1</mn>
+        </mrow>
+      </msup>
+      <mo>&#x22c5;</mo>
+      <msup>
+        <mrow>
+          <mi mathvariant="normal">K</mi>
+        </mrow>
+        <mrow>
+          <mo>&#x2212;</mo>
+          <mn>1</mn>
+        </mrow>
+      </msup>
+    </math>
+  </UnitSymbol>
+  <RootUnits>
+    <EnumeratedRootUnit unit="joule"/>
+    <EnumeratedRootUnit unit="gram" prefix="k" powerNumerator="-1"/>
+    <EnumeratedRootUnit unit="kelvin" powerNumerator="-1"/>
+  </RootUnits>
+</Unit>
+
+<Prefix xmlns="https://schema.unitsml.org/unitsml/1.0" prefixBase="10" prefixPower="3" xml:id="NISTp10_3">
+  <PrefixName xml:lang="en">kilo</PrefixName>
+  <PrefixSymbol type="ASCII">k</PrefixSymbol>
+  <PrefixSymbol type="unicode">k</PrefixSymbol>
+  <PrefixSymbol type="LaTeX">k</PrefixSymbol>
+  <PrefixSymbol type="HTML">k</PrefixSymbol>
+</Prefix>
+
+<Dimension xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="D_L2M0T-2Theta-1">
+  <Length symbol="L" powerNumerator="2"/>
+  <Mass symbol="M" powerNumerator="0"/>
+  <Time symbol="T" powerNumerator="-2"/>
+  <ThermodynamicTemperature symbol="Theta" powerNumerator="-1"/>
+</Dimension>
+----
+
+=== Dimension expressions
+
+==== Basic dimension (dim_l)
+
+AsciiUnits statement:
+[source,ascii]
+----
+dim_L
+----
+
+XML representation:
+[source,xml]
+----
+<Dimension xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="D_L">
+  <Length symbol="L" powerNumerator="1"/>
+</Dimension>
+----
+
+==== Dimension multiplication (dim_theta*dim_l^2)
+
+AsciiUnits statement:
+[source,ascii]
+----
+dim_Theta*dim_L^2
+----
+
+XML representation:
+[source,xml]
+----
+<Dimension xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="D_L2Theta">
+  <Length symbol="L" powerNumerator="2"/>
+  <ThermodynamicTemperature symbol="Theta" powerNumerator="1"/>
+</Dimension>
+----
+
+=== Units with metadata
+
+==== Unit with symbol metadata
+
+AsciiUnits statement:
+[source,ascii]
+----
+cd*sr*m^(-2),symbol:cd cdot sr cdot m^(-2)
+----
+
+XML representation:
+[source,xml]
+----
+<Unit xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="U_cd.sr.m-2" dimensionURL="#D_L-2J">
+  <UnitSystem name="SI" type="SI_derived" xml:lang="en-US"/>
+  <UnitName xml:lang="en">cd*sr*m^-2</UnitName>
+  <UnitSymbol type="HTML">cd&#x22c5;sr&#x22c5;m<sup>&#x2212;2</sup></UnitSymbol>
+  <UnitSymbol type="MathMl">
+    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+      <mi mathvariant="normal">cd</mi>
+      <mo>&#x22c5;</mo>
+      <mi mathvariant="normal">sr</mi>
+      <mo>&#x22c5;</mo>
+      <msup>
+        <mrow>
+          <mi mathvariant="normal">m</mi>
+        </mrow>
+        <mrow>
+          <mo>&#x2212;</mo>
+          <mn>2</mn>
+        </mrow>
+      </msup>
+    </math>
+  </UnitSymbol>
+  <RootUnits>
+    <EnumeratedRootUnit unit="candela"/>
+    <EnumeratedRootUnit unit="steradian"/>
+    <EnumeratedRootUnit unit="meter" powerNumerator="-2"/>
+  </RootUnits>
+</Unit>
+
+<Dimension xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="D_L-2J">
+  <Length symbol="L" powerNumerator="-2"/>
+  <LuminousIntensity symbol="J" powerNumerator="1"/>
+</Dimension>
+----
+

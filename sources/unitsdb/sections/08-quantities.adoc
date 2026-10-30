@@ -1,0 +1,280 @@
+== Quantity
+
+=== General
+
+A quantity is a property of a phenomenon, body, or substance that can be
+quantified by measurement.
+
+In UnitsDB, quantities provide the bridge between theoretical dimensions and
+practical units of measurement.
+
+They represent physical properties like length, mass, time, speed, or energy,
+which can be measured using specific units.
+
+There are two represented types of quantities in UnitsDB.
+
+Base quantities::
+The fundamental quantities that cannot be derived from other quantities. The SI
+system defines seven base quantities: length, mass, time, electric current,
+thermodynamic temperature, amount of substance, and luminous intensity.
+
+Dimensionless quantities::
+The dimension-independent quantities that are not associated with any physical dimension.
+These quantities are often used in mathematical or statistical contexts, such as
+probability, ratios, or pure numbers. While dimensionless quantities do not have
+a specific dimension, they can still be associated with a unit of measurement
+for semantic interoperability.
++
+[example]
+====
+The ratio of two lengths is dimensionless, but it can be expressed as a quantity
+as a "ratio for lengths".
+====
++
+[example]
+====
+The unit 'parts-per-million' (ppm) is a unit that measures a quantity that
+represents a ratio of one part of a substance to one million parts of the total
+mixture.
+====
+
+Derived quantities::
+Quantities that are defined through algebraic relationships with other quantities,
+typically expressed as products of powers of base quantities. They can differ in
+units depending on their dependencies and can be used to express complex measures
+in a simplified form.
+
+
+=== Quantity model
+
+==== Definition
+
+The Quantity model is defined as follows.
+
+[source,lutaml]
+----
+class Quantity {
+  attribute id, String {
+    definition {
+      "Unique identifier for the quantity.
+    }
+  }
+  attribute dimension_url, String {
+    definition {
+      Reference to the dimension of the quantity.
+    }
+  }
+  attribute quantity_type, QuantityType {
+    definition {
+      Type of quantity.
+    }
+  }
+  attribute quantity_name, String {
+    collection true
+    definition {
+      Names of the quantity.
+    }
+  }
+  attribute unit_reference, UnitReference {
+    collection true
+    definition {
+      References to units that can measure this quantity
+    }
+  }
+}
+----
+
+==== YAML structure
+
+The quantity data is stored in the `quantities.yaml` file with the following structure:
+
+[source,yaml]
+----
+NISTq1:
+  dimension_url: "#NISTd1"
+  quantity_type: base
+  quantity_name:
+  - length
+  unit_reference:
+  - name: meter
+    url: "#NISTu1"
+  - name: foot
+    url: "#NISTu78"
+  - name: inch
+    url: "#NISTu8"
+  - name: mile
+    url: "#NISTu83"
+  - name: yard
+    url: "#NISTu84"
+
+NISTq12:
+  dimension_url: "#NISTd11"
+  quantity_type: derived
+  quantity_name:
+  - velocity
+  - speed
+  unit_reference:
+  - name: meter per second
+    url: "#NISTu1.u3e-1/1"
+  - name: kilometer per hour
+    url: "#NISTu160"
+  - name: mile per hour
+    url: "#NISTu110"
+----
+
+
+==== Attributes
+
+===== id
+
+The `id` field is a unique identifier for the quantity, typically in the format
+`NISTqX` where X is a number.
+
+Each quantity has a unique ID that is used for cross-referencing throughout the
+UnitsDB system.
+
+===== dimension_url
+
+The `dimension_url` field contains a reference to the dimension associated with
+the quantity. This reference establishes the dimensional characteristics of the
+quantity and links it to the mathematical representation in the dimension model.
+
+===== quantity_type
+
+The `quantity_type` field indicates whether the quantity is a base quantity or a
+derived quantity, using the `QuantityType` enumeration.
+
+===== quantity_name
+
+The `quantity_name` field is a collection of strings that each represents a name
+for the quantity.
+
+The first name in the array is the primary name, and any additional names are
+alternative names or synonyms.
+
+[example]
+"velocity" might have the synonym "speed".
+
+===== unit_reference
+
+The `unit_reference` field is a collection of UnitReference objects that can be used to measure the quantity.
+
+
+=== Quantity type model
+
+==== General
+
+UnitsDB classifies quantities into different types based on their role in the
+system of physical quantities.
+
+==== Definition
+
+[source,lutaml]
+----
+enum QuantityType {
+  base {
+    definition "Base quantity"
+  }
+  derived {
+    definition "Derived quantity"
+  }
+}
+----
+
+
+==== Enumerated values
+
+===== `base`
+
+Base quantities are the fundamental physical quantities that cannot be derived
+from other quantities. They are defined independently and serve as the
+foundation for all other quantities.
+
+The seven base quantities in the SI system form the foundation of all physical
+measurements, and are currently defined in the UnitsDB.
+
+NOTE: These quantity entries are protected entries in the UnitsDB.
+
+(NISTq1) Length, (NISTq48) Distance::
+The measurement of distance or dimension in one direction.
+
+(NISTq2) Mass::
+The measurement of the amount of matter in an object.
+
+(NISTq3) Time/Duration::
+The measurement of duration or sequential events.
+
+(NISTq4) Electric current::
+The flow of electric charge.
+
+(NISTq5) Thermodynamic temperature::
+The measurement of thermal energy.
+
+(NISTq6) Amount of substance::
+The number of entities (atoms, molecules, ions, etc.) in a system.
+
+(NISTq7) Luminous intensity::
+The measure of the power of light in a given direction.
+
+
+===== `derived`
+
+A derived quantity is a physical quantity that is defined in terms of base
+quantities. Derived quantities are expressed as products of powers of base
+quantities, and they can be represented in terms of their dimensional
+relationships.
+
+Derived quantities can be expressed in terms of base quantities using
+dimensional analysis.
+
+For example, velocity is a derived quantity that can be
+expressed as length divided by time (L/T). Other examples of derived
+quantities include:
+
+* acceleration (NISTq13), which is expressed as length divided by time squared (L/T²)
+* force (NISTq14), which is expressed as mass times acceleration (M·L/T²)
+* pressure (NISTq15), which is expressed as force divided by area (M·L/T²·L²)
+
+
+=== Unit reference model
+
+==== General
+
+A quantity can be measured by multiple units, and this relationship is captured in the `unit_reference` field.
+
+This many-to-many relationship allows:
+
+* Selection of appropriate units for a given quantity
+* Identification of all quantities that can be measured with a particular unit
+* Conversion between different units for the same quantity
+
+For example, the quantity "length" (NISTq1) can be measured using units such as meter, foot, inch, mile, and yard.
+
+==== Definition
+
+[source,lutaml]
+----
+class UnitReference {
+  attribute name, String {
+    definition "Name of the unit"
+  }
+
+  attribute url, String {
+    definition "Reference to the unit"
+  }
+}
+----
+
+==== Attributes
+
+===== name
+
+The `name` field is a string that represents the name of the unit that can measure the quantity.
+
+This field is optional
+
+===== url
+
+The `url` field is a string that contains a reference to the unit in the UnitsDB system.
+
+

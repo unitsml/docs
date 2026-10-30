@@ -1,0 +1,156 @@
+== Prefix
+
+=== General
+
+A prefix is a modifier that, when attached to a unit, multiplies that unit by a
+specified factor.
+
+In UnitsDB, prefixes are used to create multiples and submultiples of units,
+allowing for the expression of quantities across a wide range of magnitudes.
+
+=== Prefix model
+
+==== Definition
+
+The Prefix model is defined as follows.
+
+[source,lutaml]
+----
+class Prefix {
+  attribute id, String {
+    definition "Unique identifier for the prefix"
+  }
+  attribute name, String {
+    definition "Name of the prefix (e.g., kilo, milli)"
+  }
+  attribute symbol, PrefixSymbols {
+    definition "Symbol representations in different formats"
+  }
+  attribute base, Integer {
+    definition "The base of the exponentiation (10 for SI prefixes, 2 for binary prefixes)"
+  }
+  attribute power, Integer {
+    definition "The power to which the base is raised"
+  }
+}
+----
+
+==== YAML structure
+
+The prefix data is stored in the `prefixes.yaml` file with the following structure:
+
+[source,yaml]
+----
+NISTp10_3:
+  name: kilo
+  symbol:
+    ascii: k
+    html: k
+    latex: k
+    unicode: k
+  base: 10
+  power: 3
+
+NISTp10_-6:
+  name: micro
+  symbol:
+    ascii: u
+    html: "&micro;"
+    latex: "$mu$"
+    unicode: μ
+  base: 10
+  power: -6
+
+NISTp2_10:
+  name: kibi
+  symbol:
+    ascii: Ki
+    html: Ki
+    latex: Ki
+    unicode: Ki
+  base: 2
+  power: 10
+----
+
+==== Attributes
+
+===== id
+
+The `id` field is a unique identifier for the prefix. The format follows a pattern of "NISTp" followed by the base and power of the prefix, separated by an underscore. For SI prefixes, the format is "NISTp10_X" where X is the power, which can be positive or negative. For binary prefixes, the format is "NISTp2_X".
+
+===== name
+
+The `name` field contains the name of the prefix, such as "kilo", "milli", or "giga".
+
+===== symbol
+
+The `symbol` field contains representations of the prefix symbol in different formats using the `PrefixSymbols` model.
+
+===== base
+
+The `base` field indicates the base of the exponentiation.
+
+* For SI prefixes, this is always 10.
+* For binary prefixes, it is 2.
+
+===== power
+
+The `power` field indicates the power to which the base is raised to obtain the multiplier for the prefix.
+
+For example, a power of 3 with a base of 10 gives a multiplier of 10^3^ = 1000.
+
+=== Prefix symbols model
+
+==== Definition
+
+[source,lutaml]
+----
+class PrefixSymbols {
+  attribute ascii, String {
+    definition "ASCII text representation"
+  }
+  attribute html, String {
+    definition "HTML representation (may include HTML entities)"
+  }
+  attribute mathml, String {
+    definition "MathML representation in XML format."
+  }
+  attribute latex, String {
+    definition "LaTeX representation in LaTeX typeset format."
+  }
+  attribute unicode, String {
+    definition "Unicode representation in UTF-8 encoding."
+  }
+}
+----
+
+==== Attributes
+
+===== ascii
+
+The `ascii` field contains the ASCII text representation of the prefix symbol.
+This is the most basic representation and is suitable for plain text environments.
+
+===== html
+
+The `html` field contains the HTML representation of the prefix symbol.
+This may include HTML entities for special characters.
+
+===== mathml
+
+The `mathml` field contains the MathML representation of the prefix symbol
+and is a MathML string.
+This is for use within MathML-supported environments.
+
+===== latex
+
+The `latex` field contains the LaTeX representation of the prefix symbol.
+This is for use within LaTeX documents or LaTeX-supported environments.
+
+===== unicode
+
+The `unicode` field contains the Unicode representation of the prefix symbol.
+This is mainly for use within UnicodeMath or other Unicode-enabled environments.
+
+NOTE: This allows for the representation of characters that may not be available
+in ASCII or HTML.

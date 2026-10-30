@@ -1,0 +1,68 @@
+
+== Terms and definitions
+
+=== unit
+
+reference quantity with which other quantities of the same kind are compared to
+express their value
+
+[example]
+The meter is a unit of length.
+
+NOTE: Units are identified by conventionally assigned names and symbols.
+
+=== quantity
+
+property of a phenomenon, body, or substance, where the property has a magnitude
+that can be expressed by a number and a reference
+
+[example]
+Length, mass, and time are quantities.
+
+=== dimension
+
+expression of the dependence of a quantity on the base quantities of a system of
+quantities as a product of powers of factors corresponding to the base
+quantities
+
+NOTE: In UnitsDB, dimensions are represented as combinations of seven base
+dimensions: length (L), mass (M), time (T), electric current (I), thermodynamic
+temperature (Θ), amount of substance (N), and luminous intensity (J).
+
+=== prefix
+
+name or symbol that, when attached to a unit, multiplies that unit by a
+specified factor
+
+[example]
+The kilo prefix multiplies a unit by 1000.
+
+=== unit system
+
+set of units used to express quantities in a consistent manner
+
+=== SI
+
+International System of Units
+
+NOTE: SI is the modern form of the metric system and is the most widely used
+system of measurement.
+
+=== base unit
+
+unit of measurement of a base quantity in a given system of quantities
+
+
+=== derived unit
+
+unit of measurement of a derived quantity in a given system of quantities
+
+
+=== normalization rule
+
+constraint that ensures the consistency, integrity, and standardization of data
+
+
+=== data model
+
+formal description of the structure, attributes, and relationships of entities

@@ -1,0 +1,326 @@
+[appendix]
+== Test suite
+
+This appendix provides a test suite for UnitsDB, comprising examples from the YAML files that demonstrate the correct implementation of the data models and normalization rules.
+
+=== Test cases
+
+==== Dimension test cases
+
+These test cases verify the correct implementation of the Dimension model:
+
+[source,yaml]
+----
+# Test case 1: Base dimension (length)
+NISTd1:
+  length:
+    powerNumerator: 1
+    symbol: L
+    dim_symbols:
+    - id: dim_L
+      ascii: L
+      html: "&#x1D5AB;"
+      mathml: "<mi mathvariant='sans-serif'>L</mi>"
+      latex: "\\ensuremath{\\mathsf{L}}"
+      unicode: "\U0001D5AB"
+
+# Test case 2: Derived dimension (force)
+NISTd12:
+  length:
+    powerNumerator: 1
+    symbol: L
+  mass:
+    powerNumerator: 1
+    symbol: M
+  time:
+    powerNumerator: -2
+    symbol: T
+
+# Test case 3: Dimensionless quantity
+NISTd67:
+  dimensionless: true
+----
+
+==== Quantity test cases
+
+These test cases verify the correct implementation of the Quantity model:
+
+[source,yaml]
+----
+# Test case 1: Base quantity (length)
+NISTq1:
+  dimension_url: "#NISTd1"
+  quantity_type: base
+  quantity_name:
+  - length
+  unit_reference:
+  - name: meter
+    url: "#NISTu1"
+  - name: foot
+    url: "#NISTu78"
+
+# Test case 2: Derived quantity (velocity)
+NISTq12:
+  dimension_url: "#NISTd11"
+  quantity_type: derived
+  quantity_name:
+  - velocity
+  - speed
+  unit_reference:
+  - name: meter per second
+    url: "#NISTu1.u3e-1/1"
+  - name: kilometer per hour
+    url: "#NISTu160"
+
+# Test case 3: Quantity with multiple names
+NISTq3:
+  dimension_url: "#NISTd3"
+  quantity_type: base
+  quantity_name:
+  - time
+  - duration
+  unit_reference:
+  - name: second
+    url: "#NISTu3"
+----
+
+==== Unit test cases
+
+These test cases verify the correct implementation of the Unit model:
+
+[source,yaml]
+----
+# Test case 1: Base unit (meter)
+NISTu1:
+  dimension_url: "#NISTd1"
+  short: meter
+  root: true
+  unit_system:
+    type: SI_base
+    name: SI
+  unit_name:
+  - meter
+  unit_symbols:
+  - id: m
+    ascii: m
+    html: m
+    mathml: "<mi mathvariant='normal'>m</mi>"
+    latex: "\\ensuremath{\\mathrm{m}}"
+    unicode: m
+  root_units:
+    enumerated_root_units:
+    - unit: meter
+      power_denominator: 1
+      power_numerator: 1
+  quantity_reference:
+  - name: length
+    url: "#NISTq1"
+
+# Test case 2: Derived unit (meter per second)
+NISTu1.u3e-1/1:
+  dimension_url: "#NISTd11"
+  short: meter per second
+  root: false
+  unit_system:
+    type: SI_derived_non-special
+    name: SI
+  unit_name:
+  - meter per second
+  unit_symbols:
+  - id: mps
+    ascii: m/s
+    html: m/s
+    mathml: "<mi mathvariant='normal'>m</mi><mo>/</mo><mi mathvariant='normal'>s</mi>"
+    latex: "\\ensuremath{\\mathrm{m/s}}"
+    unicode: m/s
+  root_units:
+    enumerated_root_units:
+    - unit: meter
+      power_denominator: 1
+      power_numerator: 1
+    - unit: second
+      power_denominator: 1
+      power_numerator: -1
+  quantity_reference:
+  - name: velocity
+    url: "#NISTq12"
+
+# Test case 3: Prefixed unit (kilometer)
+NISTu1p10'3:
+  dimension_url: "#NISTd1"
+  short: kilometer
+  prefixed: true
+  root: false
+  unit_system:
+    type: SI_derived_non-special
+    name: SI
+  unit_name:
+  - kilometer
+  unit_symbols:
+  - id: km
+    ascii: km
+    html: km
+    mathml: "<mi mathvariant='normal'>km</mi>"
+    latex: "\\ensuremath{\\mathrm{km}}"
+    unicode: km
+  root_units:
+    enumerated_root_units:
+    - unit: meter
+      power_denominator: 1
+      power_numerator: 1
+      prefix: k
+  quantity_reference:
+  - name: length
+    url: "#NISTq1"
+----
+
+==== Prefix test cases
+
+These test cases verify the correct implementation of the Prefix model:
+
+[source,yaml]
+----
+# Test case 1: Standard SI prefix (kilo)
+NISTp10_3:
+  name: kilo
+  symbol:
+    ascii: k
+    html: k
+    latex: k
+    unicode: k
+  base: 10
+  power: 3
+
+# Test case 2: Small SI prefix (micro)
+NISTp10_-6:
+  name: micro
+  symbol:
+    ascii: u
+    html: "&micro;"
+    latex: "$mu$"
+    unicode: μ
+  base: 10
+  power: -6
+
+# Test case 3: Binary prefix (kibi)
+NISTp2_10:
+  name: kibi
+  symbol:
+    ascii: Ki
+    html: Ki
+    latex: Ki
+    unicode: Ki
+  base: 2
+  power: 10
+----
+
+==== Unit system test cases
+
+These test cases verify the correct implementation of the UnitSystem model:
+
+[source,yaml]
+----
+# Test case 1: SI base unit system
+- id: SI_base
+  name: SI
+  acceptable: true
+
+# Test case 2: SI derived unit system (with special names)
+- id: SI_derived_special
+  name: SI
+  acceptable: true
+
+# Test case 3: Non-SI but acceptable unit system
+- id: non-SI_acceptable
+  name: non-SI
+  acceptable: true
+
+# Test case 4: Non-SI and not acceptable unit system
+- id: non-SI_not_acceptable
+  name: non-SI
+  acceptable: false
+----
+
+=== Cross-reference validation
+
+The following tests verify the integrity of cross-references across the UnitsDB files:
+
+==== Dimension to quantity references
+
+This test verifies that each dimension is referenced by at least one quantity:
+
+[source]
+----
+# For each dimension NISTdX in dimensions.yaml:
+# - Verify there exists at least one quantity in quantities.yaml where dimension_url: "#NISTdX"
+
+NISTd1 (length) → Referenced by NISTq1 (length), NISTq48 (distance), etc.
+NISTd2 (mass) → Referenced by NISTq2 (mass)
+NISTd3 (time) → Referenced by NISTq3 (time)
+----
+
+==== Quantity to unit references
+
+This test verifies that each quantity references valid units:
+
+[source]
+----
+# For each quantity NISTqX in quantities.yaml:
+# - For each unit_reference, verify that the referenced unit exists in units.yaml
+
+NISTq1 (length) → References NISTu1 (meter), NISTu78 (foot), etc.
+NISTq12 (velocity) → References NISTu1.u3e-1/1 (meter per second), NISTu160 (kilometer per hour)
+----
+
+==== Unit to quantity references
+
+This test verifies that each unit references valid quantities:
+
+[source]
+----
+# For each unit NISTuX in units.yaml:
+# - For each quantity_reference, verify that the referenced quantity exists in quantities.yaml
+
+NISTu1 (meter) → References NISTq1 (length)
+NISTu1.u3e-1/1 (meter per second) → References NISTq12 (velocity)
+----
+
+=== Validation techniques
+
+The following techniques can be used to validate UnitsDB data files:
+
+==== Schema validation
+
+YAML schema validation can be performed to ensure that each file adheres to the expected structure. This includes checking:
+
+* Required fields are present
+* Field types are correct
+* Enumerated values are valid
+
+==== Reference integrity validation
+
+Reference integrity validation ensures that all cross-references between entities are valid:
+
+* Verify dimension references from quantities
+* Verify unit references from quantities
+* Verify quantity references from units
+* Verify dimension references from units
+
+==== Dimensional consistency validation
+
+Dimensional consistency validation ensures that the dimensional relationships are mathematically consistent:
+
+* Verify that units have the same dimension as their referenced quantities
+* Verify that derived dimensions have correct combinations of base dimensions
+* Verify that derived units have correct combinations of root units
+
+==== Normalization rule validation
+
+Validation of normalization rules ensures that the data adheres to the specific formatting and structural requirements:
+
+* Verify naming conventions for identifiers
+* Verify the structure of root_units for derived units
+* Verify the correct use of prefixes
+* Verify unit system categorization
+
+These test cases and validation techniques provide a comprehensive framework for ensuring the integrity and correctness of the UnitsDB database.

@@ -1,0 +1,87 @@
+== Principles
+
+=== General
+
+The design and architecture of the UnitsDB adheres to the following
+principles.
+
+* Scientific accuracy and completeness
+* Interoperability
+* Declarative content
+* Ease of use and maintenance
+* Extensibility
+
+=== Scientific accuracy and completeness
+
+UnitsDB adheres to the International System of Units (SI) and
+aims to facilitate accurate measurement across various domains
+towards international standards.
+
+The database aims to accurately represent:
+
+* Base and derived units as defined by SI.
+* Information models used in the representation and realization of a digital
+units system.
+* Historical and non-SI units that are still in use.
+
+=== Interoperability
+
+UnitsDB supports interoperability through:
+
+* Simple realization of the database in human-readable formats
+* Globally unique identifiers
+* Support for presentational needs of units
+* Well-defined data models allowing straightforward serialization to various
+formats
+
+=== Declarative content
+
+UnitsDB maintains structural consistency through:
+
+* Well-defined data models for each entity type
+* Separation of concerns in information models
+* Explicit definitions of relationships between information models
+
+=== Ease of use and maintenance
+
+UnitsDB applies data normalization principles to:
+
+* Eliminate redundancy in the database
+* Ensure data integrity across related entities
+* Simplify maintenance and updates
+* Support efficient querying and processing
+* Enable validation and consistency checking
+
+
+=== Interoperability
+
+UnitsDB supports interoperability through:
+
+* Use of industry-standard YAML for data representation
+* Clear separation of content from presentation
+* Consistent identifiers and cross-references
+* Support for multiple symbol representations (ASCII, Unicode, MathML, LaTeX, HTML)
+* Well-defined data models that can be mapped to various implementation formats
+
+This interoperability enables UnitsDB to serve as a reference database for diverse applications and systems.
+
+=== Ease of use and maintenance
+
+UnitsDB aims to provide users an easy to use information database while keeping
+it easy and simple to maintain.
+
+* Human-readable content facilitates inspection and understanding by humans and transparent review and validation of content
+* Automated validation and consistency checking
+* Allows incofmproation into software sytsemss
+* Efficient querying and filtering
+* Transformation to other formats and representations
+
+
+=== Extensibility
+
+UnitsDB is designed to be extensible to accommodate:
+
+* New units as they are defined, come into use or encoded historically
+* Additional quantities in emerging domains
+* New prefixes defined in the future
+* Domain-specific extensions and annotations

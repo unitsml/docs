@@ -1,0 +1,25 @@
+[.preface]
+== Introduction
+
+UnitsDB is a comprehensive database of units of measurement, quantities,
+dimensions, and prefixes that serves as the authoritative reference for the
+UnitsML framework.
+
+UnitsDB provides a structured and standardized way to represent and reference
+measurement units and related concepts across various scientific, engineering,
+and technical domains.
+
+UnitsDB is designed to support multiple applications, including:
+
+* Providing an authoritative source of measurement units for scientific and technical documentation
+* Supporting unit conversion systems
+* Enabling semantic interoperability between different systems that work with measurement data
+
+This specification defines the data models, structures, and normalization rules
+for UnitsDB. It is intended for developers implementing UnitsML, database
+administrators managing UnitsDB installations, and contributors who wish to
+extend or modify the database.
+
+By following this specification, implementers and users of UnitsDB can ensure
+consistent and accurate representation of measurement units and related concepts
+across different applications and domains.

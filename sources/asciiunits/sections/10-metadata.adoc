@@ -1,0 +1,656 @@
+[[unit-metadata]]
+== Unit metadata
+
+=== General
+
+Metadata to a unit's usage can be supplied after a comma after an AsciiUnits
+statement.
+
+Syntax:
+
+[source]
+----
+{unit-code}, {metadata}
+----
+
+Where,
+
+`{unit-code}`:: is the unit code
+`{metadata}`:: is the metadata
+
+[example]
+====
+[source]
+----
+m, quantity: NISTq103               # meter with quantity reference
+cal_th/cm^2, name: langley          # calorie thermal per square centimeter with name
+cm*s^-2, symbol: cm cdot s^-2       # custom symbol representation
+cm*s^-2, multiplier: xx             # custom multiplier
+----
+====
+
+
+=== Quantity
+
+==== General
+
+A unit of measurement is used to describe a quantity, and one unit can be used
+to measure different quantities.
+
+[example]
+The unit "meter" (m) can be used to measure length, wavelength, radius, height,
+displacement.
+
+For interoperability between systems and value conversions, it is important to
+specify the quantity being measured. This ensures that the unit is used
+correctly and consistently in scientific and engineering contexts.
+
+
+==== Default quantity
+
+An AsciiUnit unit is associated with a default quantity.
+
+* If a single quantity is associated with the unit in UnitsDB,
+that quantity is added automatically.
+
+* Otherwise, no quantity is added unless explicitly specified as in <<specific-quantity>>.
+
+[example]
+====
+The unit `m` (meter) is associated with the quantities `length`, `diameter`,
+`length of path`, and so on in the UnitsDB database, with the `length` quantity
+being listed first. Therefore, the default quantity for `m` is "length".
+====
+
+The XML representation of an AsciiUnits unit always includes the default
+quantity association in the `<Quantity>` element unless a different quantity is
+specified.
+
+[example]
+====
+AsciiUnits statement:
+
+[source,ascii]
+----
+m # meter
+----
+
+XML:
+[source,xml]
+----
+<Unit xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="U_NISTu1" dimensionURL="#NISTd1">
+  <UnitSystem name="SI" type="SI_derived" xml:lang="en-US"/>
+  <UnitName xml:lang="en">meter</UnitName>
+  <UnitSymbol type="HTML">m</UnitSymbol>
+  <UnitSymbol type="MathMl">
+    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+      <mi mathvariant="normal">m</mi>
+    </math>
+  </UnitSymbol>
+</Unit>
+
+<Dimension xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="NISTd1">
+  <Length symbol="L" powerNumerator="1"/>
+</Dimension>
+
+<Quantity xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="NISTq1" quantityType="base" dimensionURL="#NISTd1">
+  <QuantityName xml:lang="en-US">length</QuantityName>
+</Quantity>
+----
+====
+
+[[specific-quantity]]
+==== Specific quantity
+
+AsciiUnits allows specifying the quantity a unit measures using the `quantity`
+metadata parameter, which provides the UnitsDB identifier for the quantity being
+measured.
+
+Syntax:
+
+[source]
+----
+{unit-code}, quantity: {quantity-code}
+----
+
+Where,
+
+`{unit-code}`:: is the unit code
+
+`{quantity-code}`:: is the reference to a quantity identifier or its shortname
+in the UnitsDB database
+
+
+[example]
+====
+The AsciiUnits statement of `s, quantity: NISTq109` indicates that the second is
+used to measure period duration.
+====
+
+
+.Examples of units with quantity references
+[example]
+====
+[source]
+----
+kg, quantity: NISTq2                # kilogram with mass quantity reference
+kg, quantity: mass                  # kilogram with mass quantity reference
+s, quantity: NISTq3                 # second with time quantity reference
+s, quantity: duration               # second with time quantity reference
+m, quantity: NISTq103               # meter with length quantity reference
+m, quantity: position_vector        # meter with length quantity reference
+l, quantity: NISTq105               # liter with volume quantity reference
+l, quantity: volume                 # liter with volume quantity reference
+----
+====
+
+The XML representation of an AsciiUnits unit with quantity reference includes
+the specific `<Quantity>` element that provides information about the quantity
+being measured.
+
+.AsciiUnits representation for kilogram with mass quantity reference
+[example]
+====
+AsciiUnits statement:
+
+[source,ascii]
+----
+kg [NISTq2]
+----
+
+XML:
+
+[source,xml]
+----
+<Unit xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="U_NISTu1" dimensionURL="#NISTd1">
+  <UnitSystem name="SI" type="SI_derived" xml:lang="en-US"/>
+  <UnitName xml:lang="en">meter</UnitName>
+  <UnitSymbol type="HTML">m</UnitSymbol>
+  <UnitSymbol type="MathMl">
+    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+      <mi mathvariant="normal">m</mi>
+    </math>
+  </UnitSymbol>
+</Unit>
+
+<Dimension xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="NISTd1">
+  <Length symbol="L" powerNumerator="1"/>
+</Dimension>
+
+<Quantity xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="NISTq2" quantityType="base" dimensionURL="#NISTd1">
+  <QuantityName xml:lang="en-US">mass</QuantityName>
+</Quantity>
+----
+====
+
+.AsciiUnits representation for meter with position vector quantity reference
+[example]
+====
+AsciiUnits statement:
+
+[source,ascii]
+----
+m [NISTq103]
+----
+
+XML:
+
+[source,xml]
+----
+<Unit xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="U_NISTu1" dimensionURL="#NISTd1">
+  <UnitSystem name="SI" type="SI_derived" xml:lang="en-US"/>
+  <UnitName xml:lang="en">meter</UnitName>
+  <UnitSymbol type="HTML">m</UnitSymbol>
+  <UnitSymbol type="MathMl">
+    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+      <mi mathvariant="normal">m</mi>
+    </math>
+  </UnitSymbol>
+</Unit>
+
+<Dimension xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="NISTd1">
+  <Length symbol="L" powerNumerator="1"/>
+</Dimension>
+
+<Quantity xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="NISTq103" quantityType="base" dimensionURL="#NISTd1">
+  <QuantityName xml:lang="en-US">position vector</QuantityName>
+</Quantity>
+----
+====
+
+
+==== Inferred quantity
+
+In composite units, when a quantity is not explicitly specified, AsciiUnits will
+attempt to infer the appropriate quantity based on the unit's dimension. This
+inference is based on the standard quantities defined in the UnitsDB database.
+
+[example]
+====
+A unit with dimension `L` (length) will be detected to be associated with the
+quantity "length".
+
+A unit with dimension `L*T^-1` will be detected to be associated with the
+quantity "velocity".
+====
+
+.Inferred quantity based on UnitsDB lookup
+[example]
+====
+AsciiUnits statement:
+
+[source,ascii]
+----
+m/s
+----
+
+Given that the unit `m/s` is a composite unit, AsciiUnits can detect the
+dimension `L*T^-1` (NISTd11), which allows an inference to the quantity
+"velocity" (NISTq12).
+
+XML (with inferred quantity):
+
+[source,xml]
+----
+<Unit xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="NISTu1.u3e-1/1" dimensionURL="#NISTd11">
+  <UnitSystem name="SI" type="SI_derived" xml:lang="en-US"/>
+  <UnitName xml:lang="en">meter per second</UnitName>
+  <UnitSymbol type="HTML">m&#x22c5;s<sup>&#x2212;1</sup></UnitSymbol>
+  <UnitSymbol type="MathMl">
+    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+      <mi mathvariant="normal">m</mi>
+      <mo>&#x22c5;</mo>
+      <msup>
+        <mrow>
+          <mi mathvariant="normal">s</mi>
+        </mrow>
+        <mrow>
+          <mo>&#x2212;</mo>
+          <mn>1</mn>
+        </mrow>
+      </msup>
+    </math>
+  </UnitSymbol>
+  <RootUnits>
+    <EnumeratedRootUnit unit="meter"/>
+    <EnumeratedRootUnit unit="second" powerNumerator="-1"/>
+  </RootUnits>
+</Unit>
+
+<Dimension xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="NISTd11">
+  <Length symbol="L" powerNumerator="1"/>
+  <Time symbol="T" powerNumerator="-1"/>
+</Dimension>
+
+<Quantity xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="NISTq12" quantityType="derived" dimensionURL="#NISTd11">
+  <QuantityName xml:lang="en-US">velocity</QuantityName>
+  <QuantityName xml:lang="en-US">speed</QuantityName>
+</Quantity>
+----
+====
+
+Composite units that lead to a detected of dimension associated with multiple
+quantities will always infer the first quantity in the UnitsDB database.
+
+NOTE: Composite units that lead to a dimension that is not associated with any
+quantity in the UnitsDB database will not be inferred.
+
+
+.Inferred quantity using composite units with detected dimension and quantity from UnitsDB
+[example]
+====
+AsciiUnits statement:
+
+[source,ascii]
+----
+cd*sr*m^(-2)
+----
+
+Given that the unit `cd*sr*m^(-2)` is a composite unit, AsciiUnits can detect
+the dimension `L^-2*J` (NISTd27), which allows an inference to the quantity
+"luminous flux" (NISTq47) or "luminance" (NISTq56), and the first detected
+quantity is always inferred since the exact quantity type is not specified.
+
+XML (with inferred quantity):
+
+[source,xml]
+----
+<Unit xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="U_cd.sr.m-2" dimensionURL="#NISTd27">
+  <UnitSystem name="SI" type="SI_derived" xml:lang="en-US"/>
+  <UnitName xml:lang="en">cd*sr*m^-2</UnitName>
+  <UnitSymbol type="HTML">cd&#x22c5;sr&#x22c5;m<sup>&#x2212;2</sup></UnitSymbol>
+  <UnitSymbol type="MathMl">
+    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+      <mi mathvariant="normal">cd</mi>
+      <mo>&#x22c5;</mo>
+      <mi mathvariant="normal">sr</mi>
+      <mo>&#x22c5;</mo>
+      <msup>
+        <mrow>
+          <mi mathvariant="normal">m</mi>
+        </mrow>
+        <mrow>
+          <mo>&#x2212;</mo>
+          <mn>2</mn>
+        </mrow>
+      </msup>
+    </math>
+  </UnitSymbol>
+  <RootUnits>
+    <EnumeratedRootUnit unit="candela"/>
+    <EnumeratedRootUnit unit="steradian"/>
+    <EnumeratedRootUnit unit="meter" powerNumerator="-2"/>
+  </RootUnits>
+</Unit>
+
+<!--
+  The dimension NISTd27 is detected given the length and luminous intensity
+  power numerators of L = -2 and J = 1.
+-->
+<Dimension xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="NISTd27">
+  <Length symbol="L" powerNumerator="-2"/>
+  <LuminousIntensity symbol="J" powerNumerator="1"/>
+</Dimension>
+
+<!--
+  The dimension NISTd27 is used in two UnitsDB quantities: NISTq47 (luminous
+  flux) and NISTq56 (luminance), detection always infers the first.
+-->
+<Quantity xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="NISTq47" quantityType="derived" dimensionURL="#NISTd27">
+  <QuantityName xml:lang="en-US">luminous flux</QuantityName>
+</Quantity>
+----
+====
+
+
+[[metadata-symbol]]
+=== Symbol representation
+
+==== General
+
+The symbol representation of a unit can be customized using the `symbol`
+metadata parameter. This allows for the specification of a custom symbol
+representation for the unit.
+
+
+==== Default symbol
+
+The default symbol representation is the first symbol entry as associated to
+the unit in the UnitsDB database.
+
+[example]
+====
+The unit `s` (NISTu3, second) is associated with the symbols `s`, `"_s`, and `"`
+in the context of time measurement.
+
+Therefore, the default symbol for `s` is "s".
+====
+
+
+==== Custom symbol
+
+The custom symbol representation is specified using the `symbol` metadata
+parameter.
+
+This allows for the specification of a custom symbol representation for the unit
+in AsciiUnits format.
+
+A custom symbol can be assigned to an AsciiUnits unit whether it is a unit of
+measure or a composite unit.
+
+
+Syntax:
+
+[source]
+----
+{unit-code}, symbol: {custom_symbol}
+----
+
+Where,
+
+`{unit-code}`:: is the unit code
+`{custom_symbol}`:: is the custom symbol representation in AsciiUnits format
+
+NOTE: While the `unit-code` gives the canonical representation of the unit,
+`custom_symbol` is what will be rendered.
+
+
+[example]
+====
+`unitsml(cal_th/cm^2, name: langley, symbol: La)` assigns the custom symbol
+`La` to the unit `cal_th/cm^2` (calorie thermal per square centimeter).
+
+`unitsml(mm*s^-2, symbol: mm cdot s^-2)` assigns the custom symbol `mm cdot
+s^-2` to the unit `mm*s^-2` (millimeter per second squared).
+====
+
+
+[example]
+====
+AsciiUnits statement (for candela steradian per square meter),
+with a custom symbol representation:
+
+[source]
+----
+cd*sr*m^(-2),symbol:cd cdot sr cdot m^(-2)
+----
+
+XML:
+
+[source,xml]
+----
+<Unit xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="U_cd.sr.m-2" dimensionURL="#D_L-2J">
+  <UnitSystem name="SI" type="SI_derived" xml:lang="en-US"/>
+  <UnitName xml:lang="en">cd*sr*m^-2</UnitName>
+  <UnitSymbol type="HTML">cd&#x22c5;sr&#x22c5;m<sup>&#x2212;2</sup></UnitSymbol>
+  <UnitSymbol type="MathMl">
+    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+      <mi mathvariant="normal">cd</mi>
+      <mo>&#x22c5;</mo>
+      <mi mathvariant="normal">sr</mi>
+      <mo>&#x22c5;</mo>
+      <msup>
+        <mrow>
+          <mi mathvariant="normal">m</mi>
+        </mrow>
+        <mrow>
+          <mo>&#x2212;</mo>
+          <mn>2</mn>
+        </mrow>
+      </msup>
+    </math>
+  </UnitSymbol>
+  <RootUnits>
+    <EnumeratedRootUnit unit="candela"/>
+    <EnumeratedRootUnit unit="steradian"/>
+    <EnumeratedRootUnit unit="meter" powerNumerator="-2"/>
+  </RootUnits>
+</Unit>
+
+<Dimension xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="NISTd27">
+  <Length symbol="L" powerNumerator="-2"/>
+  <LuminousIntensity symbol="J" powerNumerator="1"/>
+</Dimension>
+----
+====
+
+
+=== Name
+
+==== General
+
+The name of a unit can be customized using the `name` metadata parameter. This
+allows for the specification of a custom name for the unit.
+
+
+==== Default name
+
+The default name is the first name entry as associated to the unit in the
+UnitsDB database.
+
+[example]
+====
+The unit `metric_ton` (NISTu88, metric ton) is associated with the unit names
+"metric ton" and "ton". The default name for `metric_ton` is the first entry,
+"metric ton".
+====
+
+==== Custom name
+
+The custom name representation is specified using the `name` metadata parameter,
+allowing for the specification of a custom name representation for the unit.
+
+This is especially relevant if the unit is a composite unit, as the custom name
+representation can be used to provide a more meaningful description of the unit,
+and when its name is not already available from UnitsDB.
+
+Syntax:
+
+[source]
+----
+{unit-code}, name: {custom_name}
+----
+
+Where,
+
+`{unit-code}`:: is the unit code
+`{custom_name}`:: is the custom name representation in AsciiUnits format
+
+`name: NAME`:: is an optional name for the unit, if one is not already available
+from UnitsDB.
+
+
+[example]
+====
+`unitsml(cal_th/cm^2, name: langley)` assigns the custom name "langley" to the
+unit `cal_th/cm^2` (calorie thermal per square centimeter).
+====
+
+
+[example]
+====
+The AsciiUnits statement (for the "metric ton" unit with a custom name "ton"),
+with a custom name representation:
+
+[source,ascii]
+----
+metric_ton, name: ton
+----
+
+XML:
+
+[source,xml]
+----
+<Unit xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="NISTu88" dimensionURL="#NISTd2">
+  <UnitSystem name="SI" type="SI_derived" xml:lang="en-US"/>
+  <UnitName xml:lang="en">ton</UnitName>
+  <UnitSymbol type="HTML">t</UnitSymbol>
+  <UnitSymbol type="MathMl">
+    <math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+      <mi mathvariant='normal'>t</mi>
+    </math>
+  </UnitSymbol>
+</Unit>
+
+<Dimension xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="NISTd2">
+  <Mass symbol="M" powerNumerator="1"/>
+</Dimension>
+
+<Quantity xmlns="https://schema.unitsml.org/unitsml/1.0" xml:id="NISTq2" quantityType="base" dimensionURL="#NISTd2">
+  <QuantityName xml:lang="en-US">mass</QuantityName>
+</Quantity>
+----
+====
+
+
+=== Multiplier
+
+==== General
+
+A multiplier is the conjoining symbol that is used to combine multiple units in
+a composite unit.
+
+It is typically represented as a multiplication sign (×) or a dot (·). The
+choice of symbol can depend on the context in which the unit is used and the
+conventions of the field of study.
+
+
+==== Default multiplier
+
+The default AsciiUnits multiplier adopts the specified default from MathML
+Units, the middle dot (`&#xB7`) symbol.
+
+This default multiplier symbol is rendered in various formats as:
+
+* ASCII: a single empty space
+* Unicode: the invisible times symbol (`&#x2062;`)
+* MathML: middle dot (`&#xB7`)
+* LaTeX: a middle dot (`\cdot`)
+* HTML: a non-breaking space
+
+
+==== Custom multiplier
+
+The multiplier of a unit can be specified using the `multiplier` metadata
+parameter.
+
+Syntax:
+
+[source]
+----
+{unit-code}, multiplier: {custom_multiplier}
+----
+
+Where,
+
+`{unit-code}`:: is the unit code
+
+`{custom_multiplier}`:: is the custom multiplier representation in AsciiUnits
+format. It accepts the following values:
+
+`:default`:: is the default multiplier.
+
+`:space`:: a spacing invisible times.
+
+`:nospace`:: a non-spacing invisible times
+
+`custom_multiplier`:: is an arbitrary UTF-8 string that can be supplied
+instead; it will be encoded as XML entities.
+
+The `:space` value is rendered as:
+
+* ASCII: a single empty space
+* Unicode: the invisible times symbol (`&#x2062;`)
+* MathML: spacing invisible times (`<mo rspace='thickmathspace'>&#x2062;</mo>`)
+* LaTeX: a non-breaking space (`~`)
+* HTML: `&nbsp;` (non-breaking space)
+
+The `:nospace` value is rendered as:
+
+* ASCII: no space
+* Unicode: the invisible times symbol (`&#x2062;`)
+* MathML: non-spacing invisible times (`<mo>&#x2062;</mo>`)
+* LaTeX: no space
+* HTML: no space
+
+If the value is not one of the above, it will be treated as a custom multiplier,
+where an arbitrary UTF-8 string can be supplied. It will be rendered as:
+
+* ASCII: the UTF-8 string
+* Unicode: the UTF-8 string
+* MathML: the UTF-8 string with XML entities
+* LaTeX: the UTF-8 string
+* HTML: the UTF-8 string
+
+
+[example]
+====
+[source]
+----
+cm*s^-2, multiplier: xx             # custom multiplier
+----
+
+The `xx` character is the AsciiMath explicit multiplication sign (×).
+This statement will render the unit as `cm xx s^-2` in AsciiUnits format..
+====
+

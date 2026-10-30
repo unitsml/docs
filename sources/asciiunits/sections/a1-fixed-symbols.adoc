@@ -1,0 +1,72 @@
+
+[appendix,obligation=informative]
+[[fixed-symbols]]
+== Fixed symbols
+
+=== General
+
+Some symbols used in AsciiUnits are fundamental symbols that while exist in
+UnitsDB as individual entries, they are considered constant entries because
+of the fundamental nature of their values.
+
+=== Dimension symbols
+
+Dimensions are represented by the following symbols.
+
+|===
+| Dimension | UnitsDB symbol | UnitsDB ID
+
+| Length |`dim_L` | `NISTd1`
+| Mass |`dim_M` | `NISTd2`
+| Time |`dim_T` | `NISTd3`
+| Electric current |`dim_I` | `NISTd4`
+| Thermodynamic temperature |`dim_Theta` | `NISTd5`
+| Amount of substance |`dim_N` | `NISTd6`
+| Luminous intensity |`dim_J` | `NISTd7`
+| Plane angle (dimensionless) |`dim_phi` | `NISTd9`
+|===
+
+[example]
+====
+`unitsml(dim_I)` for the dimension of electric current, 𝖨.
+====
+
+=== Non-SI units who values in SI units that are experimentally determined
+
+This table maps from NIST SP 811, Table 7.
+
+.Non-SI Units accepted for use with the SI by the CIPM and NIST SP 811 Table 7
+|===
+|Name | UnitsDB symbol | UnitsDB name | UnitsDB ID
+
+|electronvolt | `eV` | electronvolt | `NISTu240`
+|astronomical unit | `ua` | astronomical unit | `NISTu183`
+|unified atomic mass unit | `u` | unified atomic mass unit | `NISTu241`
+|dalton | `Da` | dalton | `NISTu289`
+
+|===
+
+
+=== Natural units and atomic units
+
+Natural units and atomic units are represented by the following symbols.
+
+This table maps from NIST SP 811, Table 8.
+
+|===
+|Quantity kind| UnitsDB symbol | Description | UnitsDB name | UnitsDB ID
+|speed |`c` | Speed of light in vacuum (n.u.) | natural unit of velocity | `NISTu242`
+|action| `h-bar` | Planck constant divided by 2π (n.u.) | natural unit of action | `NISTu243`
+|mass| `m_e` | electron rest mass (n.u. and a.u.) | natural unit of action | `NISTu244`
+|electric charge|`e` | elementary charge (a.u.) | atomic unit of charge | `NISTu246`
+|length| `a_0` | Bohr radius (a.u.) | atomic unit of length | `NISTu249`
+|energy|`e_h` | Hartree energy (a.u.) | atomic unit of energy | `NISTu250`
+|time| `h/E_h` | ratio of action to energy (a.u.) | natural unit of time | `NISTu248`
+
+// |time| `h-bar*(E_h)-1` | N/A | atomic unit of time | `NISTu251`
+// | `h-bar*(m_e*c^2)` | N/A | natural unit of time | `NISTu245` (not in NIST SP 811)
+// |`m_e_atomic` | N/A | atomic unit of mass | `NISTu247`
+// |`h-bar_atomic` | N/A | atomic unit of action | `NISTu248`
+// | `e^2*a_0&2*m_e-1` | N/A | atomic unit of magetizability | `NISTu252`
+
+|===

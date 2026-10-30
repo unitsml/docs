@@ -1,0 +1,66 @@
+== Formula with units
+
+=== General
+
+AsciiUnits allows for the representation of a formula with units in a variety of
+formats, including basic values, mathematical expressions, ranges, intervals,
+and uncertainty. This flexibility enables users to express complex measurements
+in a clear and concise manner.
+
+=== Formula unit representation
+
+The basic syntax for representing a mathematical expression with a unit.
+
+Syntax:
+
+[source]
+----
+{text-math-representation} {units-expression}
+----
+
+Where,
+
+`{text-math-representation}`:: is a mathematical expression in a supported text
+format, such as AsciiMath or UnicodeMath
+
+`{units-expression}`:: is an AsciiUnits expression
+
+.Examples of basic measurement values
+[example]
+====
+[source]
+----
+9.81 m/s^2     # acceleration due to gravity
+5.67e-8 W/(m^2*K^4)  # Stefan-Boltzmann constant
+299792458 m/s  # speed of light in vacuum
+(3.14159 * r^2) m^2     # area of a circle
+(1/2 * m * v^2) J       # kinetic energy
+(F/m) m/s^2             # acceleration from force and mass
+(9.81 * t) m            # distance fallen under gravity after time t
+(1/2 * I * ω^2) J       # rotational kinetic energy
+----
+====
+
+The XML representation of a measurement value includes both the value and the unit:
+
+.XML representation of a measurement value
+[example]
+====
+AsciiUnits statement:
+
+[source,ascii]
+----
+9.81 m/s^2
+----
+
+XML:
+
+[source,xml]
+----
+<UnitFormula xmlns="https://schema.unitsml.org/unitsml/1.0">
+  <ApplicableFormula>9.81</ApplicableFormula>
+  <Unit>...</Unit>
+</UnitFormula>
+----
+====
+

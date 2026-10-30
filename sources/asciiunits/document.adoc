@@ -1,0 +1,63 @@
+= CalConnect Standard: AsciiUnits syntax specification
+:title: AsciiUnits syntax specification
+:docnumber: 36810
+:copyright-year: 2025
+:doctype: standard
+:edition: 1
+:status: committee-draft
+:revdate: 2025-03-14
+:published-date: 2025-03-14
+:technical-committee: UnitsML
+:fullname: Ronald Tse
+:surname: Tse
+:givenname: Ronald
+:affiliation: Ribose Inc.
+:fullname_2: Nick Nicholas
+:surname_2: Nicholas
+:givenname_2: Nick
+:affiliation_2: Ribose Inc.
+:imagesdir: images
+:mn-document-class: cc
+:mn-output-extensions: xml,html,pdf,rxl
+:local-cache-only:
+:data-uri-image:
+
+include::sections/00-foreword.adoc[]
+
+include::sections/00-intro.adoc[]
+
+include::sections/01-scope.adoc[]
+
+include::sections/02-normrefs.adoc[]
+
+include::sections/03-terms.adoc[]
+
+include::sections/04-principles.adoc[]
+
+include::sections/05-elements.adoc[]
+
+include::sections/06-architecture.adoc[]
+
+include::sections/07-prefixes.adoc[]
+
+include::sections/08-dimensions.adoc[]
+
+include::sections/09-units.adoc[]
+
+include::sections/10-metadata.adoc[]
+
+include::sections/11-ebnf.adoc[]
+
+include::sections/12-with-asciimath.adoc[]
+
+// include::sections/x1-formula-units.adoc[]
+
+// include::sections/x2-uncertainty.adoc[]
+
+include::sections/99-bibliography.adoc[]
+
+include::sections/a1-fixed-symbols.adoc[]
+
+include::sections/a2-ambiguous-symbols.adoc[]
+
+include::sections/a3-test-suite.adoc[]
