@@ -38,6 +38,10 @@ This attribute group is used by:
 {{ used_by_list }}
 {% endif %}
 
+==== Structure diagram
+
+{% render "diagram", item: item, attributes: item_attributes, schema: schema %}
+
 ==== Attributes
 
 {% if item_attributes.size > 0 %}
