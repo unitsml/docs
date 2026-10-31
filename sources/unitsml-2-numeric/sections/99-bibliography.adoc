@@ -1,4 +1,5 @@
+[bibliography]
 == Bibliography
 
-* JCGM 100:2008, 7.2.2 (rounding of reported results)
-* ISO 80000-1 Annex B (rounding of numerical values)
+* [[[jcgm100-722,nofetch(JCGM 100:2008)]]], 7.2.2 (rounding of reported results)
+* [[[iso80000-1b,nofetch(ISO 80000-1)]]], Annex B (rounding of numerical values)

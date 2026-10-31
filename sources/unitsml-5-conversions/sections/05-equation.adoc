@@ -7,4 +7,4 @@ A linear conversion from unit *x* to unit *y* is
 where a = `initialAddend`, b = `multiplicand`, c = `divisor`, d = `finalAddend`; defaults 0, 1, 1, 0. The inverse is x = (c/b)(y − d) − a. The equation is legal at power 1 of a single absolute unit only.
 
 [example]
-*Expected outcome.* Degree Celsius to kelvin: a = 0, b = 1, c = 1, d = 273.15, exact. 0 °C → 273.15 K; 100 °C → 373.15 K — exact rationals serialized `"273.15"` and `"373.15"`.
+*Expected outcome.* Degree Celsius to kelvin: a = 0, b = 1, c = 1, d = stem:[273.15], exact. 0 °C → stem:[273.15] K; 100 °C → stem:[373.15] K — exact rationals serialized `"273.15"` and `"373.15"`.

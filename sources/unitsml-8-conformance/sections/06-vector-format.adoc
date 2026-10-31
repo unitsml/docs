@@ -3,4 +3,4 @@
 A vector carries: `input`; `expected` as exact decimal strings (UnitsML 2) for every compared field; `metadata`: the normative source (document + clause), `engine_version`, `grammar_version`, `vector_set_version`, `numeric_algorithm`, and — only where a vector is non-exact — `tolerance_d`. Monte Carlo vectors carry the PRNG identity, seed and trial count.
 
 [example]
-*Expected shape.* The degC vector: input `(20 °C).convert_to(K)`; expected `"293.15"`; metadata citing UnitsML 5 Clause 5, the engine and vector-set versions, and no tolerance (byte-exact).
+*Expected shape.* The degC vector: input `(20 °C).convert_to(K)`; expected `"293.15"`; metadata citing UnitsML 5 Clause 5, the engine and vector-set versions, and no tolerance (byte-exact).

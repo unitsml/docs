@@ -1,4 +1,5 @@
+[bibliography]
 == Bibliography
 
-* UnitsML 1.0 XSD · unitsml/unitsdb#130 (data), #134 (corpus import), #139 (reading rules)
-* unitsml/unitsml-ruby#92 (application; double-power defect comment)
+* [[[unitsdb-prov,nofetch(unitsml/unitsdb)]]] — #130 (data), #134 (corpus import), #139 (reading rules); UnitsML 1.0 XSD
+* [[[u92,nofetch(unitsml/unitsml-ruby#92)]]] (application; double-power defect comment)

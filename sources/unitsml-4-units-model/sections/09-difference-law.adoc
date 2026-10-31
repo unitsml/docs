@@ -11,7 +11,7 @@ I4 — Uncertainties are always `Diff(Q)`: u, U and interval-endpoint distances 
 Differences are typed in the algebra; no delta pseudo-units exist in the register. A difference raised through a power ≥ 2, or an affine unit inside a composite, is a specified error (UnitsML 5).
 
 [example]
-*Expected outcome.* `(20 °C − 15 °C) → K` is `5 K` (offset cancels); `(20 °C).convert_to(K)` is `293.15 K` (offset applies). An uncertainty magnitude `0.2 °C → K` is `0.2 K`. Implementations producing 278.15 K for the difference violate this clause.
+*Expected outcome.* `(20 °C − 15 °C) → K` is `5 K` (offset cancels); `(20 °C).convert_to(K)` is `293.15 K` (offset applies). An uncertainty magnitude `0.2 °C → K` is `0.2 K`. Implementations producing 278.15 K for the difference violate this clause.
 
 [example]
-*Provenance, not unit.* The same text `5 °C` is an absolute when measured and a difference when subtracted; the unit record is identical, the type differs. The type is carried by the value, set at construction (`Abs` literal or `Abs − Abs`).
+*Provenance, not unit.* The same text `5 °C` is an absolute when measured and a difference when subtracted; the unit record is identical, the type differs. The type is carried by the value, set at construction (`Abs` literal or `Abs − Abs`).

@@ -1,5 +1,9 @@
+[bibliography]
 == Normative references
 
-* UnitsML 1, UnitsML 2, UnitsML 3, UnitsML 4
-* UnitsML 1.0 XSD `Float64ConversionFromType` (the data syntax)
-* JCGM 100:2008 (exactness discipline analogy)
+* [[[unitsml-1,nofetch(UnitsML 1)]]]
+* [[[unitsml-2,nofetch(UnitsML 2)]]]
+* [[[unitsml-3,nofetch(UnitsML 3)]]]
+* [[[unitsml-4,nofetch(UnitsML 4)]]]
+* [[[xsd-float64,nofetch(UnitsML 1.0 XSD Float64ConversionFromType)]]] (the data syntax)
+* [[[jcgm100,nofetch(JCGM 100:2008)]]] (exactness discipline analogy)

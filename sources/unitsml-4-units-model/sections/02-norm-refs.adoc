@@ -1,6 +1,9 @@
+[bibliography]
 == Normative references
 
-* UnitsML 1, UnitsML 2, UnitsML 3
-* JCGM 200:2012 (VIM), entries 1.1–1.5, 2.30–2.38
-* ISO 80000-1 (quantities and units; scales)
-* Pendrill 2024 (L0–L3 concept levels; isq-smart concept system)
+* [[[unitsml-1,nofetch(UnitsML 1)]]]
+* [[[unitsml-2,nofetch(UnitsML 2)]]]
+* [[[unitsml-3,nofetch(UnitsML 3)]]]
+* [[[jcgm200,nofetch(JCGM 200:2012)]]] (VIM), entries 1.1–1.5, 2.30–2.38
+* [[[iso80000-1,nofetch(ISO 80000-1)]]] (quantities and units; scales)
+* [[[pendrill2024,nofetch(Pendrill 2024)]]] (L0–L3 concept levels; isq-smart concept system)

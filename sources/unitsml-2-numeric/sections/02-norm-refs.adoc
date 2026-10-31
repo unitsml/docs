@@ -1,5 +1,6 @@
+[bibliography]
 == Normative references
 
-* UnitsML 1 (requirement language, artifact discipline)
-* UnitsML 8 (vector format, tolerance conventions)
-* JCGM 101:2008, Clause 7.9 (numerical tolerance convention δ = ½·10^ℓ^)
+* [[[unitsml-1,nofetch(UnitsML 1)]]] (requirement language, artifact discipline)
+* [[[unitsml-8,nofetch(UnitsML 8)]]] (vector format, tolerance conventions)
+* [[[jcgm101,nofetch(JCGM 101:2008)]]], Clause 7.9 (numerical tolerance convention δ = ½·10^ℓ^)

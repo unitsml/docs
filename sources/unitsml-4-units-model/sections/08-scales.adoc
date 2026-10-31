@@ -3,4 +3,4 @@
 Each scale class in `scales.yaml` lists its permitted operations; consumers MUST enforce exactly that list and MUST name the scale class in the error. The landed classes: `continuous_ratio` (+, −, scaling, ×, ÷, comparison), `continuous_interval` (+, −, comparison only), `logarithmic_ratio`, `logarithmic_field`, `discrete`.
 
 [example]
-*Expected outcome.* `10 °C × 2` is a specified scale error naming `continuous_interval`; `10 K × 2` is legal (`continuous_ratio`); `20 °C − 15 °C` is legal on both — differences are permitted wherever the scale permits subtraction.
+*Expected outcome.* `10 °C × 2` is a specified scale error naming `continuous_interval`; `10 K × 2` is legal (`continuous_ratio`); `20 °C − 15 °C` is legal on both — differences are permitted wherever the scale permits subtraction.

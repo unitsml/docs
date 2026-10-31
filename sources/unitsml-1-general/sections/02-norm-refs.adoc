@@ -1,8 +1,9 @@
+[bibliography]
 == Normative references
 
 The following documents are referred to in the text in such a way that some or all of their content constitutes requirements of this document.
 
-* RFC 2119, _Key words for use in RFCs to Indicate Requirement Levels_
-* RFC 8174, _Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words_
-* JCGM 200:2012, _International vocabulary of metrology — Basic and general concepts and associated terms (VIM)_
-* JCGM 100:2008 + Amd.1:2026, _Evaluation of measurement data — Guide to the expression of uncertainty in measurement (GUM)_
+* [[[rfc2119,nofetch(RFC 2119)]]], _Key words for use in RFCs to Indicate Requirement Levels_
+* [[[rfc8174,nofetch(RFC 8174)]]], _Ambiguity of Uppercase vs Lowercase in RFC 2119 Key Words_
+* [[[jcgm200,nofetch(JCGM 200:2012)]]], _International vocabulary of metrology — Basic and general concepts and associated terms (VIM)_
+* [[[jcgm100,nofetch(JCGM 100:2008 + Amd.1:2026)]]], _Evaluation of measurement data — Guide to the expression of uncertainty in measurement (GUM)_

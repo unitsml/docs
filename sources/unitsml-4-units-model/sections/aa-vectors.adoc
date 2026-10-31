@@ -1,6 +1,11 @@
+[[annex-vectors]]
 [appendix]
 == Annex A (normative): gating and difference vectors
 
+The red/green vector table is given in <<tbl-gate-vectors>>; UnitsML 8, Annex B freezes and replays it.
+
+[[tbl-gate-vectors]]
+.Gating and difference vectors
 |===
 |Input |Expected result
 
@@ -22,12 +27,12 @@
 |`unit(J::energy) + unit(N·m::torque)`
 |typed error naming both kinds
 
-|`10 °C × 2`
+|`10 °C × 2`
 |scale error naming `continuous_interval`
 
-|`(20 °C − 15 °C) → K`
+|`(20 °C − 15 °C) → K`
 |`5 K` (offset cancels)
 
-|uncertainty magnitude `0.2 °C → K`
+|uncertainty magnitude `0.2 °C → K`
 |`0.2 K` (factor-only)
 |===

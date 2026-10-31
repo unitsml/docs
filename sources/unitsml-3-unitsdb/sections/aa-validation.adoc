@@ -1,3 +1,4 @@
+[[annex-validation]]
 [appendix]
 == Annex A (normative): validation suite
 

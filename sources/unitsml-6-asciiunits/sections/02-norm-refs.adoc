@@ -1,5 +1,7 @@
+[bibliography]
 == Normative references
 
-* UnitsML 1, UnitsML 3
-* The PARG grammar language and artifact format (parsanol/docs)
-* CalConnect 36810, _AsciiUnits syntax specification_ (v1 base standard, frozen 2025-03; historical)
+* [[[unitsml-1,nofetch(UnitsML 1)]]]
+* [[[unitsml-3,nofetch(UnitsML 3)]]]
+* [[[parg,nofetch(PARG grammar language and artifact format)]]] (parsanol/docs)
+* [[[cc36810,nofetch(CalConnect 36810)]]], _AsciiUnits syntax specification_ (v1 base standard, frozen 2025-03; historical)

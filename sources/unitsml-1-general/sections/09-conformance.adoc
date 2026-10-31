@@ -1,3 +1,3 @@
 == Conformance
 
-This part is enforced by the register procedures themselves; it introduces no vectors. Conformance classes are defined in UnitsML 8 and referenced from every other part's conformance clause.
+This part is enforced by the register procedures themselves; it introduces no vectors. Conformance classes are defined in UnitsML 8 and referenced from every other part's conformance clause. The informative annexes map the series (<<annex-series-map>>) and provide additional test-suite examples (<<annex-test-suite>>).

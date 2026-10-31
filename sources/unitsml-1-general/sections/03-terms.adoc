@@ -1,6 +1,8 @@
 == Terms, definitions and abbreviated terms
 
-=== Terms and definitions
+For the purposes of this document, the following terms and definitions apply.
+
+ISO and IEC maintain terminology databases for use in standardization at https://www.iso.org/obp and https://www.iec.ch/harmonized-terminology-database.
 
 artifact::
 versioned, checksummed, language-independent file produced from a normative source (grammar, register, schema, corpus) and consumed by implementations without modification. Artifact bytes are authoritative; consumers verify checksums before use.
@@ -23,7 +25,8 @@ the legacy AsciiMath compatibility dialect (Plurimath series, asciimath Part 1);
 dialect P (pma)::
 the featureful strict input language (Plurimath series, pma Part 1).
 
-=== Abbreviated terms
+SP 811::
+NIST Special Publication 811, _Guide for the Use of the International System of Units (SI)_.
 
-SP 811:: NIST Special Publication 811, _Guide for the Use of the International System of Units (SI)_.
-VIM:: JCGM 200, _International vocabulary of metrology_.
+VIM::
+JCGM 200, _International vocabulary of metrology_.

@@ -1,5 +1,6 @@
+[bibliography]
 == Bibliography
 
-* NIST SP 811:2008, _Guide for the Use of the International System of Units (SI)_
-* unitsml/unitsdb#130, #134, #135, #136, #137, #138, #139 (content-rule provenance)
-* Pendrill 2024; isq-smart concept-system methodology
+* [[[nist-sp811,nofetch(NIST SP 811:2008)]]], _Guide for the Use of the International System of Units (SI)_
+* [[[unitsdb-content,nofetch(unitsml/unitsdb content rules)]]] — issues #130, #134, #135, #136, #137, #138, #139 (content-rule provenance)
+* [[[isq-smart,nofetch(isq-smart concept-system methodology)]]]; Pendrill 2024
