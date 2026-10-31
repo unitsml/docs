@@ -99,7 +99,8 @@ known_series = all_names.map { |n| n.split("-").first }.uniq
 all_dirs.each do |root, dirs|
   dirs.each do |d|
     name = File.basename(d)
-    doc = File.read(File.join(d, "document.adoc"))
+    doc = Dir.glob([File.join(d, "*.adoc"), File.join(d, "sections", "*.adoc")])
+             .map { |f| File.read(f) }.join("\n")
     doc.scan(/\b(UnitsML|Plurimath|asciimath|pma) (\d+)\b/) do |cited_series, cited_num|
       next unless known_series.include?(cited_series.downcase)
       target = "#{cited_series.downcase}-#{cited_num}-"
