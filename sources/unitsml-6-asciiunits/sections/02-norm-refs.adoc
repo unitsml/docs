@@ -2,3 +2,4 @@
 
 * UnitsML 1, UnitsML 3
 * The PARG grammar language and artifact format (parsanol/docs)
+* CalConnect 36810, _AsciiUnits syntax specification_ (v1 base standard, frozen 2025-03; historical)
