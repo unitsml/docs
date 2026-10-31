@@ -1,4 +1,8 @@
+[bibliography]
 == Normative references
 
-* UnitsML 1, UnitsML 2; the tested parts (3–7 and the Plurimath series parts under test)
-* JCGM 101:2008 Clause 7.9 (adaptive procedure); JCGM 106:2012 (decision vectors)
+* [[[unitsml-1,nofetch(UnitsML 1)]]]
+* [[[unitsml-2,nofetch(UnitsML 2)]]]
+* [[[tested-parts,nofetch(tested parts)]]] — UnitsML 3–7 and the Plurimath series parts under test
+* [[[jcgm101,nofetch(JCGM 101:2008)]]], Clause 7.9 (adaptive procedure)
+* [[[jcgm106,nofetch(JCGM 106:2012)]]] (decision vectors)

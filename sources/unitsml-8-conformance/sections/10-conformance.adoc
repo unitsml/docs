@@ -1,3 +1,3 @@
 == Conformance
 
-This part is the gate of the series: releases across the family are blocked on vector drift, and conformance claims are exactly the replayed classes of Clause 8.
+This part is the gate of the series: releases across the family are blocked on vector drift, and conformance claims are exactly the replayed classes of Clause 8. The frozen vector sets are given in <<annex-uncertainty>>, <<annex-conversion>> and <<annex-evaluator>>; corpus provenance is recorded in <<annex-provenance>>.

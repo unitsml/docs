@@ -1,3 +1,7 @@
+[bibliography]
 == Bibliography
 
-* JCGM 101:2008 Table 10 (§9.5 results) · JCGM 106:2012 Table 1 · GUM-5:2026 Examples · unitsml/unitsml-testsuite#1
+* [[[jcgm101-t10,nofetch(JCGM 101:2008)]]], Table 10 (§9.5 results)
+* [[[jcgm106-t1,nofetch(JCGM 106:2012)]]], Table 1
+* [[[gum5,nofetch(GUM-5:2026)]]], Examples
+* [[[testsuite,nofetch(unitsml/unitsml-testsuite#1)]]]

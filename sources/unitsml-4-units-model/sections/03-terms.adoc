@@ -13,7 +13,7 @@ measured value (L3)::
 the value + unit pairing (with uncertainty per the Plurimath series). The language surface.
 
 absolute quantity::
-a value positioned on a scale (`T = 20 °C`).
+a value positioned on a scale (`T = 20 °C`).
 
 difference quantity::
-a value that is an interval between two absolutes (`ΔT = 5 °C`); subject to the law of Clause 9.
+a value that is an interval between two absolutes (`ΔT = 5 °C`); subject to the law of Clause 9.

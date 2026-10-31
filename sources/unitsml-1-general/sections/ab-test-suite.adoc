@@ -1,3 +1,4 @@
+[[annex-test-suite]]
 [appendix]
 == Annex B (informative): additional test-suite examples
 

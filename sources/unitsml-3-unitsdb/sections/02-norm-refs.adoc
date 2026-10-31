@@ -1,6 +1,8 @@
+[bibliography]
 == Normative references
 
-* UnitsML 1, UnitsML 2
-* ISO 4217 (currency codes)
-* IEC 62720 (units dictionary; source corpus only — no IEC backing of this register is implied)
-* CalConnect 36811, _UnitsML — UnitsDB specification_ (v1 base standard, frozen 2025-03; historical)
+* [[[unitsml-1,nofetch(UnitsML 1)]]]
+* [[[unitsml-2,nofetch(UnitsML 2)]]]
+* [[[iso4217,nofetch(ISO 4217)]]] (currency codes)
+* [[[iec62720,nofetch(IEC 62720)]]] (units dictionary; source corpus only — no IEC backing of this register is implied)
+* [[[cc36811,nofetch(CalConnect 36811)]]], _UnitsML — UnitsDB specification_ (v1 base standard, frozen 2025-03; historical)

@@ -1,6 +1,11 @@
+[[annex-series-map]]
 [appendix]
 == Annex A (informative): series map
 
+The series is consumed as mapped in <<tbl-series-map>>.
+
+[[tbl-series-map]]
+.Series map
 [cols="1,2,1"]
 |===
 |Part |Title |Consumes

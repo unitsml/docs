@@ -3,4 +3,4 @@
 The difference law of UnitsML 4 Clause 9 governs application: absolutes convert affinely; differences (including uncertainty magnitudes and interval-endpoint distances) convert by the factor b/c alone. Affine units MUST NOT appear inside composite expressions nor at powers ≠ 1; each is a specified error.
 
 [example]
-*Expected outcome.* `(20 °C − 15 °C) → K` is `5 K`; an uncertainty magnitude `0.2 °C → K` is `0.2 K`; `degC^2` and `(degC)·(s)` are specified errors. The canonical register entries encode the same law structurally — `factor` with `offset` only for the affine unit at power 1.
+*Expected outcome.* `(20 °C − 15 °C) → K` is `5 K`; an uncertainty magnitude `0.2 °C → K` is `0.2 K`; `degC^2` and `(degC)·(s)` are specified errors. The canonical register entries encode the same law structurally — `factor` with `offset` only for the affine unit at power 1.

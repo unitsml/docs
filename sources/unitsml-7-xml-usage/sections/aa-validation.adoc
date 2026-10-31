@@ -1,3 +1,4 @@
+[[annex-validation]]
 [appendix]
 == Annex A (informative): validation profile
 

@@ -1,3 +1,4 @@
+[[annex-proposal]]
 [appendix]
 == Annex B (informative): proposal — a measurement-result element
 
