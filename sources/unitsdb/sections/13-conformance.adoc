@@ -1,0 +1,8 @@
+== Conformance
+
+Conforming register implementations MUST carry the seven collections at a uniform `schema_version` (≥ 2.2.0 for the current content rules), MUST pass the validation suite of UnitsML 3 Annex A, and MUST apply the content rules of UnitsML 3 (primary quantity references, L1 equivalence classes, canonical conversions with mandatory `root_units`, currencies as denominations with N.A. minor units absent).
+
+Conformance class: `quantity-conversion` (UnitsML 8).
+
+[example]
+*Expected outcome.* A conforming register exposes the joule with a single `primary: true` quantity reference (energy), 135 canonical conversions including the generated set, and the 178-code currency collection with N.A. minor units absent — validated by the suite before every release.
