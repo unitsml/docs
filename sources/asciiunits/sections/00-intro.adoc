@@ -149,7 +149,3 @@ technologies for representing units of measurement, including UCUM, QUDT, and th
 Digital SI framework. It can be used in conjunction with these technologies to
 provide a comprehensive solution for representing units of measurement in
 scientific and engineering applications.
-
-== Relationship to the UnitsML specification series
-
-This document is the base CalConnect standard for the AsciiUnits syntax. The current normative formalization of the language — including the PARG artifact contract, register-generated terminals, and the conformance corpus — is *UnitsML — Part 6: asciiunits* (unitsml/docs). Where this document and Part 6 differ, Part 6 and the checksummed artifact govern: in particular, the shipped implementation is the generated PARG grammar (grammar v2), not the EBNF of Clause 11, which is retained as the historical informal definition.
