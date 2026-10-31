@@ -4,12 +4,13 @@
 
 require "yaml"
 
-SERIES_TITLE = { "unitsml" => "UnitsML", "plurimath" => "Plurimath",
+SERIES_TITLE = { "unitsml" => "UnitsML", "plurimath" => "Plurimath", "pm" => "Plurimath",
                  "asciimath" => "asciimath", "pma" => "pma" }.freeze
-SERIES_RANGE = { "unitsml" => 1..8, "plurimath" => 1..4,
+SERIES_RANGE = { "unitsml" => 1..8, "plurimath" => 1..4, "pm" => 1001..1999,
                  "asciimath" => 1..2, "pma" => 1..1 }.freeze
 REQUIRED_SECTIONS = %w[00-foreword 00-introduction 01-scope 02-norm-refs
                        03-terms 04-conventions 99-bibliography].freeze
+RIBOSE_SECTIONS = %w[00-foreword 01-scope 02-normrefs 03-terms 98-bibliography].freeze
 LEGACY = %w[unitsml-guide unitsml-incorporation unitsml-ubl-ndr-subset].freeze
 # Frozen v1 committee drafts (CalConnect 36810/36811): structure is not
 # retroactively conformed; nn-usage.adoc was never included — known v1 artifact.
@@ -73,17 +74,20 @@ ROOTS.each do |root|
   all_dirs[root].each do |d|
     name = File.basename(d)
     next if LEGACY.any? { |l| name.start_with?(l) }
-    next unless name =~ /\A(#{SERIES_TITLE.keys.join("|")})-(\d+)-/
+    next unless name =~ /\A(#{SERIES_TITLE.keys.join("|")})-(\d+)(?:-|\z)/
     series = Regexp.last_match(1)
     num = Regexp.last_match(2).to_i
     doc = File.read(File.join(d, "document.adoc"))
+    ribose = doc.include?(":mn-document-class: ribose")
 
     report.call(key, "#{name}: docnumber mismatch") unless doc =~ /^:docnumber: #{num}$/
-    report.call(key, "#{name}: :title-intro-en: is not the series name") unless doc =~ /^:title-intro-en: #{SERIES_TITLE[series]}$/
+    unless ribose
+      report.call(key, "#{name}: :title-intro-en: is not the series name") unless doc =~ /^:title-intro-en: #{SERIES_TITLE[series]}$/
+    end
     unless SERIES_RANGE[series].cover?(num)
       report.call(key, "#{name}: part number #{num} outside series range")
     end
-    REQUIRED_SECTIONS.each do |s|
+    (ribose ? RIBOSE_SECTIONS : REQUIRED_SECTIONS).each do |s|
       report.call(key, "#{name}: missing required section #{s}") unless File.exist?(File.join(d, "sections", "#{s}.adoc"))
     end
     report.call(key, "#{name}: missing conformance clause") unless doc.include?("conformance.adoc[]")
@@ -104,7 +108,9 @@ all_dirs.each do |root, dirs|
     doc.scan(/\b(UnitsML|Plurimath|asciimath|pma) (\d+)\b/) do |cited_series, cited_num|
       next unless known_series.include?(cited_series.downcase)
       target = "#{cited_series.downcase}-#{cited_num}-"
-      next if all_names.any? { |n| n.start_with?(target) }
+      exact = "#{cited_series.downcase}-#{cited_num}"
+      alias_exact = cited_series.downcase == "plurimath" ? "pm-#{cited_num}" : exact
+      next if all_names.any? { |n| n.start_with?(target) || n == exact || n == alias_exact }
       report.call(root, "#{name}: citation to non-existent part #{cited_series} #{cited_num}")
     end
   end
