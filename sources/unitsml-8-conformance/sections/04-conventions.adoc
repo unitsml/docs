@@ -1,0 +1,3 @@
+== Conventions
+
+Requirement language per UnitsML 1. Tolerances are written `tolerance_d` with |computed − expected| ≤ 10^−d^·|expected|; vectors without `tolerance_d` are byte-exact.

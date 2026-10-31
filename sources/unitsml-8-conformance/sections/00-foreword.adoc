@@ -1,0 +1,3 @@
+== Foreword
+
+This part is the gate of the series: it defines the corpora that freeze normative behavior into replayable vectors, the format those vectors take, the harness every implementation must satisfy, and the conformance classes an implementation may claim. Byte-identity across implementations is enforced HERE, by replay — never by shared code.

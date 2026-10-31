@@ -1,0 +1,6 @@
+== Quantity resolution
+
+A value MAY assert one L1 quantity by identifier. The assertion MUST resolve against the register in the fixed order: `short` name → `unitsml` identifier (`q:…`) → `nist` identifier (`NISTq…`); resolution is exact-token; free-text names are never syntax. A stated kind MUST be a member of the resolved unit's `quantity_references` (UnitsML 3). For register units with multiple references and no stated kind, the primary reference is the default; an unregistered composite falls back to the dimension check of Clause 8 only.
+
+[example]
+*Expected outcome.* `u:joule` without an assertion resolves to energy (`NISTq17`, the primary reference) — never "Lagrange function", which is merely a list member. `unit(J::torque)` is invalid: torque is not among the joule's references, though the dimensions match. `unit(N·m::torque)` is valid: the newton-metre record lists it.

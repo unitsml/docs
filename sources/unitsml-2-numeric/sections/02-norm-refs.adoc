@@ -1,0 +1,5 @@
+== Normative references
+
+* UnitsML 1 (requirement language, artifact discipline)
+* UnitsML 8 (vector format, tolerance conventions)
+* JCGM 101:2008, Clause 7.9 (numerical tolerance convention δ = ½·10^ℓ^)

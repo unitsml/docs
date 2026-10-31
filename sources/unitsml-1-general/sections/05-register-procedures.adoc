@@ -1,0 +1,35 @@
+== Register procedures
+
+=== Document types
+
+[cols="1,3"]
+|===
+|Type |Meaning
+
+|Standards Track
+|normative specifications of behavior, data or syntax; enforced by corpora
+
+|Informational
+|orientation, glossaries, research notes; never cited as a requirement source
+
+|Process
+|this document and its amendments
+|===
+
+=== Lifecycle
+
+Idea → Draft (docstage 20) → Committee Draft (30) → Final Draft (50) → Published (60).
+
+[example]
+*Expected outcome.* A part moved to docstage 60 without its Annex test vectors frozen in UnitsML 8 is mis-published; the register procedure rejects the move.
+
+=== Numbering
+
+Part numbers are permanent and never reused. Informational documents share the numbering space with an explicit type marker.
+
+=== Amendments
+
+A Published document changes only by a numbered Amendment; corrections that would alter normative content require an Amendment entry, never silent edits.
+
+[example]
+*Expected outcome.* Correcting "Lagrange function" to "energy" in a rendered example is an editorial fix; changing the primary-reference selection rule of UnitsML 3 requires "UnitsML 3/Amd.1".

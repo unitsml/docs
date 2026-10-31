@@ -12,54 +12,30 @@
 :mn-output-extensions: xml,html,doc,pdf
 :imagesdir: images
 
-== Foreword
+include::sections/00-foreword.adoc[]
 
-This part fixes the numeric law of the series: where exact arithmetic is required, how numbers cross serialization boundaries, which algorithm produces transcendental results and how its version is stamped. Every other part that computes or serializes a number cites this part.
+include::sections/00-introduction.adoc[]
 
-== Scope
+include::sections/01-scope.adoc[]
 
-This document specifies: exact rational arithmetic requirements; decimal-string representation; the t-quantile algorithm and its versioning; rounding rules; and the byte-identical JSON serialization contract for conformance corpora and evaluator output.
+include::sections/02-norm-refs.adoc[]
 
-This document does not define when to compute (Parts 4, 5 and the evaluation parts of the Plurimath series decide that); it defines how any computation in the series must behave numerically.
+include::sections/03-terms.adoc[]
 
-== Normative references
+include::sections/04-conventions.adoc[]
 
-* UnitsML 1 (requirement language, artifact discipline)
-* JCGM 101:2008 (numerical tolerance convention δ = ½·10^ℓ^)
+include::sections/05-exact-arithmetic.adoc[]
 
-== Terms and definitions
+include::sections/06-decimal-strings.adoc[]
 
-*exact decimal*:: a decimal string preserved verbatim from its source; trailing zeros are significant (`2.10 ≠ 2.1`).
-*guard digits*:: the declared number of extra digits carried beyond the published precision of a non-exact result.
-*reproducibility class*:: byte-exact or distributional (UnitsML 8).
+include::sections/07-t-quantile.adoc[]
 
-== Exact rational arithmetic
+include::sections/08-rounding.adoc[]
 
-Conversions defined `exact="true"` (UnitsML 5), scale and difference arithmetic (UnitsML 4), Type A statistics, and all rational operations of propagation MUST be computed in exact rational arithmetic. An implementation MUST NOT round an intermediate exact value.
+include::sections/09-serialization.adoc[]
 
-Irrational results (square roots of non-square rationals, Student-t quantiles) MUST NOT be produced by floating-point shortcut: they are computed by the declared algorithm of Clause 6 or refused.
+include::sections/10-conformance.adoc[]
 
-== Decimal-string representation
+include::sections/ab-test-suite.adoc[]
 
-Numbers crossing a serialization boundary MUST be decimal strings. IEEE-754 values MUST NOT appear in any artifact, corpus or API result of this series. Decimal strings preserve:
-
-- the author's text verbatim in record positions (rounding is the author's act, per GUM 7.2.2);
-- the exact rational value elsewhere: integer strings for integral rationals, `p/q` rationals where the register uses them, and fixed-decimal strings with declared guard digits for non-exact results.
-
-== The t-quantile algorithm
-
-Coverage factors obtained from the Student-t distribution at probability p with ν degrees of freedom MUST be computed by Newton iteration on the regularized incomplete beta function at fixed precision, with a published, monotone error bound. The algorithm identity and version MUST be stamped in every result and vector metadata (`numeric_algorithm` field). An implementation MUST NOT substitute a different approximation while claiming conformance.
-
-== Rounding
-
-- Record nodes: no rounding by the implementation; author text is preserved verbatim.
-- Vectors: published at the fixed decimal places declared per vector.
-- Presentation: rounding is a presentation decision and MUST NOT feed back into stored values.
-
-== Serialization contract
-
-JSON output of conformance replays and evaluator APIs MUST be: UTF-8; fixed key order (lexicographic, defined once per schema); decimal strings for all numerics; and stamped with `{engine_version, grammar_version, vector_set_version, numeric_algorithm}`. Two conforming implementations given the same input MUST emit byte-identical output.
-
-== Conformance
-
-Enforced by every vector of UnitsML 8: byte-identical replay is the test of this part.
+include::sections/99-bibliography.adoc[]

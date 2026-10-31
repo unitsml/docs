@@ -1,0 +1,12 @@
+== Decimal-string representation
+
+Numbers crossing a serialization boundary MUST be decimal strings. IEEE-754 values MUST NOT appear in any artifact, corpus or API result of this series. Decimal strings preserve:
+
+- the author's text verbatim in record positions — rounding is the author's act (JCGM 100:2008, 7.2.2);
+- the exact rational value elsewhere: integer strings for integral rationals, `p/q` rationals where the register uses them, and fixed-decimal strings with declared guard digits for non-exact results.
+
+[example]
+*Verbatim preservation.* The author writes `2.10`; the record, every render and every vector carry `"2.10"`. `"2.1"` is a different author text and MUST NOT replace it.
+
+[example]
+*Register rationals.* The register carries the litre as `factor: '0.001'` and degree Fahrenheit as `factor: 5/9`, `offset: 229835/900` — exact by construction. Conforming conversions reproduce these strings on round-trip.

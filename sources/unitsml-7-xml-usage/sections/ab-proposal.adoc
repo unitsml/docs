@@ -1,0 +1,12 @@
+[appendix]
+== Annex B (informative): proposal — a measurement-result element
+
+A sibling of `QuantityReference` on `Quantity`-carrying elements, or a child of `Unit`:
+
+[listing]
+MeasurementResult: category (standard | expanded | coverage-interval),
+  value (decimal string), magnitude?, k?, p?, lower?, upper?,
+  intervalKind?, distribution? (JCGM 101 family + parameters),
+  exact (boolean), digits metadata
+
+Adoption is a WG decision; until adopted, this series carries uncertainty in the math layer only.

@@ -1,0 +1,13 @@
+== Terms, definitions and abbreviated terms
+
+terminal::
+a registered string the grammar matches as one token: a unit symbol, prefix symbol, registered multi-term or prefixed symbol, or a structural keyword.
+
+extender::
+a continuation mark for interrupted unit series; legal only inside an expression.
+
+artifact::
+the checksummed `artifacts/unitsml.json` compiled from the grammar; the normative form of this language.
+
+edition::
+the recorded grammar revision carried by the artifact.

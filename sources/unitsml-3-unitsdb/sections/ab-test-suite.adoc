@@ -1,0 +1,11 @@
+[appendix]
+== Annex B (informative): additional test-suite examples
+
+[example]
+*Primary-reference red/green.* Render the joule without an asserted kind. Red: `Quantity id="NISTq152" name="Lagrange function"`. Green: `name="energy"` via `NISTq17, primary: true`.
+
+[example]
+*Coverage report shape.* Every register unit appears exactly once in the conversion coverage report as `generated`, `derived-by-design` (SI base, prefix-level), or `source-needed` with a reason string; no unit is unlisted.
+
+[example]
+*Equivalence gate.* `unit(J::work) + unit(J::energy)` evaluates; `unit(J::energy) + unit(N·m::torque)` raises naming both kinds; both vectors are frozen in UnitsML 8 Annex B.

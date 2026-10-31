@@ -1,0 +1,4 @@
+== Normative references
+
+* UnitsML 1, UnitsML 2; the tested parts (3–7 and the Plurimath series parts under test)
+* JCGM 101:2008 Clause 7.9 (adaptive procedure); JCGM 106:2012 (decision vectors)

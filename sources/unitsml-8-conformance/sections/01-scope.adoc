@@ -1,0 +1,3 @@
+== Scope
+
+This document specifies: the corpora layout and versioned index; the vector file format and metadata; the replay-harness requirements; the runtime conformance classes and the claims each licenses; and the reproducibility classes for Monte Carlo vectors.

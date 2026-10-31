@@ -1,0 +1,5 @@
+== Normative references
+
+* UnitsML 1, 3, 4, 5
+* The generated XSD specification (base document)
+* UnitsML 1.0 XSD (unitsml-v1.0.xsd)

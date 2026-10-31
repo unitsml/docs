@@ -1,0 +1,4 @@
+== Bibliography
+
+* JCGM 100:2008, 7.2.2 (rounding of reported results)
+* ISO 80000-1 Annex B (rounding of numerical values)

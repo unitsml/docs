@@ -1,0 +1,42 @@
+[appendix]
+== Annex A (normative): conversion vectors
+
+|===
+|Vector |Expected
+
+|0 °C → K · 100 °C → K
+|273.15 · 373.15 (exact rationals)
+
+|32 °F → K → °F round-trip
+|273.15 · exact identity
+
+|1 mi → m
+|1609.344 (exact)
+
+|1 bar → Pa · 2 bar → Pa
+|100 000 · 200 000 (register canonical)
+
+|percent → one (IEC 62720 import path)
+|0.01 exact
+
+|percent per degree (non-exact)
+|declared-precision decimal `0.5729577951308232087679815481`, never marked exact
+
+|(20 °C − 15 °C) → K
+|5 K (offset cancels — UnitsML 4 I1)
+
+|u = 0.2 °C → K
+|0.2 K (factor-only — I4)
+
+|degC² · (degC)·(s) composites
+|specified errors (affine at power ≠ 1 / in composite)
+
+|ft²
+|0.09290304 m² (double-power defect red/green)
+
+|SpecialConversionFrom · WSDLConversionFrom
+|typed refusal naming the conversion
+
+|unresolvable initialUnit
+|typed error naming the reference
+|===

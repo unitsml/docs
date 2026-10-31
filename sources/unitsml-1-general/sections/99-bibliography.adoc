@@ -1,0 +1,5 @@
+== Bibliography
+
+* UnitsML program master graph: https://github.com/unitsml/unitsml-ruby/issues/95
+* Pendrill, L. R. (2024), _Quantities and units: order amongst complexity_, De Gruyter
+* unitsml/docs PR #9 (generated XSD specification — house document pattern)

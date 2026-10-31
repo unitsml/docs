@@ -1,0 +1,10 @@
+== Scope
+
+This document specifies:
+
+- the procedures of the UnitsML specification register: document numbering, types, lifecycle and amendment rules;
+- the normative vocabulary of the series and the requirement language (MUST/SHOULD/MAY);
+- the artifact discipline: checksums, editions, and the binding between normative parts and their conformance corpora;
+- the release and distribution procedures for the data register and its downstream packages.
+
+This document does not specify any behavior of units, quantities, conversions, expressions or evaluation; those are specified in Parts 2 to 8 and in the companion Plurimath series.

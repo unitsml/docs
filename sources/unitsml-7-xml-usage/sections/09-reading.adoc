@@ -1,0 +1,6 @@
+== Reading rules and determinism
+
+Readers MUST tolerate foreign-payload defects deterministically: duplicate lowercase attributes (the openCDD `finaladdend` beside `finalAddend`) are accepted with the camel-case value prevailing on read and never reproduced on write; unrecognized elements are skipped, not fatal; recognized names with malformed shapes are fatal.
+
+[example]
+*Expected outcome.* The known degree-Celsius payload defect (one duplicate attribute) is reported in the coverage report, accepted on read, and absent from every emission this series produces.

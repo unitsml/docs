@@ -1,0 +1,3 @@
+== Conformance
+
+This part is enforced by every vector of UnitsML 8: byte-identical replay is the test. Class coverage: any claimed class implies this part.

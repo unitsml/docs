@@ -1,0 +1,29 @@
+== Terms, definitions and abbreviated terms
+
+=== Terms and definitions
+
+artifact::
+versioned, checksummed, language-independent file produced from a normative source (grammar, register, schema, corpus) and consumed by implementations without modification. Artifact bytes are authoritative; consumers verify checksums before use.
+
+corpus::
+a versioned collection of test vectors owned by UnitsML 8. A corpus entry names its normative source clause and the tolerance convention that applies.
+
+oracle::
+an implementation whose output is frozen into a corpus. The reference implementation of the series is the Ruby one; corpora are frozen from it.
+
+edition::
+a recorded revision of an artifact or register, identified by checksum and version string.
+
+conformance class::
+the set of vector classes an implementation replays, licensing specific claims (UnitsML 8).
+
+dialect L::
+the legacy AsciiMath compatibility dialect (Plurimath series, asciimath Part 1); not extended by this series.
+
+dialect P (pma)::
+the featureful strict input language (Plurimath series, pma Part 1).
+
+=== Abbreviated terms
+
+SP 811:: NIST Special Publication 811, _Guide for the Use of the International System of Units (SI)_.
+VIM:: JCGM 200, _International vocabulary of metrology_.

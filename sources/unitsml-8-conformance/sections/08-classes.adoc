@@ -1,0 +1,23 @@
+== Runtime conformance classes
+
+[cols="1,3"]
+|===
+|Class |Licenses the implementation to claim
+
+|parse/render
+|correct parse of an input language into the model and correct emission per format column of the render corpus
+
+|quantity-conversion
+|UnitsML 4/5 semantics: resolution, gating, scales, conversion application (Annex B)
+
+|evaluation
+|Plurimath 4: propagation, adequacy verdict, second-order, MCM, conformity (Annex C)
+
+|full-series
+|all of the above plus round-trip guarantees (Plurimath 2, Annex A)
+|===
+
+Claims MUST name the class and the corpus version replayed. An implementation MUST NOT claim a class whose vectors it does not replay.
+
+[example]
+*Expected claim shape.* "Conforming at class `quantity-conversion`, corpus v2026.10" licenses resolution, gating, scales and conversions — and says nothing about evaluation.

@@ -1,0 +1,21 @@
+== Distribution and release procedures
+
+The release chain is strict and ordered:
+
+[verse]
+--
+unitsdb data (tag v*) → unitsdb-ruby (submodule pin, VERSION, UNITS_DATA_VERSION)
+  → unitsml-ruby (payload regeneration, dependency bump)
+  → unitsdb-ts / unitsml-ts (dataset rebuild) → npm (bare, unprefixed names)
+--
+
+Rules:
+
+- Data schema versions and package versions are independent; the data pin travels via `UNITS_DATA_VERSION`.
+- Releases are PATCH bumps unless the maintainer states otherwise.
+- npm package names are bare and unprefixed (`unitsml`, `unitsdb`, `asciiunits`).
+- Release workflows run Node 24: trusted publishing requires npm ≥ 11.5.
+- Every release is gated by conformance-corpus replay (UnitsML 8).
+
+[example]
+*Expected outcome (worked release).* Data PRs land schema 2.2.0 (primary references, equivalence classes, 121 canonical conversions, IEC 62720 coverage) → tag v2.2.0 → unitsdb-ruby 2.2.13 (`UNITS_DATA_VERSION = "2.2.0"`) → unitsml-ruby payload regeneration → unitsdb-ts rebuild → `unitsdb@0.1.2` on npm, where `getById("cur:EUR")` returns the Euro with ISO numeric 978, the joule carries its primary reference NISTq17 (energy), and 6 quantities carry the energy equivalence class.

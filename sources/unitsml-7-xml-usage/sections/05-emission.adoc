@@ -1,0 +1,6 @@
+== Emission contract
+
+Producers MUST emit only elements and attributes the XSD defines, targeting the declared schema version. `xml:id` values are producer-allocated, unique per document, and stable across regenerations of the same input. The emitted element set: `Unit` (symbols, `unitSystem`, roots and prefixes, `dimensionURL`), `Prefix`, `Quantity` (names, symbols, `quantityType`, `dimensionURL`), `Dimension`, per-unit `QuantityReference` (0..*) and `Conversions` (0..1). `SpecialConversionFrom`/`WSDLConversionFrom` are never emitted synthetically.
+
+[example]
+*Expected outcome.* Regenerating the UnitsML for the same input yields byte-identical XML — same ids, same order, same attribute values. A producer whose regeneration flips element order or mints new ids is non-conforming.

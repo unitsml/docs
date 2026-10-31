@@ -1,0 +1,6 @@
+== Collections and identifiers
+
+The register comprises `units.yaml`, `prefixes.yaml`, `dimensions.yaml`, `quantities.yaml`, `scales.yaml`, `unit_systems.yaml`, `currencies.yaml`. All collections in one release carry the SAME `schema_version`, quoted. Loaders treat units, prefixes, dimensions, quantities and unit systems as REQUIRED and currencies as OPTIONAL-IF-ABSENT; any collection that is present MUST match the uniform version.
+
+[example]
+*Expected outcome.* A loader presented with units at 2.2.0 and currencies at 2.1.0 rejects the register with a version-mismatch error naming both files. A loader presented with no currencies file at all loads the five required collections and exposes an empty currency collection.

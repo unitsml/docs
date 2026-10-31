@@ -1,0 +1,8 @@
+== Rounding
+
+- Record nodes: no rounding by the implementation; author text is preserved verbatim.
+- Vectors: published at the fixed decimal places declared per vector.
+- Presentation: rounding is a presentation decision and MUST NOT feed back into stored values.
+
+[example]
+*Interpretation.* An evaluator computing u_c = 34.1839… nm for a vector declaring three decimals publishes `"34.184"`; the stored record meanwhile keeps whatever text the author wrote. Neither the author text nor the vector is altered by the presentation layer's choice to display `34 µm`.

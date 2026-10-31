@@ -12,105 +12,30 @@
 :mn-output-extensions: xml,html,doc,pdf
 :imagesdir: images
 
-== Foreword
+include::sections/00-foreword.adoc[]
 
-This part defines the semantics computed over the register (UnitsML 3): how units resolve to dimensions and quantity kinds, which arithmetic operations are legal on which measurement scales, and how absolute quantities are distinguished from differences. It is the layer that the evaluation parts consume and the vector sets of UnitsML 8 freeze.
+include::sections/00-introduction.adoc[]
 
-== Scope
+include::sections/01-scope.adoc[]
 
-This document specifies: the L0/L1 frame for dimensions and quantities; quantity resolution (membership, primary reference, asserted kinds); arithmetic gating including declared equivalence classes; measurement-scale classes and their permitted operations; and the absolute/difference typing law with its invariants.
+include::sections/02-norm-refs.adoc[]
 
-This document does not define conversion arithmetic (UnitsML 5), expression syntax (the Plurimath asciimath and pma parts), or evaluation procedures (Plurimath 4).
+include::sections/03-terms.adoc[]
 
-== Normative references
+include::sections/04-conventions.adoc[]
 
-* UnitsML 1, UnitsML 2, UnitsML 3
-* JCGM 200:2012 (VIM), entries 1.1–1.5, 2.30–2.38
-* ISO 80000-1 (quantities and units; scales)
-* Pendrill 2024 (L0–L3 concept levels; isq-smart concept system)
+include::sections/05-levels.adoc[]
 
-== Terms, definitions and abbreviated terms
+include::sections/06-resolution.adoc[]
 
-*dimension (L0)*:: the exponent vector over the base quantities; the comparable-family level. Derived from the register's `dimensions.yaml`; never stored per quantity.
+include::sections/07-gating.adoc[]
 
-*quantity (L1)*:: a named concept of the register (`quantities.yaml`) — "energy", "plane angle" — each carrying a `dimension_reference` and identifiers.
+include::sections/08-scales.adoc[]
 
-*dedicated quantity (L2)*:: an L1 quantity bound to a kind of entity ("length of rod"). Outside the language surface; binding metadata of evaluation inputs.
+include::sections/09-difference-law.adoc[]
 
-*measured value (L3)*:: the value + unit pairing (with uncertainty per the Plurimath series). The language surface.
+include::sections/10-conformance.adoc[]
 
-*absolute quantity*:: a value positioned on a scale (`T = 20 °C`).
+include::sections/aa-vectors.adoc[]
 
-*difference quantity*:: a value that is an interval between two absolutes (`ΔT = 5 °C`); subject to the law of Clause 8.
-
-== Quantity resolution
-
-A value MAY assert one L1 quantity by identifier. The assertion MUST resolve against the register in the fixed order: `short` name → `unitsml` identifier (`q:…`) → `nist` identifier (`NISTq…`); resolution is exact-token; free-text names are never syntax. A stated kind MUST be a member of the resolved unit's `quantity_references` (UnitsML 3). For register units with multiple references and no stated kind, the primary reference (UnitsML 3, Clause "Primary quantity reference") is the default; an unregistered composite falls back to the dimension check of Clause 7 only.
-
-The register is the only source of kinds, membership and primaries. Implementations MUST NOT carry fallback tables (see the red/green vector: `u:joule` resolves to *energy*, never "Lagrange function").
-
-== Arithmetic gating
-
-Addition and subtraction REQUIRE equal dimension vectors, and REQUIRE kind compatibility: identical L1 kinds, or kinds within one declared `equivalence_class` (UnitsML 3). Work + energy is conforming; energy + torque is a specified error naming both kinds. Multiplication, division and scaling compose dimensions and derive the result kind through the normalized register record (primary reference), falling back to dimension-only when no record matches. Strict conversion gating: dimension-compatible units with disjoint kinds MUST be rejected as conversions (Bq↔Hz, Sv↔Gy) unless the asserted kinds are compatible.
-
-== Scales and operation legality
-
-Each scale class in `scales.yaml` lists its permitted operations; consumers MUST enforce exactly that list and MUST name the scale class in the error. The landed classes: `continuous_ratio` (+, −, scaling, ×, ÷, comparison), `continuous_interval` (+, −, comparison only), `logarithmic_ratio`, `logarithmic_field`, `discrete`. Multiplying an absolute quantity on a non-ratio scale is a specified error: `10 °C × 2` fails naming `continuous_interval`.
-
-== The difference law
-
-With a scale map s(x) = f·x + o (o ≠ 0 on interval scales), an absolute value converts as s(x), while a difference x₁ − x₂ converts as f·(x₁ − x₂): the offset cancels. The invariants:
-
-[%hardbreaks]
-I1 — `Diff(Q)` is closed under +, − (same dimension) and under factor-only conversion; it is never reachable by affine conversion; `Diff(Q) × scalar` is legal.
-I2 — `Abs − Abs` on a non-ratio scale yields `Diff(Q)`; `Abs + Abs`, `Abs × Abs`, `Abs ÷ Abs` on such a scale are scale errors (Clause 7).
-I3 — Typing follows the value's provenance (operation history), not its unit: the unit's `scale_reference` bounds legal operations; the history determines the conversion law.
-I4 — Uncertainties are always `Diff(Q)`: u, U and interval-endpoint distances convert factor-only, never affinely.
-
-Differences are typed in the algebra; no delta pseudo-units exist in the register. A difference raised through a power ≥ 2, or an affine unit inside a composite, is a specified error (UnitsML 5).
-
-[example]
-`(20 °C − 15 °C) → 5 K` (offset cancels); `(20 °C).convert_to(K) → 293.15 K` (offset applies). Implementations that produce 278.15 K for the difference violate Clause 8.
-
-== Conformance
-
-Annex A defines the red/green vector table; UnitsML 8 Annex B freezes and replays it.
-
-[appendix]
-== Annex A (normative): gating and difference vectors
-
-|===
-|Input |Expected result
-
-|`u:joule` quantity resolution (no assertion)
-|primary kind = energy (red against `.first`: "Lagrange function")
-
-|`unit(J::energy)` / `unit(N·m::torque)`
-|valid / valid (membership per register)
-
-|`unit(J::torque)`
-|invalid: not a member of the joule record
-
-|`Bq → Hz` conversion (no kinds stated)
-|rejected (strict gating)
-
-|`unit(J::work) + unit(J::energy)`
-|valid (equivalence class `energy`)
-
-|`unit(J::energy) + unit(N·m::torque)`
-|typed error naming both kinds
-
-|`10 °C × 2`
-|scale error naming `continuous_interval`
-
-|`(20 °C − 15 °C) → K`
-|`5 K` (offset cancels)
-
-|uncertainty magnitude `0.2 °C → K`
-|`0.2 K` (factor-only)
-|===
-
-== Bibliography
-
-* JCGM 200:2012 (VIM) · ISO 80000-1 · Pendrill 2024
-* unitsml/unitsdb#135, #136, #42 · unitsml/unitsml-ruby#82 (R-A4), #92 Task 6
+include::sections/99-bibliography.adoc[]

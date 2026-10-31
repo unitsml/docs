@@ -1,0 +1,6 @@
+== Conversions emission
+
+`Conversions` carries the full affine attribute set of UnitsML 5 — `initialUnit`, `initialAddend`, `multiplicand`, `divisor`, `finalAddend`, `exact`, digit metadata — with decimal attributes as lexical strings. A producer MUST NOT emit a conversion whose definition it cannot reproduce; register factors are emitted with their exact strings.
+
+[example]
+*Expected outcome.* The degree Celsius emission carries `finalAddend="273.15" exact="true"`; the percent-per-degree emission carries its full declared decimal and no `exact` attribute.

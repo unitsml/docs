@@ -1,0 +1,6 @@
+== Arithmetic gating
+
+Addition and subtraction REQUIRE equal dimension vectors, and REQUIRE kind compatibility: identical L1 kinds, or kinds within one declared `equivalence_class` (UnitsML 3). Multiplication, division and scaling compose dimensions and derive the result kind through the normalized register record (primary reference), falling back to dimension-only when no record matches. Strict conversion gating: dimension-compatible units with disjoint kinds MUST be rejected as conversions (Bq↔Hz, Sv↔Gy) unless the asserted kinds are compatible.
+
+[example]
+*Expected outcome.* `unit(J::work) + unit(J::energy)` evaluates (one equivalence class). `unit(J::energy) + unit(N·m::torque)` raises a typed error naming both kinds — the classic blunder the gate exists to catch. `Bq → Hz` without stated kinds is rejected as a conversion.

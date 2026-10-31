@@ -1,0 +1,7 @@
+[appendix]
+== Annex A (normative): uncertainty vector set
+
+Parse/render/round-trip vectors for every mechanism of Plurimath 2: the three categories; k, p pairings; interval kinds; concise (output-only) and absolute notations; the ASCII channels (quoted channel for dialect L; native literals for pma); lossiness assertions per the Plurimath 2 matrix. Invariant replayed: every model field survives every lossless channel byte-identically.
+
+[example]
+*Round-trip triplet.* `ucov(10.0, 9.7, 10.3, 0.95, shortest)` through MathML → model → OMML → model preserves category, endpoints, p and kind byte-identically; the LaTeX column renders the visible interval only, per the declared loss.

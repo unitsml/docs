@@ -1,0 +1,11 @@
+[appendix]
+== Annex A (informative): additional test-suite examples
+
+[example]
+*Checksum gate.* A stale artifact (one edited byte, stale checksums) aborts the load with the typed checksum error in every runtime.
+
+[example]
+*Trailing-extender rejection.* `m/s ⟶` fails; `m/s ⟶ m` parses as a series continuation.
+
+[example]
+*Longest-match registration.* `mbar` matches as one registered symbol; `dB` never matches d × B; `kgf` never decomposes to kg × f.

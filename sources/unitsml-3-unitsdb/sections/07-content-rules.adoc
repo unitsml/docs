@@ -1,0 +1,26 @@
+== Content rules
+
+=== Canonical conversions
+
+A unit whose derivation is mechanical MUST carry `canonical_conversion`: an exact rational `factor` (decimal or `p/q` string), an `offset` where the unit is affine, and the `root_units` decomposition the factor was computed over (REQUIRED). Units at powers other than 1, affine units inside composites, logarithmic units, and prefix-level units do not carry canonical data; the coverage report itemizes every unit as generated, derived-by-design, or source-needed with a reason.
+
+[example]
+*Expected outcome.* foot per minute carries `factor: 127/25000` with `root_units` = foot × minute⁻¹; gram-force carries none and is reported "self-referential root_units — needs a sourced definition" (its 9.80665 value is source-needed, not derivable).
+
+=== Scale operation legality
+
+`scales.yaml` classifies scales and lists the operations each permits; consumers MUST take operation legality from this data (UnitsML 4).
+
+=== Primary quantity reference
+
+A unit with more than one `quantity_reference` MUST designate exactly one entry `primary: true`. Selection rule: the quantity in the SI Brochure definition where the unit has an SI special name (joule → energy, weber → magnetic flux, …); the explicitly curated first entry otherwise. The current register flags 96 units.
+
+[example]
+*Expected outcome.* The joule's references list `NISTq17` with `primary: true`; every other entry is unflagged. A consumer rendering without an asserted kind emits "energy" — never "Lagrange function", which is merely a member of the reference list.
+
+=== L1 equivalence classes
+
+A quantity MAY declare `equivalence_class`: quantities in the same class are interchangeable for addition and subtraction. The energy class is landed (energy, work, kinetic energy, mechanical energy, amount of heat, potential energy); all other quantities gate identity-only. Classes are curated from ISO 80000 usage; never inferred in code.
+
+[example]
+*Expected outcome.* `work + energy` conforms (same class); `energy + torque` is a specified error naming both kinds; torque is deliberately outside the energy class.

@@ -1,0 +1,6 @@
+== Schema versioning policy
+
+The schema version moves only by maintainer decision. Additive optional fields move the minor component; removals or semantic changes move the major component. A schema version MUST be supported by the register loader before a data release can adopt it (unitsdb-ruby ≥ 2.2.12 supports 2.2.0).
+
+[example]
+*Expected outcome.* Schema 2.2.0 added exactly two optional fields — `primary` on unit quantity references and `equivalence_class` on quantities — and every collection moved 2.1.0 → 2.2.0 in one release, with the loader support released first (unitsdb-ruby 2.2.12).

@@ -1,0 +1,17 @@
+== The difference law
+
+With a scale map s(x) = f·x + o (o ≠ 0 on interval scales), an absolute value converts as s(x), while a difference x₁ − x₂ converts as f·(x₁ − x₂): the offset cancels. The invariants:
+
+[%hardbreaks]
+I1 — `Diff(Q)` is closed under +, − (same dimension) and under factor-only conversion; it is never reachable by affine conversion; `Diff(Q) × scalar` is legal.
+I2 — `Abs − Abs` on a non-ratio scale yields `Diff(Q)`; `Abs + Abs`, `Abs × Abs`, `Abs ÷ Abs` on such a scale are scale errors (Clause 8).
+I3 — Typing follows the value's provenance (operation history), not its unit: the unit's `scale_reference` bounds legal operations; the history determines the conversion law.
+I4 — Uncertainties are always `Diff(Q)`: u, U and interval-endpoint distances convert factor-only, never affinely.
+
+Differences are typed in the algebra; no delta pseudo-units exist in the register. A difference raised through a power ≥ 2, or an affine unit inside a composite, is a specified error (UnitsML 5).
+
+[example]
+*Expected outcome.* `(20 °C − 15 °C) → K` is `5 K` (offset cancels); `(20 °C).convert_to(K)` is `293.15 K` (offset applies). An uncertainty magnitude `0.2 °C → K` is `0.2 K`. Implementations producing 278.15 K for the difference violate this clause.
+
+[example]
+*Provenance, not unit.* The same text `5 °C` is an absolute when measured and a difference when subtracted; the unit record is identical, the type differs. The type is carried by the value, set at construction (`Abs` literal or `Abs − Abs`).

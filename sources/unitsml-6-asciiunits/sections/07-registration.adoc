@@ -1,0 +1,6 @@
+== Registered and prefixed symbols
+
+Registered prefixed symbols (dB, mbar, kgf, cSt, …) are single terminals, resolved deterministically against prefix+unit decompositions; registration order and precedence are part of the generated tables.
+
+[example]
+*Expected outcome.* `dB` matches as one token (never d·b); `mbar` precedes `m`-prefixed `bar` in match order; `kgf` never decomposes to kg·f.

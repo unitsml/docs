@@ -1,0 +1,5 @@
+== Normative references
+
+* UnitsML 1, UnitsML 2, UnitsML 3, UnitsML 4
+* UnitsML 1.0 XSD `Float64ConversionFromType` (the data syntax)
+* JCGM 100:2008 (exactness discipline analogy)

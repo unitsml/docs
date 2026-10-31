@@ -1,0 +1,5 @@
+== Scope
+
+This document specifies the collections of the register and their interreferences; the schema versioning policy; and the content rules for canonical conversions, scale operation legality, primary quantity references, L1 equivalence classes, and currencies.
+
+The semantics of consuming this data — resolution, gating, conversion application — are specified in UnitsML 4 and UnitsML 5.

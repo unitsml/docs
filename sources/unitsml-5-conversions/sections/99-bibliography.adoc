@@ -1,0 +1,4 @@
+== Bibliography
+
+* UnitsML 1.0 XSD · unitsml/unitsdb#130 (data), #134 (corpus import), #139 (reading rules)
+* unitsml/unitsml-ruby#92 (application; double-power defect comment)

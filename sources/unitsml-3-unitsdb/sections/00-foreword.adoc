@@ -1,0 +1,3 @@
+== Foreword
+
+UnitsDB is the single source of truth of the series: every unit identity, prefix, dimension, quantity kind, scale class, conversion factor and currency in the ecosystem resolves from this register, and no implementation hardcodes any of it. This part specifies the register's collections, its schema versioning policy, and the content rules introduced with schema 2.2.0.

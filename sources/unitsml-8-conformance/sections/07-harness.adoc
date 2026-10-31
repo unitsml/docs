@@ -1,0 +1,3 @@
+== Replay harness requirements and CI gates
+
+A conforming harness MUST: load and checksum-verify the corpora; replay every vector of every claimed class; compare bytes; and report drift per vector. Release CI MUST block on any drift. The reference harness lives in unitsml/unitsml-testsuite; parity runtimes (TypeScript, Rust) run the same corpora through their own lanes.

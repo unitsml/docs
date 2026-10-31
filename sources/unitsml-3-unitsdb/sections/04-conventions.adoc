@@ -1,0 +1,3 @@
+== Conventions
+
+Requirement language per UnitsML 1. Identifier pairs are written (`type`, `id`); NIST identifiers are primary for cross-collection references; `unitsml:` identifiers (`u:`, `q:`, `cur:`, `d:`, `us:`) are the series' own namespace.

@@ -1,0 +1,3 @@
+== Known engine defect (normative test target)
+
+The composition rule in reference implementations applies the base power twice: a sub-factor already raised to the base power is exponentiated again at the composition site. The red vector is ft²: (0.3048 m)² = 0.09290304 m²; an implementation returning 0.3048⁴ violates this part. UnitsML 8 Annex B carries the vector; the fix rides unitsml-ruby#92.

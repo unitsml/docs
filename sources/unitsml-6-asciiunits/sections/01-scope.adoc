@@ -1,0 +1,3 @@
+== Scope
+
+This document specifies the expression surface; the terminal-generation rule from the register (UnitsML 3); the registration of multi-term and prefixed symbols; extender rules; and the artifact contract. It does not define the embedding syntax of host languages (asciimath 2 and pma 1 do that) nor any semantics beyond parsing to a formula tree.
