@@ -1,0 +1,3 @@
+== Foreword
+
+This part defines the semantics computed over the register (UnitsML 3): how units resolve to dimensions and quantity kinds, which arithmetic operations are legal on which measurement scales, and how absolute quantities are distinguished from differences. It is the layer the evaluation parts consume and the vector sets of UnitsML 8 freeze.

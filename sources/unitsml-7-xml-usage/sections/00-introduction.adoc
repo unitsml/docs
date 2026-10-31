@@ -1,0 +1,3 @@
+== Introduction
+
+A schema tells you what is well-formed; only a usage contract tells you what is true. The schema permits any `QuantityReference` order — the register's primary-reference rule says which one is the truth. The schema permits omitting digit metadata — the usage contract says importing without it loses exactness. This part is those statements, made normative.

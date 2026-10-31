@@ -1,0 +1,6 @@
+== Provenance and licensing
+
+Imported data records its source corpus, snapshot identity and license. The IEC 62720 import carries an informative reference per unit and implies no IEC endorsement. Source defects in imported corpora are counted and reported, never silently corrected.
+
+[example]
+*Expected outcome.* The IEC 62720 coverage report enumerates every resolvable conversion as agreed (metre, kelvin, degree Celsius anchors) with zero disagreements, counts the duplicate lowercase `finaladdend` attribute as a source defect, and itemizes the 3 824 IEC-specific composites that have no register counterpart.

@@ -1,0 +1,8 @@
+== Conventions
+
+The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RECOMMENDED, NOT RECOMMENDED, MAY, and OPTIONAL are to be interpreted as described in RFC 2119 and RFC 8174. A requirement binds an implementation only within the conformance class it claims (UnitsML 8).
+
+[example]
+A TypeScript runtime that replays the parse/render and conversion corpora but no evaluator vectors claims class `quantity-conversion`; it MAY not advertise evaluation.
+
+Single-source normativity: a normative rule is stated in exactly one part of the series; other parts cite it. Restating a rule from another part is an editorial defect corrected on sight.

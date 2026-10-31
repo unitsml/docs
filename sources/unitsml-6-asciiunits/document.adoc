@@ -12,51 +12,30 @@
 :mn-output-extensions: xml,html,doc,pdf
 :imagesdir: images
 
-== Foreword
+include::sections/00-foreword.adoc[]
 
-The unit expression is the connective tissue of the series: it is the content of `unitsml(...)` in legacy dialects, of the `unit(...)` constructor in pma, and the payload of every dimension decomposition. This part specifies that language as a grammar-only artifact: a PARG grammar compiled to a checksummed artifact, terminals generated from the register, and a corpus frozen as the conformance reference. No runtime code lives beside the grammar; runtimes are separate implementations (Ruby, TypeScript) of the same artifact.
+include::sections/00-introduction.adoc[]
 
-== Scope
+include::sections/01-scope.adoc[]
 
-This document specifies the expression surface; the terminal-generation rule from the register (UnitsML 3); the registration of multi-term and prefixed symbols; extender rules; and the artifact contract. It does not define the embedding syntax of host languages (their parts do that) nor any semantics beyond parsing to a formula tree.
+include::sections/02-norm-refs.adoc[]
 
-== Normative references
+include::sections/03-terms.adoc[]
 
-* UnitsML 1, UnitsML 3
-* The PARG grammar language and artifact format (parsanol/docs)
+include::sections/04-conventions.adoc[]
 
-== Expression grammar
+include::sections/05-grammar.adoc[]
 
-The artifact (`artifacts/unitsml.json`, checksummed) is normative; this clause orients. The surface:
+include::sections/06-terminals.adoc[]
 
-- **products**: juxtaposition with a single separating space (`kg m`);
-- **quotients**: `/` and `//`, the latter inverting the exponent of the following factor (`m/s^2`, `J//kg` forms);
-- **powers**: `^` with integer and specified-fraction numerators; **roots**: `sqrt(...)`;
-- **grouping**: parentheses;
-- **extenders**: continuation marks for interrupted series, legal only inside an expression — a trailing extender is rejected (grammar v2);
-- **dimension symbols**: `dim_L`, `dim_M`, `dim_I`, `dim_Θ`, `dim_N`, `dim_J`, `dim_Φ` for dimension-only expressions;
-- **the number `1`**: the identity expression.
+include::sections/07-registration.adoc[]
 
-== Terminal generation from the register
+include::sections/08-extenders.adoc[]
 
-Every unit symbol, prefix symbol and registered multi-term symbol is generated from the UnitsDB 3 release. The grammar never hardcodes vocabulary: a register edit regenerates the terminals. Registered prefixed symbols (dB, mbar, kgf, cSt, …) are single terminals, resolved deterministically against prefix+unit decompositions; registration order and precedence are part of the generated tables.
+include::sections/09-artifact.adoc[]
 
-== Whitespace and lexical discipline
+include::sections/10-conformance.adoc[]
 
-A single space separates juxtaposed factors; no space occurs inside a terminal; multi-term registered symbols match as whole tokens before sub-term decomposition. The lexer is owned by the grammar — no consumer-side re-lexing.
+include::sections/aa-test-suite.adoc[]
 
-== The artifact contract
-
-- The artifact carries a checksum set; every consuming runtime MUST verify checksums before load.
-- The artifact records its grammar edition; edition 2 carries grammar v2 (registered prefixed symbols, trailing-extender rejection).
-- Grammar edits regenerate the artifact AND the corpus in the same change; consuming-runtimes CI (dependent-gems against unitsml-ruby) gates the regeneration.
-- The corpus: 143 cases covering every terminal class and every production of Clause 5, frozen byte-for-byte.
-
-== Conformance
-
-The 143-case corpus replayed by unitsml-ruby, unitsml-ts and asciiunits-ts; the embedding vectors of UnitsML 8 Annex B for host-language integration.
-
-== Bibliography
-
-* parsanol PARG specification and artifact format (parsanol/docs)
-* unitsml/asciiunits (grammar source, artifacts, corpus); unitsml/unitsml-ruby#80 (artifact runtime adoption)
+include::sections/99-bibliography.adoc[]

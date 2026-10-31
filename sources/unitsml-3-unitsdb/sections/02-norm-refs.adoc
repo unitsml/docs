@@ -1,0 +1,5 @@
+== Normative references
+
+* UnitsML 1, UnitsML 2
+* ISO 4217 (currency codes)
+* IEC 62720 (units dictionary; source corpus only — no IEC backing of this register is implied)

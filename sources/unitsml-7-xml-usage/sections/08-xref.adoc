@@ -1,0 +1,6 @@
+== Cross-references from MathML
+
+MathML embeds unit symbols with `xref` pointing at the UnitsML `xml:id`; the linkage is the machine-readable bond between presentation and definition (the embedding clauses of the Plurimath input-language parts define the ASCII side).
+
+[example]
+*Expected outcome.* `parse('mg')` rendered to MathML emits the milligram symbol with an `xref` resolving, inside the document, to the milligram `Unit` element — the reader can walk from presentation to definition without name matching.

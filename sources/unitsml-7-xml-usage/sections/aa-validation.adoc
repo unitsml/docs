@@ -1,0 +1,4 @@
+[appendix]
+== Annex A (informative): validation profile
+
+Emitted documents validate against the XSD; every `xref` resolves; every `QuantityReference`/`Conversions` value round-trips through the UnitsML 5 semantics; document regeneration from the same input is byte-stable.

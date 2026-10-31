@@ -1,0 +1,6 @@
+== Artifact discipline
+
+Every artifact carries a checksum; consumers MUST verify it before load. Every artifact records its edition (source revision and generation date). Grammars, the register dataset, model schemas and corpora are artifacts; per-language engines are not. A change to artifact content regenerates the artifact and its conformance corpus in the same change.
+
+[example]
+*Expected outcome.* The asciiunits artifact ships `artifacts/unitsml.json` with a checksum file. A consumer loading the artifact with a stale checksum aborts with a typed load error — not a warning — because grammar and behavior are bound to the bytes.

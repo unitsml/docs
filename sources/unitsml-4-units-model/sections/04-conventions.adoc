@@ -1,0 +1,3 @@
+== Conventions
+
+Requirement language per UnitsML 1. Kind identifiers resolve exactly as tokens; prose names are never syntax. Errors name the violated rule and the data involved (both kinds, or the scale class).

@@ -1,0 +1,6 @@
+== Serialization contract
+
+JSON output of conformance replays and evaluator APIs MUST be: UTF-8; fixed key order (lexicographic, defined once per schema); decimal strings for all numerics; stamped with `engine_version`, `grammar_version`, `vector_set_version`, `numeric_algorithm`. Two conforming implementations given the same input MUST emit byte-identical output.
+
+[example]
+*Byte-identity.* Given the same conversion input, the Ruby and TypeScript runtimes emit identical JSON including key order and the trailing digits of `"127/25000"`-class rationals. Any byte difference is vector drift and blocks the release (UnitsML 8).

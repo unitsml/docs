@@ -1,0 +1,19 @@
+== Terms, definitions and abbreviated terms
+
+dimension (L0)::
+the exponent vector over the base quantities; the comparable-family level. Derived from the register's `dimensions.yaml`; never stored per quantity.
+
+quantity (L1)::
+a named concept of the register (`quantities.yaml`) — "energy", "plane angle" — carrying a `dimension_reference` and identifiers.
+
+dedicated quantity (L2)::
+an L1 quantity bound to a kind of entity ("length of rod"). Outside the language surface; binding metadata of evaluation inputs.
+
+measured value (L3)::
+the value + unit pairing (with uncertainty per the Plurimath series). The language surface.
+
+absolute quantity::
+a value positioned on a scale (`T = 20 °C`).
+
+difference quantity::
+a value that is an interval between two absolutes (`ΔT = 5 °C`); subject to the law of Clause 9.

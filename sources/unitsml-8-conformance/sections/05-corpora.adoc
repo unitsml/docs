@@ -1,0 +1,12 @@
+== Corpora layout and versioned index
+
+[listing]
+corpora/
+  renders/        expected-renders.json, inputs.txt   (parse → format columns)
+  uncertainty/    parse, render and round-trip vectors (Plurimath 2)
+  conversion/     conversion, scale and gating vectors (UnitsML 4, 5)
+  conformance/    evaluator vectors (Plurimath 4)
+  index.json      versioned: names each vector set, its source part,
+                  its vector_set_version and its provenance
+
+The index is an artifact (UnitsML 1, artifact discipline): checksummed, editioned, consumed by both reference and parity runtimes.

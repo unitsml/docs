@@ -1,0 +1,3 @@
+== Conformance
+
+This part is the gate of the series: releases across the family are blocked on vector drift, and conformance claims are exactly the replayed classes of Clause 8.

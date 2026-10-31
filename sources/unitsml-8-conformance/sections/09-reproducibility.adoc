@@ -1,0 +1,6 @@
+== Monte Carlo reproducibility classes
+
+Byte-exact: vectors produced by the pinned Wichmann–Hill generator with recorded seed and trial count; the adaptive stopping δ = ½·10^ℓ is part of the vector. Distributional: for methods without deterministic draws (e.g. MCMC sampling, GUM-5 Ex 12), vectors carry statistical-equivalence assertions (stated test and threshold) instead of byte expectations. Implementations MUST state which class each claimed vector satisfies.
+
+[example]
+*Expected outcome.* The JCGM 101 §9.5 vector records Wichmann–Hill with its seed and trial count; a runtime producing 36 nm-class results with a different generator claims the distributional class, not byte-exact.

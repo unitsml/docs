@@ -1,0 +1,3 @@
+== Introduction
+
+Two distinctions carry this part. First, Pendrill's levels: a dimension is what makes quantities comparable; a quantity kind is what makes them meaningful; confusing them is how `J + N·m` passes a dimension check and fails physics. Second, the absolute/difference duality: `20 °C` and `15 °C` are positions; their difference is a length of scale, and the offset that positions carry has no business in it. Every rule below serves one of these two distinctions.

@@ -1,0 +1,6 @@
+== QuantityReference selection
+
+`QuantityReference` is 0..* per unit; a producer MUST NOT emit positional order. Selection follows the UnitsML 3 primary-reference rule: the `primary: true` entry when present; the caller's asserted kind when one is stated.
+
+[example]
+*Expected outcome.* A joule emitted against the current register resolves to `Quantity id="NISTq17"` (energy). A producer emitting `NISTq152` ("Lagrange function") from list position is non-conforming — the red member of the frozen vector pair.

@@ -12,62 +12,34 @@
 :mn-output-extensions: xml,html,doc,pdf
 :imagesdir: images
 
-== Foreword
+include::sections/00-foreword.adoc[]
 
-Two documents govern UnitsML XML: the **base document** — the generated XSD specification (unitsml/docs PR #9), which specifies the SYNTAX of unitsml-v1.0.xsd, all 96 schema components, enumerations and examples — and THIS part, which specifies the USAGE SEMANTICS: what conforming producers emit, what conforming consumers may infer, and what neither may invent. This part adds no elements and changes no schema; where the series needs what the schema cannot say, the gap is recorded and the path is Annex B.
+include::sections/00-introduction.adoc[]
 
-== Scope
+include::sections/01-scope.adoc[]
 
-This document specifies: the emission contract for the element set; quantity-reference selection; conversion emission; cross-references from MathML; reading rules for foreign payloads; and the uncertainty-representation gap.
+include::sections/02-norm-refs.adoc[]
 
-== Normative references
+include::sections/03-terms.adoc[]
 
-* UnitsML 1, 3, 4, 5
-* The generated XSD specification (base document)
-* UnitsML 1.0 XSD (unitsml-v1.0.xsd)
+include::sections/04-conventions.adoc[]
 
-== Emission contract
+include::sections/05-emission.adoc[]
 
-Producers MUST emit only elements and attributes the XSD defines, targeting the declared schema version. `xml:id` values are producer-allocated, unique per document, and stable across regenerations of the same input. The emitted element set: `Unit` (with symbols, `unitSystem`, roots and prefixes, `dimensionURL`), `Prefix`, `Quantity` (names, symbols, `quantityType`, `dimensionURL`), `Dimension`, and per-unit `QuantityReference` (0..\*) and `Conversions` (0..1). `SpecialConversionFrom`/`WSDLConversionFrom` are never emitted synthetically.
+include::sections/06-selection.adoc[]
 
-== QuantityReference selection
+include::sections/07-conversions.adoc[]
 
-`QuantityReference` is 0..\* per unit; a producer MUST NOT emit positional order. Selection follows the UnitsML 3 primary-reference rule: the `primary: true` entry when present; the caller's asserted kind when one is stated. The red/green pair: a joule emitted against the current register resolves to *energy*; a producer emitting "Lagrange function" from `.first` is non-conforming.
+include::sections/08-xref.adoc[]
 
-== Conversions emission
+include::sections/09-reading.adoc[]
 
-`Conversions` carries the full affine attribute set of UnitsML 5 — `initialUnit`, `initialAddend`, `multiplicand`, `divisor`, `finalAddend`, `exact`, digit metadata — with decimal attributes as lexical strings. A producer MUST NOT emit a conversion whose definition it cannot reproduce; factors from the register are emitted with their exact strings.
+include::sections/10-gap.adoc[]
 
-== Cross-references from MathML
+include::sections/11-conformance.adoc[]
 
-MathML embeds unit symbols with `xref` pointing at the UnitsML `xml:id`; the linkage is the machine-readable bond between presentation and definition (the embedding clauses of the Plurimath input-language parts define the ASCII side).
+include::sections/aa-validation.adoc[]
 
-== Reading rules and determinism
+include::sections/ab-proposal.adoc[]
 
-Readers MUST tolerate foreign-payload defects deterministically: the openCDD corpus's duplicate lowercase attributes (e.g. `finaladdend` beside `finalAddend`) are accepted with the camel-case value prevailing on read and never reproduced on write; unrecognized elements are skipped, not fatal; recognized names with malformed shapes are fatal. Unknown namespaces inside quoted channels are other producers' vocabularies.
-
-== The uncertainty gap
-
-UnitsML 1.0 has no first-class uncertainty element. Measured values travel in the math layer (Plurimath 2). This part does not invent one; Annex B records the proposal shape for the WG.
-
-[appendix]
-== Annex A (informative): validation profile
-
-Emitted documents validate against the XSD; every `xref` resolves; every `QuantityReference`/`Conversions` value round-trips through the UnitsML 5 semantics; document regeneration from the same input is byte-stable.
-
-[appendix]
-== Annex B (informative): proposal — a measurement-result element
-
-A sibling of `QuantityReference` on `Quantity`-carrying elements, or a child of `Unit`:
-
-[listing]
-MeasurementResult: category (standard | expanded | coverage-interval),
-  value (decimal string), magnitude?, k?, p?, lower?, upper?,
-  intervalKind?, distribution? (JCGM 101 family + parameters),
-  exact (boolean), digits metadata
-
-Adoption is a WG decision; until adopted, this series carries uncertainty in the math layer only.
-
-== Bibliography
-
-* unitsml/docs PR #9 (base document) · unitsml/unitsml-ruby#92 · unitsml/unitsdb#139 (reading-rule provenance)
+include::sections/99-bibliography.adoc[]

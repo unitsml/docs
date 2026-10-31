@@ -1,0 +1,16 @@
+== Terms, definitions and abbreviated terms
+
+vector::
+one test case: an input, an expected result (exact decimal strings per UnitsML 2), and metadata.
+
+drift::
+any byte difference between a replay and its vector, beyond a vector's declared tolerance.
+
+replay::
+the execution of a vector by an implementation under test, compared against the expected result.
+
+conformance class::
+a named set of vector classes (Clause 8) licensing specific claims.
+
+reproducibility class::
+byte-exact or distributional, per Clause 9.

@@ -1,0 +1,3 @@
+== Foreword
+
+This part defines what a conversion IS in this stack — the UnitsML 1.0 linear equation with its exactness and digit metadata — and the law of its application: exact rational arithmetic, offset cancellation on differences, precedence of definitions, and refusal of non-linear forms. The register carries the data (UnitsML 3); this part carries the semantics.

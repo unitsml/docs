@@ -1,0 +1,3 @@
+== Bibliography
+
+* JCGM 101:2008 Table 10 (§9.5 results) · JCGM 106:2012 Table 1 · GUM-5:2026 Examples · unitsml/unitsml-testsuite#1

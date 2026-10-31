@@ -1,0 +1,4 @@
+== Bibliography
+
+* JCGM 200:2012 (VIM) · ISO 80000-1 · Pendrill 2024
+* unitsml/unitsdb#135, #136, #42 · unitsml/unitsml-ruby#82 (R-A4), #92 Task 6

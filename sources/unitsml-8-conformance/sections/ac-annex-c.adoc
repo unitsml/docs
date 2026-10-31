@@ -1,0 +1,7 @@
+[appendix]
+== Annex C (normative): GUM/JCGM evaluator vectors
+
+- GUM H.1–H.6, with H.1 as the **versioned triple**: 2008 first-order (u_c = 32 nm) / amended second-order per Amd.1:2026 H.1.7 (u_c ≈ 34.2 nm; derivation in Plurimath 4 Annex A) / MCM per JCGM 101 §9.5 (u(δL) = 36 nm; shortest 99 % interval [745, 932] nm).
+- JCGM 101 §9.2 (masses), §9.3 (microresistance), §9.4 (comparison loss with r = 0.9), §9.5 (gauge block) MCM vectors; pinned Wichmann–Hill seeds.
+- LPU-failure set: GUM-6 §13.1.4 bromine (LPU u = 0 vs true 0.00007); GUM-5 Ex 6 (dominant uniform), Ex 7 (GUF₁/GUF₂/MCM), Ex 13, Ex 14 (linearity adequacy), Ex 16 (comparison loss at x₁ = 0).
+- JCGM 106 decisions: one-sided p_c at Table 1 z-values; guarded accept/reject with r = 0.65 → R_C = 0.1 %; C_m = 1 boundary; ISO 14253-1 w = U ceiling.

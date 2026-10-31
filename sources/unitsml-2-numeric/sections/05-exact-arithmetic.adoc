@@ -1,0 +1,11 @@
+== Exact rational arithmetic
+
+Conversions declared `exact="true"` (UnitsML 5), scale and difference arithmetic (UnitsML 4), Type A statistics, and all rational operations of propagation MUST be computed in exact rational arithmetic. An implementation MUST NOT round an intermediate exact value.
+
+Irrational results — square roots of non-square rationals, Student-t quantiles — MUST be computed by the declared algorithm of Clause 7 or refused. An implementation MUST NOT produce them through a floating-point shortcut.
+
+[example]
+*Expected outcome.* Converting 32 °F to kelvin: the factor 5/9 and the offset arithmetic run in rationals; the serialized result is exactly `"273.15"`. A float path would emit platform-dependent digits at the tail.
+
+[example]
+*Refusal expected.* `sqrt` over a non-square rational factor in a canonical decomposition has no exact rational result; the conversion of such a synthetic unit is refused with a typed error, not approximated.

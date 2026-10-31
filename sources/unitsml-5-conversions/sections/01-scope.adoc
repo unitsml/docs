@@ -1,0 +1,5 @@
+== Scope
+
+This document specifies: the conversion equation and its attributes; exactness discipline; the difference application law and affine legality; definition resolution and application precedence; and refusal semantics for non-linear conversions.
+
+Quantity resolution and gating are UnitsML 4; the register's conversion data is UnitsML 3.

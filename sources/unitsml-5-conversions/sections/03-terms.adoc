@@ -1,0 +1,13 @@
+== Terms, definitions and abbreviated terms
+
+linear conversion::
+a mapping of the form y = d + (b/c)(x + a) between two units.
+
+affine unit::
+a unit whose conversion to its canonical anchor has a nonzero offset (degree Celsius, degree Fahrenheit).
+
+difference conversion::
+the conversion of a `Diff`-typed quantity: factor-only (UnitsML 4, I4).
+
+refusal::
+a typed error identifying a conversion that this part does not permit to be approximated.

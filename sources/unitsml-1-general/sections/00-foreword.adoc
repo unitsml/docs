@@ -1,0 +1,5 @@
+== Foreword
+
+This part of the UnitsML specification series establishes the register procedures, the normative vocabulary, the artifact discipline and the release procedures that every other part assumes. It is the root of the series: every other part cites it for requirement language and procedures and carries no duplicate of that content.
+
+The series is developed within the UnitsML program. The program dependency graph and stage gates are tracked in unitsml/unitsml-ruby#95. This edition restructures the series to the ISO document pattern: scope, normative references, terms, conventions, technical clauses with worked examples and expected outcomes, a conformance clause, and informative test-suite annexes.

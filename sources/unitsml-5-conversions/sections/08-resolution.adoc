@@ -1,0 +1,12 @@
+== Definition resolution and precedence
+
+When more than one definition exists, application order is:
+
+. caller-supplied conversion definition;
+. document-local `<Conversions>` resolved against the enclosing document;
+. the register canonical path (UnitsML 3).
+
+`initialUnit` and target references resolve by document fragment (`#xml:id`), SI Digital Framework URI, or IEC IRDI (via the register's reference URIs and alias seeds); an unresolvable reference is a typed error naming it. When a local definition and the register disagree, the disagreement is reported as a diagnostic; the two paths are never applied in sequence (no double conversion), and the register is never silently overridden.
+
+[example]
+*Expected outcome.* An IEC 62720 payload converting percent to one (b = 0.01, exact) is recognized as agreeing with the register's percent canonical entry; a disagreeing payload produces a diagnostic naming both factors, and the register value stands unless the maintainer intervenes.

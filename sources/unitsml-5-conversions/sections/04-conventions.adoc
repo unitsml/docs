@@ -1,0 +1,3 @@
+== Conventions
+
+Requirement language per UnitsML 1. Attribute names are written as in the XSD (`initialAddend`, `multiplicand`, `divisor`, `finalAddend`, `exact`). All example factors are exact rationals serialized per UnitsML 2.

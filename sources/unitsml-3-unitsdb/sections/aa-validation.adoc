@@ -1,0 +1,12 @@
+[appendix]
+== Annex A (normative): validation suite
+
+The register MUST pass, per release:
+
+- JSON-schema validation of every collection against `schemas/*-schema.yaml`;
+- identifier uniqueness (`unitsdb validate identifiers`);
+- reference integrity (`unitsdb validate references`);
+- SI-reference integrity (`unitsdb validate si_references`);
+- numeric-uniqueness and lockstep checks for currencies.
+
+The schema validation step runs in the PR lane; a silent landing is a process defect (it happened once — the post-#138 factor quoting — and the gate was added).

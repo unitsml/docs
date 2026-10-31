@@ -1,0 +1,4 @@
+[appendix]
+== Annex D (informative): corpus provenance
+
+Every vector names its normative source. The H.1 triple's second-order member carries the derivation reference (Plurimath 4 Annex A); the JCGM vectors cite clause and table. The excluded-as-byte-vectors set (MCMC draws) is listed with its distributional-class alternative.

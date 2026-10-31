@@ -1,0 +1,6 @@
+== The t-quantile algorithm
+
+Coverage factors from the Student-t distribution at probability p with ν degrees of freedom MUST be computed by Newton iteration on the regularized incomplete beta function at fixed precision, with a published monotone error bound. The algorithm identity and version MUST be stamped in every result and vector metadata (`numeric_algorithm`).
+
+[example]
+*Expected outcome.* For p = 0.95, ν = 16: k = 2.119905…, published to the vector's declared decimals with `numeric_algorithm: "unitsml-t-newton-1"`. A conforming TypeScript runtime emits the same bytes as the Ruby reference for the same stamp. Substituting a table-based or library quantile without restamping is non-conforming.

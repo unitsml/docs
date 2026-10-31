@@ -1,0 +1,4 @@
+[appendix]
+== Annex B (normative): conversion, scale and quantity-gating vectors
+
+The vector tables of UnitsML 4 Annex A and UnitsML 5 Annex A, frozen: degC/degF round-trips, percent, non-exact percent-per-degree, difference-skip-addends, affine-in-composite and power ≠ 1 errors, ft² double-power red/green, refusals, resolution red/greens (J → energy; Bq↔Hz; equivalence-class addition), scale errors naming the class.

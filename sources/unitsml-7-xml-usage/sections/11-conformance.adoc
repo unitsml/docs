@@ -1,0 +1,3 @@
+== Conformance
+
+Conformance class `parse/render` includes this part for emission and reading; conversion round-trips additionally require `quantity-conversion`. Annex A defines the validation profile; UnitsML 8 freezes the round-trip vectors.

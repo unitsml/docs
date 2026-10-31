@@ -1,0 +1,11 @@
+[appendix]
+== Annex B (informative): additional test-suite examples
+
+[example]
+*Release-chain integrity.* After the worked release of Clause 8, a consumer pinning `unitsdb@0.1.2` MUST observe: 178 currencies; `getById("cur:EUR")` → Euro (ISO numeric 978); the joule's `quantity_references` containing exactly one `primary: true` entry, `NISTq17` (energy); and 6 quantities carrying `equivalence_class: "energy"`.
+
+[example]
+*Checksum failure.* Modifying one byte of `artifacts/unitsml.json` without regenerating `checksums` MUST abort the load with the typed checksum error in every runtime.
+
+[example]
+*Amendment trace.* A reader of Published UnitsML 3 following an amendment MUST find the Amendment entry referenced from the part's revision history; an unamended content change between releases is a register defect.

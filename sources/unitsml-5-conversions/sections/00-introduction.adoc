@@ -1,0 +1,3 @@
+== Introduction
+
+Conversions are where metrology data most easily lies: an exact tenth routed through a binary double, an offset applied to a temperature difference, a WSDL round-trip smuggled in as a linear factor. Each clause below closes one of those doors, and every door has a vector in Annex A.

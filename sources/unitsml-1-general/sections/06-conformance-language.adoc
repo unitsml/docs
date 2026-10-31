@@ -1,0 +1,6 @@
+== Conformance language
+
+MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RECOMMENDED, NOT RECOMMENDED, MAY, OPTIONAL per RFC 2119/8174.
+
+[example]
+*Interpretation.* "Conversions with `exact="true"` MUST be computed in exact rational arithmetic" (UnitsML 5): an implementation returning 0.1 as a binary float for a declared-exact tenth is non-conforming, and the violation is detectable by byte comparison of the serialized decimal string.

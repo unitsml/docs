@@ -1,0 +1,6 @@
+== The artifact contract
+
+- The artifact carries a checksum set; every consuming runtime MUST verify checksums before load.
+- The artifact records its grammar edition; edition 2 carries grammar v2 (registered prefixed symbols, trailing-extender rejection).
+- Grammar edits regenerate the artifact AND the corpus in the same change; consumer-runtime CI (dependent-gems against unitsml-ruby) gates the regeneration.
+- The corpus: 143 cases covering every terminal class and every production of Clause 5, frozen byte-for-byte.

@@ -1,0 +1,4 @@
+== Bibliography
+
+* parsanol PARG specification and artifact format (parsanol/docs)
+* unitsml/asciiunits (grammar source, artifacts, corpus); unitsml/unitsml-ruby#80

@@ -1,0 +1,3 @@
+== Introduction
+
+Specifications without gates are aspirations. Every clause of Parts 2 to 7 is paired with vectors that a machine can replay, and this part defines the machine: the layout, the format, the tolerance convention, the classes. An implementation's claim is exactly the set of vectors it replays — no more, no less.

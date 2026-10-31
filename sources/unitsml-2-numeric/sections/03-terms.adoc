@@ -1,0 +1,13 @@
+== Terms, definitions and abbreviated terms
+
+exact decimal::
+a decimal string preserved verbatim from its source; trailing zeros are significant (`2.10 ≠ 2.1`).
+
+guard digits::
+the declared number of extra digits carried beyond the published precision of a non-exact result.
+
+reproducibility class::
+byte-exact or distributional (UnitsML 8).
+
+numeric algorithm stamp::
+the identity and version of the algorithm producing a non-exact result (Clause 7).

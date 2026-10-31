@@ -1,0 +1,6 @@
+== Refusal semantics
+
+`SpecialConversionFrom` and `WSDLConversionFrom` MUST be refused with typed errors naming the conversion and its kind. Approximating a non-linear conversion by a linear factor is non-conforming. Logarithmic units without canonical data (dB, Np, B) refuse conversion the same way ("no derivation path").
+
+[example]
+*Expected outcome.* Attempting `dBm → W` yields a typed refusal citing the logarithmic class; no numeric result is produced in any output format.

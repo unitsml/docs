@@ -1,0 +1,5 @@
+== Scope
+
+This document specifies: the L0/L1 frame for dimensions and quantities; quantity resolution (membership, primary reference, asserted kinds); arithmetic gating including declared equivalence classes; measurement-scale classes and their permitted operations; and the absolute/difference typing law with its invariants.
+
+Conversion arithmetic is specified in UnitsML 5; expression syntax in the Plurimath input-language parts; evaluation in Plurimath 4.

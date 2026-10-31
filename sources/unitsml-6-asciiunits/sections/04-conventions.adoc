@@ -1,0 +1,3 @@
+== Conventions
+
+Requirement language per UnitsML 1. A single space separates juxtaposed factors; no space occurs inside a terminal; multi-term registered symbols match as whole tokens before sub-term decomposition.
