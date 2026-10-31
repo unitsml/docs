@@ -1,8 +1,0 @@
-== Conformance
-
-Conforming implementations of the AsciiUnits syntax MUST parse every case of the frozen corpus (Annex C) to the specified formula tree and MUST verify the artifact checksum before load (UnitsML 1, artifact discipline). The normative grammar is the generated PARG artifact (Part 6 of the UnitsML specification series); Clause 11's EBNF is the historical informal definition.
-
-Conformance class: `parse/render` (UnitsML 8).
-
-[example]
-*Expected outcome.* A conforming runtime replays the 143-case corpus byte-identically, rejects a stale checksum, and rejects trailing-extender tails per grammar v2.
