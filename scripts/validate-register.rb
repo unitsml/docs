@@ -11,7 +11,10 @@ SERIES_RANGE = { "unitsml" => 1..8, "plurimath" => 1..4,
 REQUIRED_SECTIONS = %w[00-foreword 00-introduction 01-scope 02-norm-refs
                        03-terms 04-conventions 99-bibliography].freeze
 LEGACY = %w[unitsml-guide unitsml-incorporation unitsml-ubl-ndr-subset].freeze
-ROOTS = ARGV.empty? ? %w[/Users/mulgogi/src/unitsml/docs /Users/mulgogi/src/plurimath/docs] : ARGV
+# Frozen v1 committee drafts (CalConnect 36810/36811): structure is not
+# retroactively conformed; nn-usage.adoc was never included — known v1 artifact.
+FROZEN_V1 = %w[asciiunits unitsdb].freeze
+ROOTS = ARGV.empty? ? [File.expand_path("..", __dir__)] : ARGV
 
 problems = Hash.new { |h, k| h[k] = [] }
 report = ->(key, msg) { (problems[key] ||= []) << msg }
@@ -51,6 +54,7 @@ ROOTS.each do |root|
 
     sec_dir = File.join(d, "sections")
     next unless File.directory?(sec_dir)
+    next if FROZEN_V1.include?(name)
     included = includes.map { |i| File.basename(i) }
     Dir.glob(File.join(sec_dir, "*.adoc")).each do |f|
       base = File.basename(f)
@@ -88,12 +92,16 @@ end
 
 # ---- pass 3: cross-part citations resolve ------------------------------------
 all_names = all_dirs.values.flatten.map { |d| File.basename(d) }
+# Only check citations to series visible in the scanned registers; a sibling
+# register (plurimath/docs) may not be checked out in this repo's CI.
+known_series = all_names.map { |n| n.split("-").first }.uniq
 
 all_dirs.each do |root, dirs|
   dirs.each do |d|
     name = File.basename(d)
     doc = File.read(File.join(d, "document.adoc"))
     doc.scan(/\b(UnitsML|Plurimath|asciimath|pma) (\d+)\b/) do |cited_series, cited_num|
+      next unless known_series.include?(cited_series.downcase)
       target = "#{cited_series.downcase}-#{cited_num}-"
       next if all_names.any? { |n| n.start_with?(target) }
       report.call(root, "#{name}: citation to non-existent part #{cited_series} #{cited_num}")
