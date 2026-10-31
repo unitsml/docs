@@ -5,8 +5,7 @@
 :doctype: standard
 :edition: 1
 :status: committee-draft
-:revdate: 2025-03-15
-:published-date: 2025-03-15
+:revdate: 2026-10-30
 :technical-committee: UnitsML
 :fullname: Ronald Tse
 :surname: Tse
@@ -20,11 +19,11 @@
 
 include::sections/00-foreword.adoc[]
 
-include::sections/00-intro.adoc[]
+include::sections/00-introduction.adoc[]
 
 include::sections/01-scope.adoc[]
 
-include::sections/02-normrefs.adoc[]
+include::sections/02-norm-refs.adoc[]
 
 include::sections/03-terms.adoc[]
 
@@ -45,5 +44,7 @@ include::sections/10-units.adoc[]
 include::sections/11-normalization.adoc[]
 
 include::sections/12-common-models.adoc[]
+
+include::sections/13-conformance.adoc[]
 
 include::sections/a1-test-suite.adoc[]

@@ -23,3 +23,7 @@ extend or modify the database.
 By following this specification, implementers and users of UnitsDB can ensure
 consistent and accurate representation of measurement units and related concepts
 across different applications and domains.
+
+== Relationship to the UnitsML specification series
+
+This document is the base CalConnect standard for UnitsDB. The current normative formalization of the register — including schema 2.2.0 (primary quantity references, L1 equivalence classes), canonical conversions, scale operation legality, the currency-as-denomination rule, and the validation suite — is *UnitsML — Part 3: UnitsDB — the register* (unitsml/docs). Where this document and Part 3 differ, Part 3 and the released data govern.
