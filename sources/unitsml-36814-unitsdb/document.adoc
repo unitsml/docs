@@ -1,0 +1,43 @@
+= UnitsML — Part 3: UnitsDB — the register: data model and content rules
+:docnumber: 36814
+:edition: 1
+:revdate: 2026-10-30
+:copyright-year: 2026
+:language: en
+:title-intro-en: UnitsML
+:title-main-en: Part 3: UnitsDB — the register: data model and content rules
+:doctype: standard
+:docstage: 20
+:mn-document-class: iso
+:mn-output-extensions: xml,html,doc,pdf
+:imagesdir: images
+
+include::sections/00-foreword.adoc[]
+
+include::sections/00-introduction.adoc[]
+
+include::sections/01-scope.adoc[]
+
+include::sections/02-norm-refs.adoc[]
+
+include::sections/03-terms.adoc[]
+
+include::sections/04-conventions.adoc[]
+
+include::sections/05-collections.adoc[]
+
+include::sections/06-schema-versioning.adoc[]
+
+include::sections/07-content-rules.adoc[]
+
+include::sections/08-currencies.adoc[]
+
+include::sections/09-provenance.adoc[]
+
+include::sections/10-conformance.adoc[]
+
+include::sections/aa-validation.adoc[]
+
+include::sections/ab-test-suite.adoc[]
+
+include::sections/99-bibliography.adoc[]

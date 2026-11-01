@@ -1,3 +1,0 @@
-== Conformance
-
-Enforced by the register's own validation suite (<<annex-validation>>) and by the conversion and scale vectors of UnitsML 8, Annex B. Conformance classes: `quantity-conversion` requires this part. Additional test-suite examples are given in <<annex-test-suite>>.

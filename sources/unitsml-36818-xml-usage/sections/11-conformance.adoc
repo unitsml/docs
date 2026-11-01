@@ -1,0 +1,3 @@
+== Conformance
+
+Conformance class `parse/render` includes this part for emission and reading; conversion round-trips additionally require `quantity-conversion`. <<annex-validation>> defines the validation profile; <<annex-proposal>> discusses a measurement-result element; CalConnect 36819 freezes the round-trip vectors.

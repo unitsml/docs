@@ -1,0 +1,9 @@
+[bibliography]
+== Normative references
+
+* [[[unitsml-36812,nofetch(CalConnect 36812)]]]
+* [[[unitsml-3682,nofetch(CalConnect 36813]]]
+* [[[unitsml-3683,nofetch(CalConnect 36814]]]
+* [[[jcgm200,JCGM 200:2012]]] (VIM), entries 1.1–1.5, 2.30–2.38
+* [[[iso80000-1,ISO 80000-1]]] (quantities and units; scales)
+* [[[pendrill2024,nofetch(Pendrill 2024)]]] (L0–L3 concept levels; isq-smart concept system)

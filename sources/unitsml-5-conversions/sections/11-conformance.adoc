@@ -1,3 +1,0 @@
-== Conformance
-
-Conformance class `quantity-conversion` includes this part. <<annex-vectors>> defines the vector table; UnitsML 8 Annex B freezes and replays it byte-identically across the reference implementation and parity runtimes.

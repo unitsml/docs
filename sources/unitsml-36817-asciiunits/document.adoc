@@ -1,0 +1,41 @@
+= UnitsML — Part 6: asciiunits — the unit expression content language
+:docnumber: 36817
+:edition: 1
+:revdate: 2026-10-30
+:copyright-year: 2026
+:language: en
+:title-intro-en: UnitsML
+:title-main-en: Part 6: asciiunits — the unit expression content language
+:doctype: standard
+:docstage: 20
+:mn-document-class: iso
+:mn-output-extensions: xml,html,doc,pdf
+:imagesdir: images
+
+include::sections/00-foreword.adoc[]
+
+include::sections/00-introduction.adoc[]
+
+include::sections/01-scope.adoc[]
+
+include::sections/02-norm-refs.adoc[]
+
+include::sections/03-terms.adoc[]
+
+include::sections/04-conventions.adoc[]
+
+include::sections/05-grammar.adoc[]
+
+include::sections/06-terminals.adoc[]
+
+include::sections/07-registration.adoc[]
+
+include::sections/08-extenders.adoc[]
+
+include::sections/09-artifact.adoc[]
+
+include::sections/10-conformance.adoc[]
+
+include::sections/aa-test-suite.adoc[]
+
+include::sections/99-bibliography.adoc[]

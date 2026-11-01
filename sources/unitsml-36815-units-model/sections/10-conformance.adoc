@@ -1,0 +1,3 @@
+== Conformance
+
+Conformance class `quantity-conversion` (CalConnect 36819 includes this part. <<annex-vectors>> defines the red/green vector table; CalConnect 36819 Annex B freezes and replays it byte-identically across the reference implementation and parity runtimes.
