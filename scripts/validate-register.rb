@@ -6,7 +6,7 @@ require "yaml"
 
 SERIES_TITLE = { "unitsml" => "UnitsML", "plurimath" => "Plurimath", "pm" => "Plurimath",
                  "asciimath" => "asciimath", "pma" => "pma" }.freeze
-SERIES_RANGE = { "unitsml" => 1..8, "plurimath" => 1..4, "pm" => 1001..1999,
+SERIES_RANGE = { "unitsml" => 36812..36819, "plurimath" => 1..4, "pm" => 1001..1999,
                  "asciimath" => 1..2, "pma" => 1..1 }.freeze
 REQUIRED_SECTIONS = %w[00-foreword 00-introduction 01-scope 02-norm-refs
                        03-terms 04-conventions 99-bibliography].freeze
@@ -105,7 +105,7 @@ all_dirs.each do |root, dirs|
     name = File.basename(d)
     doc = Dir.glob([File.join(d, "*.adoc"), File.join(d, "sections", "*.adoc")])
              .map { |f| File.read(f) }.join("\n")
-    doc.scan(/\b(UnitsML|Plurimath|asciimath|pma) (\d+)\b/) do |cited_series, cited_num|
+    doc.scan(/\b(UnitsML|Plurimath|asciimath|pma) (\d+)(?!\.\d)\b/) do |cited_series, cited_num|
       next unless known_series.include?(cited_series.downcase)
       target = "#{cited_series.downcase}-#{cited_num}-"
       exact = "#{cited_series.downcase}-#{cited_num}"
