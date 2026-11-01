@@ -9,7 +9,7 @@ A unit whose derivation is mechanical MUST carry `canonical_conversion`: an exac
 
 === Scale operation legality
 
-`scales.yaml` classifies scales and lists the operations each permits; consumers MUST take operation legality from this data (UnitsML 4).
+`scales.yaml` classifies scales and lists the operations each permits; consumers MUST take operation legality from this data (CalConnect 36815).
 
 === Primary quantity reference
 

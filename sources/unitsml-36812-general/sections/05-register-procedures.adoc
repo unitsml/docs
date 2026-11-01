@@ -25,7 +25,7 @@ Register documents are classified as in <<tbl-doc-types>>.
 Idea → Draft (docstage 20) → Committee Draft (30) → Final Draft (50) → Published (60).
 
 [example]
-*Expected outcome.* A part moved to docstage 60 without its Annex test vectors frozen in UnitsML 8 is mis-published; the register procedure rejects the move.
+*Expected outcome.* A part moved to docstage 60 without its Annex test vectors frozen in CalConnect 36819 is mis-published; the register procedure rejects the move.
 
 === Numbering
 
@@ -36,4 +36,4 @@ Part numbers are permanent and never reused. Informational documents share the n
 A Published document changes only by a numbered Amendment; corrections that would alter normative content require an Amendment entry, never silent edits.
 
 [example]
-*Expected outcome.* Correcting "Lagrange function" to "energy" in a rendered example is an editorial fix; changing the primary-reference selection rule of UnitsML 3 requires "UnitsML 3/Amd.1".
+*Expected outcome.* Correcting "Lagrange function" to "energy" in a rendered example is an editorial fix; changing the primary-reference selection rule of CalConnect 36814 requires "CalConnect 36814/Amd.1".

@@ -2,7 +2,7 @@
 [appendix]
 == Annex A (normative): gating and difference vectors
 
-The red/green vector table is given in <<tbl-gate-vectors>>; UnitsML 8, Annex B freezes and replays it.
+The red/green vector table is given in <<tbl-gate-vectors>>; CalConnect 36819, Annex B freezes and replays it.
 
 [[tbl-gate-vectors]]
 .Gating and difference vectors

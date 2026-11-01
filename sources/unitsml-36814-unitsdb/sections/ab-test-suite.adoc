@@ -9,4 +9,4 @@
 *Coverage report shape.* Every register unit appears exactly once in the conversion coverage report as `generated`, `derived-by-design` (SI base, prefix-level), or `source-needed` with a reason string; no unit is unlisted.
 
 [example]
-*Equivalence gate.* `unit(J::work) + unit(J::energy)` evaluates; `unit(J::energy) + unit(N·m::torque)` raises naming both kinds; both vectors are frozen in UnitsML 8 Annex B.
+*Equivalence gate.* `unit(J::work) + unit(J::energy)` evaluates; `unit(J::energy) + unit(N·m::torque)` raises naming both kinds; both vectors are frozen in CalConnect 36819 Annex B.

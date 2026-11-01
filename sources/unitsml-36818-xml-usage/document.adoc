@@ -1,5 +1,5 @@
 = UnitsML — Part 7: UnitsML XML — the usage contract
-:docnumber: 7
+:docnumber: 36818
 :edition: 1
 :revdate: 2026-10-30
 :copyright-year: 2026

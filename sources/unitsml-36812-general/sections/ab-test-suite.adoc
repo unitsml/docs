@@ -9,4 +9,4 @@
 *Checksum failure.* Modifying one byte of `artifacts/unitsml.json` without regenerating `checksums` MUST abort the load with the typed checksum error in every runtime.
 
 [example]
-*Amendment trace.* A reader of Published UnitsML 3 following an amendment MUST find the Amendment entry referenced from the part's revision history; an unamended content change between releases is a register defect.
+*Amendment trace.* A reader of Published CalConnect 36814 following an amendment MUST find the Amendment entry referenced from the part's revision history; an unamended content change between releases is a register defect.

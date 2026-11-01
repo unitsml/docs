@@ -1,6 +1,6 @@
 [bibliography]
 == Normative references
 
-* [[[unitsml-1,nofetch(UnitsML 1)]]] (requirement language, artifact discipline)
-* [[[unitsml-8,nofetch(UnitsML 8)]]] (vector format, tolerance conventions)
-* [[[jcgm101,nofetch(JCGM 101:2008)]]], Clause 7.9 (numerical tolerance convention δ = ½·10^ℓ^)
+* [[[unitsml-36812,nofetch(CalConnect 36812)]]] (requirement language, artifact discipline)
+* [[[unitsml-36819,nofetch(CalConnect 36819)]]] (vector format, tolerance conventions)
+* [[[jcgm101,JCGM 101:2008]]], Clause 7.9 (numerical tolerance convention δ = ½·10^ℓ^)

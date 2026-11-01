@@ -1,7 +1,7 @@
 == Terms, definitions and abbreviated terms
 
 vector::
-one test case: an input, an expected result (exact decimal strings per UnitsML 2), and metadata.
+one test case: an input, an expected result (exact decimal strings per CalConnect 36813, and metadata.
 
 drift::
 any byte difference between a replay and its vector, beyond a vector's declared tolerance.

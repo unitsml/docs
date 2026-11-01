@@ -8,7 +8,7 @@ I2 — `Abs − Abs` on a non-ratio scale yields `Diff(Q)`; `Abs + Abs`, `Abs ×
 I3 — Typing follows the value's provenance (operation history), not its unit: the unit's `scale_reference` bounds legal operations; the history determines the conversion law.
 I4 — Uncertainties are always `Diff(Q)`: u, U and interval-endpoint distances convert factor-only, never affinely.
 
-Differences are typed in the algebra; no delta pseudo-units exist in the register. A difference raised through a power ≥ 2, or an affine unit inside a composite, is a specified error (UnitsML 5).
+Differences are typed in the algebra; no delta pseudo-units exist in the register. A difference raised through a power ≥ 2, or an affine unit inside a composite, is a specified error (CalConnect 36816).
 
 [example]
 *Expected outcome.* `(20 °C − 15 °C) → K` is `5 K` (offset cancels); `(20 °C).convert_to(K)` is `293.15 K` (offset applies). An uncertainty magnitude `0.2 °C → K` is `0.2 K`. Implementations producing 278.15 K for the difference violate this clause.

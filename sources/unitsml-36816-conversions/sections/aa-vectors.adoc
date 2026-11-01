@@ -2,7 +2,7 @@
 [appendix]
 == Annex A (normative): conversion vectors
 
-The conversion vector table is given in <<tbl-conversion-vectors>>; its final rows are the typed refusals, also replayed from UnitsML 8, Annex B.
+The conversion vector table is given in <<tbl-conversion-vectors>>; its final rows are the typed refusals, also replayed from CalConnect 36819, Annex B.
 
 [[tbl-conversion-vectors]]
 .Conversion vectors
@@ -28,7 +28,7 @@ The conversion vector table is given in <<tbl-conversion-vectors>>; its final ro
 |declared-precision decimal `0.5729577951308232087679815481`, never marked exact
 
 |(20 °C − 15 °C) → K
-|5 K (offset cancels — UnitsML 4 I1)
+|5 K (offset cancels — CalConnect 36815 I1)
 
 |u = 0.2 °C → K
 |0.2 K (factor-only — I4)

@@ -1,5 +1,5 @@
 = UnitsML — Part 8: Conformance — corpora, vector sets and runtime classes
-:docnumber: 8
+:docnumber: 36819
 :edition: 1
 :revdate: 2026-10-30
 :copyright-year: 2026

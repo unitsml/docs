@@ -1,5 +1,5 @@
 = UnitsML — Part 6: asciiunits — the unit expression content language
-:docnumber: 6
+:docnumber: 36817
 :edition: 1
 :revdate: 2026-10-30
 :copyright-year: 2026

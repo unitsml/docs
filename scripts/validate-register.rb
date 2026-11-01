@@ -105,11 +105,16 @@ all_dirs.each do |root, dirs|
     name = File.basename(d)
     doc = Dir.glob([File.join(d, "*.adoc"), File.join(d, "sections", "*.adoc")])
              .map { |f| File.read(f) }.join("\n")
-    doc.scan(/\b(UnitsML|Plurimath|asciimath|pma) (\d+)(?!\.\d)\b/) do |cited_series, cited_num|
-      next unless known_series.include?(cited_series.downcase)
-      target = "#{cited_series.downcase}-#{cited_num}-"
-      exact = "#{cited_series.downcase}-#{cited_num}"
-      alias_exact = cited_series.downcase == "plurimath" ? "pm-#{cited_num}" : exact
+    doc.scan(/\b(UnitsML|CalConnect|Plurimath|asciimath|pma) (\d+)(?!\.\d)\b/) do |cited_series, cited_num|
+      series_key = cited_series == "CalConnect" ? "unitsml" : cited_series.downcase
+      next unless known_series.include?(series_key)
+      target = "#{series_key}-#{cited_num}-"
+      exact = "#{series_key}-#{cited_num}"
+      alias_exact = series_key == "plurimath" ? "pm-#{cited_num}" : exact
+      # the v1 base standards (36810, 36811) live in the frozen v1 directories
+      v1_dir = { "36810" => "asciiunits", "36811" => "unitsdb" }[cited_num] if series_key == "unitsml"
+      next if v1_dir && all_names.include?(v1_dir)
+
       next if all_names.any? { |n| n.start_with?(target) || n == exact || n == alias_exact }
       report.call(root, "#{name}: citation to non-existent part #{cited_series} #{cited_num}")
     end

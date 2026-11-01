@@ -12,7 +12,7 @@ Implementations are licensed to claim conformance as in <<tbl-runtime-classes>>.
 |correct parse of an input language into the model and correct emission per format column of the render corpus
 
 |quantity-conversion
-|UnitsML 4/5 semantics: resolution, gating, scales, conversion application (Annex B)
+|CalConnect 36815/5 semantics: resolution, gating, scales, conversion application (Annex B)
 
 |evaluation
 |Plurimath 4: propagation, adequacy verdict, second-order, MCM, conformity (Annex C)

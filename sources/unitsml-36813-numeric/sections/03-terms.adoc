@@ -7,7 +7,7 @@ guard digits::
 the declared number of extra digits carried beyond the published precision of a non-exact result.
 
 reproducibility class::
-byte-exact or distributional (UnitsML 8).
+byte-exact or distributional (CalConnect 36819).
 
 numeric algorithm stamp::
 the identity and version of the algorithm producing a non-exact result (Clause 7).
