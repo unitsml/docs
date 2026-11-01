@@ -3,7 +3,7 @@
 This document specifies:
 
 - the procedures of the UnitsML specification register: document numbering, types, lifecycle and amendment rules;
-- the normative vocabulary of the series and the requirement language (MUST/SHOULD/MAY);
+- the normative vocabulary of the series and the binding of statements to conformance classes;
 - the artifact discipline: checksums, editions, and the binding between normative parts and their conformance corpora;
 - the release and distribution procedures for the data register and its downstream packages.
 

@@ -2,7 +2,7 @@
 [appendix]
 == Annex A (normative): validation suite
 
-The register MUST pass, per release:
+The register passes, per release:
 
 - JSON-schema validation of every collection against `schemas/*-schema.yaml`;
 - identifier uniqueness (`unitsdb validate identifiers`);
