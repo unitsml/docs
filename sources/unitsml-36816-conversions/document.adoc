@@ -1,16 +1,21 @@
-= UnitsML — Part 5: Conversions — definitions and application
+= UnitsML conversions
 :docnumber: 36816
 :edition: 1
-:revdate: 2026-10-30
+:ref-docnumber: CC 36816:2026(E)
 :copyright-year: 2026
+:revdate: 2026-11-01
 :language: en
-:title-intro-en: UnitsML
-:title-main-en: Part 5: Conversions — definitions and application
+:script: Latn
+:title: UnitsML specifications -- Conversions
 :doctype: standard
-:docstage: 20
-:mn-document-class: iso
-:mn-output-extensions: xml,html,doc,pdf
-:imagesdir: images
+:status: draft-standard
+:committee: CalConnect
+:committee-type: technical
+:mn-document-class: ribose
+:docfile: document.adoc
+:mn-output-extensions: xml,html,doc
+:local-cache-only:
+:data-uri-image:
 
 include::sections/00-foreword.adoc[]
 
@@ -18,7 +23,7 @@ include::sections/00-introduction.adoc[]
 
 include::sections/01-scope.adoc[]
 
-include::sections/02-norm-refs.adoc[]
+include::sections/02-normrefs.adoc[]
 
 include::sections/03-terms.adoc[]
 
@@ -40,4 +45,4 @@ include::sections/11-conformance.adoc[]
 
 include::sections/aa-vectors.adoc[]
 
-include::sections/99-bibliography.adoc[]
+include::sections/98-bibliography.adoc[]
