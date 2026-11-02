@@ -1,2 +1,5 @@
 [bibliography]
 == Bibliography
+
+* [[[unitsml-ruby,nofetch(unitsml/unitsml-ruby)]]] — the Ruby implementation of AsciiUnits from which the grammar was extracted, and the reference parser validated against it
+* [[[asciiunits-repo,nofetch(unitsml/asciiunits)]]] — the PARG grammar artifact and conformance corpus repository

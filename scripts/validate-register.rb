@@ -94,6 +94,50 @@ ROOTS.each do |root|
   end
 end
 
+# ---- pass 2b: bibliography markup (renders empty when malformed) -------------
+# Metanorma drops bibliography entries without a [[[id,text]]] anchor and
+# renders only the first anchor of a multi-anchor entry, so a malformed
+# section silently produces an empty trailing "Bibliography" heading.
+ROOTS.each do |root|
+  key = root
+  all_dirs[root].each do |d|
+    name = File.basename(d)
+    next if FROZEN_V1.include?(name)
+    Dir.glob(File.join(d, "sections", "*.adoc")).each do |f|
+      lines = File.readlines(f)
+      lines.each_with_index do |line, i|
+        next unless line =~ /^== (Bibliography|Normative references)\s*$/
+
+        prior = lines[0...i].reverse.find { |l| !l.strip.empty? }
+        unless prior && prior =~ /^\[bibliography\]\s*$/
+          report.call(key, "#{name}:#{File.basename(f)}:#{i + 1}: " \
+                           "heading `#{line.strip}` lacks the [bibliography] marker")
+        end
+
+        lines[(i + 1)..].each_with_index do |entry, j|
+          break if entry =~ /^== /
+          next unless entry =~ /^\* /
+
+          ln = i + 1 + j + 1
+          anchors = entry.scan(/\[\[\[([^\],]+),/).flatten
+          if anchors.empty?
+            report.call(key, "#{name}:#{File.basename(f)}:#{ln}: " \
+                             "bibliography entry without an anchor")
+          elsif anchors.size > 1
+            report.call(key, "#{name}:#{File.basename(f)}:#{ln}: " \
+                             "multi-anchor entry (renders later anchors empty): " \
+                             "#{anchors.join(", ")}")
+          end
+          if entry =~ /\nofetch\([^)]*\z/
+            report.call(key, "#{name}:#{File.basename(f)}:#{ln}: " \
+                             "unbalanced nofetch( parenthesis")
+          end
+        end
+      end
+    end
+  end
+end
+
 # ---- pass 3: cross-part citations resolve ------------------------------------
 all_names = all_dirs.values.flatten.map { |d| File.basename(d) }
 # Only check citations to series visible in the scanned registers; a sibling
