@@ -2,7 +2,7 @@
 == Normative references
 
 * [[[unitsml-36812,nofetch(CalConnect 36812)]]]
-* [[[unitsml-3682,nofetch(CalConnect 36813]]]
+* [[[unitsml-36813,nofetch(CalConnect 36813)]]]
 * [[[tested-parts,nofetch(tested parts)]]] — CalConnect 36814–7 and the Plurimath series parts under test
 * [[[jcgm101,JCGM 101:2008]]], Clause 7.9 (adaptive procedure)
 * [[[jcgm106,JCGM 106:2012]]] (decision vectors)
