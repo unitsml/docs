@@ -1,6 +1,6 @@
 == Attribute groups
 
-[lutaml_xsd,schemas/unitsml-v1.0-csd04.xsd,schema,include_path=templates]
+[lutaml_xsd,schemas/unitsml-v1.0.xsd,schema,include_path=templates]
 ----
 {% for item in schema.attribute_groups_sorted_by_name %}
 {% render "attribute_group", item: item, schema: schema %}
