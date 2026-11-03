@@ -58,7 +58,7 @@ jobs:
       - name: Record documentation runtime
         run: |
           bundle exec ruby -rjson -e '
-            names = %w[lutaml-model metanorma-standoc metanorma-plugin-lutaml metanorma-utils metanorma-cli]
+            names = %w[lutaml-model metanorma-standoc metanorma-plugin-lutaml metanorma-plugin-plantuml metanorma-utils metanorma-cli]
             dependencies = Gem.loaded_specs.select { |name, _| names.include?(name) }
             puts JSON.generate(runtime: RUBY_DESCRIPTION, dependencies: dependencies.transform_values { |spec| spec.version.to_s })
           '
