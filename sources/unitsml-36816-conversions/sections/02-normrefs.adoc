@@ -1,0 +1,9 @@
+[bibliography]
+== Normative references
+
+* [[[unitsml-36812,nofetch(CalConnect 36812)]]]
+* [[[unitsml-36813,nofetch(CalConnect 36813)]]]
+* [[[unitsml-36814,nofetch(CalConnect 36814)]]]
+* [[[unitsml-36815,nofetch(CalConnect 36815)]]]
+* [[[xsd-float64,nofetch(UnitsML 1.0 XSD Float64ConversionFromType)]]] (the data syntax)
+* [[[jcgm100,JCGM 100:2008]]] (exactness discipline analogy)

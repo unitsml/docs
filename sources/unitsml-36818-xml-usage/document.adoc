@@ -1,0 +1,50 @@
+= UnitsML XML usage
+:docnumber: 36818
+:edition: 1
+:ref-docnumber: CC 36818:2026(E)
+:copyright-year: 2026
+:revdate: 2026-11-01
+:language: en
+:script: Latn
+:title: UnitsML specifications -- Xml Usage
+:doctype: standard
+:status: draft-standard
+:committee: CalConnect
+:committee-type: technical
+:mn-document-class: ribose
+:docfile: document.adoc
+:mn-output-extensions: xml,html,doc
+:local-cache-only:
+:data-uri-image:
+
+include::sections/00-foreword.adoc[]
+
+include::sections/00-introduction.adoc[]
+
+include::sections/01-scope.adoc[]
+
+include::sections/02-normrefs.adoc[]
+
+include::sections/03-terms.adoc[]
+
+include::sections/04-conventions.adoc[]
+
+include::sections/05-emission.adoc[]
+
+include::sections/06-selection.adoc[]
+
+include::sections/07-conversions.adoc[]
+
+include::sections/08-xref.adoc[]
+
+include::sections/09-reading.adoc[]
+
+include::sections/10-gap.adoc[]
+
+include::sections/11-conformance.adoc[]
+
+include::sections/aa-validation.adoc[]
+
+include::sections/ab-proposal.adoc[]
+
+include::sections/98-bibliography.adoc[]

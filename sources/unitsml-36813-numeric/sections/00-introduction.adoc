@@ -1,0 +1,3 @@
+== Introduction
+
+Metrology data dies by a thousand float roundings. A conversion declared exact that transits an IEEE-754 double, an author's `2.10` normalized to `2.1`, a coverage factor recomputed by a different library on each platform — each silently invalidates byte-identity between implementations. This part makes numerics a contract: exact where exact is possible, declared and versioned where it is not, and byte-identical at every boundary.

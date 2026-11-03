@@ -1,0 +1,5 @@
+[bibliography]
+== Bibliography
+
+* [[[parg-b,nofetch(parsanol PARG specification and artifact format)]]] (parsanol/docs)
+* [[[asciiunits-repo,nofetch(unitsml/asciiunits)]]] (grammar source, artifacts, corpus); unitsml/unitsml-ruby#80

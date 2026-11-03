@@ -1,0 +1,16 @@
+== Terms, definitions and abbreviated terms
+
+register::
+the UnitsDB dataset: the seven collections of Clause 5 at one uniform `schema_version`.
+
+collection::
+one of the register's YAML files and its validated content.
+
+denomination::
+a currency code: a unit of account that is its own base and admits no conversion factor.
+
+primary quantity reference::
+the `quantity_reference` entry flagged `primary: true` for a unit — the kind the unit denotes when none is asserted.
+
+equivalence class::
+an L1 grouping declared on quantities; kinds in one class are interchangeable for addition and subtraction.

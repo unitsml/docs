@@ -1,0 +1,6 @@
+== Currencies
+
+Each ISO 4217 code is its own base: no root units, no cross-currency factors, ever — floating exchange rates would make any stored factor silently wrong. The register carries the 178 active List One codes with ISO numeric identifiers. Minor units: ISO's "N.A." is recorded as ABSENT, never 0; KMF and XDR carry the real value 0.
+
+[example]
+*Expected outcome.* `cur:EUR` resolves with ISO numeric `978`, symbol `€`, `minor_unit_exponent: 2`; `cur:KMF` carries `minor_unit_exponent: 0`; the 13 precious-metal and fund codes carry NO `minor_unit_exponent` key at all. A dataset conflating absent with 0 is non-conforming.

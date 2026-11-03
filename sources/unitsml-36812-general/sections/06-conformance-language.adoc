@@ -1,0 +1,6 @@
+== Conformance language
+
+Statements are declarative; requirement strength comes from precision and from the corpus vectors that test them.
+
+[example]
+*Interpretation.* "Conversions with `exact="true"` are computed in exact rational arithmetic" (CalConnect 36816: an implementation returning 0.1 as a binary float for a declared-exact tenth is non-conforming, and the violation is detectable by byte comparison of the serialized decimal string.

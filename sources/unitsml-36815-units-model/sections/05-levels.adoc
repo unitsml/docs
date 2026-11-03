@@ -1,0 +1,6 @@
+== Quantity levels
+
+Dimensions are the L0 arithmetic-gating level: derived from the register's dimension references, never stored per quantity. L1 quantities are the register's named concepts (200 of them), each with a dimension reference. The levels answer different questions — L0 "can these be added at all?", L1 "do these mean the same thing?" — and this part keeps the answers in that order.
+
+[example]
+*Interpretation.* Hertz and becquerel share dimension s⁻¹ (L0: comparable) and are different L1 kinds (L0 does not make them interchangeable). Length, breadth and height are distinct L1 quantities within the L0 kind of length — comparable and addable.

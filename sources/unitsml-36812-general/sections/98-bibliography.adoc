@@ -1,0 +1,6 @@
+[bibliography]
+== Bibliography
+
+* [[[ref95,nofetch(unitsml/unitsml-ruby#95)]]], _UnitsML program master graph_ — https://github.com/unitsml/unitsml-ruby/issues/95
+* [[[pendrill2024,nofetch(Pendrill 2024)]]], L. R. Pendrill, _Quantities and units: order amongst complexity_, De Gruyter
+* [[[xsd-spec,nofetch(unitsml/docs PR #9)]]], _UnitsML XML Schema specification_ (generated from XSD; house document pattern)

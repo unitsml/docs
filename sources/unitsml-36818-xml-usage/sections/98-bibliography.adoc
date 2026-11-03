@@ -1,0 +1,4 @@
+[bibliography]
+== Bibliography
+
+* [[[docs-pr9,nofetch(unitsml/docs PR #9)]]] (base document); unitsml/unitsml-ruby#92; unitsml/unitsdb#139 (reading-rule provenance)

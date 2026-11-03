@@ -39,6 +39,9 @@ jobs:
           distribution: temurin
           java-version: '21'
 
+      - name: Validate register structure
+        run: ruby scripts/validate-register.rb
+
       - name: Cache Metanorma assets
         uses: actions-mn/cache@v1
 

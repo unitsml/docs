@@ -1,0 +1,7 @@
+[bibliography]
+== Normative references
+
+The following documents are referred to in the text in such a way that some or all of their content constitutes requirements of this document.
+
+* [[[jcgm200,JCGM 200:2012]]], _International vocabulary of metrology — Basic and general concepts and associated terms (VIM)_
+* [[[jcgm100,JCGM 100:2008]]], _Evaluation of measurement data — Guide to the expression of uncertainty in measurement (GUM)_

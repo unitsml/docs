@@ -1,0 +1,3 @@
+== Scope
+
+This document specifies: the emission contract for the element set; quantity-reference selection; conversion emission; cross-references from MathML; reading rules for foreign payloads; and the uncertainty-representation gap.

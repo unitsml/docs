@@ -1,0 +1,5 @@
+== Scope
+
+This document specifies: exact rational arithmetic requirements; decimal-string representation; the t-quantile algorithm and its versioning; rounding rules; and the byte-identical JSON serialization contract for conformance corpora and evaluator output.
+
+This document does not define when to compute (Parts 4, 5 and the evaluation parts of the Plurimath series decide that); it defines how any computation in the series must behave numerically.

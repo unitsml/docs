@@ -1,0 +1,3 @@
+== Foreword
+
+The unit expression is the connective tissue of the series: it is the content of `unitsml(...)` in legacy dialects, of the `unit(...)` constructor in pma, and the payload of every dimension decomposition. This part specifies that language as a grammar-only artifact: a PARG grammar compiled to a checksummed artifact, terminals generated from the register, and a corpus frozen as the conformance reference. No runtime code lives beside the grammar; runtimes are separate implementations (Ruby, TypeScript) of the same artifact.

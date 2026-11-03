@@ -1,0 +1,5 @@
+== Foreword
+
+This part of the UnitsML specification series establishes the register procedures, the normative vocabulary, the artifact discipline and the release procedures that every other part assumes. It is the root of the series: every other part cites it for requirement language and procedures and carries no duplicate of that content.
+
+The series is developed within the UnitsML program. The program dependency graph and stage gates are tracked in unitsml/unitsml-ruby#95. The series is specified in the ribose document flavor: each part states its model normatively (LML where the content is a data model, PARG where it is a grammar), carries worked examples with expected outcomes, and is gated by the register validator and the frozen corpora.

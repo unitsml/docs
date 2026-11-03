@@ -1,0 +1,4 @@
+[bibliography]
+== Bibliography
+
+* [[[unit-prov,nofetch(content-rule provenance)]]] — unitsml/unitsdb#135, #136, #42; unitsml/unitsml-ruby#82 (R-A4), #92 Task 6

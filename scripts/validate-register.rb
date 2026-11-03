@@ -1,0 +1,178 @@
+#!/usr/bin/env ruby
+# Documentation register validator: includes, orphans, front matter,
+# cross-part citations, metanorma.yml consistency.
+
+require "yaml"
+
+SERIES_TITLE = { "unitsml" => "UnitsML", "plurimath" => "Plurimath", "pm" => "Plurimath",
+                 "asciimath" => "asciimath", "pma" => "pma" }.freeze
+SERIES_RANGE = { "unitsml" => 36812..36819, "plurimath" => 1..4, "pm" => 1001..1999,
+                 "asciimath" => 1..2, "pma" => 1..1 }.freeze
+REQUIRED_SECTIONS = %w[00-foreword 00-introduction 01-scope 02-norm-refs
+                       03-terms 04-conventions 99-bibliography].freeze
+RIBOSE_SECTIONS = %w[00-foreword 01-scope 02-normrefs 03-terms 98-bibliography].freeze
+LEGACY = %w[unitsml-guide unitsml-incorporation unitsml-ubl-ndr-subset].freeze
+# Frozen v1 committee drafts (CalConnect 36810/36811): structure is not
+# retroactively conformed; nn-usage.adoc was never included — known v1 artifact.
+FROZEN_V1 = %w[asciiunits unitsdb].freeze
+ROOTS = ARGV.empty? ? [File.expand_path("..", __dir__)] : ARGV
+
+problems = Hash.new { |h, k| h[k] = [] }
+report = ->(key, msg) { (problems[key] ||= []) << msg }
+
+# ---- pass 1: per-register structure ------------------------------------------
+all_dirs = {}
+
+ROOTS.each do |root|
+  key = root
+  begin
+    mn = YAML.safe_load(File.read(File.join(root, "metanorma.yml")))
+  rescue StandardError => e
+    report.call(key, "metanorma.yml unparseable: #{e.message[0, 80]}")
+    mn = { "metanorma" => { "source" => { "files" => [] } } }
+  end
+  listed_dirs = (mn.dig("metanorma", "source", "files") || []).map { |f| File.dirname(f) }
+
+  dirs = Dir.glob(File.join(root, "sources", "*"))
+            .select { |d| File.directory?(d) && File.exist?(File.join(d, "document.adoc")) }
+            .sort
+  all_dirs[root] = dirs
+
+  dirs.each do |d|
+    name = File.basename(d)
+    rel = d.sub("#{root}/", "")
+    legacy = LEGACY.any? { |l| name.start_with?(l) }
+
+    unless legacy || listed_dirs.include?(rel)
+      report.call(key, "#{name}: present on disk but not listed in metanorma.yml")
+    end
+
+    includes = File.read(File.join(d, "document.adoc"))
+                   .scan(/include::([^#\[]+?)\[\]/).map(&:first)
+    includes.each do |inc|
+      report.call(key, "#{name}: dangling include #{inc}") unless File.exist?(File.join(d, inc))
+    end
+
+    sec_dir = File.join(d, "sections")
+    next unless File.directory?(sec_dir)
+    next if FROZEN_V1.include?(name)
+    included = includes.map { |i| File.basename(i) }
+    Dir.glob(File.join(sec_dir, "*.adoc")).each do |f|
+      base = File.basename(f)
+      report.call(key, "#{name}: orphan section #{base}") unless included.include?(base)
+    end
+  end
+
+  (listed_dirs - dirs.map { |d| d.sub("#{root}/", "") }).each do |rel|
+    report.call(key, "metanorma.yml lists missing document: #{rel}")
+  end
+end
+
+# ---- pass 2: per-document content (series parts only) ------------------------
+ROOTS.each do |root|
+  key = root
+  all_dirs[root].each do |d|
+    name = File.basename(d)
+    next if LEGACY.any? { |l| name.start_with?(l) }
+    next unless name =~ /\A(#{SERIES_TITLE.keys.join("|")})-(\d+)(?:-|\z)/
+    series = Regexp.last_match(1)
+    num = Regexp.last_match(2).to_i
+    doc = File.read(File.join(d, "document.adoc"))
+    ribose = doc.include?(":mn-document-class: ribose")
+
+    report.call(key, "#{name}: docnumber mismatch") unless doc =~ /^:docnumber: #{num}$/
+    unless ribose
+      report.call(key, "#{name}: :title-intro-en: is not the series name") unless doc =~ /^:title-intro-en: #{SERIES_TITLE[series]}$/
+    end
+    unless SERIES_RANGE[series].cover?(num)
+      report.call(key, "#{name}: part number #{num} outside series range")
+    end
+    (ribose ? RIBOSE_SECTIONS : REQUIRED_SECTIONS).each do |s|
+      report.call(key, "#{name}: missing required section #{s}") unless File.exist?(File.join(d, "sections", "#{s}.adoc"))
+    end
+    report.call(key, "#{name}: missing conformance clause") unless doc.include?("conformance.adoc[]")
+  end
+end
+
+# ---- pass 2b: bibliography markup (renders empty when malformed) -------------
+# Metanorma drops bibliography entries without a [[[id,text]]] anchor and
+# renders only the first anchor of a multi-anchor entry, so a malformed
+# section silently produces an empty trailing "Bibliography" heading.
+ROOTS.each do |root|
+  key = root
+  all_dirs[root].each do |d|
+    name = File.basename(d)
+    next if FROZEN_V1.include?(name)
+    Dir.glob(File.join(d, "sections", "*.adoc")).each do |f|
+      lines = File.readlines(f)
+      lines.each_with_index do |line, i|
+        next unless line =~ /^== (Bibliography|Normative references)\s*$/
+
+        prior = lines[0...i].reverse.find { |l| !l.strip.empty? }
+        unless prior && prior =~ /^\[bibliography\]\s*$/
+          report.call(key, "#{name}:#{File.basename(f)}:#{i + 1}: " \
+                           "heading `#{line.strip}` lacks the [bibliography] marker")
+        end
+
+        lines[(i + 1)..].each_with_index do |entry, j|
+          break if entry =~ /^== /
+          next unless entry =~ /^\* /
+
+          ln = i + 1 + j + 1
+          anchors = entry.scan(/\[\[\[([^\],]+),/).flatten
+          if anchors.empty?
+            report.call(key, "#{name}:#{File.basename(f)}:#{ln}: " \
+                             "bibliography entry without an anchor")
+          elsif anchors.size > 1
+            report.call(key, "#{name}:#{File.basename(f)}:#{ln}: " \
+                             "multi-anchor entry (renders later anchors empty): " \
+                             "#{anchors.join(", ")}")
+          end
+          if entry =~ /\nofetch\([^)]*\z/
+            report.call(key, "#{name}:#{File.basename(f)}:#{ln}: " \
+                             "unbalanced nofetch( parenthesis")
+          end
+        end
+      end
+    end
+  end
+end
+
+# ---- pass 3: cross-part citations resolve ------------------------------------
+all_names = all_dirs.values.flatten.map { |d| File.basename(d) }
+# Only check citations to series visible in the scanned registers; a sibling
+# register (plurimath/docs) may not be checked out in this repo's CI.
+known_series = all_names.map { |n| n.split("-").first }.uniq
+
+all_dirs.each do |root, dirs|
+  dirs.each do |d|
+    name = File.basename(d)
+    doc = Dir.glob([File.join(d, "*.adoc"), File.join(d, "sections", "*.adoc")])
+             .map { |f| File.read(f) }.join("\n")
+    doc.scan(/\b(UnitsML|CalConnect|Plurimath|asciimath|pma) (\d+)(?!\.\d)\b/) do |cited_series, cited_num|
+      series_key = cited_series == "CalConnect" ? "unitsml" : cited_series.downcase
+      next unless known_series.include?(series_key)
+      target = "#{series_key}-#{cited_num}-"
+      exact = "#{series_key}-#{cited_num}"
+      alias_exact = series_key == "plurimath" ? "pm-#{cited_num}" : exact
+      # the v1 base standards (36810, 36811) live in the frozen v1 directories
+      v1_dir = { "36810" => "asciiunits", "36811" => "unitsdb" }[cited_num] if series_key == "unitsml"
+      next if v1_dir && all_names.include?(v1_dir)
+
+      next if all_names.any? { |n| n.start_with?(target) || n == exact || n == alias_exact }
+      report.call(root, "#{name}: citation to non-existent part #{cited_series} #{cited_num}")
+    end
+  end
+end
+
+total = problems.values.map(&:size).sum
+if total.zero?
+  puts "VALIDATION OK: no problems found across #{ROOTS.length} registers (#{all_dirs.values.map(&:length).sum} documents)"
+else
+  problems.each do |key, list|
+    puts "== #{key}"
+    list.each { |p| puts "  - #{p}" }
+  end
+  puts "TOTAL PROBLEMS: #{total}"
+  exit 1
+end

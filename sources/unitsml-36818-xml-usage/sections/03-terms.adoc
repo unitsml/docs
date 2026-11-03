@@ -1,0 +1,13 @@
+== Terms, definitions and abbreviated terms
+
+base document::
+the generated XSD specification; normative for XML syntax.
+
+emission::
+the production of UnitsML XML by a conforming producer.
+
+xref::
+the IDREF bond from a MathML unit symbol to the UnitsML `xml:id`.
+
+deterministic reading::
+acceptance behavior for foreign payloads that is fully specified — accept, skip, or fail, never whim.

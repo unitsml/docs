@@ -1,0 +1,6 @@
+== Extender rules
+
+Extenders continue interrupted series inside an expression; an expression MAY NOT terminate on an extender (grammar v2 trailing-extender rejection).
+
+[example]
+*Expected outcome.* `m + …` inside a continuation series parses; the bare tail `m ⟶` at the end of an expression is rejected with a parse error.

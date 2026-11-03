@@ -1,0 +1,6 @@
+== Expression grammar
+
+The artifact (`artifacts/unitsml.json`, checksummed) is normative; this clause orients. The surface: products (`kg m`); quotients `/` and `//` with exponent inversion (`m/s^2`); powers `^` (integer and specified-fraction numerators); `sqrt(...)`; parentheses; the dimension symbols `dim_L`, `dim_M`, `dim_I`, `dim_Θ`, `dim_N`, `dim_J`, `dim_Φ`; and the number `1`.
+
+[example]
+*Expected outcome.* `kg m/s^2` parses to mass × length × time⁻²; `J/(kg K)` groups the denominator; `sqrt(m^2)` resolves to a length root; `1` is the unity expression.

@@ -1,0 +1,5 @@
+== Introduction
+
+The UnitsML stack expresses measurement — values, units, quantity kinds, uncertainty — across a data register (UnitsDB), expression languages and multiple output formats, with implementations in Ruby, TypeScript and Rust. The architecture principle of the series is that *artifacts are the product and engines are interchangeable*: everything shareable is compiled to a checksummed artifact, every runtime replays the same conformance corpora, and byte-identity across languages is enforced by contract testing rather than by shared binaries.
+
+Implementations follow a reference-first rule: the Ruby implementation lands every semantic layer first and its outputs are frozen as the oracle corpora; implementations in other languages are generated from schema declarations or verified against those corpora, never re-derived independently.

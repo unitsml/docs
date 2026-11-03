@@ -1,0 +1,3 @@
+== Introduction
+
+A register earns its role by being the only place a fact lives. When the joule's primary quantity lived in positional YAML order, consumers rendered "Lagrange function" — an artifact of line order, not of metrology. Every content rule in this part exists to move such facts out of accident and into declared, validated data.

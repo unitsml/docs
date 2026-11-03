@@ -1,0 +1,48 @@
+= UnitsML conversions
+:docnumber: 36816
+:edition: 1
+:ref-docnumber: CC 36816:2026(E)
+:copyright-year: 2026
+:revdate: 2026-11-01
+:language: en
+:script: Latn
+:title: UnitsML specifications -- Conversions
+:doctype: standard
+:status: draft-standard
+:committee: CalConnect
+:committee-type: technical
+:mn-document-class: ribose
+:docfile: document.adoc
+:mn-output-extensions: xml,html,doc
+:local-cache-only:
+:data-uri-image:
+
+include::sections/00-foreword.adoc[]
+
+include::sections/00-introduction.adoc[]
+
+include::sections/01-scope.adoc[]
+
+include::sections/02-normrefs.adoc[]
+
+include::sections/03-terms.adoc[]
+
+include::sections/04-conventions.adoc[]
+
+include::sections/05-equation.adoc[]
+
+include::sections/06-exactness.adoc[]
+
+include::sections/07-differences.adoc[]
+
+include::sections/08-resolution.adoc[]
+
+include::sections/09-refusals.adoc[]
+
+include::sections/10-defect.adoc[]
+
+include::sections/11-conformance.adoc[]
+
+include::sections/aa-vectors.adoc[]
+
+include::sections/98-bibliography.adoc[]

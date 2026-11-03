@@ -1,0 +1,6 @@
+== Terminal generation from the register
+
+Every unit symbol, prefix symbol and registered multi-term symbol is generated from the UnitsDB 3 release. The grammar never hardcodes vocabulary: a register edit regenerates the terminals.
+
+[example]
+*Expected outcome.* Adding a unit to the register lands its symbol as a terminal in the regenerated artifact in the same change; a consumer loading a stale artifact against the new register fails checksum verification rather than silently missing the symbol.

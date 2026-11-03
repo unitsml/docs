@@ -1,0 +1,9 @@
+[bibliography]
+== Normative references
+
+* [[[unitsml-36812,nofetch(CalConnect 36812)]]]
+* [[[unitsml-36814,nofetch(CalConnect 36814)]]]
+* [[[unitsml-36815,nofetch(CalConnect 36815)]]]
+* [[[unitsml-36816,nofetch(CalConnect 36816)]]]
+* [[[xsd-spec,nofetch(generated XSD specification)]]] (base document)
+* [[[unitsml-xsd,nofetch(UnitsML 1.0 XSD)]]] (unitsml-v1.0.xsd)

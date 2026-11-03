@@ -1,0 +1,3 @@
+== Foreword
+
+Two documents govern UnitsML XML: the base document — the generated XSD specification (unitsml/docs PR #9), specifying the SYNTAX of unitsml-v1.0.xsd, all 96 schema components, enumerations and examples — and THIS part, specifying the USAGE SEMANTICS: what conforming producers emit, what conforming consumers may infer, and what neither may invent. This part adds no elements and changes no schema; where the series needs what the schema cannot say, the gap is recorded and the path is Annex B.

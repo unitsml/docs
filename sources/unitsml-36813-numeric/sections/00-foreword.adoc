@@ -1,0 +1,3 @@
+== Foreword
+
+This part fixes the numeric law of the series: where exact arithmetic is required, how numbers cross serialization boundaries, which algorithm produces transcendental results and how its version is stamped. Every other part that computes or serializes a number cites this part.

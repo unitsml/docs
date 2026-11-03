@@ -1,0 +1,46 @@
+= UnitsML units model
+:docnumber: 36815
+:edition: 1
+:ref-docnumber: CC 36815:2026(E)
+:copyright-year: 2026
+:revdate: 2026-11-01
+:language: en
+:script: Latn
+:title: UnitsML specifications -- Units Model
+:doctype: standard
+:status: draft-standard
+:committee: CalConnect
+:committee-type: technical
+:mn-document-class: ribose
+:docfile: document.adoc
+:mn-output-extensions: xml,html,doc
+:local-cache-only:
+:data-uri-image:
+
+include::sections/00-foreword.adoc[]
+
+include::sections/00-introduction.adoc[]
+
+include::sections/01-scope.adoc[]
+
+include::sections/02-normrefs.adoc[]
+
+include::sections/03-terms.adoc[]
+
+include::sections/04-conventions.adoc[]
+
+include::sections/05-levels.adoc[]
+
+include::sections/06-resolution.adoc[]
+
+include::sections/07-gating.adoc[]
+
+include::sections/08-scales.adoc[]
+
+include::sections/09-difference-law.adoc[]
+
+include::sections/10-conformance.adoc[]
+
+include::sections/aa-vectors.adoc[]
+
+include::sections/98-bibliography.adoc[]
