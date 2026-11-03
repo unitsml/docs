@@ -1,7 +1,9 @@
 == Schema
 
-The UnitsML XML schema is defined in the file `unitsml.xsd`, which is
-included in the UnitsML distribution.
+This document describes the final UnitsML 1.0 XML schema. Its namespace is
+`https://schema.unitsml.org/unitsml/1.0`, and the schema source is included in
+the UnitsML distribution as `unitsml.xsd`. The published schema reference is
+https://schema.unitsml.org/unitsml/1.0.
 
 The root element of the schema is `<UnitsML>`, which contains all other
 elements.

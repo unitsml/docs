@@ -73,7 +73,7 @@ jobs:
       - name: Verify generated XML Schema documentation
         run: >-
           bundle exec ruby script/verify_xsd_documentation.rb
-          sources/unitsml-xml-schema/schemas/unitsml-v1.0-csd04.xsd _site
+          sources/unitsml-xml-schema/schemas/unitsml-v1.0.xsd _site
 
   deploy:
     if: ${{ github.ref == 'refs/heads/main' }}
