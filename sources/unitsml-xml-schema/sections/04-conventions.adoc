@@ -1,0 +1,90 @@
+== Conventions
+
+=== General
+
+Elements and attributes defined in the UnitsML XML schema are described in
+following clauses.
+
+Each element and attribute is described in a separate entry, with entries
+arranged in alphabetical order.
+
+=== Element
+
+Each element entry contains the following information:
+
+* The XML Name (tag or generic identifier) of the element or attribute that is
+used in UnitsML XML files.
++
+[example]
+====
+`<Unit>`
+====
+
+* The informational name of the element or attribute.
++
+[example]
+====
+Unit
+====
+
+* A description of the element or attribute.
++
+[example]
+====
+For the element `<Unit>`: "Specifies a unit of measurement."
+====
+
+* A list of all of the attributes that may be applied to the element, with first
+the attribute name and then the attribute's informal expanded name. Attribute
+names are prefixed with an at sign (`@`).
+
+* The content model or type of the element's content. If the element has a type,
+the type is given first, with a link to the type definition. If the element
+does not have a type, the content model is described in detail, supporting
+groups, sequences, choices, one of and any of.
++
+[example]
+====
+string, integer, boolean, or a reference to a simple or complex type defined in
+the schema.
+====
+
+
+=== Attribute
+
+Each attribute entry contains the following information:
+
+* The XML Name of the attribute.
++
+[example]
+====
+`@quantityType`
+====
+
+* The informational name of the attribute.
++
+[example]
+====
+Quantity Type
+====
+
+* A description of the attribute
+[example]
+====
+Type of the quantity.
+====
+
+* The data type of the attribute's value.
++
+[example]
+====
+string, integer, boolean, or a reference to a simple type defined in the schema.
+====
+
+* A list of all of the elements or groups of elements in which the attribute may
+be used, with first the element name and then the element's informal
+expanded name. Element names are not prefixed.
+
+* For each element or group of elements in which the attribute may be used, a
+block of usage information with required or suggested values and other
+information.

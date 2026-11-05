@@ -1,0 +1,25 @@
+= UnitsML 1.0 schema source provenance
+
+The schema in `unitsml-v1.0.xsd` is generated from the UnitsML schema project
+inputs used for the published final 1.0 reference. The optional `schemaLocation`
+was omitted from the XML namespace import so schema documentation builds do not
+need network access; the import namespace and schema declarations are unchanged.
+The schema template and generator are from `unitsml/schemas` commit
+`de016581e4ab886550608ae26fd457f669b0938f`. The `unitsdb/units.yaml` and
+`unitsdb/prefixes.yaml` inputs are from commit
+`651384b0300b79489274c117a3ea4a860a806e84`, the UnitsDB main revision before
+the published reference was deployed.
+
+The original generator expands both YAML files into `items` XML, then runs
+`templates/xsdprocess.xsl` over `templates/unitsml-v1.0.template`. The resulting
+schema has namespace `https://schema.unitsml.org/unitsml/1.0`. Its 298
+enumeration values exactly match the values rendered in the published schema
+reference, and its non-annotation, non-enumeration structure matches the
+maintained final 1.0 XSD.
+
+Input SHA-256 values:
+
+* `units.yaml`: `05893cff15d593a9197a17dd8b70e941634d483e5847b97f8326960b2e06af1e`
+* `prefixes.yaml`: `25c804e6e7951eb0605608002e23f3439e58ce83e3ba410cae91370fff420625`
+* original generated XSD before the optional-import-hint omission: `7bf145052f69abcbd79b268993f60b5b25be323be0e325e1b1cbe444abb104d6`
+* repository XSD with the optional hint omitted: `efef28d7bde5a66fbf3c1c6e40c9b4897868b7e1b6171723b7f6364087b9fcd3`

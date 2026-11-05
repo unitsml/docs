@@ -4,6 +4,7 @@ metanorma:
     files:
       - sources/asciiunits/document.adoc
       - sources/unitsdb/document.adoc
+      - sources/unitsml-xml-schema/document.adoc
       - sources/unitsml-36812-general/document.adoc
       - sources/unitsml-36813-numeric/document.adoc
       - sources/unitsml-36814-unitsdb/document.adoc
