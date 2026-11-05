@@ -1,3 +1,7 @@
 # Folders
 .history/
 _untraked-files/
+
+# Relaton local cache: never commit negative lookup markers
+sources/**/relaton/cache/**/*.notfound
+sources/**/relaton/cache/**/*.redirect

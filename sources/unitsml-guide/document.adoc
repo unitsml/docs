@@ -28,7 +28,7 @@
 :imagesdir: images
 :mn-document-class: nist
 :mn-output-extensions: xml,html,doc,rxl,pdf
-:local-cache-only:
+:local-cache:
 :data-uri-image:
 
 [.preface]

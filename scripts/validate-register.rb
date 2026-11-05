@@ -94,6 +94,19 @@ ROOTS.each do |root|
   end
 end
 
+# ---- pass 2a: relaton local cache (the committed bib database) ---------------
+# The registers compile with :local-cache: and commit sources/*/relaton as the
+# portable bib database (metanorma.org, reference lookups: local cache stores
+# are committed to git for reproducible CI builds). Negative lookup markers
+# (.notfound) poison the cache: with a committed marker, every future build
+# drops the reference. They are gitignored; a present marker is an error.
+ROOTS.each do |root|
+  key = root
+  Dir.glob(File.join(root, "sources", "**", "relaton", "cache", "**", "*.notfound")).each do |f|
+    report.call(key, "relaton cache poison (delete): #{f.sub("#{root}/", "")}")
+  end
+end
+
 # ---- pass 2b: bibliography markup (renders empty when malformed) -------------
 # Metanorma drops bibliography entries without a [[[id,text]]] anchor and
 # renders only the first anchor of a multi-anchor entry, so a malformed

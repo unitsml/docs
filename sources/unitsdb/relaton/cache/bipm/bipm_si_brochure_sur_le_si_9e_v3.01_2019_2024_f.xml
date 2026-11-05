@@ -1,0 +1,67 @@
+<bibdata type="standard" schema-version="v1.5.6">
+  <fetched>2026-11-05</fetched>
+  <title language="en" type="title-main">The International System of Units</title>
+  <title language="en" type="title-cover">The International System of Units (SI)</title>
+  <title language="fr" type="title-main">Le Système international d’unités</title>
+  <title language="fr" type="title-cover">Le Système international d’unités (SI)</title>
+  <docidentifier type="BIPM" primary="true">BIPM SI Brochure sur le SI 9e v3.01 (2019/2024, F)</docidentifier>
+  <docidentifier type="ISBN">978-92-822-2272-0</docidentifier>
+  <docidentifier type="BIPM" primary="true">BIPM SI Brochure 9e v3.01 (2019/2024, E)</docidentifier>
+  <docnumber>SI Brochure 9e v3.01 (2019/2024, E)</docnumber>
+  <date type="updated">
+    <on>2024-08-28</on>
+  </date>
+  <contributor>
+    <role type="author"/>
+    <organization>
+      <name>Bureau international des poids et mesures</name>
+      <abbreviation>BIPM</abbreviation>
+    </organization>
+  </contributor>
+  <contributor>
+    <role type="author">
+      <description>committee</description>
+    </role>
+    <organization>
+      <name>Bureau international des poids et mesures</name>
+      <subdivision type="Committee">
+        <name language="en">International Bureau of Weights and Measures</name>
+        <name language="fr">Bureau International des Poids et Mesures</name>
+        <identifier>BIPM</identifier>
+        <identifier type="full">BIPM</identifier>
+      </subdivision>
+    </organization>
+  </contributor>
+  <contributor>
+    <role type="publisher"/>
+    <organization>
+      <name>Bureau international des poids et mesures</name>
+      <abbreviation>BIPM</abbreviation>
+    </organization>
+  </contributor>
+  <edition>9</edition>
+  <version>v3.01</version>
+  <language>fr</language>
+  <language>en</language>
+  <script>Latn</script>
+  <status>
+    <stage>in-force</stage>
+  </status>
+  <copyright>
+    <from>2024</from>
+    <owner>
+      <organization>
+        <name>Bureau international des poids et mesures</name>
+        <abbreviation>BIPM</abbreviation>
+      </organization>
+    </owner>
+  </copyright>
+  <ext schema-version="v1.1.2">
+    <doctype>brochure</doctype>
+    <flavor>bipm</flavor>
+    <structuredidentifier>
+      <docnumber>SI Brochure 9e v3.01 (2019/2024, E)</docnumber>
+    </structuredidentifier>
+    <si-aspect>full</si-aspect>
+  </ext>
+</bibdata>

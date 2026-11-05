@@ -1,0 +1,32 @@
+<bibdata type="standard" schema-version="v1.5.6">
+  <fetched>2026-11-05</fetched>
+  <title language="en" script="Latn">Web Services Description Language (WSDL) 1.1</title>
+  <uri type="src">https://www.w3.org/TR/wsdl</uri>
+  <docidentifier type="W3C" primary="true">W3C wsdl</docidentifier>
+  <docnumber>wsdl</docnumber>
+  <contributor>
+    <role type="publisher"/>
+    <organization>
+      <name>World Wide Web Consortium</name>
+      <abbreviation>W3C</abbreviation>
+      <uri>https://www.w3.org</uri>
+    </organization>
+  </contributor>
+  <language>en</language>
+  <script>Latn</script>
+  <relation type="hasEdition">
+    <bibitem>
+      <title language="en" script="Latn">Web Services Description Language (WSDL) 1.1</title>
+      <uri type="src">https://www.w3.org/TR/2001/NOTE-wsdl-20010315</uri>
+      <docidentifier type="W3C" primary="true">W3C NOTE-wsdl-20010315</docidentifier>
+    </bibitem>
+  </relation>
+  <series>
+    <title language="en" script="Latn">W3C technicalReport</title>
+    <number>wsdl</number>
+  </series>
+  <ext schema-version="v1.0.0">
+    <doctype>technicalReport</doctype>
+    <flavor>w3c</flavor>
+  </ext>
+</bibdata>

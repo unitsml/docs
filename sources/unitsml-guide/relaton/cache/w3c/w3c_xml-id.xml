@@ -1,0 +1,60 @@
+<bibdata type="standard" schema-version="v1.5.6">
+  <fetched>2026-11-05</fetched>
+  <title language="en" script="Latn">xml:id Version 1.0</title>
+  <uri type="src">https://www.w3.org/TR/xml-id/</uri>
+  <docidentifier type="W3C" primary="true">W3C xml-id</docidentifier>
+  <docnumber>xml-id</docnumber>
+  <contributor>
+    <role type="publisher"/>
+    <organization>
+      <name>World Wide Web Consortium</name>
+      <abbreviation>W3C</abbreviation>
+      <uri>https://www.w3.org</uri>
+    </organization>
+  </contributor>
+  <language>en</language>
+  <script>Latn</script>
+  <relation type="hasEdition">
+    <bibitem>
+      <title language="en" script="Latn">xml:id Version 1.0</title>
+      <uri type="src">https://www.w3.org/TR/2005/REC-xml-id-20050909/</uri>
+      <docidentifier type="W3C" primary="true">W3C REC-xml-id-20050909</docidentifier>
+    </bibitem>
+  </relation>
+  <relation type="hasEdition">
+    <bibitem>
+      <title language="en" script="Latn">xml:id Version 1.0</title>
+      <uri type="src">https://www.w3.org/TR/2005/PR-xml-id-20050712/</uri>
+      <docidentifier type="W3C" primary="true">W3C PR-xml-id-20050712</docidentifier>
+    </bibitem>
+  </relation>
+  <relation type="hasEdition">
+    <bibitem>
+      <title language="en" script="Latn">xml:id Version 1.0</title>
+      <uri type="src">https://www.w3.org/TR/2005/CR-xml-id-20050208/</uri>
+      <docidentifier type="W3C" primary="true">W3C CR-xml-id-20050208</docidentifier>
+    </bibitem>
+  </relation>
+  <relation type="hasEdition">
+    <bibitem>
+      <title language="en" script="Latn">xml:id Version 1.0</title>
+      <uri type="src">https://www.w3.org/TR/2004/WD-xml-id-20041109/</uri>
+      <docidentifier type="W3C" primary="true">W3C WD-xml-id-20041109</docidentifier>
+    </bibitem>
+  </relation>
+  <relation type="hasEdition">
+    <bibitem>
+      <title language="en" script="Latn">xml:id Version 1.0</title>
+      <uri type="src">https://www.w3.org/TR/2004/WD-xml-id-20040407</uri>
+      <docidentifier type="W3C" primary="true">W3C WD-xml-id-20040407</docidentifier>
+    </bibitem>
+  </relation>
+  <series>
+    <title language="en" script="Latn">W3C technicalReport</title>
+    <number>xml-id</number>
+  </series>
+  <ext schema-version="v1.0.0">
+    <doctype>technicalReport</doctype>
+    <flavor>w3c</flavor>
+  </ext>
+</bibdata>

@@ -1,0 +1,109 @@
+<bibdata type="standard" schema-version="v1.5.6">
+  <fetched>2026-11-05</fetched>
+  <title language="en" script="Latn">XML Schema Part 1: Structures Second Edition</title>
+  <uri type="src">https://www.w3.org/TR/xmlschema-1/</uri>
+  <docidentifier type="W3C" primary="true">W3C xmlschema-1</docidentifier>
+  <docnumber>xmlschema-1</docnumber>
+  <contributor>
+    <role type="publisher"/>
+    <organization>
+      <name>World Wide Web Consortium</name>
+      <abbreviation>W3C</abbreviation>
+      <uri>https://www.w3.org</uri>
+    </organization>
+  </contributor>
+  <language>en</language>
+  <script>Latn</script>
+  <relation type="hasEdition">
+    <bibitem>
+      <title language="en" script="Latn">XML Schema Part 1: Structures Second Edition</title>
+      <uri type="src">https://www.w3.org/TR/2004/REC-xmlschema-1-20041028/</uri>
+      <docidentifier type="W3C" primary="true">W3C REC-xmlschema-1-20041028</docidentifier>
+    </bibitem>
+  </relation>
+  <relation type="hasEdition">
+    <bibitem>
+      <title language="en" script="Latn">XML Schema Part 1: Structures Second Edition</title>
+      <uri type="src">https://www.w3.org/TR/2004/PER-xmlschema-1-20040318/</uri>
+      <docidentifier type="W3C" primary="true">W3C PER-xmlschema-1-20040318</docidentifier>
+    </bibitem>
+  </relation>
+  <relation type="hasEdition">
+    <bibitem>
+      <title language="en" script="Latn">XML Schema Part 1: Structures</title>
+      <uri type="src">https://www.w3.org/TR/2001/REC-xmlschema-1-20010502/</uri>
+      <docidentifier type="W3C" primary="true">W3C REC-xmlschema-1-20010502</docidentifier>
+    </bibitem>
+  </relation>
+  <relation type="hasEdition">
+    <bibitem>
+      <title language="en" script="Latn">XML Schema Part 1: Structures</title>
+      <uri type="src">https://www.w3.org/TR/2001/PR-xmlschema-1-20010330/</uri>
+      <docidentifier type="W3C" primary="true">W3C PR-xmlschema-1-20010330</docidentifier>
+    </bibitem>
+  </relation>
+  <relation type="hasEdition">
+    <bibitem>
+      <title language="en" script="Latn">XML Schema Part 1: Structures</title>
+      <uri type="src">https://www.w3.org/TR/2001/PR-xmlschema-1-20010316/</uri>
+      <docidentifier type="W3C" primary="true">W3C PR-xmlschema-1-20010316</docidentifier>
+    </bibitem>
+  </relation>
+  <relation type="hasEdition">
+    <bibitem>
+      <title language="en" script="Latn">XML Schema Part 1: Structures</title>
+      <uri type="src">https://www.w3.org/TR/2000/CR-xmlschema-1-20001024/</uri>
+      <docidentifier type="W3C" primary="true">W3C CR-xmlschema-1-20001024</docidentifier>
+    </bibitem>
+  </relation>
+  <relation type="hasEdition">
+    <bibitem>
+      <title language="en" script="Latn">XML Schema Part 1: Structures</title>
+      <uri type="src">https://www.w3.org/TR/2000/WD-xmlschema-1-20000922/</uri>
+      <docidentifier type="W3C" primary="true">W3C WD-xmlschema-1-20000922</docidentifier>
+    </bibitem>
+  </relation>
+  <relation type="hasEdition">
+    <bibitem>
+      <title language="en" script="Latn">XML Schema Part 1: Structures</title>
+      <uri type="src">https://www.w3.org/TR/2000/WD-xmlschema-1-20000407/</uri>
+      <docidentifier type="W3C" primary="true">W3C WD-xmlschema-1-20000407</docidentifier>
+    </bibitem>
+  </relation>
+  <relation type="hasEdition">
+    <bibitem>
+      <title language="en" script="Latn">XML Schema Part 1: Structures</title>
+      <uri type="src">https://www.w3.org/TR/2000/WD-xmlschema-1-20000225/</uri>
+      <docidentifier type="W3C" primary="true">W3C WD-xmlschema-1-20000225</docidentifier>
+    </bibitem>
+  </relation>
+  <relation type="hasEdition">
+    <bibitem>
+      <title language="en" script="Latn">XML Schema Part 1: Structures</title>
+      <uri type="src">https://www.w3.org/TR/1999/WD-xmlschema-1-19991217/</uri>
+      <docidentifier type="W3C" primary="true">W3C WD-xmlschema-1-19991217</docidentifier>
+    </bibitem>
+  </relation>
+  <relation type="hasEdition">
+    <bibitem>
+      <title language="en" script="Latn">XML Schema Part 1: Structures</title>
+      <uri type="src">https://www.w3.org/TR/1999/WD-xmlschema-1-19991105/</uri>
+      <docidentifier type="W3C" primary="true">W3C WD-xmlschema-1-19991105</docidentifier>
+    </bibitem>
+  </relation>
+  <relation type="hasEdition">
+    <bibitem>
+      <title language="en" script="Latn">XML Schema Part 1: Structures</title>
+      <uri type="src">https://www.w3.org/1999/05/06-xmlschema-1/</uri>
+      <docidentifier type="W3C" primary="true">W3C 06-xmlschema-1</docidentifier>
+    </bibitem>
+  </relation>
+  <series>
+    <title language="en" script="Latn">W3C technicalReport</title>
+    <number>xmlschema-1</number>
+  </series>
+  <ext schema-version="v1.0.0">
+    <doctype>technicalReport</doctype>
+    <flavor>w3c</flavor>
+  </ext>
+</bibdata>
