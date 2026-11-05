@@ -1,8 +1,8 @@
 [bibliography]
 == Normative references
 
-* [[[unitsml-36812,nofetch(CalConnect 36812)]]]
-* [[[unitsml-36813,nofetch(CalConnect 36813)]]]
+* [[[unitsml-36812,nofetch(CalConnect 36812)]], general
+* [[[unitsml-36813,nofetch(CalConnect 36813)]], numeric
 * [[[iso4217,ISO 4217]]] (currency codes)
 * [[[iec62720,nofetch(IEC 62720)]]] (units dictionary; source corpus only — no IEC backing of this register is implied)
 * [[[cc36811,nofetch(CalConnect 36811)]]], _UnitsML — UnitsDB specification_ (v1 base standard, frozen 2025-03; historical)
