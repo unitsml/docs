@@ -1,7 +1,7 @@
 [bibliography]
 == Normative references
 
-* [[[unitsml-36812,nofetch(CalConnect 36812)]]]
-* [[[unitsml-36814,nofetch(CalConnect 36814)]]]
+* [[[unitsml-36812,nofetch(CalConnect 36812)]], general
+* [[[unitsml-36814,nofetch(CalConnect 36814)]], unitsdb
 * [[[parg,nofetch(PARG grammar language and artifact format)]]] (parsanol/docs)
 * [[[cc36810,nofetch(CalConnect 36810)]]], _AsciiUnits syntax specification_ (v1 base standard, frozen 2025-03; historical)

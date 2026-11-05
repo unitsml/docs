@@ -132,6 +132,10 @@ ROOTS.each do |root|
             report.call(key, "#{name}:#{File.basename(f)}:#{ln}: " \
                              "unbalanced nofetch( parenthesis")
           end
+          if entry =~ /\]\]\]\s*$/
+            report.call(key, "#{name}:#{File.basename(f)}:#{ln}: " \
+                             "bare anchor (renders an empty citation chip)")
+          end
         end
       end
     end
