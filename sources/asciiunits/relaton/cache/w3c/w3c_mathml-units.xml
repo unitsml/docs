@@ -1,0 +1,32 @@
+<bibdata type="standard" schema-version="v1.5.6">
+  <fetched>2026-11-05</fetched>
+  <title language="en" script="Latn">Units in MathML</title>
+  <uri type="src">https://www.w3.org/TR/mathml-units/</uri>
+  <docidentifier type="W3C" primary="true">W3C mathml-units</docidentifier>
+  <docnumber>mathml-units</docnumber>
+  <contributor>
+    <role type="publisher"/>
+    <organization>
+      <name>World Wide Web Consortium</name>
+      <abbreviation>W3C</abbreviation>
+      <uri>https://www.w3.org</uri>
+    </organization>
+  </contributor>
+  <language>en</language>
+  <script>Latn</script>
+  <relation type="hasEdition">
+    <bibitem>
+      <title language="en" script="Latn">Units in MathML</title>
+      <uri type="src">https://www.w3.org/TR/2003/NOTE-mathml-units-20031110/</uri>
+      <docidentifier type="W3C" primary="true">W3C NOTE-mathml-units-20031110</docidentifier>
+    </bibitem>
+  </relation>
+  <series>
+    <title language="en" script="Latn">W3C technicalReport</title>
+    <number>mathml-units</number>
+  </series>
+  <ext schema-version="v1.0.0">
+    <doctype>technicalReport</doctype>
+    <flavor>w3c</flavor>
+  </ext>
+</bibdata>

@@ -1,0 +1,38 @@
+<bibdata type="standard" schema-version="v1.5.6">
+  <title language="en" script="Latn" type="title-main">Guide for the use of the International System of Units</title>
+  <title language="en" script="Latn" type="title-part">the modernized metric system</title>
+  <title language="en" script="Latn" type="main">Guide for the use of the International System of Units - the modernized metric system</title>
+  <uri type="doi">https://doi.org/10.6028/NIST.SP.811e1991</uri>
+  <docidentifier type="NIST" primary="true">NIST SP 811e1991</docidentifier>
+  <docidentifier type="DOI">NIST.SP.811e1991</docidentifier>
+  <date type="issued">
+    <on>1991</on>
+  </date>
+  <contributor>
+    <role type="author"/>
+    <person>
+      <name>
+        <completename language="en">McCoubrey, A. O. (Arthur O.)</completename>
+      </name>
+    </person>
+  </contributor>
+  <contributor>
+    <role type="publisher"/>
+    <organization>
+      <name>National Institute of Standards and Technology (U.S.)</name>
+      <identifier type="uri">https://id.loc.gov/authorities/names/n88112126</identifier>
+    </organization>
+  </contributor>
+  <series>
+    <title>NIST special publication; NIST special pub; NIST SP</title>
+    <number>811e1991</number>
+  </series>
+  <place>
+    <city>Gaithersburg</city>
+    <region iso="MD"/>
+  </place>
+  <ext schema-version="v1.1.2">
+    <doctype>standard</doctype>
+    <flavor>nist</flavor>
+  </ext>
+</bibdata>

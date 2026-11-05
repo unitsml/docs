@@ -1,0 +1,72 @@
+<bibdata type="standard" schema-version="v1.5.6">
+  <fetched>2026-11-05</fetched>
+  <title type="main">A URN Namespace for OASIS</title>
+  <uri type="src">https://www.rfc-editor.org/info/rfc3121</uri>
+  <docidentifier type="IETF" primary="true">RFC 3121</docidentifier>
+  <docidentifier type="DOI">10.17487/RFC3121</docidentifier>
+  <docnumber>RFC3121</docnumber>
+  <date type="published">
+    <on>2001-06</on>
+  </date>
+  <contributor>
+    <role type="author"/>
+    <person>
+      <name>
+        <forename language="en" script="Latn" initial="K"/>
+        <formatted-initials language="en" script="Latn">K.</formatted-initials>
+        <surname language="en" script="Latn">Best</surname>
+        <completename language="en" script="Latn">K. Best</completename>
+      </name>
+    </person>
+  </contributor>
+  <contributor>
+    <role type="author"/>
+    <person>
+      <name>
+        <forename language="en" script="Latn" initial="N"/>
+        <formatted-initials language="en" script="Latn">N.</formatted-initials>
+        <surname language="en" script="Latn">Walsh</surname>
+        <completename language="en" script="Latn">N. Walsh</completename>
+      </name>
+    </person>
+  </contributor>
+  <contributor>
+    <role type="publisher"/>
+    <organization>
+      <name language="en">RFC Publisher</name>
+    </organization>
+  </contributor>
+  <contributor>
+    <role type="authorizer"/>
+    <organization>
+      <name language="en">RFC Series</name>
+    </organization>
+  </contributor>
+  <language>en</language>
+  <script>Latn</script>
+  <abstract language="en" script="Latn">
+    <p>This document describes a URN (Uniform Resource Name) namespace that is engineered by the Organization for the Advancement of Structured Information Standards (OASIS) for naming persistent resources published by OASIS (such as OASIS Standards, XML (Extensible Markup Language) Document Type Definitions, XML Schemas, Namespaces, Stylesheets, and other documents).  This memo provides information for the Internet community.</p>
+  </abstract>
+  <status>
+    <stage>INFORMATIONAL</stage>
+  </status>
+  <series>
+    <title>RFC</title>
+    <number>3121</number>
+  </series>
+  <series type="stream">
+    <title>Legacy</title>
+  </series>
+  <keyword>
+    <vocab>uniform</vocab>
+  </keyword>
+  <keyword>
+    <vocab>resource</vocab>
+  </keyword>
+  <keyword>
+    <vocab>name</vocab>
+  </keyword>
+  <keyword>
+    <vocab>organization for the advancement of structured information standards</vocab>
+  </keyword>
+</bibdata>

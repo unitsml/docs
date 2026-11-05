@@ -1,0 +1,166 @@
+<bibdata type="standard" schema-version="v1.5.6">
+  <fetched>2026-11-05</fetched>
+  <title language="en" script="Latn" type="title-main">Quantities and units</title>
+  <title language="en" script="Latn" type="title-part">Part 1: General</title>
+  <title language="en" script="Latn" type="main">Quantities and units - Part 1: General</title>
+  <title language="fr" script="Latn" type="title-main">Grandeurs et unités</title>
+  <title language="fr" script="Latn" type="title-part">Partie 1: Généralités</title>
+  <title language="fr" script="Latn" type="main">Grandeurs et unités - Partie 1: Généralités</title>
+  <uri type="src">https://www.iso.org/standard/76921.html</uri>
+  <uri type="obp">https://www.iso.org/obp/ui/en/#!iso:std:76921:en</uri>
+  <uri type="rss">https://www.iso.org/contents/data/standard/07/69/76921.detail.rss</uri>
+  <docidentifier type="ISO" primary="true">ISO 80000-1</docidentifier>
+  <docidentifier type="iso-undated">ISO 80000-1</docidentifier>
+  <docidentifier type="iso-reference">ISO 80000-1(E)</docidentifier>
+  <docidentifier type="URN">urn:iso:std:iso:80000:-1</docidentifier>
+  <docnumber>80000</docnumber>
+  <contributor>
+    <role type="publisher"/>
+    <organization>
+      <name>International Organization for Standardization</name>
+      <abbreviation>ISO</abbreviation>
+      <uri>www.iso.org</uri>
+    </organization>
+  </contributor>
+  <contributor>
+    <role type="author">
+      <description>committee</description>
+    </role>
+    <organization>
+      <name>International Organization for Standardization</name>
+      <subdivision type="technical-committee" subtype="TC">
+        <name>Quantities and units</name>
+        <identifier>ISO/TC 12</identifier>
+      </subdivision>
+      <abbreviation>ISO</abbreviation>
+    </organization>
+  </contributor>
+  <edition>2</edition>
+  <language>en</language>
+  <language>fr</language>
+  <script>Latn</script>
+  <status>
+    <stage>60</stage>
+    <substage>60</substage>
+  </status>
+  <copyright>
+    <from>2022</from>
+    <owner>
+      <organization>
+        <name>ISO</name>
+      </organization>
+    </owner>
+  </copyright>
+  <relation type="obsoletes">
+    <bibitem>
+      <formattedref>ISO 80000-1:2009</formattedref>
+      <docidentifier type="ISO" primary="true">ISO 80000-1:2009</docidentifier>
+      <date type="published">
+        <on>2009-11-17</on>
+      </date>
+    </bibitem>
+  </relation>
+  <relation type="obsoletes">
+    <bibitem>
+      <formattedref>ISO 80000-1:2009/Cor 1:2011</formattedref>
+      <docidentifier type="ISO" primary="true">ISO 80000-1:2009/Cor 1:2011</docidentifier>
+      <date type="published">
+        <on>2011-09-22</on>
+      </date>
+    </bibitem>
+  </relation>
+  <relation type="instanceOf">
+    <bibitem type="standard">
+      <title language="en" script="Latn" type="title-main">Quantities and units</title>
+      <title language="en" script="Latn" type="title-part">Part 1: General</title>
+      <title language="en" script="Latn" type="main">Quantities and units - Part 1: General</title>
+      <title language="fr" script="Latn" type="title-main">Grandeurs et unités</title>
+      <title language="fr" script="Latn" type="title-part">Partie 1: Généralités</title>
+      <title language="fr" script="Latn" type="main">Grandeurs et unités - Partie 1: Généralités</title>
+      <uri type="src">https://www.iso.org/standard/76921.html</uri>
+      <uri type="obp">https://www.iso.org/obp/ui/en/#!iso:std:76921:en</uri>
+      <uri type="rss">https://www.iso.org/contents/data/standard/07/69/76921.detail.rss</uri>
+      <docidentifier type="ISO" primary="true">ISO 80000-1:2022</docidentifier>
+      <docidentifier type="iso-undated">ISO 80000-1</docidentifier>
+      <docidentifier type="iso-reference">ISO 80000-1:2022(E)</docidentifier>
+      <docidentifier type="URN">urn:iso:std:iso:80000:-1</docidentifier>
+      <docnumber>80000</docnumber>
+      <date type="published">
+        <on>2022-12-06</on>
+      </date>
+      <contributor>
+        <role type="publisher"/>
+        <organization>
+          <name>International Organization for Standardization</name>
+          <abbreviation>ISO</abbreviation>
+          <uri>www.iso.org</uri>
+        </organization>
+      </contributor>
+      <contributor>
+        <role type="author">
+          <description>committee</description>
+        </role>
+        <organization>
+          <name>International Organization for Standardization</name>
+          <subdivision type="technical-committee" subtype="TC">
+            <name>Quantities and units</name>
+            <identifier>ISO/TC 12</identifier>
+          </subdivision>
+          <abbreviation>ISO</abbreviation>
+        </organization>
+      </contributor>
+      <edition>2</edition>
+      <language>en</language>
+      <language>fr</language>
+      <script>Latn</script>
+      <abstract language="en" script="Latn">This document gives general information and definitions concerning quantities, systems of quantities, units, quantity and unit symbols, and coherent unit systems, especially the International System of Quantities (ISQ). The principles laid down in this document are intended for general use within the various fields of science and technology, and as an introduction to other parts of this International Standard. The ISO/IEC 80000 series does not, as yet, cover ordinal quantities and nominal properties.</abstract>
+      <status>
+        <stage>60</stage>
+        <substage>60</substage>
+      </status>
+      <copyright>
+        <from>2022</from>
+        <owner>
+          <organization>
+            <name>ISO</name>
+          </organization>
+        </owner>
+      </copyright>
+      <relation type="obsoletes">
+        <bibitem>
+          <formattedref>ISO 80000-1:2009</formattedref>
+          <docidentifier type="ISO" primary="true">ISO 80000-1:2009</docidentifier>
+          <date type="published">
+            <on>2009-11-17</on>
+          </date>
+        </bibitem>
+      </relation>
+      <relation type="obsoletes">
+        <bibitem>
+          <formattedref>ISO 80000-1:2009/Cor 1:2011</formattedref>
+          <docidentifier type="ISO" primary="true">ISO 80000-1:2009/Cor 1:2011</docidentifier>
+          <date type="published">
+            <on>2011-09-22</on>
+          </date>
+        </bibitem>
+      </relation>
+      <place>
+        <city>Geneva</city>
+      </place>
+    </bibitem>
+  </relation>
+  <place>
+    <city>Geneva</city>
+  </place>
+  <ext schema-version="v1.1.2">
+    <doctype>international-standard</doctype>
+    <flavor>iso</flavor>
+    <ics>
+      <code>01.060</code>
+      <text>Quantities and units</text>
+    </ics>
+    <structuredidentifier type="ISO">
+      <project-number>76921</project-number>
+    </structuredidentifier>
+  </ext>
+</bibdata>

@@ -19,7 +19,7 @@
 :imagesdir: images
 :mn-document-class: cc
 :mn-output-extensions: xml,html,pdf,rxl
-:local-cache-only:
+:local-cache:
 :data-uri-image:
 
 include::sections/00-foreword.adoc[]

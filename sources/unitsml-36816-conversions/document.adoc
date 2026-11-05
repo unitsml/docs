@@ -14,7 +14,7 @@
 :mn-document-class: ribose
 :docfile: document.adoc
 :mn-output-extensions: xml,html,doc
-:local-cache-only:
+:local-cache:
 :data-uri-image:
 
 include::sections/00-foreword.adoc[]

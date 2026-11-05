@@ -1,0 +1,74 @@
+<bibdata type="standard" schema-version="v1.5.6">
+  <fetched>2026-11-05</fetched>
+  <title language="en" script="Latn">Namespaces in XML 1.1 (Second Edition)</title>
+  <uri type="src">https://www.w3.org/TR/xml-names11/</uri>
+  <docidentifier type="W3C" primary="true">W3C xml-names11</docidentifier>
+  <docnumber>xml-names11</docnumber>
+  <contributor>
+    <role type="publisher"/>
+    <organization>
+      <name>World Wide Web Consortium</name>
+      <abbreviation>W3C</abbreviation>
+      <uri>https://www.w3.org</uri>
+    </organization>
+  </contributor>
+  <language>en</language>
+  <script>Latn</script>
+  <relation type="hasEdition">
+    <bibitem>
+      <title language="en" script="Latn">Namespaces in XML 1.1 (Second Edition)</title>
+      <uri type="src">https://www.w3.org/TR/2006/REC-xml-names11-20060816/</uri>
+      <docidentifier type="W3C" primary="true">W3C REC-xml-names11-20060816</docidentifier>
+    </bibitem>
+  </relation>
+  <relation type="hasEdition">
+    <bibitem>
+      <title language="en" script="Latn">Namespaces in XML 1.1 (Second Edition)</title>
+      <uri type="src">https://www.w3.org/TR/2006/PER-xml-names11-20060614</uri>
+      <docidentifier type="W3C" primary="true">W3C PER-xml-names11-20060614</docidentifier>
+    </bibitem>
+  </relation>
+  <relation type="hasEdition">
+    <bibitem>
+      <title language="en" script="Latn">Namespaces in XML 1.1</title>
+      <uri type="src">https://www.w3.org/TR/2004/REC-xml-names11-20040204/</uri>
+      <docidentifier type="W3C" primary="true">W3C REC-xml-names11-20040204</docidentifier>
+    </bibitem>
+  </relation>
+  <relation type="hasEdition">
+    <bibitem>
+      <title language="en" script="Latn">Namespaces in XML 1.1</title>
+      <uri type="src">https://www.w3.org/TR/2003/PR-xml-names11-20031105/</uri>
+      <docidentifier type="W3C" primary="true">W3C PR-xml-names11-20031105</docidentifier>
+    </bibitem>
+  </relation>
+  <relation type="hasEdition">
+    <bibitem>
+      <title language="en" script="Latn">Namespaces in XML 1.1</title>
+      <uri type="src">https://www.w3.org/TR/2002/CR-xml-names11-20021218/</uri>
+      <docidentifier type="W3C" primary="true">W3C CR-xml-names11-20021218</docidentifier>
+    </bibitem>
+  </relation>
+  <relation type="hasEdition">
+    <bibitem>
+      <title language="en" script="Latn">Namespaces in XML 1.1</title>
+      <uri type="src">https://www.w3.org/TR/2002/WD-xml-names11-20020905</uri>
+      <docidentifier type="W3C" primary="true">W3C WD-xml-names11-20020905</docidentifier>
+    </bibitem>
+  </relation>
+  <relation type="hasEdition">
+    <bibitem>
+      <title language="en" script="Latn">Namespaces in XML 1.1</title>
+      <uri type="src">https://www.w3.org/TR/2002/WD-xml-names11-20020403/</uri>
+      <docidentifier type="W3C" primary="true">W3C WD-xml-names11-20020403</docidentifier>
+    </bibitem>
+  </relation>
+  <series>
+    <title language="en" script="Latn">W3C technicalReport</title>
+    <number>xml-names11</number>
+  </series>
+  <ext schema-version="v1.0.0">
+    <doctype>technicalReport</doctype>
+    <flavor>w3c</flavor>
+  </ext>
+</bibdata>
