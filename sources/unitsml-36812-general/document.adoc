@@ -7,6 +7,7 @@
 :language: en
 :script: Latn
 :title: UnitsML specifications -- General
+:title-fr: Spécifications UnitsML -- Général
 :doctype: standard
 :status: draft-standard
 :committee: CalConnect

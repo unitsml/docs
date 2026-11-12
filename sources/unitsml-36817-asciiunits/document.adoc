@@ -7,6 +7,7 @@
 :language: en
 :script: Latn
 :title: UnitsML specifications -- Asciiunits Content Language
+:title-fr: Spécifications UnitsML -- Langage de contenu asciiunits
 :doctype: standard
 :status: draft-standard
 :committee: CalConnect

@@ -7,6 +7,7 @@
 :language: en
 :script: Latn
 :title: UnitsML specifications -- Units Model
+:title-fr: Spécifications UnitsML -- Modèle d'unités
 :doctype: standard
 :status: draft-standard
 :committee: CalConnect
