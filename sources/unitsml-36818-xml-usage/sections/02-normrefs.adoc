@@ -6,4 +6,4 @@
 * [[[unitsml-36815,nofetch(CalConnect 36815)]], units model
 * [[[unitsml-36816,nofetch(CalConnect 36816)]], conversions
 * [[[xsd-spec,nofetch(generated XSD specification)]]] (base document)
-* [[[unitsml-xsd,nofetch(UnitsML 1.0 XSD)]]] (unitsml-v1.0.xsd)
+* [[[unitsml-xsd,nofetch(UnitsML Schema v1.0.0)]]], the CalConnect UnitsML XML schema, sha256 a0573cf1e0977bf8584a3a62..., https://github.com/unitsml/schemas/releases/tag/v1.0.0

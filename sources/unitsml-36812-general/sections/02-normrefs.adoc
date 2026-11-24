@@ -5,3 +5,4 @@ The following documents are referred to in the text in such a way that some or a
 
 * [[[jcgm200,JCGM 200:2012]]], _International vocabulary of metrology — Basic and general concepts and associated terms (VIM)_
 * [[[jcgm100,JCGM 100:2008]]], _Evaluation of measurement data — Guide to the expression of uncertainty in measurement (GUM)_
+* [[[unitsml-xsd,nofetch(UnitsML Schema v1.0.0)]]], the CalConnect UnitsML XML schema, sha256 a0573cf1e0977bf8584a3a62..., https://github.com/unitsml/schemas/releases/tag/v1.0.0
